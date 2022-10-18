@@ -20,12 +20,15 @@ import javax.validation.Valid;
 public class MemberController {
     private final MemberService memberService;
 
+    //===로그인===//
     @GetMapping("/member/sign-in")
     public String signin() {
 
         return "/member/signIn";
     }
 
+
+    //===회원가입===//
     @GetMapping("/member/sign-up")
     public String signup(@ModelAttribute("signUpMemberDto") SignUpMemberDto signUpMemberDto) {
 
@@ -33,15 +36,12 @@ public class MemberController {
     }
 
     @PostMapping("/member/sign-up")
-    public String signup(@Valid SignUpMemberDto signUpMemberDto, BindingResult bindingResult) {
+    public String signup(@Valid @ModelAttribute("signUpMemberDto") SignUpMemberDto signUpMemberDto, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
-            log.info("error1");
-            log.info("Dto email = " + signUpMemberDto.getEmail());
             return "member/signUp";
         }
         if (!signUpMemberDto.getPassword1().equals(signUpMemberDto.getPassword2())) {
             bindingResult.rejectValue("password2", "passwordInCorrect", "두개의 패스워드가 일치하지 않습니다");
-            log.info("error2");
             return "member/signUp";
         }
         try {
@@ -56,9 +56,6 @@ public class MemberController {
             return "member/signUp";
         }
 
-
-        memberService.createMember(signUpMemberDto);
-        log.info("error3");
         return "redirect:/";
     }
 

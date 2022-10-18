@@ -41,11 +41,15 @@
 
 				<div class="collapse navbar-collapse" id="navbarSupportedContent">
 					<ul class="navbar-nav ml-auto">
-						<nav class="nav-item">
-							<a class="nav-link" th:href="@{/member/signIn}">로그인</a>
-						</nav>
+						<a class="nav-item">
+							<a class="nav-link" sec:authorize ="isAnonymous()" th:href="@{/member/sign-in}">로그인</a>
+						</a>
+						<a class="nav-item">
+							<a class="nav-link" sec:authorize ="isAuthenticated()" th:href="@{/member/log-out}">로그아웃</a>
+						</a>
+
 						<nav>
-							<a class="nav-link" th:href="@{/member/signUp}">회원가입</a>
+							<a class="nav-link"  th:href="@{/member/sign-up}">회원가입</a>
 						</nav>
 						<li class="nav-item">
 							<a class="scrl-down nav-link" href="#home">Home <span class="sr-only">(current)</span></a>

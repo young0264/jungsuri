@@ -9,7 +9,7 @@
 <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-<div id="loginbox" style="margin-top:50px;" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+<div style="margin-top:50px;" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
 
 <div style=" margin-top:50px"
      class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
@@ -17,7 +17,7 @@
         <div class="panel-heading">
             <div class="panel-title">회원가입</div>
             <div style="float:right; font-size: 85%; position: relative; top:-10px">
-                <a id="signinlink" th:href="@{/member/sign-in}" onclick="$('#signupbox').hide(); $('#loginbox').show()">
+                <a th:href="@{/member/sign-in}" onclick="$('#signupbox').hide(); $('#loginbox').show()">
                     로그인
                 </a>
             </div>
@@ -73,7 +73,7 @@
                 <div style="border-top: 1px solid #999; padding-top:20px" class="form-group">
                     <div class="col-md-offset-3 col-md-9">
                         <button id="btn-fbsignup" type="button" class="btn btn-primary"><i
-                                class="icon-facebook"></i>   Sign Up with Facebook Kakao Google
+                                class="icon-facebook"></i>   Sign Up with Kakao Google
                         </button>
                     </div>
                 </div>
