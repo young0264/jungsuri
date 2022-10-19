@@ -1,11 +1,14 @@
 package com.jungsuri.jungsuri.domain.member;
 
+import com.jungsuri.jungsuri.domain.post.Post;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Entity
@@ -25,4 +28,7 @@ public class Member {
 
     @Column(unique = true)
     private String email;
+
+    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Post> postList = new ArrayList<>();
 }

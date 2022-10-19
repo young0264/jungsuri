@@ -1,7 +1,6 @@
-package com.jungsuri.jungsuri.dto.Member;
+package com.jungsuri.jungsuri.dto.member;
 
 import lombok.*;
-import lombok.extern.slf4j.Slf4j;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;

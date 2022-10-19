@@ -1,12 +1,11 @@
 package com.jungsuri.jungsuri.controller;
 
-import com.jungsuri.jungsuri.dto.Member.SignUpMemberDto;
+import com.jungsuri.jungsuri.dto.member.SignUpMemberDto;
 import com.jungsuri.jungsuri.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;

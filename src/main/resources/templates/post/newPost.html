@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Contact Form 08</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link href='https://fonts.googleapis.com/css?family=Roboto:400,100,300,700' rel='stylesheet' type='text/css'>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link type="text/css" href="/css/font-awesome.min.css" rel="stylesheet" >
+	<link type="text/css" href="/css/animate.css" rel="stylesheet" >
+	<link type="text/css" href="/css/jquery.mCustomScrollbar.css" rel="stylesheet" >
+	<link type="text/css" href="/css/owl.carousel.min.css" rel="stylesheet" >
+	<link type="text/css" href="/css/bootstrap.min.css" rel="stylesheet" >
+	<link type="text/css" href="/css/normalize.css" rel="stylesheet" >
+	<link type="text/css" href="/style.css" rel="stylesheet" >
+	<link type="text/css" href="/css/responsive.css" rel="stylesheet">
+
+
+</head>
+<body>
+<section class="ftco-section">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6 text-center mb-5">
+                <h2 class="heading-section">Post Create</h2>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <div class="wrapper img" style="background-image: url(/img/img.jpg); background-size: cover">
+                    <div class="row">
+                        <div class="col-md-9 col-lg-7">
+                            <div class="contact-wrap w-100 p-md-5 p-4">
+                                <h3 class="mb-4">내용 적는 곳</h3>
+                                <div id="form-message-warning" class="mb-4"></div>
+<!--                                <div id="form-message-success" class="mb-4">-->
+<!--                                    Your message was sent, thank you!-->
+<!--                                </div>-->
+                                <form method="post" th:object="${postDto}" class="contactForm">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label class="label" >제목</label>
+                                                <input type="text" th:field="*{title}" class="form-control"
+                                                       placeholder="Subject">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label class="label" >내용</label>
+                                                <textarea class="form-control" th:field="*{content}" cols="30"
+                                                          rows="4" placeholder="Message"></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <input type="submit" value="저장하기" class="btn btn-primary">
+                                                <div class="submitting"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script src="/js/jquery.min.js"></script>
+<script src="/js/popper.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/jquery.validate.min.js"></script>
+<script src="/js/main.js"></script>
+
+</body>
+</html>
+

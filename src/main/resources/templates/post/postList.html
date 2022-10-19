@@ -1,0 +1,44 @@
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+
+<tr class="container">
+    <td th:each="post : ${postList}">
+        <a th:text="${post.title}"></a>
+        <a th:text="${post.content}"></a>
+    </td>
+    <div id="blog" class="row">
+        <div class="col-md-10 blogShort">
+            <h1>Title 1</h1>
+            <img src="http://www.kaczmarek-photo.com/wp-content/uploads/2012/06/guinnes-150x150.jpg" alt="post img"
+                 class="pull-left img-responsive thumb margin10 img-thumbnail">
+
+            <em>This snippet use <a href="http://bootsnipp.com/snippets/featured/sexy-sidebar-navigation"
+                                    target="_blank">Sexy Sidebar Navigation</a></em>
+            <a class="btn btn-blog pull-right marginBottom10" href="">READ
+                MORE</a>
+        </div>
+        <div class="col-md-10 blogShort">
+            <h1>Title 2</h1>
+            <img src="http://www.kaczmarek-photo.com/wp-content/uploads/2012/06/DSC_4073-150x150.jpg" alt="post img"
+                 class="pull-left img-responsive thumb margin10 img-thumbnail">
+            <article><p>
+
+            </p></article>
+            <a class="btn btn-blog pull-right marginBottom10" href="">READ
+                MORE</a>
+        </div>
+        <div class="col-md-10 blogShort">
+            <h1>Title 3</h1>
+            <img src="http://www.kaczmarek-photo.com/wp-content/uploads/2012/06/DSC_1681-150x150.jpg" alt="post img"
+                 class="pull-left img-responsive thumb margin10 img-thumbnail">
+            <article><p>
+
+            </p></article>
+            <a class="btn btn-blog pull-right marginBottom10" href="">READ
+                MORE</a>
+        </div>
+        <div class="col-md-12 gap10"></div>
+    </div>
+</tr>

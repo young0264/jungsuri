@@ -1,4 +1,4 @@
-package com.jungsuri.jungsuri.dto.Member;
+package com.jungsuri.jungsuri.dto.member;
 
 import lombok.Getter;
 import lombok.Setter;
