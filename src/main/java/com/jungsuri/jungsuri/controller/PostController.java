@@ -82,7 +82,7 @@ public class PostController {
     public String postDelete(Principal principal, @PathVariable Long id) {
         Post post = postService.findPostById(id);
         postService.deletePost(post);
-        return "redirect:/post/list";
+        return "redirect:/post/list" ;
     }
 }
 
