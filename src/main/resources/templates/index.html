@@ -41,36 +41,20 @@
 
 				<div class="collapse navbar-collapse" id="navbarSupportedContent">
 					<ul class="navbar-nav ml-auto">
-						<a class="nav-item">
+						<li class="nav-link">
 							<a class="nav-link" sec:authorize ="isAnonymous()" th:href="@{/member/sign-in}">로그인</a>
-						</a>
-						<a class="nav-item">
-							<a class="nav-link" sec:authorize ="isAuthenticated()" th:href="@{/member/log-out}">로그아웃</a>
-						</a>
+						</li>
 
-						<nav>
-							<a class="nav-link"  th:href="@{/member/sign-up}">회원가입</a>
-						</nav>
-						<li class="nav-item">
-							<a class="scrl-down nav-link" href="#home">Home <span class="sr-only">(current)</span></a>
+						<li class="nav-link">
+							<a class="nav-link" sec:authorize ="isAuthenticated()" th:href="@{/member/log-out}">로그아웃</a>
 						</li>
-						<li class="nav-item">
-							<a class="scrl-down nav-link" href="#about">About me</a>
+
+						<li class = "nav-link">
+							<a class="nav-link" th:href="@{/member/sign-up}">회원가입</a>
 						</li>
-						<li class="nav-item">
-							<a class="scrl-down nav-link" href="#skill">게시물</a>
-						</li>
-						<li class="nav-item">
-							<a class="scrl-down nav-link" href="#resume">resume</a>
-						</li>
-						<li class="nav-item">
-							<a class="scrl-down nav-link" href="#testimonial">testimonials</a>
-						</li>
-						<li class="nav-item">
-							<a class="scrl-down nav-link" href="#portfolio">portfolio</a>
-						</li>
-						<li class="nav-item">
-							<a class="scrl-down nav-link" href="#contact">Contact us</a>
+
+						<li class="nav-link">
+							<a class="nav-link" th:href="@{/post/new}">게시물 등록 </a>
 						</li>
 					</ul>
 				</div>
@@ -78,33 +62,6 @@
 		</div>
 	</div>
 	<!--End Main Menu Logo-->
-
-
-	<!--Start Tartget-->
-	<div class="target-area">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-4">
-					<div class="single-target-box">
-						<h1>Values</h1>
-						pLorem ipsum dolor sit amet, ea doming until epicuri iudicabit nam, te usu virtute placerat. Purto brute disputando cu est. </div>
-				</div>
-				<div class="col-lg-4">
-					<div class="single-target-box">
-						<h1>goals</h1>
-						pLorem ipsum dolor sit amet, ea doming until epicuri iudicabit nam, te usu virtute placerat. Purto brute disputando cu est. </div>
-				</div>
-				<div class="col-lg-4">
-					<div class="single-target-box">
-						<h1>hobbies</h1>
-						pLorem ipsum dolor sit amet, ea doming until epicuri iudicabit nam, te usu virtute placerat. Purto brute disputando cu est. </div>
-				</div>
-			</div>
-			<!--End of row-->
-		</div>
-		<!--End of container-->
-	</div>
-	<!--End of Target area-->
 
 
 	<!--Start About Area-->
