@@ -1,44 +1,123 @@
+<!DOCTYPE html>
+<html
+        class="no-js"
+        xmlns:th="http://www.thymeleaf.org"
+        lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Focal - Resume</title>
+    <link type="text/css" href="/css/font-awesome.min.css" rel="stylesheet">
+    <link type="text/css" href="/css/animate.css" rel="stylesheet">
+    <link type="text/css" href="/css/jquery.mCustomScrollbar.css" rel="stylesheet">
+    <link type="text/css" href="/css/owl.carousel.min.css" rel="stylesheet">
+    <link type="text/css" href="/css/bootstrap.min.css" rel="stylesheet">
+    <link type="text/css" href="/css/normalize.css" rel="stylesheet">
+    <link type="text/css" href="/style.css" rel="stylesheet">
+    <link type="text/css" href="/css/responsive.css" rel="stylesheet">
+    <!--	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">-->
+
+    <script src="/js/jquery-1.12.4.min.js"></script>
+</head>
+
 <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 <!------ Include the above in your HEAD tag ---------->
+<body>
+<!--Start Main Menu Logo-->
+<div class="menubar-area">
+    <div class="container">
+        <nav class="navbar navbar-expand-lg">
+            <a class="navbar-brand" href="#"><img src="/img/logo.png" alt="" class="logo"></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
 
-<tr class="container">
-    <td th:each="post : ${postList}">
-        <a th:text="${post.title}"></a>
-        <a th:text="${post.content}"></a>
-    </td>
-    <div id="blog" class="row">
-        <div class="col-md-10 blogShort">
-            <h1>Title 1</h1>
-            <img src="http://www.kaczmarek-photo.com/wp-content/uploads/2012/06/guinnes-150x150.jpg" alt="post img"
-                 class="pull-left img-responsive thumb margin10 img-thumbnail">
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-link">
+                        <a class="nav-link" sec:authorize="isAnonymous()" th:href="@{/member/sign-in}">로그인</a>
+                    </li>
 
-            <em>This snippet use <a href="http://bootsnipp.com/snippets/featured/sexy-sidebar-navigation"
-                                    target="_blank">Sexy Sidebar Navigation</a></em>
-            <a class="btn btn-blog pull-right marginBottom10" href="">READ
-                MORE</a>
-        </div>
-        <div class="col-md-10 blogShort">
-            <h1>Title 2</h1>
-            <img src="http://www.kaczmarek-photo.com/wp-content/uploads/2012/06/DSC_4073-150x150.jpg" alt="post img"
-                 class="pull-left img-responsive thumb margin10 img-thumbnail">
-            <article><p>
+                    <li class="nav-link">
+                        <a class="nav-link" sec:authorize="isAuthenticated()" th:href="@{/member/log-out}">로그아웃</a>
+                    </li>
 
-            </p></article>
-            <a class="btn btn-blog pull-right marginBottom10" href="">READ
-                MORE</a>
-        </div>
-        <div class="col-md-10 blogShort">
-            <h1>Title 3</h1>
-            <img src="http://www.kaczmarek-photo.com/wp-content/uploads/2012/06/DSC_1681-150x150.jpg" alt="post img"
-                 class="pull-left img-responsive thumb margin10 img-thumbnail">
-            <article><p>
+                    <li class="nav-link">
+                        <a class="nav-link" th:href="@{/member/sign-up}">회원가입</a>
+                    </li>
 
-            </p></article>
-            <a class="btn btn-blog pull-right marginBottom10" href="">READ
-                MORE</a>
-        </div>
-        <div class="col-md-12 gap10"></div>
+                    <li class="nav-link">
+                        <a class="nav-link" th:href="@{/post/new}">게시물 등록 </a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
     </div>
-</tr>
+</div>
+<!--End Main Menu Logo-->
+
+<!--<tr class="container">-->
+<!--    <td th:each="post : ${postList}">-->
+<!--        <a th:text="${post.title}"></a>-->
+<!--        <a th:text="${post.content}"></a>-->
+<!--    </td>-->
+
+<!--Start Post Content-->
+<div class="target-area">
+    <div class="container">
+        <div th:each="post :${postList}" class="col mb-4">
+            <div class="card-body">
+                <h1 class="card-title d-flex justify-content-between">
+                    <h2 class="card-title d-flex justify-content-between" th:text="${post.title}"></h2>
+                    <h3 th:text="${post.content}"></h3>
+                </h1>
+            </div>
+            <!--            <div class="col-lg-4">-->
+            <!--                <div class="single-target-box">-->
+            <!--                    <h1>goals</h1>-->
+            <!--                    pLorem ipsum dolor sit amet, ea doming until epicuri iudicabit nam, te usu virtute placerat. Purto-->
+            <!--                    brute disputando cu est.-->
+            <!--                </div>-->
+            <!--            </div>-->
+            <!--            <div class="col-lg-4">-->
+            <!--                <div class="single-target-box">-->
+            <!--                    <h1>hobbies</h1>-->
+            <!--                    pLorem ipsum dolor sit amet, ea doming until epicuri iudicabit nam, te usu virtute placerat. Purto-->
+            <!--                    brute disputando cu est.-->
+            <!--                </div>-->
+            <!--            </div>-->
+        </div>
+        <!--End of row-->
+    </div>
+    <!--End of container-->
+</div>
+<!--End of Post Content -->
+
+
+<!--Start Testimonial footer-->
+<div id="testimonial" class="testimonial-area">
+    <div class="owl-carousel testimonial-slider">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-10 text-center">
+                    <p>“Lorem ipsum dolor sit amet, ea doming epicuri iudicabit nam, te usu virtute placerat. Purto
+                        brute disputando cu est, eam dicam soluta ei. Vel dicam vivendo accusata ei, cum ne periculis
+                        molestiae pri. Lorem ipsum dolor sit amet, ea doming epicuri iudicabit nam.”</p>
+                    <h4>John Stone</h4>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<!--End of testimonial-->
+</body>
+
+
+
+
