@@ -33,6 +33,8 @@ public class Post {
     @ManyToOne(fetch = FetchType.LAZY)
     private Member member;
 
+    private String postTime;
+
     public void modifyPost(String title,String  content,Member member) {
         this.title = title;
         this.content = content;
