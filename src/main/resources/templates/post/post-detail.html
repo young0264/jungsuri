@@ -28,7 +28,7 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-6 text-center mb-5">
-                <h2 class="heading-section">Post Create</h2>
+                <h2 class="heading-section">Post Detail</h2>
             </div>
         </div>
         <div class="row justify-content-center">
@@ -37,33 +37,35 @@
                     <div class="row">
                         <div class="col-md-9 col-lg-7">
                             <div class="contact-wrap w-100 p-md-5 p-4">
-                                <h3 class="mb-4">내용 적는 곳</h3>
                                 <div id="form-message-warning" class="mb-4"></div>
                                 <!--                                <div id="form-message-success" class="mb-4">-->
                                 <!--                                    Your message was sent, thank you!-->
                                 <!--                                </div>-->
-                                <form method="post" th:object="${postDto}" class="contactForm">
-                                    <div class="row">
+
+                                <form th:object="${postDto}">
+                                    <div class="post-header">
                                         <div class="col-md-12">
                                             <div class="form-group">
-                                                <label class="label">제목</label>
-                                                <input type="text" th:field="*{title}" class="form-control"
-                                                       placeholder="Subject">
+                                                <div th:utext="${postDto.getTitle()}" class="form-control">제목</div>
                                             </div>
                                         </div>
-                                        <div class="col-md-12">
+                                        <div style="padding:10px" class="post-body">
                                             <div class="form-group">
-                                                <label class="label">내용</label>
-                                                <textarea id="message" type="text" class="form-control" th:field="*{content}" cols="30"
-                                                          rows="4" placeholder="Message"></textarea>
+                                                <div style="width:390px; height:300px" th:text="${postDto.getContent()}"
+                                                     class="form-control">내용
+                                                </div>
                                             </div>
                                         </div>
-                                        <div class="col-md-12">
-                                            <div class="form-group">
-                                                <input id="Btn" type="submit" value="저장하기" class="btn btn-primary">
-                                                <div class="submitting"></div>
-                                            </div>
-                                        </div>
+                                        <form>
+<!--                                            <button th:href="@{/post/modify/{id}(id=${postDto.id})}" class="btn btn-primary">수정</button>-->
+                                            <a th:href="@{/post/modify/{id}(id=${postDto.id})}" class="btn btn-primary">수정</a>
+                                        </form>
+
+                                        <form th:action="@{/post/delete/{id}(id=${postDto.id})}" th:method="delete">
+
+                                            <button class="btn btn-warning" type="submit">삭제</button>
+                                        </form>
+
                                     </div>
                                 </form>
                             </div>

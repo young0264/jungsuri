@@ -37,7 +37,7 @@ public class PostService {
     }
 
     public Post modifyPost(Post post, PostDto postDto) {
-        post.modifyPost(postDto.getTitle(), postDto.getContent(), postDto.getMember());
+        post.modifyPost(postDto.getTitle(), postDto.getContent(), post.getMember());
         return postRepository.save(post);
     }
 

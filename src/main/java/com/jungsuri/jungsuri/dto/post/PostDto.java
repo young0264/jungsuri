@@ -14,6 +14,7 @@ import java.time.LocalDateTime;
 public class PostDto {
 
     private Member member;
+    private Long id;
     private String title;
     private String content;
     private String postTime;

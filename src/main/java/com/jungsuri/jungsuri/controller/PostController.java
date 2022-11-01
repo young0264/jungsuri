@@ -41,7 +41,6 @@ public class PostController {
         postService.createPost(postDto, member);
 
         return "redirect:/post/list";
-//        return "redirect:/newPost";
     }
 
     @GetMapping("post/modify/{id}")
@@ -56,37 +55,46 @@ public class PostController {
         return "post/post-modify";
     }
 
-    @PostMapping("/post/modify/{id}")
+    @PostMapping("post/modify/{id}")
     public String postModify(@Valid PostDto postDto, BindingResult bindingResult, @PathVariable("id") Long id, Principal principal) {
 //        if (bindingResult.hasErrors()) {
 //            return "post/postList";
 //        }
         log.info("postdto. context" + postDto.getContent());
         Post post = postService.findPostById(id);
+        log.info("nick name1 : " + post.getMember().getUsername());
+        log.info("nick name2 : " + post.getMember().getId());
         postService.modifyPost(post, postDto);
 
         return "redirect:/post/list";
     }
 
 
-    @GetMapping("/post/list")
+    @GetMapping("post/list")
     public String showPostList(Model model) {
+
         List<Post> postList = postRepository.findAll();
         model.addAttribute("postList", postList);
         return "post/postList";
     }
 
-    @DeleteMapping("/post/delete/{id}")
+    @DeleteMapping("post/delete/{id}")
     public String postDelete(Principal principal, @PathVariable Long id) {
         Post post = postService.findPostById(id);
         postService.deletePost(post);
         return "redirect:/post/list";
     }
 
-    @GetMapping("/post/test")
-    public String postTest() {
-        return "/post/postList-test";
+    @GetMapping("post/detail/{id}")
+    public String postDetail(@ModelAttribute("postDto") PostDto postDto, @PathVariable("id") Long id) {
+        Post post = postService.findPostById(id);
+        postDto.setTitle(post.getTitle());
+        postDto.setContent(post.getContent());
+        postDto.setId(post.getId());
+        postDto.setMember(post.getMember());
+        return "post/post-detail";
     }
+
 }
 
 

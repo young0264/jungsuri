@@ -45,8 +45,7 @@
                 <div class="card mb-2">
                     <!--post image 붙이기 -->
                     <div class="card-body">
-                        <h5 class="card-title">
-                            <a th:text="${post.title}"></a>
+                        <h5 class="card-title"><a th:href="@{/post/detail/{id}(id=${post.id})}" th:text="${post.title}"></a>
                         </h5>
                         <hr class="my-1">
                         <div>
@@ -55,21 +54,14 @@
                             <span th:text="${post.modifyDate}"></span>
                         </div>
                         <div>
-                            <i class="icofont-ui-user"></i><!-232322--->
-                            <span th:text="${member}"></span>
+                            <i class="icofont-ui-user"></i>
+<!--                            <span th:text="${post.username}"></span>-->
                         </div>
                     </div>
                 </div>
             </div>
         </th:block>
 
-        <!--리팩토링 전-->
-        <!--            <div class="card-body">-->
-        <!--                <h1 class="card-title d-flex justify-content-between">-->
-        <!--                    <h2 class="card-title d-flex justify-content-between" th:text="${post.title}"></h2>-->
-        <!--                    <h3 th:text="${post.content}"></h3>-->
-        <!--                </h1>-->
-        <!--            </div>-->
 
     </div>
     <!--End of row-->

@@ -4,6 +4,8 @@ import com.jungsuri.jungsuri.domain.member.Member;
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -32,9 +34,10 @@ public class Post {
 
     @ManyToOne(fetch = FetchType.LAZY)
     private Member member;
-
     private String postTime;
 
+//    Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+//    String username = principal.getClass().getName();
     public void modifyPost(String title,String  content,Member member) {
         this.title = title;
         this.content = content;
