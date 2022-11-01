@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -21,8 +22,8 @@ public class MemberController {
 
     //===로그인===//
     @GetMapping("/member/sign-in")
-    public String signin() {
-
+    public String signin(Model model) {
+//        model.addAttribute("member", member);
         return "/member/signIn";
     }
 

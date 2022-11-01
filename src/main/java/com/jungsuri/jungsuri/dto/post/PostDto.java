@@ -16,6 +16,7 @@ public class PostDto {
     private Member member;
     private String title;
     private String content;
+    private String postTime;
 
 //    private LocalDateTime createDate;
 //

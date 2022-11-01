@@ -31,14 +31,8 @@
 <body>
 <!--Start Main Menu Logo-->
 <div th:replace="fragment/home-header::main-header"></div>
-
 <!--End Main Menu Logo-->
 
-<!--<tr class="container">-->
-<!--    <td th:each="post : ${postList}">-->
-<!--        <a th:text="${post.title}"></a>-->
-<!--        <a th:text="${post.content}"></a>-->
-<!--    </td>-->
 
 <!--Start Post Content-->
 <div class="container">
@@ -46,10 +40,10 @@
     <div class="row gutters-20">
         <th:block th:each="post : ${postList}" class="col mb-4">
 
-            <!--col-lg-4 로하면3개 5,6하면 두개씩-->
+            <!--col-lg-4 로하면3개 5,6하면 두개리팩토링-->
             <div class="col-lg-5 col-md-6 col-6">
                 <div class="card mb-2">
-                    <!--post image 붙이기-->
+                    <!--post image 붙이기 -->
                     <div class="card-body">
                         <h5 class="card-title">
                             <a th:text="${post.title}"></a>
@@ -57,7 +51,12 @@
                         <hr class="my-1">
                         <div>
                             <i class="icofont-clock-time"></i>
-                            <span th:text="${post.postTime}"></span>
+                            <span th:text="${#temporals.format(post.createDate, 'yyyy-MM-dd:mm')}"></span>
+                            <span th:text="${post.modifyDate}"></span>
+                        </div>
+                        <div>
+                            <i class="icofont-ui-user"></i><!-232322--->
+                            <span th:text="${member}"></span>
                         </div>
                     </div>
                 </div>

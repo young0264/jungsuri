@@ -11,10 +11,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.print.attribute.standard.PrinterInfo;
 import javax.validation.Valid;
@@ -64,6 +61,7 @@ public class PostController {
 //        if (bindingResult.hasErrors()) {
 //            return "post/postList";
 //        }
+        log.info("postdto. context" + postDto.getContent());
         Post post = postService.findPostById(id);
         postService.modifyPost(post, postDto);
 
@@ -78,7 +76,7 @@ public class PostController {
         return "post/postList";
     }
 
-    @GetMapping("/post/delete/{id}")
+    @DeleteMapping("/post/delete/{id}")
     public String postDelete(Principal principal, @PathVariable Long id) {
         Post post = postService.findPostById(id);
         postService.deletePost(post);
