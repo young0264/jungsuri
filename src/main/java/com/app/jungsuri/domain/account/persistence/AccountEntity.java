@@ -10,6 +10,7 @@ import java.time.LocalDateTime;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@Table(name = "account")
 //@EqualsAndHashCode(of = "id")
 public class AccountEntity {
 
@@ -19,18 +20,18 @@ public class AccountEntity {
 
     private String bio;
 
-    private String username;
+    private String name;
 
-    private String role; //TODO ENUM으로
+    private String role; //TODO ENUM으로 -> 관리자가 부여해주는 방식
 
     @Column(unique = true)
     private String email;
-
-    private String emailToken;
-
-    private LocalDateTime emailCheckTokenGeneratedAt;
-
-    private boolean emailVerified;
+//
+//    private String emailToken;
+//
+//    private LocalDateTime emailCheckTokenGeneratedAt;
+//
+//    private boolean emailVerified;
 
     private String location; //TODO 대략적인 시 or 구까지.
 
@@ -40,9 +41,6 @@ public class AccountEntity {
     private String loginId;
 
     private String password;
-
-    @Column(unique = true)
-    private String nickname;
 
     private String profileImage;
 
