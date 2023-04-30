@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<!--<html lang="ko" dir="ltr">-->
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+<html
+        lang="ko"
+        xmlns:th="http://thymeleaf.org"
+        xmlns:sec="http://thymeleaf.org/extras/spring-security">
+<script>
+    // $(function(){
+    //     $('#password').on("propertychange change keyup paste input", function(){
+    //         $('#passwordChkMsg').html('');
+    //     });
+    //     console.log(1111);
+    //
+    //     $('#password, #passwordChk').keyup(function(){
+    //         console.log(222);
+    //
+    //
+    //         if($('#password').val() != $('#passwordChk').val()){
+    //             console.log(333);
+    //
+    //             pwdChk = false;
+    //             $("#passwordChkMsg").text("비밀번호가 일치하지 않습니다.")
+    //                 .addClass("text-danger")
+    //                 .removeClass("text-primary");
+    //         } else{
+    //             console.log(444);
+    //
+    //             pwdChk = true;
+    //             console.log("pwdChk : " + pwdChk);
+    //             $("#passwordChkMsg").text("비밀번호가 일치합니다.")
+    //                 .addClass("text-primary")
+    //                 .removeClass("text-danger");
+    //         }
+    //
+    //     });
+    // });
+</script>
+
+<head th:replace="~{/fragments/fragments.html :: head}"></head>
+
+<body data-spy="scroll" data-target=".onpage-navigation" data-offset="60">
+<main>
+    <div class="page-loader">
+        <div class="loader">Loading...</div>
+    </div>
+    <span th:replace="~{fragments/fragments.html :: nav_header}"></span>
+
+    <div class="main">
+        <section class="module bg-dark-30" data-background="/images/banner_mountain02.jpg">
+
+        </section>
+        <section class="module">
+            <div class="container">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-6 col-sm-offset-3">
+                            <div th:if="${param.error}">
+                                Invalid username and password.
+                            </div>
+                            <div th:if="${param.logout}">
+                                You have been logged out.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <form th:action="@{/signup}" th:object="${signUpForm}" method="post">
+                    <div class="form-group row">
+                        <!--                TODO : 회원가입 기본정보-->
+
+                        <div class="col-sm-5 col-sm-offset-1 mb-sm-40" id="signup_init_info" name="signup_init_info">
+                            <h4 class="font-alt">회원가입</h4>
+                            <hr class="divider-w mb-10">
+                            <div class="form-group">
+                                <label>아이디</label>
+                                <input class="form-control" th:field="*{loginId}" id="username" type="text" name="username"
+                                       placeholder="아이디를 입력해주세요."/>
+                            </div>
+
+                            <div class="form-group">
+                                <label>이메일</label>
+                                <input class="form-control" th:field="*{email}" id="email" type="email" name="email"
+                                       placeholder="이메일을 입력해 주세요"/>
+                                <small class="form-text text-danger fieldError" th:if="${#fields.hasErrors('email')}"
+                                       th:errors="*{email}">email Error</small>
+                                <button class="btn btn-primary">이메일 확인</button>
+                            </div>
+
+                            <div class="form-group">
+                                <label>비밀번호</label>
+                                <input class="form-control" th:field="*{password}" id="password" type="password"
+                                       name="password"
+                                       placeholder="비밀번호를 입력해주세요." required/>
+                                <small>특수문자(.,!@#$%^)를 사용해서 비밀번호를 입력해주세요.</small>
+                                <small class="form-text text-danger fieldError" th:if="${#fields.hasErrors('password')}"
+                                       th:errors="*{password}">Password Error</small>
+
+                            </div>
+                            <div class="form-group">
+                                <label>비밀번호 확인</label>
+                                <input class="form-control" id="passwordChk" type="password" name="passwordChk"
+                                       placeholder="비밀번호를 한번 더 입력해주세요." autocomplete="off" required/>
+                            </div>
+                        </div>
+
+                        <!--              TODO :  추가정보-->
+                        <div class="col-sm-5 col-sm-offset-1 mb-sm-40" id="signup_additional_info" name="signup_additional_info">
+                        <h4 class="font-alt">추가정보</h4>
+                        <hr class="divider-w mb-10">
+
+                        <div class="form-group">
+                            <label>이름</label>
+                            <input class="form-control" th:field="*{name}" id="name" type="text" name="name" placeholder="성함을 입력해 주세요"/>
+                        </div>
+
+                        <div class="form-group">
+                            <label>인삿말</label>
+                            <input class="form-control" th:field="*{bio}" id="bio" type="text" name="bio"
+                                   placeholder="간단한 소개를 입력해주세요."/>
+                        </div>
+                        <!--TODO : 거주지 select box OR 검색 -->
+                        <div class="form-group">
+                            <label>사는지역</label>
+                            <input class="form-control" th:field="*{location}" id="location" name="location"
+                                   placeholder="거주하시는 대략적인 지역만 입력해주세요(ㅇㅇ도/ㅇㅇ시)"/>
+                        </div>
+                        <div class="form-group">
+                            <label>프로필사진 </label>
+                            <input class="form-control" th:field="*{profileImage}" id="profileImage" type="text" name="profileImage"
+                                   placeholder="업로드로 만들게요."/>
+                        </div>
+
+                    </div>
+                    </div>
+                    <div class="form-group row text-center">
+                        <button type="submit" class="btn btn-round btn-b" value="Sign In">SIGN UP</button>
+                    </div>
+                </form>
+            </div>
+        </section>
+    </div>
+
+    </section>
+    <div class="module-small bg-dark">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-3">
+                    <div class="widget">
+                        <h5 class="widget-title font-alt">About Titan</h5>
+                        <p>The languages only differ in their grammar, their pronunciation and their most common
+                            words.</p>
+                        <p>Phone: +1 234 567 89 10</p>Fax: +1 234 567 89 10
+                        <p>Email:<a href="#">somecompany@example.com</a></p>
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div class="widget">
+                        <h5 class="widget-title font-alt">Recent Comments</h5>
+                        <ul class="icon-list">
+                            <li>Maria on <a href="#">Designer Desk Essentials</a></li>
+                            <li>John on <a href="#">Realistic Business Card Mockup</a></li>
+                            <li>Andy on <a href="#">Eco bag Mockup</a></li>
+                            <li>Jack on <a href="#">Bottle Mockup</a></li>
+                            <li>Mark on <a href="#">Our trip to the Alps</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div class="widget">
+                        <h5 class="widget-title font-alt">Blog Categories</h5>
+                        <ul class="icon-list">
+                            <li><a href="#">Photography - 7</a></li>
+                            <li><a href="#">Web Design - 3</a></li>
+                            <li><a href="#">Illustration - 12</a></li>
+                            <li><a href="#">Marketing - 1</a></li>
+                            <li><a href="#">Wordpress - 16</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div class="widget">
+                        <h5 class="widget-title font-alt">Popular Posts</h5>
+                        <ul class="widget-posts">
+                            <li class="clearfix">
+                                <div class="widget-posts-image"><a href="#"><img
+                                        src="/titan/live/assets/images/rp-1.jpg" alt="Post Thumbnail"/></a></div>
+                                <div class="widget-posts-body">
+                                    <div class="widget-posts-title"><a href="#">Designer Desk Essentials</a></div>
+                                    <div class="widget-posts-meta">23 january</div>
+                                </div>
+                            </li>
+                            <li class="clearfix">
+                                <div class="widget-posts-image"><a href="#"><img
+                                        src="/titan/live/assets/images/rp-2.jpg" alt="Post Thumbnail"/></a></div>
+                                <div class="widget-posts-body">
+                                    <div class="widget-posts-title"><a href="#">Realistic Business Card Mockup</a></div>
+                                    <div class="widget-posts-meta">15 February</div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr class="divider-d">
+    <footer class="footer bg-dark">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-6">
+                    <p class="copyright font-alt">&copy; 2017&nbsp;<a href="index.html">TitaN</a>, All Rights Reserved
+                    </p>
+                </div>
+                <div class="col-sm-6">
+                    <div class="footer-social-links"><a href="#"><i class="fa fa-facebook"></i></a><a href="#"><i
+                            class="fa fa-twitter"></i></a><a href="#"><i class="fa fa-dribbble"></i></a><a href="#"><i
+                            class="fa fa-skype"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    </div>
+    <div class="scroll-up"><a href="#totop"><i class="fa fa-angle-double-up"></i></a></div>
+</main>
+<!--
+JavaScripts
+=============================================
+-->
+<script src="/titan/live/assets/lib/jquery/dist/jquery.js"></script>
+<script src="/titan/live/assets/lib/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="/titan/live/assets/lib/wow/dist/wow.js"></script>
+<script src="/titan/live/assets/lib/jquery.mb.ytplayer/dist/jquery.mb.YTPlayer.js"></script>
+<script src="/titan/live/assets/lib/isotope/dist/isotope.pkgd.js"></script>
+<script src="/titan/live/assets/lib/imagesloaded/imagesloaded.pkgd.js"></script>
+<script src="/titan/live/assets/lib/flexslider/jquery.flexslider.js"></script>
+<script src="/titan/live/assets/lib/owl.carousel/dist/owl.carousel.min.js"></script>
+<script src="/titan/live/assets/lib/smoothscroll.js"></script>
+<script src="/titan/live/assets/lib/magnific-popup/dist/jquery.magnific-popup.js"></script>
+<script src="/titan/live/assets/lib/simple-text-rotator/jquery.simple-text-rotator.min.js"></script>
+<script src="/titan/live/assets/js/plugins.js"></script>
+<script src="/titan/live/assets/js/main.js"></script>
+</body>
+
+</html>
