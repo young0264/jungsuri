@@ -7,11 +7,12 @@ import java.time.LocalDateTime;
 
 @Entity
 @Getter
+@Setter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "account")
-//@EqualsAndHashCode(of = "id")
+@EqualsAndHashCode(of = "id")
 public class AccountEntity {
 
     @Id
