@@ -17,7 +17,7 @@
     Document Title
     =============================================
     -->
-    <title>Titan | Multipurpose HTML5 Template</title>
+    <title>정수리 꼬순내</title>
     <!--
     Favicons
     =============================================
@@ -330,6 +330,16 @@
                     </a>
                 </li>
             </ul>
+        </div>
+        <div class="text-center " th:if="${error}">
+<!--            <p class="lead text-danger " style="font-weight: bold" > 이메일 확인</p>-->
+            <div class="alert alert-danger" role="alert">
+                이메일 인증이 아직 완료되지 않았습니다. 가입때 사용하신 이메일의 수신함을 확인해 주세요. 발송된 인증코드 입력시 인증이 완료됩니다.
+                <form th:action="@{/check-email-token}"  method="post"  novalidate>
+                    <input class="text-nowrap" id="token" name="token" type="text" style="width:30%">
+                    <button class="btn btn-b btn-round" type="submit" >이메일확인</button>
+                </form>
+            </div>
         </div>
     </div>
 </nav>
