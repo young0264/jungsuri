@@ -13,15 +13,22 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.mail.javamail.JavaMailSender;
 
+import java.security.Principal;
+
 @Controller
 @RequiredArgsConstructor
 @Slf4j
+
 public class AccountController {
     private final AccountService accountService;
 //    private final JavaMailSender javaMailSender;
 
     @GetMapping("/")
-    public String mainPage() {
+    public String mainPage(Principal principal, Model model) {
+        boolean emailValid = accountService.isEmailValid(principal);
+        if (!emailValid) {
+            model.addAttribute("error", "이메일 인증이 되지않은 계정입니다.");
+        }
         return "main";
     }
 
