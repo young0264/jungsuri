@@ -1,9 +1,7 @@
 package com.app.jungsuri.domain.account.web.form;
 
-import com.app.jungsuri.domain.account.persistence.CustomAuthenticationProvider;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
@@ -14,13 +12,12 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
 @EnableWebSecurity
-//@RequiredArgsConstructor
 public class WebSecurityConfig implements WebMvcConfigurer {
 
-    @Bean
-    public AuthenticationProvider authenticationProvider() {
-        return new CustomAuthenticationProvider();
-    }
+//    @Bean
+//    public AuthenticationProvider authenticationProvider() {
+//        return new CustomAuthenticationProvider();
+//    }
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
@@ -37,7 +34,7 @@ public class WebSecurityConfig implements WebMvcConfigurer {
                         .defaultSuccessUrl("/", true));
         http
                 .logout((logout) -> logout
-//                        .logoutSuccessUrl("/")
+                        .logoutSuccessUrl("/")
                         .permitAll());
 
         return http.build();

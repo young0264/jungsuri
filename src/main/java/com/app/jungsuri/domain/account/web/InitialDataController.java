@@ -11,11 +11,10 @@ import org.springframework.stereotype.Controller;
  */
 
 @Controller
-public class AccountPostController {
+public class InitialDataController {
 
     @Autowired
     private AccountService accountService;
-
 
     @PostConstruct
     public String init() {

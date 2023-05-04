@@ -12,8 +12,8 @@ import org.springframework.stereotype.Component;
 import java.io.InputStream;
 
 
-//@Profile({"local", "dev"})
-//@Component
+@Profile({"local", "dev", "test"})
+@Component
 @Slf4j
 public class ConsoleMailSender implements JavaMailSender {
     @Override
@@ -48,7 +48,7 @@ public class ConsoleMailSender implements JavaMailSender {
 
     @Override
     public void send(SimpleMailMessage simpleMessage) throws MailException {
-//        log.info("메시지 1 " + simpleMessage.getText());
+        log.info("토큰값 메시지 1 : " + simpleMessage.getText());
     }
 
     @Override

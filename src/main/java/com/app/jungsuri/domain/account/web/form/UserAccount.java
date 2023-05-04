@@ -15,8 +15,4 @@ public class UserAccount extends User {
         this.accountEntity = accountEntity;
     }
 
-    public AccountEntity getAccount() {
-        return accountEntity;
-    }
-
 }
