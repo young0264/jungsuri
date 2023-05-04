@@ -5,14 +5,12 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import com.app.jungsuri.domain.account.persistence.AccountEntity;
 import com.app.jungsuri.domain.account.persistence.AccountRepository;
-import com.app.jungsuri.domain.account.persistence.AccountService;
 import com.app.jungsuri.infra.MockMvcTest;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.web.servlet.MockMvc;
 
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
-import static org.springframework.security.test.web.servlet.response.SecurityMockMvcResultMatchers.authenticated;
 import static org.springframework.security.test.web.servlet.response.SecurityMockMvcResultMatchers.unauthenticated;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -20,7 +18,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @MockMvcTest
-//@SpringBootTest
 class AccountControllerTest {
 
     @Autowired
@@ -28,8 +25,6 @@ class AccountControllerTest {
 
     @Autowired
     private AccountRepository accountRepository;
-    @Autowired
-    private AccountService accountService;
 
     @Test
     void 메인View가_정상적으로_잘나오는지() throws Exception{
@@ -37,6 +32,7 @@ class AccountControllerTest {
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(view().name("main"))
+                .andExpect(model().attributeExists("error"))
                 .andExpect(unauthenticated());
     }
 
@@ -51,7 +47,7 @@ class AccountControllerTest {
     }
 
     @Test
-    void 로그인View가_정상적으로_나오는지() throws Exception{
+    void 로그인페이지View가_정상적으로_나오는지() throws Exception{
         mockMvc.perform(get("/login"))
                 .andDo(print())
                 .andExpect(status().isOk())
@@ -76,6 +72,5 @@ class AccountControllerTest {
         assertThat(accountEntity.getLoginId()).isEqualTo("testid");
 
     }
-
 
 }
