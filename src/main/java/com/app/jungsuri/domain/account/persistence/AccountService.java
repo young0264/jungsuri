@@ -33,20 +33,16 @@ public class AccountService implements UserDetailsService {
     private final ModelMapper modelMapper;
 
 
-
-    //TODO login method 권한인증 안됨.(로그인처리 x)
+    //TODO login method 권한인증 안됨.()
     public void login(AccountEntity accountEntity) {
         System.out.println("로그인 시작");
 
         UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(
-                new UserAccount(accountEntity),
-//                accountEntity.getLoginId(),
+                accountEntity.getLoginId(),
                 accountEntity.getPassword(),
-                List.of(new SimpleGrantedAuthority("ROLE_USER")));
-//        Authentication authentication = this.authenticationProvider.authenticate(token);
-
-//        SecurityContext context = SecurityContextHolder.getContext();
-        SecurityContext context = SecurityContextHolder.createEmptyContext();
+                List.of(new SimpleGrantedAuthority("ROLE_USER"))
+        );
+        SecurityContext context = SecurityContextHolder.getContext();
         context.setAuthentication(token);
     }
 
