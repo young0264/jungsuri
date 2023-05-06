@@ -25,6 +25,7 @@
             </div>
         </div>
     </section>
+    <div class="alert alert-info" role="alert" th:if="${message}" th:text="${message}"></div>
     <section class="module">
         <div class="container">
             <div class="row">
@@ -128,8 +129,16 @@
                         <div class="post-header font-alt">
                             <h2 class="post-title"><a href="#"></a></h2>
                             <div class="post-meta">By&nbsp;
-                                <a href="#" th:text="${post.author} +' | '+ ${post.getCreatedAt().toLocalDate()}"></a>
+                                <a href="#" th:text="${post.author} + ' | ' + ${post.getCreatedAt().toLocalDate()}"></a>
                                 | 3 Comments | <a href="#">Photography, </a>
+                                <a th:if="${post.author == #authentication.principal.username}" style="float:right">
+                                    <form th:action="'/post/' + ${post.getId()} +'/updateView'">
+                                        <button class="btn btn-b btn-round bottom-right">수정</button>
+                                    </form>
+                                    <form th:action=" '/post/' + ${post.id} + '/delete' " th:method="delete">
+                                        <button class="btn btn-danger bottom-right">삭제</button>
+                                    </form>
+                                </a>
                             </div>
                         </div>
                         <div class="post-entry">
