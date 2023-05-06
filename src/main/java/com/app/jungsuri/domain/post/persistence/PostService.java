@@ -21,7 +21,7 @@ public class PostService {
         return postRepository.findAllByOrderByUpdatedAtDesc();
     }
 
-    public PostEntity cretePost(PostCreateDto postCreateDto, String loginId) {
+    public PostEntity createPost(PostCreateDto postCreateDto, String loginId) {
         PostEntity postEntity = postCreateDto.toPost(loginId).toEntity();
         return postRepository.save(postEntity);
     }

@@ -43,7 +43,7 @@ public class PostController {
     @PostMapping("/create")
     public String write(@ModelAttribute("postCreateDto") PostCreateDto postCreateDto, Principal principal) {
         String loginId = principal.getName();
-        postService.cretePost(postCreateDto, loginId);
+        postService.createPost(postCreateDto, loginId);
         return "redirect:/post/list";
     }
 
