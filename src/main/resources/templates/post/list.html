@@ -129,9 +129,9 @@
                         <div class="post-header font-alt">
                             <h2 class="post-title"><a href="#"></a></h2>
                             <div class="post-meta">By&nbsp;
-                                <a href="#" th:text="${post.author} + ' | ' + ${post.getCreatedAt().toLocalDate()}"></a>
+                                <a href="#" th:text="${post.loginId} + ' | ' + ${post.getCreatedAt().toLocalDate()}"></a>
                                 | 3 Comments | <a href="#">Photography, </a>
-                                <a th:if="${post.author == #authentication.principal.username}" style="float:right">
+                                <a th:if="${post.loginId == #authentication.principal.username}" style="float:right">
                                     <form th:action="'/post/' + ${post.getId()} +'/updateView'">
                                         <button class="btn btn-b btn-round bottom-right">수정</button>
                                     </form>
