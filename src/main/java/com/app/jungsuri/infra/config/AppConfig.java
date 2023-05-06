@@ -5,6 +5,7 @@ import org.modelmapper.config.Configuration;
 import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.context.annotation.Bean;
 
+
 @org.springframework.context.annotation.Configuration
 public class AppConfig {
 
@@ -13,7 +14,8 @@ public class AppConfig {
         ModelMapper modelMapper = new ModelMapper();
         modelMapper.getConfiguration()
                 .setMatchingStrategy(MatchingStrategies.STRICT)
-                .setFieldAccessLevel(Configuration.AccessLevel.PRIVATE)
+                .setFieldAccessLevel(Configuration.AccessLevel.PUBLIC)
+                .setSkipNullEnabled(true)
 //                .setDestinationNameTokenizer(NameTokenizers.UNDERSCORE)
 //                .setSourceNameTokenizer(NameTokenizers.UNDERSCORE)
                 .setFieldMatchingEnabled(true);
