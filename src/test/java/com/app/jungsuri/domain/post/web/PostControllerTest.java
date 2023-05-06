@@ -59,7 +59,7 @@ class PostControllerTest {
     @Test
     @WithMockUser(username="12", password="12")
     void post수정_성공() throws Exception {
-        PostEntity postEntity = postService.cretePost(new PostCreateDto("수정전제목", "수정전내용", ""), "12");
+        PostEntity postEntity = postService.createPost(new PostCreateDto("수정전제목", "수정전내용", ""), "12");
         mockMvc.perform(patch("/post/" + postEntity.getId() +"/update")
                         .param("title", "수정제목2")
                         .param("content", "수정내용2"))
