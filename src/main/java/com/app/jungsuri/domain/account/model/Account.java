@@ -1,13 +1,9 @@
 package com.app.jungsuri.domain.account.model;
 
 import com.app.jungsuri.domain.account.persistence.AccountEntity;
-import jakarta.persistence.Column;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
 import jakarta.persistence.Lob;
 import lombok.*;
 import org.modelmapper.ModelMapper;
-import org.modelmapper.config.Configuration;
 
 import java.time.LocalDateTime;
 
@@ -52,9 +48,6 @@ public class Account {
 
     @Builder
     public AccountEntity toEntity() {
-        modelMapper.getConfiguration()
-                .setFieldAccessLevel(Configuration.AccessLevel.PRIVATE)
-                .setFieldMatchingEnabled(true);
         return modelMapper.map(this, AccountEntity.class);
     }
 
