@@ -2,9 +2,7 @@ package com.app.jungsuri.domain.post.web;
 
 import com.app.jungsuri.domain.post.persistence.PostService;
 import com.app.jungsuri.domain.post.web.dto.PostCreateDto;
-import com.app.jungsuri.domain.post.model.Post;
 import com.app.jungsuri.domain.post.persistence.PostEntity;
-import com.app.jungsuri.domain.post.persistence.PostRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -47,20 +45,22 @@ public class PostController {
         return "redirect:/post/list";
     }
 
-//    // 게시글 상세 조회
-//    @GetMapping("/{id}")
-//    public String view(@PathVariable Long id, Model model) {
-//        PostEntity post = postRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid post ID"));
-//        model.addAttribute("post", post);
-//        return "post/view";
-//    }
+    // 게시글 상세 조회
+    @GetMapping("/{postId}/details")
+    public String view(@PathVariable Long postId, Model model) {
+        PostEntity postEntity = postService.getPostEntity(postId);
+        model.addAttribute("mode", "datails");
+        model.addAttribute("postEntity", postEntity);
+        return "post/details";
+    }
 
     // 게시글 수정 화면 이동
     @GetMapping("/{postId}/updateView")
     public String update(@PathVariable Long postId, Model model) {
         PostEntity postEntity = postService.getPostEntity(postId);
+        model.addAttribute("mode", "update");
         model.addAttribute("postEntity", postEntity);
-        return "post/update";
+        return "post/details";
     }
 
     // 게시글 수정 처리
@@ -76,6 +76,7 @@ public class PostController {
     @DeleteMapping("/{postId}/delete")
     public String delete(@PathVariable Long postId) {
         postService.deletePost(postId);
+        //TODO     ApplicationEventPublisher eventPublisher; 로 이벤트처리하기
         return "redirect:/post/list";
     }
 }

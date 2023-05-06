@@ -1,5 +1,6 @@
 package com.app.jungsuri.domain.post.model;
 
+import com.app.jungsuri.domain.account.persistence.AccountEntity;
 import com.app.jungsuri.domain.post.persistence.PostEntity;
 import com.app.jungsuri.infra.config.AppConfig.*;
 import lombok.RequiredArgsConstructor;
@@ -19,6 +20,15 @@ public class Post {
     private final LocalDateTime updatedAt;
     private final String loginId;
 
+//    private final String author;
+//
+//    private final AccountEntity accountEntity;
+//
+//    private final Long likeCount;
+//
+//    private final Long commentCount;
+//
+//    private final Long viewCount;
 
     public PostEntity toEntity(){
         return PostEntity.builder()
@@ -28,7 +38,12 @@ public class Post {
                 .imagePath(imagePath)
                 .createdAt(createdAt)
                 .updatedAt(updatedAt)
-                .author(loginId)
+                .loginId(loginId)
+//                .author(author)
+//                .account_id(account_id)
+//                .likeCount(likeCount)
+//                .commentCount(commentCount)
+//                .viewCount(viewCount)
                 .build();
     }
 
