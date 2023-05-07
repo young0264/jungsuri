@@ -31,7 +31,6 @@ public class PostEntity {
 
     private LocalDateTime updatedAt;
 
-
     @NotNull
     @Column(unique = true)
     private String loginId;
@@ -51,4 +50,10 @@ public class PostEntity {
     @OneToMany(mappedBy = "postEntity")
     private List<CommentEntity> comments;
 
+    public void update(PostEntity postEntity) {
+        this.title = postEntity.getTitle();
+        this.content = postEntity.getContent();
+        this.imagePath = postEntity.getImagePath();
+        this.updatedAt = LocalDateTime.now();
+    }
 }

@@ -39,7 +39,7 @@ class PostControllerTest {
         mockMvc.perform(get("/post/create"))
                 .andDo(print())
                 .andExpect(status().isOk())
-                .andExpect(view().name("post/write"))
+                .andExpect(view().name("post/form"))
                 .andExpect(model().attributeExists("postCreateDto"))
                 .andExpect(authenticated());
     }

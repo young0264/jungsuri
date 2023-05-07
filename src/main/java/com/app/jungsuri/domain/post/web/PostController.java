@@ -34,7 +34,8 @@ public class PostController {
     @GetMapping("/create")
     public String write(Model model) {
         model.addAttribute("postCreateDto", new PostCreateDto());
-        return "post/write";
+        model.addAttribute("mode", "create");
+        return "post/form";
     }
 
     // 게시글 등록 처리
@@ -45,11 +46,10 @@ public class PostController {
         return "redirect:/post/list";
     }
 
-    // 게시글 상세 조회
+    // 게시글 상세 페이지
     @GetMapping("/{postId}/details")
     public String view(@PathVariable Long postId, Model model) {
         PostEntity postEntity = postService.getPostEntity(postId);
-        model.addAttribute("mode", "datails");
         model.addAttribute("postEntity", postEntity);
         return "post/details";
     }
@@ -60,14 +60,13 @@ public class PostController {
         PostEntity postEntity = postService.getPostEntity(postId);
         model.addAttribute("mode", "update");
         model.addAttribute("postEntity", postEntity);
-        return "post/details";
+        return "post/form";
     }
 
     // 게시글 수정 처리
     @PatchMapping("/{postId}/update")
     public String edit(@PathVariable Long postId, @ModelAttribute("postEntity") PostEntity existingPost, RedirectAttributes redirectAttributes) {
-        PostEntity postEntity = postService.getPostEntity(postId);
-        postService.updatePost(existingPost, postEntity);
+        postService.updatePost(existingPost, postId);
         redirectAttributes.addFlashAttribute("message", "게시글이 수정되었습니다.");
         return "redirect:/post/list";
     }
