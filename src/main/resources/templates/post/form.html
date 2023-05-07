@@ -7,12 +7,9 @@
 >
 
 <span th:replace="~{/fragments/fragments.html :: head}"></span>
-
-
 <head th:replace="~{fragments/fragments.html :: nav_header}"></head>
 
 <script>
-
     $(function () {
         var toolbar = [
             ['style', ['bold', 'italic', 'underline', 'clear']],
@@ -41,9 +38,7 @@
 </script>
 
 <body data-spy="scroll" data-target=".onpage-navigation" data-offset="60">
-<!--<div class="page-loader">-->
-<!--    <div class="loader">Loading...</div>-->
-<!--</div>-->
+<!--게시글 등록 form-->
 <div th:if="${mode}=='create'">
     <section class="module">
     <div class="container">
@@ -69,6 +64,8 @@
     </div>
 </section>
 </div>
+
+<!--게시글 수정 form-->
 <div th:if="${mode}=='update' ">
     <section class="module">
         <div class="container">
@@ -78,7 +75,7 @@
                 <div class="col-sm-8 col-sm-offset-1">
                     <h4 class="font-alt mb-0">Basic Forms</h4>
                     <hr class="divider-w mt-10 mb-20">
-                    <form class="form" th:action=" '/post/'+ ${postId} + '/update'" th:method="PATCH" th:object="${postEntity}">
+                    <form class="form" th:action=" '/post/'+ ${postId} + '/update'" th:method="patch" th:object="${postEntity}">
                         <div class="form-group">
                             <input class="form-control" type="text" name="title" th:field="*{title}"
                                    th:value="${postEntity.title}" placeholder="Default input"/>
@@ -98,7 +95,6 @@
         </div>
     </section>
 </div>
-
 
 </body>
 <div th:replace="~{fragments/fragments.html :: nav_footer}"></div>
