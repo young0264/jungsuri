@@ -27,7 +27,7 @@ public class CommentEntity {
 
     private String author;
 
-    private Long likeCount;
+    private Integer likeCount;
 
     private LocalDateTime createdAt;
 

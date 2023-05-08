@@ -17,7 +17,7 @@ public class Comment {
 
     private final String author;
 
-    private final Long likeCount;
+    private final Integer likeCount;
 
     private final LocalDateTime createdAt;
 
