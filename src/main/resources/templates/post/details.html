@@ -28,122 +28,86 @@
                     </div>
                     <div class="post-header font-alt">
                         <h1 class="post-title" th:text="${postEntity.title}"></h1>
-                        <div class="post-meta">By&nbsp;<a href="#">Mark Stone</a>| 23 November | 3 Comments | <a
+                        <div class="post-meta">By&nbsp;<a href="#" th:text="${postEntity.author}"></a>| 23 November | 3 Comments | <a
                                 href="#">Photography, </a><a href="#">Web Design</a>
                         </div>
                     </div>
-                    <div class="post-entry" th:utext="${postEntity.content}">
+                    <div class="post-entry " style="height: 300px">
+                        <h4  th:utext="${postEntity.content}"> </h4>
                     </div>
                 </div>
                 <!-- 게시글  end-->
-
                 <!-- 댓글 list start-->
-                <div class="comments">
-                    <h4 class="comment-title font-alt">There are 3 comments</h4>
-                    <div class="comment clearfix">
-                        <div class="comment-avatar"><img
-                                src="https://s3.amazonaws.com/uifaces/faces/twitter/ryanbattles/128.jpg"
-                                alt="avatar"/></div>
-                        <div class="comment-content clearfix">
-                            <div class="comment-author font-alt"><a href="#">John Doe</a></div>
-                            <div class="comment-body">
-                                <p>The European languages are members of the same family. Their separate
-                                    existence is a myth. For science, music, sport, etc, Europe uses the same
-                                    vocabulary. The European languages are members of the same family. Their
-                                    separate existence is a myth.</p>
-                            </div>
-                            <div class="comment-meta font-alt">Today, 14:55 - <a href="#">Reply</a>
-                            </div>
+                <h5 class="borderline"></h5>
+                <h4 class="comment-title ">There are <span th:text="${postEntity.commentCount}"></span> comments</h4>
+
+                <div class="comment clearfix" th:each="comment : ${commentList}">
+                    <div class="comment-avatar"><img
+                            src="https://s3.amazonaws.com/uifaces/faces/twitter/ryanbattles/128.jpg"
+                            alt="avatar"/></div>
+                    <div class="comment-content clearfix">
+                        <div class="comment-author font-alt"><a href="#" th:text="${comment.author}"></a></div>
+                        <div class="comment-body">
+                            <p th:text="${comment.content}"></p>
                         </div>
-                        <div class="comment clearfix">
-                            <div class="comment-avatar"><img
-                                    src="https://s3.amazonaws.com/uifaces/faces/twitter/draganbabic/128.jpg"
-                                    alt="avatar"/></div>
-                            <div class="comment-content clearfix">
-                                <div class="comment-author font-alt"><a href="#">Mark Stone</a></div>
-                                <div class="comment-body">
-                                    <p>Europe uses the same vocabulary. The European languages are members of
-                                        the same family. Their separate existence is a myth.</p>
-                                </div>
-                                <div class="comment-meta font-alt">Today, 15:34 - <a href="#">Reply</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="comment clearfix">
-                        <div class="comment-avatar"><img
-                                src="https://s3.amazonaws.com/uifaces/faces/twitter/pixeliris/128.jpg"
-                                alt="avatar"/></div>
-                        <div class="comment-content clearfix">
-                            <div class="comment-author font-alt"><a href="#">Andy</a></div>
-                            <div class="comment-body">
-                                <p>The European languages are members of the same family. Their separate
-                                    existence is a myth. For science, music, sport, etc, Europe uses the same
-                                    vocabulary. The European languages are members of the same family. Their
-                                    separate existence is a myth.</p>
-                            </div>
-                            <div class="comment-meta font-alt">Today, 14:59 - <a href="#">Reply</a>
-                            </div>
+                        <div class="comment-meta font-alt" th:text="${comment.createdAt.toLocalDate()}"><a href="#">Reply</a>
                         </div>
                     </div>
                 </div>
                 <!-- 댓글 list end-->
 
+                <!-- 댓글 list 샘플 start  class comment는 여백이 너무 큼-->
+<!--                <div class="comments">-->
+<!--                    <h4 class="comment-title font-alt">There are 3 comments</h4>-->
+<!--                    <div class="comment clearfix">-->
+<!--                        <div class="comment-avatar"><img-->
+<!--                                src="https://s3.amazonaws.com/uifaces/faces/twitter/ryanbattles/128.jpg"-->
+<!--                                alt="avatar"/></div>-->
+<!--                        <div class="comment-content clearfix">-->
+<!--                            <div class="comment-author font-alt"><a href="#">John Doe</a></div>-->
+<!--                            <div class="comment-body">-->
+<!--                                <p>The European languages are members of the same family. Their separate-->
+<!--                                    existence is a myth. For science, music, sport, etc, Europe uses the same-->
+<!--                                    vocabulary. The European languages are members of the same family. Their-->
+<!--                                    separate existence is a myth.</p>-->
+<!--                            </div>-->
+<!--                            <div class="comment-meta font-alt">Today, 14:55 - <a href="#">Reply</a>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <div class="comment clearfix">-->
+<!--                            <div class="comment-avatar"><img-->
+<!--                                    src="https://s3.amazonaws.com/uifaces/faces/twitter/draganbabic/128.jpg"-->
+<!--                                    alt="avatar"/></div>-->
+<!--                            <div class="comment-content clearfix">-->
+<!--                                <div class="comment-author font-alt"><a href="#">Mark Stone</a></div>-->
+<!--                                <div class="comment-body">-->
+<!--                                    <p>Europe uses the same vocabulary. The European languages are members of-->
+<!--                                        the same family. Their separate existence is a myth.</p>-->
+<!--                                </div>-->
+<!--                                <div class="comment-meta font-alt">Today, 15:34 - <a href="#">Reply</a>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+                <!-- 댓글 list 샘플 end-->
+
                 <!-- 댓글 작성 start -->
-                <div class="comment-form">
-                    <h4 class="comment-form-title font-alt">Add your comment</h4>
-                    <form method="post">
-                        <div class="form-group">
-                            <label class="sr-only" for="name">Name</label>
-                            <input class="form-control" id="name" type="text" name="name" placeholder="Name"/>
-                        </div>
-                        <div class="form-group">
-                            <label class="sr-only" for="email">Name</label>
-                            <input class="form-control" id="email" type="text" name="email"
-                                   placeholder="E-mail"/>
-                        </div>
-                        <div class="form-group">
-                                    <textarea class="form-control" id="comment" name="comment" rows="4"
-                                              placeholder="Comment"></textarea>
-                        </div>
-                        <button class="btn btn-round btn-d" type="submit">Post comment</button>
-                    </form>
-                </div>
+                <h4 class="comment-form-title font-alt">Add your comment</h4>
+                <form method="post" th:action="@{/comment/create}"  th:object="${commentCreateDto}">
+                    <div class="form-group">
+                        <textarea class="form-control" th:field="*{content}" rows="4"
+                                  placeholder="Comment"></textarea>
+                        <input type="hidden" name="postId" th:value="${postId}" >
+                    </div>
+                    <button class="btn btn-round btn-d" type="submit">댓글 등록</button>
+                </form>
                 <!-- 댓글 작성 end -->
             </div>
             <!-- post details end -->
         </div>
     </div>
 </section>
-<div th:if="${mode}=='update' ">
-    <section class="module">
-    <div class="container">
-        <div class="row">
-            <span th:replace="fragments/fragments.html :: left_sidebar"></span>
-
-            <div class="col-sm-8 col-sm-offset-1">
-                <h4 class="font-alt mb-0">Basic Forms</h4>
-                <hr class="divider-w mt-10 mb-20">
-                <form class="form" th:action=" '/post/'+ ${postId} + '/update'" th:method="PATCH" th:object="${postEntity}">
-                    <div class="form-group">
-                        <input class="form-control" type="text" name="title" th:field="*{title}"
-                               th:value="${postEntity.title}" placeholder="Default input"/>
-                    </div>
-                    <div class="form-group">
-                        <input class="form-control" type="text" placeholder="Disabled input" disabled=""/>
-                    </div>
-                    <div class="form-group">
-                        <input class="form-control" type="text" placeholder="Readonly input" readonly=""/>
-                    </div>
-                    <textarea class="form-control" id="summernote" th:field="*{content}"
-                              th:value="${postEntity.content}" placeholder="content"></textarea>
-                    <button class="btn btn-round btn-b" type="submit">게시글 수정</button>
-                </form>
-            </div>
-        </div>
-    </div>
-</section>
-</div>
 </body>
 <div th:replace="~{fragments/fragments.html :: nav_footer}"></div>
 
