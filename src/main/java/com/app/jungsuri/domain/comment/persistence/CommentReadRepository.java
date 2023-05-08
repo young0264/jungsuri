@@ -1,2 +1,4 @@
-package com.app.jungsuri.domain.comment.persistence;public class CommentReadRepository {
+package com.app.jungsuri.domain.comment.persistence;
+
+public class CommentReadRepository {
 }
