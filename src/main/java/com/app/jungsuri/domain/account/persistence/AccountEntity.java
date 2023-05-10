@@ -1,6 +1,8 @@
 package com.app.jungsuri.domain.account.persistence;
 
 import jakarta.persistence.*;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
 import lombok.extern.slf4j.Slf4j;
 
