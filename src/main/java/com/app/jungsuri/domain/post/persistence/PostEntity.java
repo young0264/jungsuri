@@ -32,7 +32,6 @@ public class PostEntity {
     private LocalDateTime updatedAt;
 
     @NotNull
-    @Column(unique = true)
     private String loginId;
 
     private String author;
@@ -40,20 +39,28 @@ public class PostEntity {
     @ManyToOne
     private AccountEntity accountEntity;
 
-    private Long likeCount;
+    private Integer commentCount;
 
-    private Long commentCount;
+    private Long likeCount;
 
     private Long viewCount;
 
 
     @OneToMany(mappedBy = "postEntity")
-    private List<CommentEntity> comments;
+    private List<CommentEntity> commentList;
 
     public void update(PostEntity postEntity) {
         this.title = postEntity.getTitle();
         this.content = postEntity.getContent();
         this.imagePath = postEntity.getImagePath();
         this.updatedAt = LocalDateTime.now();
+    }
+
+    public void increaseCommentCount() {
+        this.commentCount++;
+    }
+
+    public void decreaseCommentCount() {
+        this.commentCount--;
     }
 }
