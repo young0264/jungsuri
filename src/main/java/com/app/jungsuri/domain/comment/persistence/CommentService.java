@@ -21,4 +21,15 @@ public class CommentService {
         commentRepository.save(comment.toEntity());
     }
 
+    public void updateComment(Long commentId, String newComment) {
+        commentRepository.findById(commentId).orElseGet(() -> {
+            log.error("Comment not found");
+            return null;
+        }).updateComment(newComment);
+    }
+
+    public void deleteComment(Long commentId, PostEntity postEntity) {
+        postEntity.decreaseCommentCount();
+        commentRepository.deleteById(commentId);
+    }
 }

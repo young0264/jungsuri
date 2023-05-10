@@ -39,4 +39,8 @@ public class CommentEntity {
     @ManyToOne
     private AccountEntity accountEntity;
 
+    public void updateComment(String newComment) {
+        this.content = newComment;
+        this.updatedAt = LocalDateTime.now();
+    }
 }
