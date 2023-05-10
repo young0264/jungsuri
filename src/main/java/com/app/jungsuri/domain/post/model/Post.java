@@ -16,6 +16,9 @@ public class Post {
     private final String title;
     private final String content;
     private final String imagePath;
+    private final String author;
+    private final Integer commentCount;
+
     private final LocalDateTime createdAt;
     private final LocalDateTime updatedAt;
     private final String loginId;
@@ -36,10 +39,11 @@ public class Post {
                 .title(title)
                 .content(content)
                 .imagePath(imagePath)
+                .author(author)
+                .commentCount(commentCount)
                 .createdAt(createdAt)
                 .updatedAt(updatedAt)
                 .loginId(loginId)
-//                .author(author)
 //                .account_id(account_id)
 //                .likeCount(likeCount)
 //                .commentCount(commentCount)
