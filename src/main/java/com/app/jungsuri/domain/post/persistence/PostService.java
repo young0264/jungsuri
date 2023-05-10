@@ -1,5 +1,6 @@
 package com.app.jungsuri.domain.post.persistence;
 
+import com.app.jungsuri.domain.account.persistence.AccountEntity;
 import com.app.jungsuri.domain.post.web.dto.PostCreateDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -19,8 +20,8 @@ public class PostService {
         return postRepository.findAllByOrderByUpdatedAtDesc();
     }
 
-    public PostEntity createPost(PostCreateDto postCreateDto, String loginId) {
-        PostEntity postEntity = postCreateDto.toPost(loginId).toEntity();
+    public PostEntity createPost(PostCreateDto postCreateDto, AccountEntity accountEntity) {
+        PostEntity postEntity = postCreateDto.toPost(accountEntity.getLoginId(), accountEntity.getName()).toEntity();
         return postRepository.save(postEntity);
     }
 
