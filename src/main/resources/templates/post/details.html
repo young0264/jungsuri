@@ -6,10 +6,82 @@
         xmlns="http://www.w3.org/1999/xhtml"
 >
 
+
+<script th:inline="javascript">
+
+    /**
+     * comment를 받아서 textarea 에 넣어주는 함수
+     */
+    let commentContent = null;
+    let commentIdValue = null;
+
+    //th라서 빛이 안들어옴
+    let comment = {
+
+        showUpdateModal: function (content, commentIdParam) {
+            commentContent = content;
+            commentIdValue = commentIdParam;
+            document.getElementById("modal-comment-content").value = content;
+
+        },
+
+        update: function () {
+
+            //fetch 시작
+            const comment = document.getElementById("modal-comment-content").value;
+            const commentId = commentIdValue;
+            const data = {
+                "commentId": commentId,
+                "newComment": comment,
+            };
+
+            fetch('/comment/update', {
+                method: 'PUT',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify(data)
+            })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    alert('성공적으로 수정되었습니다.');
+                    $('#CommentUpdateModal').modal('hide'); // 모달 닫기
+                    window.location.reload(); // 페이지 새로고침
+                })
+                .catch(error => {
+                    console.error('There was a problem with the fetch operation:', error);
+                });
+        },
+
+        delete: function (commentIdParam, postIdParam) {
+            alert(commentIdParam);
+            const data = {
+                "commentId": commentIdParam,
+                "postId": postIdParam,
+            }
+            fetch('/comment/delete', {
+                method: 'DELETE',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify(data),
+            })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    alert('성공적으로 삭제되었습니다..');
+                    $('#CommentUpdateModal').modal('hide'); // 모달 닫기
+                    window.location.reload(); // 페이지 새로고침
+                })
+                .catch(error => {
+                    console.error('There was a problem with the fetch operation:', error);
+                });
+        },
+    }
+</script>
+
 <span th:replace="~{/fragments/fragments.html :: head}"></span>
 
 <head th:replace="~{fragments/fragments.html :: nav_header}"></head>
-
 
 <body data-spy="scroll" data-target=".onpage-navigation" data-offset="60">
 <section class="module">
@@ -28,12 +100,13 @@
                     </div>
                     <div class="post-header font-alt">
                         <h1 class="post-title" th:text="${postEntity.title}"></h1>
-                        <div class="post-meta">By&nbsp;<a href="#" th:text="${postEntity.author}"></a>| 23 November | 3 Comments | <a
-                                href="#">Photography, </a><a href="#">Web Design</a>
+                        <div class="post-meta">By&nbsp;<a href="#" th:text="${postEntity.author}"></a>| 23 November | 3
+                            Comments | <a
+                                    href="#">Photography, </a><a href="#">Web Design</a>
                         </div>
                     </div>
                     <div class="post-entry " style="height: 300px">
-                        <h4  th:utext="${postEntity.content}"> </h4>
+                        <h4 th:utext="${postEntity.content}"></h4>
                     </div>
                 </div>
                 <!-- 게시글  end-->
@@ -50,55 +123,94 @@
                         <div class="comment-body">
                             <p th:text="${comment.content}"></p>
                         </div>
-                        <div class="comment-meta font-alt" th:text="${comment.createdAt.toLocalDate()}"><a href="#">Reply</a>
+                        <div class="comment-meta font-alt">
+                            <a href="#" th:text="${comment.createdAt.toLocalDate()}">시간</a>
+                            <a class="1" href="#">Reply</a>
+                            <button type="button" class="btn btn-g btn-round" data-toggle="modal"
+                                    data-target="#CommentUpdateModal"
+                                    th:onclick="comment.showUpdateModal(/*[[${comment.content}]]*/ , /*[[${comment.id}]]*/)">수정
+                            </button>
+                            <button type="button" class="btn btn-danger btn-round" th:onclick="comment.delete(/*[[${comment.id}]]*/, /*[[${postId}]]*/)">삭제</button>
+
                         </div>
                     </div>
                 </div>
+
+                <!--                댓글 수정 모달 start-->
+                <div class="modal fade" id="CommentUpdateModal" tabindex="-1" role="dialog"
+                     aria-labelledby="myModalLabel">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">댓글 수정</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <form>
+                                    <div class="form-group">
+                                        <label for="modal-comment-content" class="col-form-label">댓글 </label>
+                                        <textarea class="form-control" id="modal-comment-content"
+                                                  name="newComment"></textarea>
+                                        <input type="hidden" name="commentId" value="${comment">
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-primary" onclick="comment.update()">댓글 수정</button>
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--                댓글 수정 모달 end -->
+
                 <!-- 댓글 list end-->
 
                 <!-- 댓글 list 샘플 start  class comment는 여백이 너무 큼-->
-<!--                <div class="comments">-->
-<!--                    <h4 class="comment-title font-alt">There are 3 comments</h4>-->
-<!--                    <div class="comment clearfix">-->
-<!--                        <div class="comment-avatar"><img-->
-<!--                                src="https://s3.amazonaws.com/uifaces/faces/twitter/ryanbattles/128.jpg"-->
-<!--                                alt="avatar"/></div>-->
-<!--                        <div class="comment-content clearfix">-->
-<!--                            <div class="comment-author font-alt"><a href="#">John Doe</a></div>-->
-<!--                            <div class="comment-body">-->
-<!--                                <p>The European languages are members of the same family. Their separate-->
-<!--                                    existence is a myth. For science, music, sport, etc, Europe uses the same-->
-<!--                                    vocabulary. The European languages are members of the same family. Their-->
-<!--                                    separate existence is a myth.</p>-->
-<!--                            </div>-->
-<!--                            <div class="comment-meta font-alt">Today, 14:55 - <a href="#">Reply</a>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                        <div class="comment clearfix">-->
-<!--                            <div class="comment-avatar"><img-->
-<!--                                    src="https://s3.amazonaws.com/uifaces/faces/twitter/draganbabic/128.jpg"-->
-<!--                                    alt="avatar"/></div>-->
-<!--                            <div class="comment-content clearfix">-->
-<!--                                <div class="comment-author font-alt"><a href="#">Mark Stone</a></div>-->
-<!--                                <div class="comment-body">-->
-<!--                                    <p>Europe uses the same vocabulary. The European languages are members of-->
-<!--                                        the same family. Their separate existence is a myth.</p>-->
-<!--                                </div>-->
-<!--                                <div class="comment-meta font-alt">Today, 15:34 - <a href="#">Reply</a>-->
-<!--                                </div>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                </div>-->
+                <!--                <div class="comments">-->
+                <!--                    <h4 class="comment-title font-alt">There are 3 comments</h4>-->
+                <!--                    <div class="comment clearfix">-->
+                <!--                        <div class="comment-avatar"><img-->
+                <!--                                src="https://s3.amazonaws.com/uifaces/faces/twitter/ryanbattles/128.jpg"-->
+                <!--                                alt="avatar"/></div>-->
+                <!--                        <div class="comment-content clearfix">-->
+                <!--                            <div class="comment-author font-alt"><a href="#">John Doe</a></div>-->
+                <!--                            <div class="comment-body">-->
+                <!--                                <p>The European languages are members of the same family. Their separate-->
+                <!--                                    existence is a myth. For science, music, sport, etc, Europe uses the same-->
+                <!--                                    vocabulary. The European languages are members of the same family. Their-->
+                <!--                                    separate existence is a myth.</p>-->
+                <!--                            </div>-->
+                <!--                            <div class="comment-meta font-alt">Today, 14:55 - <a href="#">Reply</a>-->
+                <!--                            </div>-->
+                <!--                        </div>-->
+                <!--                        <div class="comment clearfix">-->
+                <!--                            <div class="comment-avatar"><img-->
+                <!--                                    src="https://s3.amazonaws.com/uifaces/faces/twitter/draganbabic/128.jpg"-->
+                <!--                                    alt="avatar"/></div>-->
+                <!--                            <div class="comment-content clearfix">-->
+                <!--                                <div class="comment-author font-alt"><a href="#">Mark Stone</a></div>-->
+                <!--                                <div class="comment-body">-->
+                <!--                                    <p>Europe uses the same vocabulary. The European languages are members of-->
+                <!--                                        the same family. Their separate existence is a myth.</p>-->
+                <!--                                </div>-->
+                <!--                                <div class="comment-meta font-alt">Today, 15:34 - <a href="#">Reply</a>-->
+                <!--                                </div>-->
+                <!--                            </div>-->
+                <!--                        </div>-->
+                <!--                    </div>-->
+                <!--                </div>-->
                 <!-- 댓글 list 샘플 end-->
 
                 <!-- 댓글 작성 start -->
                 <h4 class="comment-form-title font-alt">Add your comment</h4>
-                <form method="post" th:action="@{/comment/create}"  th:object="${commentCreateDto}">
+                <form method="post" th:action="@{/comment/create}" th:object="${commentCreateDto}">
                     <div class="form-group">
                         <textarea class="form-control" th:field="*{content}" rows="4"
                                   placeholder="Comment"></textarea>
-                        <input type="hidden" name="postId" th:value="${postId}" >
+                        <input type="hidden" name="postId" th:value="${postId}">
                     </div>
                     <button class="btn btn-round btn-d" type="submit">댓글 등록</button>
                 </form>
@@ -110,6 +222,9 @@
 </section>
 </body>
 <div th:replace="~{fragments/fragments.html :: nav_footer}"></div>
-
+<!--  modal  -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.min.js"></script>
 
 </html>
