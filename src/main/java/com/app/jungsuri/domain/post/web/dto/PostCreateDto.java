@@ -21,7 +21,7 @@ public class PostCreateDto {
     String imagePath;
     Integer commentCount = 0;
 
-    public Post toPost(String loginId, String name) {
-        return new Post(null, title, content, imagePath, name , commentCount, LocalDateTime.now(), null, loginId);
+    public Post toPost(String loginId) {
+        return new Post(null, title, content, imagePath, author , commentCount, LocalDateTime.now(), null, loginId);
     }
 }
