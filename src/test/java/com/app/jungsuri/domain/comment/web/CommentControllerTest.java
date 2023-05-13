@@ -33,7 +33,7 @@ class CommentControllerTest {
     @Autowired
     AccountService accountService;
 
-
+    //TODO 동시실행 문제 해결
     @Test
     @WithMockUser(username = "12", password = "12")
     void 댓글등록이_정상적으로_되는지() throws Exception {
@@ -69,6 +69,7 @@ class CommentControllerTest {
     @Test
     @WithMockUser(username = "12", password = "12")
     void 댓글등록_실패케이스() throws Exception {
+
         // given
         AccountEntity accountEntity = accountService.findByLoginId("12");
         PostCreateDto postCreateDto = new PostCreateDto("제목", "내용","등록자이름", "12", 0);

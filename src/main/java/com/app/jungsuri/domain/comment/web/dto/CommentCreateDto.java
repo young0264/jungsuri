@@ -24,7 +24,7 @@ public class CommentCreateDto {
     Integer commentCount;
 
     public Comment toComment(AccountEntity accountEntity) {
-        return new Comment(null, content,accountEntity.getName() , commentCount, LocalDateTime.now(), null, postEntity, accountEntity);
+        return new Comment(null, content, accountEntity.getName(), commentCount, LocalDateTime.now(), null, postEntity, accountEntity);
     }
 
 }

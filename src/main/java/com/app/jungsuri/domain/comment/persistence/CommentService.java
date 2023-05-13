@@ -1,7 +1,6 @@
 package com.app.jungsuri.domain.comment.persistence;
 
 import com.app.jungsuri.domain.comment.model.Comment;
-import com.app.jungsuri.domain.comment.web.dto.CommentCreateDto;
 import com.app.jungsuri.domain.post.persistence.PostEntity;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -16,9 +15,9 @@ public class CommentService {
 
     private final CommentRepository commentRepository;
 
-    public void createComment(Comment comment, PostEntity postEntity) {
+    public CommentEntity createComment(Comment comment, PostEntity postEntity) {
         postEntity.increaseCommentCount();
-        commentRepository.save(comment.toEntity());
+        return commentRepository.save(comment.toEntity());
     }
 
     public void updateComment(Long commentId, String newComment) {
