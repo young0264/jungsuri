@@ -39,14 +39,14 @@ public class CommentController {
     }
 
     @PutMapping("/update")
-    public ResponseEntity<?> update(@RequestBody CommentUpdateDto commentUpdateDto) {
+    public ResponseEntity update(@RequestBody CommentUpdateDto commentUpdateDto) {
         log.info("update request id, comment : ", commentUpdateDto.getCommentId(), commentUpdateDto.getNewComment());
         commentService.updateComment(commentUpdateDto.getCommentId(), commentUpdateDto.getNewComment());
         return ResponseEntity.ok().build();
     }
 
     @DeleteMapping("/delete")
-    public ResponseEntity<?>  delete(@RequestBody CommentDeleteDto commentDeleteDto) {
+    public ResponseEntity  delete(@RequestBody CommentDeleteDto commentDeleteDto) {
         PostEntity postEntity = postService.getPostEntity(commentDeleteDto.getPostId());
         commentService.deleteComment(commentDeleteDto.getCommentId(), postEntity);
         return ResponseEntity.ok().build();
