@@ -17,14 +17,14 @@ import java.time.LocalDateTime;
 public class CommentCreateDto {
 
     String content;
-    PostEntity postEntity;
 
-    AccountEntity accountEntity;
+    String loginId;
 
-    Integer commentCount;
+    Long postId;
 
-    public Comment toComment(AccountEntity accountEntity) {
-        return new Comment(null, content, accountEntity.getName(), commentCount, LocalDateTime.now(), null, postEntity, accountEntity);
+
+    public Comment toComment(AccountEntity accountEntity, PostEntity postEntity) {
+        return new Comment(null, content, accountEntity.getName(), 0, LocalDateTime.now(), null, postEntity, accountEntity);
     }
 
 }

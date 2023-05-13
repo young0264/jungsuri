@@ -56,12 +56,8 @@ class CommentControllerTest {
 
         //Account Entity , Post Entity 생성
         AccountEntity accountEntity = accountService.findByLoginId("12");
-        PostEntity postEntity = postService.createPost(postCreateDto, accountEntity);
+        postService.createPost(postCreateDto, accountEntity);
 
-        CommentCreateDto commentCreateDto = new CommentCreateDto("댓글입니다", postEntity, accountEntity, 0);
-
-        //comment Entity 생성
-        CommentEntity comment = commentService.createComment(commentCreateDto.toComment(accountEntity), postEntity);
     }
 
 
@@ -74,6 +70,7 @@ class CommentControllerTest {
         // when
         mockMvc.perform(post("/comment/create")
                         .param("content", "댓글입니다.")
+                        .param("loginId", "12")
                         .param("postId", "1")
                         .with(csrf()))
                 .andExpect(status().is3xxRedirection())
@@ -83,8 +80,8 @@ class CommentControllerTest {
 
         // then
         CommentEntity commentEntity = commentRepository.findById(1L).orElseThrow(() -> new IllegalArgumentException("해당 댓글이 없습니다."));
-        assertThat(commentEntity.getContent()).isEqualTo("댓글입니다");
-        assertThat(commentEntity.getPostEntity().getAuthor()).isEqualTo("등록자이름");
+        assertThat(commentEntity.getContent()).isEqualTo("댓글입니다.");
+        assertThat(commentEntity.getAuthor()).isEqualTo("남의영");
     }
 
     //TODO
@@ -100,7 +97,6 @@ class CommentControllerTest {
                 .andExpect(status().is3xxRedirection())
                 .andExpect(redirectedUrl("/post/1/details"))
                 .andExpect(authenticated());
-
         //then
     }
 

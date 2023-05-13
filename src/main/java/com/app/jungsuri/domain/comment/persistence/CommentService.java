@@ -15,8 +15,8 @@ public class CommentService {
 
     private final CommentRepository commentRepository;
 
-    public CommentEntity createComment(Comment comment, PostEntity postEntity) {
-        postEntity.increaseCommentCount();
+    public CommentEntity createComment(Comment comment) {
+        comment.getPostEntity().increaseCommentCount();
         return commentRepository.save(comment.toEntity());
     }
 

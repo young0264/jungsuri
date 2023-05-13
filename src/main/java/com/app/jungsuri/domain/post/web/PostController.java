@@ -52,8 +52,9 @@ public class PostController {
 
     // 게시글 상세 페이지
     @GetMapping("/{postId}/details")
-    public String view(@PathVariable Long postId, Model model) {
+    public String view(@PathVariable Long postId, Model model, Principal principal) {
         PostEntity postEntity = postService.getPostEntity(postId);
+        model.addAttribute("loginId", principal.getName());
         model.addAttribute("postEntity", postEntity);
         model.addAttribute("commentCreateDto", new CommentCreateDto());
         model.addAttribute("commentList", postEntity.getCommentList());
