@@ -6,19 +6,24 @@ import com.app.jungsuri.domain.comment.persistence.CommentEntity;
 import com.app.jungsuri.domain.comment.persistence.CommentRepository;
 import com.app.jungsuri.domain.comment.persistence.CommentService;
 import com.app.jungsuri.domain.comment.web.dto.CommentCreateDto;
+import com.app.jungsuri.domain.comment.web.dto.CommentDeleteDto;
 import com.app.jungsuri.domain.comment.web.dto.CommentUpdateDto;
 import com.app.jungsuri.domain.post.persistence.PostEntity;
 import com.app.jungsuri.domain.post.persistence.PostService;
 import com.app.jungsuri.domain.post.web.dto.PostCreateDto;
 import com.app.jungsuri.infra.MockMvcTest;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.assertj.core.api.Assertions;
+import org.assertj.core.api.ThrowableAssert;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
+
+import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.security.test.web.servlet.response.SecurityMockMvcResultMatchers.authenticated;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
@@ -78,8 +83,8 @@ class CommentControllerTest {
 
         // then
         CommentEntity commentEntity = commentRepository.findById(1L).orElseThrow(() -> new IllegalArgumentException("해당 댓글이 없습니다."));
-        Assertions.assertThat(commentEntity.getContent()).isEqualTo("댓글입니다");
-        Assertions.assertThat(commentEntity.getPostEntity().getAuthor()).isEqualTo("등록자이름");
+        assertThat(commentEntity.getContent()).isEqualTo("댓글입니다");
+        assertThat(commentEntity.getPostEntity().getAuthor()).isEqualTo("등록자이름");
     }
 
     //TODO
@@ -110,11 +115,37 @@ class CommentControllerTest {
 
         mockMvc.perform(put("/comment/update")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(objectMapper.writeValueAsString(dto)))
+                        .content(objectMapper.writeValueAsString(dto))
+                        .with(csrf()))
                 .andExpect(status().isOk());
         CommentEntity commentEntity = commentRepository.findById(1L).orElseThrow(() -> new IllegalArgumentException("해당 댓글이 없습니다."));
 
-        Assertions.assertThat(commentEntity.getContent()).isEqualTo("수정한 댓글입니다.");
+        assertThat(commentEntity.getContent()).isEqualTo("수정한 댓글입니다.");
+    }
+
+    @Test
+    @WithMockUser(username = "12", password = "12")
+    void 댓글삭제_성공() throws Exception {
+
+        //given
+        CommentDeleteDto dto = new CommentDeleteDto();
+        dto.setCommentId(1L);
+        dto.setPostId(1L);
+
+        //when
+        mockMvc.perform(delete("/comment/delete")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(dto))
+                        .with(csrf())
+                ).andExpect(status().isOk());
+
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
+            commentService.getComment(1L);
+        });
+
+        //then
+        assertThat(exception.getMessage()).isEqualTo("해당 댓글이 없습니다.");
+
     }
 
 

@@ -46,7 +46,7 @@ public class CommentController {
     }
 
     @DeleteMapping("/delete")
-    public ResponseEntity  delete(@RequestBody CommentDeleteDto commentDeleteDto) {
+    public ResponseEntity delete(@RequestBody CommentDeleteDto commentDeleteDto) {
         PostEntity postEntity = postService.getPostEntity(commentDeleteDto.getPostId());
         commentService.deleteComment(commentDeleteDto.getCommentId(), postEntity);
         return ResponseEntity.ok().build();
