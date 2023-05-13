@@ -45,4 +45,18 @@ public class CommentEntity {
         this.content = newComment;
         this.updatedAt = LocalDateTime.now();
     }
+
+    @Override
+    public String toString() {
+        return "CommentEntity{" +
+                "id=" + id +
+                ", content='" + content + '\'' +
+                ", author='" + author + '\'' +
+                ", likeCount=" + likeCount +
+                ", createdAt=" + createdAt +
+                ", updatedAt=" + updatedAt +
+                ", postEntity=" + postEntity +
+                ", accountEntity=" + accountEntity +
+                '}';
+    }
 }

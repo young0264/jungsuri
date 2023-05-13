@@ -15,8 +15,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import java.security.Principal;
-
 @Controller
 @Slf4j
 @RequiredArgsConstructor
@@ -29,18 +27,15 @@ public class CommentController {
     private final PostService postService;
 
     @PostMapping("/create")
-    public String create(@ModelAttribute("commentCreateDto") CommentCreateDto commentCreateDto, Long postId, Principal principal) {
-        PostEntity postEntity = postService.getPostEntity(postId);
-        AccountEntity accountEntity = accountService.findByLoginId(principal.getName());
-        commentCreateDto.setAccountEntity(accountEntity);
-        commentCreateDto.setPostEntity(postEntity);
-        commentService.createComment(commentCreateDto.toComment(accountEntity), postEntity);
-        return String.format("redirect:/post/%s/details", postId);
+    public String create(@ModelAttribute("commentCreateDto") CommentCreateDto commentCreateDto) {
+        PostEntity postEntity = postService.getPostEntity(commentCreateDto.getPostId());
+        AccountEntity accountEntity = accountService.findByLoginId(commentCreateDto.getLoginId());
+        commentService.createComment(commentCreateDto.toComment(accountEntity, postEntity));
+        return String.format("redirect:/post/%s/details", commentCreateDto.getPostId());
     }
 
     @PutMapping("/update")
     public ResponseEntity update(@RequestBody CommentUpdateDto commentUpdateDto) {
-        log.info("update request id, comment : ", commentUpdateDto.getCommentId(), commentUpdateDto.getNewComment());
         commentService.updateComment(commentUpdateDto.getCommentId(), commentUpdateDto.getNewComment());
         return ResponseEntity.ok().build();
     }

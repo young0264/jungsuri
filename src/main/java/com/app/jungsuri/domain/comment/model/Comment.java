@@ -3,11 +3,12 @@ package com.app.jungsuri.domain.comment.model;
 import com.app.jungsuri.domain.account.persistence.AccountEntity;
 import com.app.jungsuri.domain.comment.persistence.CommentEntity;
 import com.app.jungsuri.domain.post.persistence.PostEntity;
-import jakarta.persistence.ManyToOne;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
 import java.time.LocalDateTime;
 
+@Getter
 @RequiredArgsConstructor
 public class Comment {
 
