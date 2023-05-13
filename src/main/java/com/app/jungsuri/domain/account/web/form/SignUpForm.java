@@ -22,7 +22,7 @@ public class SignUpForm {
     private String loginId;
 
     @Email
-    @NotBlank
+//    @NotBlank
     private String email;
 
     @NotBlank
@@ -35,7 +35,5 @@ public class SignUpForm {
 
     private String location;
 
-    @Lob
-    private String profileImage;
 
 }

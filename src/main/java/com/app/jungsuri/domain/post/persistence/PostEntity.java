@@ -1,8 +1,12 @@
 package com.app.jungsuri.domain.post.persistence;
 
+import com.app.jungsuri.domain.account.persistence.AccountEntity;
+import com.app.jungsuri.domain.comment.persistence.CommentEntity;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Getter
@@ -27,24 +31,36 @@ public class PostEntity {
 
     private LocalDateTime updatedAt;
 
+    @NotNull
+    private String loginId;
+
     private String author;
 
-    private Long account_id;
+    @ManyToOne
+    private AccountEntity accountEntity;
+
+    private Integer commentCount;
 
     private Long likeCount;
-
-    private Long commentCount;
 
     private Long viewCount;
 
 
-//    @OneToMany(mappedBy = "post")
-//    private List<CommentEntity> comments;
+    @OneToMany(mappedBy = "postEntity")
+    private List<CommentEntity> commentList;
 
     public void update(PostEntity postEntity) {
         this.title = postEntity.getTitle();
         this.content = postEntity.getContent();
         this.imagePath = postEntity.getImagePath();
         this.updatedAt = LocalDateTime.now();
+    }
+
+    public void increaseCommentCount() {
+        this.commentCount++;
+    }
+
+    public void decreaseCommentCount() {
+        this.commentCount--;
     }
 }

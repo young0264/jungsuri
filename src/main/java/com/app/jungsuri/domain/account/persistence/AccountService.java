@@ -72,12 +72,11 @@ public class AccountService implements UserDetailsService {
             throw new UsernameNotFoundException("로그인 아이디에 해당하는 유저는 존재하지 않습니다.");
         }
         //권한 정보 등록
-        List<GrantedAuthority> roles = new ArrayList<>();
+//        List<GrantedAuthority> roles = new ArrayList<>();
 //        roles.add(new SimpleGrantedAuthority(accountEntity.getRole()));
-        roles.add(new SimpleGrantedAuthority("ROLE_USER"));
-
+//        roles.add(new SimpleGrantedAuthority("ROLE_USER"));
         //AccountContext 생성자로 UserDetails 타입 생성
-        AccountContext accountContext = new AccountContext(accountEntity, roles);
+//        AccountContext accountContext = new AccountContext(accountEntity, roles);
 
         return new UserAccount(accountEntity);
     }

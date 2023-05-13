@@ -1,5 +1,8 @@
 package com.app.jungsuri.domain.post.web;
 
+import com.app.jungsuri.domain.account.persistence.AccountEntity;
+import com.app.jungsuri.domain.account.persistence.AccountRepository;
+import com.app.jungsuri.domain.account.persistence.AccountService;
 import com.app.jungsuri.domain.post.persistence.PostEntity;
 import com.app.jungsuri.domain.post.persistence.PostRepository;
 import com.app.jungsuri.domain.post.persistence.PostService;
@@ -30,6 +33,8 @@ class PostControllerTest {
     private PostService postService;
     @Autowired
     private PostRepository postRepository;
+    @Autowired
+    private AccountService accountService;
 
 
     @Test
@@ -39,7 +44,7 @@ class PostControllerTest {
         mockMvc.perform(get("/post/create"))
                 .andDo(print())
                 .andExpect(status().isOk())
-                .andExpect(view().name("post/write"))
+                .andExpect(view().name("post/form"))
                 .andExpect(model().attributeExists("postCreateDto"))
                 .andExpect(authenticated());
     }
@@ -59,7 +64,8 @@ class PostControllerTest {
     @Test
     @WithMockUser(username="12", password="12")
     void post수정_성공() throws Exception {
-        PostEntity postEntity = postService.cretePost(new PostCreateDto("수정전제목", "수정전내용", ""), "12");
+        AccountEntity accountEntity = accountService.findByLoginId("12");
+        PostEntity postEntity = postService.createPost(new PostCreateDto("수정전제목", "수정전내용", "수정전이름", null, 0), accountEntity);
         mockMvc.perform(patch("/post/" + postEntity.getId() +"/update")
                         .param("title", "수정제목2")
                         .param("content", "수정내용2"))
