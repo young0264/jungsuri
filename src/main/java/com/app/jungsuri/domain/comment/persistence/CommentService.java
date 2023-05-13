@@ -31,4 +31,9 @@ public class CommentService {
         postEntity.decreaseCommentCount();
         commentRepository.deleteById(commentId);
     }
+
+    public CommentEntity getComment(Long commentId) {
+        return commentRepository.findById(commentId).orElseThrow(() -> new IllegalArgumentException("해당 댓글이 없습니다."));
+    }
+
 }
