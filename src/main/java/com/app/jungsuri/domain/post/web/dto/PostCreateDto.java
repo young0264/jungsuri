@@ -11,14 +11,17 @@ import java.time.LocalDateTime;
 
 @Getter
 @Setter
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 public class PostCreateDto {
+
     String title;
     String content;
+    String author;
     String imagePath;
+    Integer commentCount = 0;
 
     public Post toPost(String loginId) {
-        return new Post(null, title, content, imagePath, LocalDateTime.now(), null, loginId);
+        return new Post(null, title, content, imagePath, author , commentCount, LocalDateTime.now(), null, loginId);
     }
 }

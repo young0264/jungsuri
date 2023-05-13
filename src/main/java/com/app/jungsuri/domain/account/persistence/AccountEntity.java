@@ -1,6 +1,7 @@
 package com.app.jungsuri.domain.account.persistence;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 import lombok.extern.slf4j.Slf4j;
 
@@ -29,6 +30,7 @@ public class AccountEntity {
     private String role; //TODO ENUM으로 -> 관리자가 부여해주는 방식
 
     @Column(unique = true)
+//    @NotBlank
     private String email;
 
     private String emailToken;
@@ -42,8 +44,10 @@ public class AccountEntity {
     private String occupation;//
 
     @Column(unique = true)
+    @NotBlank
     private String loginId;
 
+    @NotBlank
     private String password;
 
     private String profileImage;

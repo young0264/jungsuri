@@ -7,12 +7,9 @@
 >
 
 <span th:replace="~{/fragments/fragments.html :: head}"></span>
-
-
 <head th:replace="~{fragments/fragments.html :: nav_header}"></head>
 
 <script>
-
     $(function () {
         var toolbar = [
             ['style', ['bold', 'italic', 'underline', 'clear']],
@@ -31,22 +28,19 @@
             placeholder: 'Hello summernote placeholer',
             tabsize: 2,
             height: 350,
-            lang : 'ko-KR',
-            focus : true,
-            toolbar : toolbar
+            lang: 'ko-KR',
+            focus: true,
+            toolbar: toolbar,
         }
 
         $('#summernote').summernote(settings);
-
-
     });
 </script>
 
 <body data-spy="scroll" data-target=".onpage-navigation" data-offset="60">
-<!--<div class="page-loader">-->
-<!--    <div class="loader">Loading...</div>-->
-<!--</div>-->
-<section class="module">
+<!--게시글 등록 form-->
+<div th:if="${mode}=='create'">
+    <section class="module">
     <div class="container">
         <div class="row">
             <div class="col-sm-8 col-sm-offset-2">
@@ -62,6 +56,7 @@
                     <div class="form-group">
                         <input class="form-control" type="text" placeholder="Readonly input" readonly=""/>
                     </div>
+                    <input type="hidden" name="author" th:value="${#authentication.name}">
                     <textarea id="summernote" th:field="*{content}" class="form-control"  placeholder="content"></textarea>
                     <button class="btn btn-round btn-b" type="submit">게시글 등록</button>
                 </form>
@@ -69,6 +64,39 @@
         </div>
     </div>
 </section>
+</div>
+
+<!--게시글 수정 form-->
+<div th:if="${mode}=='update' ">
+    <section class="module">
+        <div class="container">
+            <div class="row">
+                <span th:replace="fragments/fragments.html :: left_sidebar"></span>
+
+                <div class="col-sm-8 col-sm-offset-1">
+                    <h4 class="font-alt mb-0">Basic Forms</h4>
+                    <hr class="divider-w mt-10 mb-20">
+                    <form class="form" th:action=" '/post/'+ ${postId} + '/update'" th:method="patch" th:object="${postEntity}">
+                        <div class="form-group">
+                            <input class="form-control" type="text" name="title" th:field="*{title}"
+                                   th:value="${postEntity.title}" placeholder="Default input"/>
+                        </div>
+                        <div class="form-group">
+                            <input class="form-control" type="text" placeholder="Disabled input" disabled=""/>
+                        </div>
+                        <div class="form-group">
+                            <input class="form-control" type="text" placeholder="Readonly input" readonly=""/>
+                        </div>
+                        <textarea class="form-control" id="summernote" th:field="*{content}"
+                                  th:value="${postEntity.content}" placeholder="content"></textarea>
+                        <button class="btn btn-round btn-b" type="submit">게시글 수정</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
 </body>
 <div th:replace="~{fragments/fragments.html :: nav_footer}"></div>
 

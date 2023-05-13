@@ -5,8 +5,9 @@ import com.app.jungsuri.domain.account.persistence.AccountService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
 import java.security.Principal;
 
 @RequiredArgsConstructor
@@ -23,13 +24,10 @@ public class EmailController {
      */
 
     @PostMapping("/check-email-token")
-    public String checkEmailToken(String token, Principal principal, Model model) {
+    public String checkEmailToken(String token, Principal principal, RedirectAttributes redirectAttributes) {
         AccountEntity accountEntity = accountService.findByLoginId(principal.getName());
         if (!accountEntity.isValidToken(token)) {
-            System.out.println("check email token token principal : " + accountEntity.getEmailToken());
-            System.out.println("check email token token " +token);
-            System.out.println("check email token error");
-            model.addAttribute("error", "error");
+            redirectAttributes.addAttribute("error", "wrong.email token");
         }
         accountService.completeSignUp(accountEntity);
         return MAIN_REDIRECT_VIEW;
