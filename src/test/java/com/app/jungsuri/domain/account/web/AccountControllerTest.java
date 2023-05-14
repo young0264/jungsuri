@@ -76,7 +76,7 @@ class AccountControllerTest {
                 .andExpect(authenticated().withUsername("testid")) //TODO
         ;
 
-        AccountEntity accountEntity = accountRepository.findByLoginId("testid");
+        AccountEntity accountEntity = accountRepository.findByLoginId("testid").orElseThrow(() -> new IllegalArgumentException("해당 유저가 없습니다."));
         assertNotNull(accountEntity);
         Assertions.assertThat(accountEntity.getLoginId()).isEqualTo("testid");
     }
