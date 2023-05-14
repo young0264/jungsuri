@@ -67,7 +67,7 @@ public class AccountService implements UserDetailsService {
     @Transactional(readOnly = true)
     @Override
     public UserDetails loadUserByUsername(String loginId) throws UsernameNotFoundException {
-        AccountEntity accountEntity = accountRepository.findByLoginId(loginId);
+        AccountEntity accountEntity = accountRepository.findByLoginId(loginId).orElseThrow(() -> new UsernameNotFoundException("로그인 아이디에 해당하는 유저는 존재하지 않습니다."));
         if (accountEntity == null) {
             throw new UsernameNotFoundException("로그인 아이디에 해당하는 유저는 존재하지 않습니다.");
         }
@@ -83,7 +83,7 @@ public class AccountService implements UserDetailsService {
 
 
     public AccountEntity findByLoginId(String loginId) {
-        return accountRepository.findByLoginId(loginId);
+        return accountRepository.findByLoginId(loginId).orElseThrow(() -> new UsernameNotFoundException("로그인 아이디에 해당하는 유저는 존재하지 않습니다."));
     }
 
     public void completeSignUp(AccountEntity accountEntity) {
