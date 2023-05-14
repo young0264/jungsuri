@@ -17,9 +17,9 @@
         <div class="container">
             <div class="row">
                 <div class="col-sm-6 col-sm-offset-3">
-                    <h2 class="module-title font-alt">Blog Standard</h2>
-                    <div class="module-subtitle font-serif">A wonderful serenity has taken possession of my entire
-                        soul, like these sweet mornings of spring which I enjoy with my whole heart.
+                    <h2 class="module-title font-alt">등산 게시물</h2>
+                    <div class="module-subtitle font-serif">
+                        정수리가 다녀갔던 등산 게시물을 확인하세요.
                     </div>
                 </div>
             </div>
@@ -29,6 +29,7 @@
         <div class="container">
             <div class="row">
                 <div class="alert alert-info" role="alert" th:if="${message}" th:text="${message}"></div>
+                <div class="alert alert-danger" role="alert" th:if="${delete_message}" th:text="${delete_message}"></div>
 
                 <!-- left slider start col-sm-4-->
                 <span th:replace="fragments/fragments.html :: left_sidebar"></span>
@@ -88,6 +89,9 @@
                                 of existence in this spot, which was created for the bliss of souls like mine.</p>
                         </div>
                         <div class="post-more"><a class="more-link" href="#">Read more</a></div>
+                    </div>
+                    <div>
+                        <a href="/post/create"><button class="btn btn-d btn-round" >글쓰기</button></a>
                     </div>
                     <div class="pagination font-alt"><a href="#"><i class="fa fa-angle-left"></i></a><a
                             class="active" href="#">1</a><a href="#">2</a><a href="#">3</a><a href="#">4</a><a
