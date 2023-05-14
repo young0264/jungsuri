@@ -71,4 +71,8 @@ public class AccountEntity {
     public boolean canSendConfirmEmail() {
         return this.emailCheckTokenGeneratedAt.isBefore(LocalDateTime.now().minusHours(1)); //1시간 이전에 만들었는지
     }
+
+    public void updatePassword(String newPassword) {
+        this.password = newPassword;
+    }
 }
