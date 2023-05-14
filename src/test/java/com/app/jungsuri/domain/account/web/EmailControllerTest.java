@@ -25,7 +25,7 @@ class EmailControllerTest {
     @Test
     @WithMockUser(username="12", password="12")
     void 이메일_토큰값이_정상일때() throws Exception {
-        AccountEntity accountEntity = accountRepository.findByLoginId("12");
+        AccountEntity accountEntity = accountRepository.findByLoginId("12").orElseThrow(() -> new IllegalArgumentException("존재하지 않는 아이디입니다."));
         accountEntity.setEmailToken("123abc234"); //토큰값 강제 주입
         System.out.println(accountEntity.getEmailToken());
         mockMvc.perform(post("/check-email-token")
@@ -39,7 +39,7 @@ class EmailControllerTest {
     @Test
     @WithMockUser(username="12", password="12")
     void 이메일_토큰값이_다를때() throws Exception {
-        AccountEntity accountEntity = accountRepository.findByLoginId("12");
+        AccountEntity accountEntity = accountRepository.findByLoginId("12").orElseThrow(() -> new IllegalArgumentException("존재하지 않는 아이디입니다."));
         accountEntity.setEmailToken("123ab123c234"); // 랜덤 토큰값 강제 주입
         System.out.println(accountEntity.getEmailToken());
         mockMvc.perform(post("/check-email-token")
