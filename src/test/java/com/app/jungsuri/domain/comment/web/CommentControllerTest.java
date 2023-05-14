@@ -2,6 +2,7 @@ package com.app.jungsuri.domain.comment.web;
 
 import com.app.jungsuri.domain.account.persistence.AccountEntity;
 import com.app.jungsuri.domain.account.persistence.AccountService;
+import com.app.jungsuri.domain.comment.model.Comment;
 import com.app.jungsuri.domain.comment.persistence.CommentEntity;
 import com.app.jungsuri.domain.comment.persistence.CommentRepository;
 import com.app.jungsuri.domain.comment.persistence.CommentService;
@@ -20,6 +21,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
+
+import java.time.LocalDateTime;
 
 import static org.assertj.core.api.Assertions.*;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -92,6 +95,7 @@ class CommentControllerTest {
         // when
         mockMvc.perform(post("/comment/create")
                         .param("content", "")
+                        .param("loginId", "12")
                         .param("postId", "1")
                         .with(csrf()))
                 .andExpect(status().is3xxRedirection())
@@ -108,7 +112,8 @@ class CommentControllerTest {
         CommentUpdateDto dto = new CommentUpdateDto();
         dto.setCommentId(1L);
         dto.setNewComment("수정한 댓글입니다.");
-
+        PostEntity postEntity = postService.getPostEntity(1L);
+        CommentEntity comment = commentService.createComment(new Comment(1L, "댓글입니다.", "12", 0, LocalDateTime.now(), LocalDateTime.now(), postEntity, null));
         mockMvc.perform(put("/comment/update")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(dto))
