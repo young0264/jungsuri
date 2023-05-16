@@ -9,6 +9,7 @@ public class JungsuriApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(JungsuriApplication.class, args);
+
 	}
 
 }
