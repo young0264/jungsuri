@@ -11,6 +11,7 @@ import java.time.LocalDateTime;
 @Entity
 @Getter
 @Setter
+@Table(name = "notification")
 @EqualsAndHashCode(of = "id")
 public class NotificationEntity {
     @Id
@@ -19,7 +20,7 @@ public class NotificationEntity {
 
     private String title;
 
-    private String link;
+//    private String link;
 
     private String message;
 
