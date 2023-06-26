@@ -13,8 +13,12 @@ import org.springframework.web.util.HtmlUtils;
 public class NotificationController {
 
     @GetMapping("/testNotification")
-    public String testNotification() {
+    public String testNotification1() {
         return "/index";
+    }
+    @GetMapping("/testNotification2")
+    public String testNotification2() {
+        return "/notification/main";
     }
 
     @MessageMapping("/hello")
@@ -23,5 +27,6 @@ public class NotificationController {
         Thread.sleep(1000); // simulated delay
         return new Greeting("Hello, " + HtmlUtils.htmlEscape(message.getName()) + "!");
     }
+
 
 }
