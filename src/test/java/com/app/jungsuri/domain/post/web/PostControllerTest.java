@@ -76,4 +76,17 @@ class PostControllerTest {
         Assertions.assertThat(postEntity.getTitle()).isEqualTo("수정제목2");
         Assertions.assertThat(postEntity.getContent()).isEqualTo("수정내용2");
     }
+
+//    @JooqTest
+//    @Test
+//    @WithMockUser(username="12", password="12")
+//    void jooq_post찾기() throws Exception {
+//        AccountEntity accountEntity = accountService.findByLoginId("12");
+//        PostEntity postEntity = postService.createPost(new PostCreateDto("수정전제목", "수정전내용", "수정전이름", null, 0), accountEntity);
+////        PostReadDto post = postReadRepository.getPost(1L);
+//        Assertions.assertThat(postEntity.getTitle()).isEqualTo("수정전제목");
+////        PostEntity postEntity1 = postRepository.findById(1L).orElse(null);
+////        Assertions.assertThat(postEntity1.getTitle()).isEqualTo("수정전제목");
+//    }
+
 }
