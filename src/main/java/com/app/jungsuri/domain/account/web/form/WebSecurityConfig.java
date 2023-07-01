@@ -22,20 +22,17 @@ public class WebSecurityConfig implements WebMvcConfigurer {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-                .httpBasic().and()
                 .csrf().disable()
                 .authorizeHttpRequests((requests) -> requests
                         .requestMatchers("/", "/home", "/signup", "/login").permitAll()
 //                        .requestMatchers("/admin/**").hasRole("ADMIN")
                         .anyRequest().authenticated());
         http
-                .httpBasic().and()
                 .formLogin((form) -> form
                         .loginPage("/login")
                         .permitAll()
                         .defaultSuccessUrl("/", true));
         http
-                .httpBasic().and()
                 .logout((logout) -> logout
                         .logoutSuccessUrl("/")
                         .permitAll());
