@@ -9,11 +9,16 @@ import com.app.jungsuri.domain.comment.web.dto.CommentDeleteDto;
 import com.app.jungsuri.domain.comment.web.dto.CommentUpdateDto;
 import com.app.jungsuri.domain.post.persistence.PostEntity;
 import com.app.jungsuri.domain.post.persistence.PostService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import java.util.List;
 
 @Controller
 @Slf4j
@@ -27,10 +32,18 @@ public class CommentController {
     private final PostService postService;
 
     @PostMapping("/create")
-    public String create(@ModelAttribute("commentCreateDto") CommentCreateDto commentCreateDto) {
+    public String create(@Valid @ModelAttribute("commentCreateDto") CommentCreateDto commentCreateDto,
+                         BindingResult errors, RedirectAttributes redirectAttributes) {
         PostEntity postEntity = postService.getPostEntity(commentCreateDto.getPostId());
         AccountEntity accountEntity = accountService.findByLoginId(commentCreateDto.getLoginId());
         commentService.createComment(commentCreateDto.toComment(accountEntity, postEntity));
+
+        if (errors.hasErrors()) {
+            List<ObjectError> allErrors = errors.getAllErrors();
+            allErrors.stream().forEach(objectError -> {
+                redirectAttributes.addFlashAttribute("comment_create_error", objectError.getDefaultMessage());
+            });
+        }
         return String.format("redirect:/post/%s/details", commentCreateDto.getPostId());
     }
 
