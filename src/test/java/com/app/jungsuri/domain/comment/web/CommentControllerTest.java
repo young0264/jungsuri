@@ -15,20 +15,12 @@ import com.app.jungsuri.domain.post.web.dto.PostCreateDto;
 import com.app.jungsuri.infra.MockMvcTest;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.assertj.core.api.Assertions;
-import org.assertj.core.api.ThrowableAssert;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.ResultActions;
-
-import java.util.List;
-
-import static org.assertj.core.api.Assertions.*;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
@@ -104,6 +96,33 @@ class CommentControllerTest {
         assertThat(commentEntity.getContent()).isEqualTo("댓글 등록 테스트 댓글입니다.");
         assertThat(commentEntity.getAuthor()).isEqualTo("남의영");
     }
+
+    //TODO
+    @Test
+    @WithMockUser(username = "12", password = "12")
+    void 댓글등록_실패케이스() throws Exception {
+        AccountEntity accountEntity = accountService.findByLoginId("12");
+        PostEntity postEntity = postRepository.findById(createdPostId).orElseThrow(() -> new IllegalArgumentException("댓글등록 테스트 : id에 해당하는 게시글이 없습니다."));
+        CommentCreateDto commentCreateDto = new CommentCreateDto("짧은댓글", "12", createdPostId);
+
+        // when
+        mockMvc.perform(post("/comment/create")
+                        .param("content", "짧음")
+                        .param("loginId", "12")
+                        .param("postId", createdPostId.toString())
+                        .with(csrf()))
+                .andExpect(status().is3xxRedirection())
+                .andExpect(redirectedUrl("/post/" + createdPostId + "/details"))
+                .andExpect(flash().attributeExists("comment_create_error"))
+                .andExpect(view().name("redirect:/post/" + createdPostId + "/details"))
+                .andExpect(authenticated());
+
+        CommentEntity commentEntity = commentService.createComment(commentCreateDto.toComment(accountEntity, postEntity));
+
+        //then
+        Assertions.assertThat(commentEntity.getContent()).isEqualTo("짧은댓글");
+    }
+
 
     @Test
     @WithMockUser(username = "12", password = "12")
