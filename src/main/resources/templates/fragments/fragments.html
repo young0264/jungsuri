@@ -88,24 +88,35 @@
             <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#custom-collapse">
                 <span class="sr-only">Toggle navigation</span>
                 <span class="icon-bar"></span><span class="icon-bar"></span>
-                <span class="icon-bar"></span></button><a class="navbar-brand" href="index.html">JUNGSURI</a>
+                <span class="icon-bar"></span></button>
+            <a class="navbar-brand" href="index.html">JUNGSURI</a>
         </div>
+        <div class="navbar-header">
+            <a sec:authorize="!isAuthenticated()" th:href="@{/login}">
+                <form th:action="@{/}" method="post">
+                    <input class="btn btn-b btn-round" type="submit" value="로그인"/>
+                </form>
+            </a>
+        </div>
+
         <div class="collapse navbar-collapse" id="custom-collapse">
             <ul class="nav navbar-nav navbar-right">
-                <li ><a  href="/post/list">게시물 리스트</a>
-                <li ><a  href="/post/create">게시물 작성</a>
-                <li ><a  href="/settings">프로필</a>
-
+                <li ><a  href="/post/list">게시물 리스트</a></li>
+                <li ><a  href="/post/create">게시물 작성</a></li>
+                <li ><a  href="/settings">프로필</a></li>
+<!--                <li ><a class="fa-bell">알림</a></li>-->
+                <li class="fa fa-fw">
+                    <a href="#" style="white-space: nowrap;">[&#xf0f3;]알림on</a>
                 </li>
+<!--                <li class="fa fa-fw">-->
+<!--                    <span class="muted" style="white-space: nowrap;">[&#xf0a2;]알림off</span>-->
+<!--                </li>-->
+            </ul>
+            <ul>
                 <li>
                     <a sec:authorize="isAuthenticated()">
                         <form th:action="@{/logout}" method="post">
                             <input class="btn btn-b btn-round" type="submit" value="로그아웃"/>
-                        </form>
-                    </a>
-                    <a sec:authorize="!isAuthenticated()" th:href="@{/login}">
-                        <form th:action="@{/}" method="post">
-                            <input class="btn btn-b btn-round" type="submit" value="로그인"/>
                         </form>
                     </a>
                 </li>
