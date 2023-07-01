@@ -1,5 +1,6 @@
 package com.app.jungsuri.domain.account.persistence;
 
+import com.app.jungsuri.domain.account.web.form.AccountGrade;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.*;
@@ -52,6 +53,8 @@ public class AccountEntity {
 
     private String profileImage;
 
+    private AccountGrade accountGrade;
+
     private LocalDateTime joinedAt;
 
     public boolean isValidToken(String token) {
@@ -70,5 +73,9 @@ public class AccountEntity {
 
     public boolean canSendConfirmEmail() {
         return this.emailCheckTokenGeneratedAt.isBefore(LocalDateTime.now().minusHours(1)); //1시간 이전에 만들었는지
+    }
+
+    public void updatePassword(String newPassword) {
+        this.password = newPassword;
     }
 }
