@@ -35,5 +35,7 @@ public class SignUpForm {
 
     private String location;
 
+    private AccountGrade accountGrade = AccountGrade.ASSOCIATE_MEMBER;
+
 
 }

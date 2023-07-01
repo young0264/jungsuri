@@ -1,5 +1,6 @@
 package com.app.jungsuri.domain.account.persistence;
 
+import com.app.jungsuri.domain.account.web.form.AccountGrade;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.*;
@@ -51,6 +52,8 @@ public class AccountEntity {
     private String password;
 
     private String profileImage;
+
+    private AccountGrade accountGrade;
 
     private LocalDateTime joinedAt;
 

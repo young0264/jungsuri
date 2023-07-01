@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>WebSocket Example</title>
+</head>
+<body>
+<h1>WebSocket Example</h1>
+
+<div id="notification-container"></div>
+
+<form th:action="@{/send}" method="post" onsubmit="sendNotification(event)">
+    <input type="text" name="message" placeholder="Enter notification message" required>
+    <button type="submit">Send</button>
+</form>
+
+<script th:src="@{/webjars/sockjs-client/sockjs.min.js}"></script>
+<script th:src="@{/webjars/stomp-websocket/stomp.min.js}"></script>
+<script>
+    var socket = new SockJS('/websocket');
+    var stompClient = Stomp.over(socket);
+
+    stompClient.connect({}, function (frame) {
+        stompClient.subscribe('/topic/notifications', function (notification) {
+            var message = JSON.parse(notification.body);
+            var container = document.getElementById('notification-container');
+            var notificationElement = document.createElement('div');
+            notificationElement.textContent = message;
+            container.appendChild(notificationElement);
+        });
+    });
+
+    function sendNotification(event) {
+        event.preventDefault();
+        var messageInput = document.querySelector('input[name="message"]');
+        var message = messageInput.value.trim();
+        if (message !== '') {
+            stompClient.send('/app/send', {}, JSON.stringify(message));
+            messageInput.value = '';
+        }
+    }
+</script>
+</body>
+</html>
