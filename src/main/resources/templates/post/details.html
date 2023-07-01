@@ -208,9 +208,15 @@
                 <h4 class="comment-form-title font-alt">Add your comment</h4>
                 <form method="post" th:action="@{/comment/create}" th:object="${commentCreateDto}">
                     <div class="form-group">
-                        <textarea class="form-control" th:field="*{content}" rows="4" placeholder="Comment"></textarea>
+                        <textarea class="form-control" th:field="*{content}" rows="4" placeholder="Comment" required th:min="5" th:max="50"></textarea>
                         <input type="hidden" th:name="loginId" th:value="${loginId}">
                         <input type="hidden" th:name="postId" th:value="${postId}">
+                    </div>
+                    <div class="text-center " th:if="${comment_create_error}">
+                        <div class="alert alert-danger" role="alert">
+                            <strong>댓글 등록 실패</strong> <br>
+                            <span th:text="${comment_create_error}"></span>
+                        </div>
                     </div>
                     <button class="btn btn-round btn-d" type="submit">댓글 등록</button>
                 </form>
