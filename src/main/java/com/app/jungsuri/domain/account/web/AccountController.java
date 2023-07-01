@@ -18,7 +18,6 @@ import java.security.Principal;
 @Controller
 @RequiredArgsConstructor
 @Slf4j
-
 public class AccountController {
     private final AccountService accountService;
 //    private final JavaMailSender javaMailSender;

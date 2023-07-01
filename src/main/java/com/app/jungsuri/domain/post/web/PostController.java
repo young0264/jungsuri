@@ -44,9 +44,10 @@ public class PostController {
 
     // 게시글 등록 처리
     @PostMapping("/create")
-    public String write(@ModelAttribute("postCreateDto") PostCreateDto postCreateDto, Principal principal) {
+    public String write(@ModelAttribute("postCreateDto") PostCreateDto postCreateDto, Principal principal, RedirectAttributes redirectAttributes){
         AccountEntity accountEntity = accountService.findByLoginId(principal.getName());
         postService.createPost(postCreateDto, accountEntity);
+        redirectAttributes.addFlashAttribute("message", "게시물이 성공적으로 등록되었습니다.");
         return "redirect:/post/list";
     }
 
@@ -74,15 +75,15 @@ public class PostController {
     @PatchMapping("/{postId}/update")
     public String edit(@PathVariable Long postId, @ModelAttribute("postEntity") PostEntity existingPost, RedirectAttributes redirectAttributes) {
         postService.updatePost(existingPost, postId);
-        redirectAttributes.addFlashAttribute("message", "게시글이 수정되었습니다.");
+        redirectAttributes.addFlashAttribute("message", "/titan/live/assets/");
         return "redirect:/post/list";
     }
 
     // 게시글 삭제 처리
     @DeleteMapping("/{postId}/delete")
-    public String delete(@PathVariable Long postId) {
+    public String delete(@PathVariable Long postId, RedirectAttributes redirectAttributes){
         postService.deletePost(postId);
-        //TODO     ApplicationEventPublisher eventPublisher; 로 이벤트처리하기
+        redirectAttributes.addFlashAttribute("delete_message", "게시물이 성공적으로 삭제되었습니다.");
         return "redirect:/post/list";
     }
 }
