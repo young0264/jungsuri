@@ -49,6 +49,23 @@ public class PostEntity {
     @OneToMany(mappedBy = "postEntity")
     private List<CommentEntity> commentList;
 
+    @Override
+    public String toString() {
+        return "PostEntity {" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", content='" + content + '\'' +
+                ", imagePath='" + imagePath + '\'' +
+                ", createdAt=" + createdAt +
+                ", updatedAt=" + updatedAt +
+                ", loginId='" + loginId + '\'' +
+                ", author='" + author + '\'' +
+                ", commentCount=" + commentCount +
+                ", likeCount=" + likeCount +
+                ", viewCount=" + viewCount +
+                '}';
+    }
+
     public void update(PostEntity postEntity) {
         this.title = postEntity.getTitle();
         this.content = postEntity.getContent();

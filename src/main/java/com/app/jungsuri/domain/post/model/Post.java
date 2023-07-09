@@ -1,15 +1,14 @@
 package com.app.jungsuri.domain.post.model;
 
-import com.app.jungsuri.domain.account.persistence.AccountEntity;
 import com.app.jungsuri.domain.post.persistence.PostEntity;
-import com.app.jungsuri.infra.config.AppConfig.*;
-import lombok.RequiredArgsConstructor;
-import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.time.LocalDateTime;
 
-@RequiredArgsConstructor
+@Getter
+@Setter
 public class Post {
 
     private final Long id;
@@ -32,6 +31,20 @@ public class Post {
 //    private final Long commentCount;
 //
 //    private final Long viewCount;
+
+
+    @Builder
+    public Post(Long id, String title, String content, String imagePath, String author, Integer commentCount, LocalDateTime createdAt, LocalDateTime updatedAt, String loginId) {
+        this.id = id;
+        this.title = title;
+        this.content = content;
+        this.imagePath = imagePath;
+        this.author = author;
+        this.commentCount = commentCount;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
+        this.loginId = loginId;
+    }
 
     public PostEntity toEntity(){
         return PostEntity.builder()
