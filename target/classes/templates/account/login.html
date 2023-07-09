@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<!--<html lang="ko" dir="ltr">-->
+<html
+        lang="ko"
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:sec="http://thymeleaf.org/extras/spring-security">
+<head th:replace="~{/fragments/fragments.html :: head}"></head>
+
+<body data-spy="scroll" data-target=".onpage-navigation" data-offset="60">
+<main>
+    <div class="page-loader">
+        <div class="loader">Loading...</div>
+    </div>
+    <span th:replace="~{fragments/fragments.html :: nav_header}"></span>
+
+    <div class="main">
+        <section class="module bg-dark-30" data-background="/images/banner_mountain02.jpg">
+
+        </section>
+        <section class="module">
+            <div class="container">
+                <div class="row">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-sm-6 col-sm-offset-3">
+                                <div class="module-title font-alt mb-60 " th:if="${param.error}">
+                                    <h3 class="text-danger">유효하지 않은 아이디/비밀번호 입니다.</h3>
+                                </div>
+                                <div class="module-title font-alt mb-60 " th:if="${param.logout}">
+                                    <h3 class="text-success">정상적으로 로그아웃 되었습니다.</h3>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-5 col-sm-offset-1 mb-sm-40">
+                        <section class="module " data-background="/images/jungsuri_logo.png">
+                        </section>
+                    </div>
+                    <div class="col-sm-5 col-sm-offset-1 mb-sm-40">
+                        <h4 class="font-alt">Login</h4>
+                        <hr class="divider-w mb-10">
+                        <form th:action="@{/login}" method="post">
+                            <div class="form-group">
+                                <input class="form-control" id="username" type="text" name="username" placeholder="아이디를 입력해주세요."/>
+                            </div>
+                            <div class="form-group">
+                                <input class="form-control" id="password" type="password" name="password" placeholder="비밀번호를 입력해주세요."/>
+                            </div>
+                            <div class="form-group">
+                                <button type="submit"  class="btn btn-round btn-b">Login</button>
+                            </div>
+                        </form>
+                        <div class="form-group"><a href="#">계정이 없으신가요?</a></div>
+                        <a th:href="@{/signup}"><button class="btn btn-warning">회원가입</button></a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </div>
+    <div th:replace="~{fragments/fragments.html :: nav_footer}"></div>
+    <div class="scroll-up"><a href="#totop"><i class="fa fa-angle-double-up"></i></a></div>
+
+</main>
+<!--
+JavaScripts
+=============================================
+-->
+<script src="/titan/live/assets/lib/jquery/dist/jquery.js"></script>
+<script src="/titan/live/assets/lib/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="/titan/live/assets/lib/wow/dist/wow.js"></script>
+<script src="/titan/live/assets/lib/jquery.mb.ytplayer/dist/jquery.mb.YTPlayer.js"></script>
+<script src="/titan/live/assets/lib/isotope/dist/isotope.pkgd.js"></script>
+<script src="/titan/live/assets/lib/imagesloaded/imagesloaded.pkgd.js"></script>
+<script src="/titan/live/assets/lib/flexslider/jquery.flexslider.js"></script>
+<script src="/titan/live/assets/lib/owl.carousel/dist/owl.carousel.min.js"></script>
+<script src="/titan/live/assets/lib/smoothscroll.js"></script>
+<script src="/titan/live/assets/lib/magnific-popup/dist/jquery.magnific-popup.js"></script>
+<script src="/titan/live/assets/lib/simple-text-rotator/jquery.simple-text-rotator.min.js"></script>
+<script src="/titan/live/assets/js/plugins.js"></script>
+<script src="/titan/live/assets/js/main.js"></script>
+</body>
+
+</html>

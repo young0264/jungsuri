@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html
+        lang="ko"
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:sec="http://thymeleaf.org/extras/spring-security"
+        xmlns="http://www.w3.org/1999/xhtml"
+>
+
+<!--html head 조각 start-->
+<head th:fragment="head">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--
+    Document Title
+    =============================================
+    -->
+    <title>정수리 꼬순내</title>
+    <!--
+    Favicons
+    =============================================
+    -->
+    <link rel="apple-touch-icon" sizes="57x57" href="/titan/live/assets/images/favicons/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="/titan/live/assets/images/favicons/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/titan/live/assets/images/favicons/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="/titan/live/assets/images/favicons/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/titan/live/assets/images/favicons/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="/titan/live/assets/images/favicons/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="/titan/live/assets/images/favicons/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="/titan/live/assets/images/favicons/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/titan/live/assets/images/favicons/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192"
+          href="/titan/live/assets/images/favicons/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/titan/live/assets/images/favicons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="/titan/live/assets/images/favicons/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/titan/live/assets/images/favicons/favicon-16x16.png">
+    <link rel="manifest" href="/manifest.json">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="/titan/live/assets/images/favicons/ms-icon-144x144.png">
+    <meta name="theme-color" content="#ffffff">
+    <!--
+    Stylesheets
+    =============================================
+
+    -->
+    <!-- Default stylesheets-->
+    <link href="/titan/live/assets/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Template specific stylesheets-->
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:400,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Volkhov:400i" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800" rel="stylesheet">
+    <link href="/titan/live/assets/lib/animate.css/animate.css" rel="stylesheet">
+    <link href="/titan/live/assets/lib/components-font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <link href="/titan/live/assets/lib/et-line-font/et-line-font.css" rel="stylesheet">
+    <link href="/titan/live/assets/lib/flexslider/flexslider.css" rel="stylesheet">
+    <link href="/titan/live/assets/lib/owl.carousel/dist/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="/titan/live/assets/lib/owl.carousel/dist/assets/owl.theme.default.min.css" rel="stylesheet">
+    <link href="/titan/live/assets/lib/magnific-popup/dist/magnific-popup.css" rel="stylesheet">
+    <link href="/titan/live/assets/lib/simple-text-rotator/simpletextrotator.css" rel="stylesheet">
+    <!-- Main stylesheet and color file-->
+    <link href="/titan/live/assets/css/style.css" rel="stylesheet">
+    <link id="color-scheme" href="/titan/live/assets/css/colors/default.css" rel="stylesheet">
+    <!--  jquery  -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+
+    <!--  modal  -->
+    <script src="/js/jquery.js"></script>
+    <script src="/js/bootstrap.js"></script>
+
+
+    <!-- include summernote css/js -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script>
+
+
+
+</head>
+<!--html head 조각 end-->
+
+<!--nav header 레이아웃 조각 start -->
+<span th:fragment="nav_header">
+    <nav class="navbar navbar-custom navbar-fixed-top " style="font-size: 13px" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#custom-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span><span class="icon-bar"></span>
+                <span class="icon-bar"></span></button><a class="navbar-brand" href="index.html">JUNGSURI</a>
+        </div>
+        <div class="collapse navbar-collapse" id="custom-collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li ><a  href="/post/list">게시물 리스트</a>
+                <li ><a  href="/post/create">게시물 작성</a>
+                <li ><a  href="/settings">프로필</a>
+
+                </li>
+                <li>
+                    <a sec:authorize="isAuthenticated()">
+                        <form th:action="@{/logout}" method="post">
+                            <input class="btn btn-b btn-round" type="submit" value="로그아웃"/>
+                        </form>
+                    </a>
+                    <a sec:authorize="!isAuthenticated()" th:href="@{/login}">
+                        <form th:action="@{/}" method="post">
+                            <input class="btn btn-b btn-round" type="submit" value="로그인"/>
+                        </form>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="text-center " th:if="${error}">
+<!--            <p class="lead text-danger " style="font-weight: bold" > 이메일 확인</p>-->
+            <div class="alert alert-danger" role="alert">
+                이메일 인증이 아직 완료되지 않았습니다. 가입때 사용하신 이메일의 수신함을 확인해 주세요. 발송된 인증코드 입력시 인증이 완료됩니다.
+                <form th:action="@{/check-email-token}" method="post" novalidate>
+                    <input class="text-nowrap" id="token" name="token" type="text" style="width:30%">
+                    <button class="btn btn-b btn-round" type="submit">이메일확인</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</nav>
+</span>
+<!--nav header 레이아웃 조각 end-->
+
+<!--nav footer 레이아웃 조각 start-->
+<span th:fragment="nav_footer">
+        <hr class="divider-d">
+        <div class="module-small bg-dark">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-3">
+                        <div class="widget">
+                            <h5 class="widget-title font-alt">About Titan</h5>
+                            <p>The languages only differ in their grammar, their pronunciation and their most common words.</p>
+                            <p>Phone: +1 234 567 89 10</p>Fax: +1 234 567 89 10
+                            <p>Email:<a href="#">somecompany@example.com</a></p>
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="widget">
+                            <h5 class="widget-title font-alt">Recent Comments</h5>
+                            <ul class="icon-list">
+                                <li>Maria on <a href="#">Designer Desk Essentials</a></li>
+                                <li>John on <a href="#">Realistic Business Card Mockup</a></li>
+                                <li>Andy on <a href="#">Eco bag Mockup</a></li>
+                                <li>Jack on <a href="#">Bottle Mockup</a></li>
+                                <li>Mark on <a href="#">Our trip to the Alps</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="widget">
+                            <h5 class="widget-title font-alt">Blog Categories</h5>
+                            <ul class="icon-list">
+                                <li><a href="#">Photography - 7</a></li>
+                                <li><a href="#">Web Design - 3</a></li>
+                                <li><a href="#">Illustration - 12</a></li>
+                                <li><a href="#">Marketing - 1</a></li>
+                                <li><a href="#">Wordpress - 16</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="widget">
+                            <h5 class="widget-title font-alt">Popular Posts</h5>
+                            <ul class="widget-posts">
+                                <li class="clearfix">
+                                    <div class="widget-posts-image"><a href="#"><img src="/titan/live/assets/images/rp-1.jpg" alt="Post Thumbnail"/></a></div>
+                                    <div class="widget-posts-body">
+                                        <div class="widget-posts-title"><a href="#">Designer Desk Essentials</a></div>
+                                        <div class="widget-posts-meta">23 january</div>
+                                    </div>
+                                </li>
+                                <li class="clearfix">
+                                    <div class="widget-posts-image"><a href="#"><img src="/titan/live/assets/images/rp-2.jpg" alt="Post Thumbnail"/></a></div>
+                                    <div class="widget-posts-body">
+                                        <div class="widget-posts-title"><a href="#">Realistic Business Card Mockup</a></div>
+                                        <div class="widget-posts-meta">15 February</div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr class="divider-d">
+        <footer class="footer bg-dark">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <p class="copyright font-alt">&copy; 2017&nbsp;<a href="index.html">TitaN</a>, All Rights Reserved</p>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="footer-social-links"><a href="#"><i class="fa fa-facebook"></i></a><a href="#"><i class="fa fa-twitter"></i></a><a href="#"><i class="fa fa-dribbble"></i></a><a href="#"><i class="fa fa-skype"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+</span>
+<!--nav footer 레이아웃 조각 end-->
+
+<!-- left slider start-->
+<div th:fragment="left_sidebar" class="col-sm-4 col-md-3 sidebar">
+    <div class="widget">
+        <form role="form">
+            <div class="search-box">
+                <input class="form-control" type="text" placeholder="Search..."/>
+                <button class="search-btn" type="submit"><i class="fa fa-search"></i></button>
+            </div>
+        </form>
+    </div>
+    <div class="widget">
+        <h5 class="widget-title font-alt">Blog Categories</h5>
+        <ul class="icon-list">
+            <li><a href="#">등산 기록</a></li>
+
+        </ul>
+    </div>
+    <!-- pupular posts 사진, 제목, 시간-->
+    <div class="widget">
+        <h5 class="widget-title font-alt">Popular Posts</h5>
+        <!--                        <ul class="widget-posts">-->
+        <!--                            <li class="clearfix">-->
+        <!--                                <div class="widget-posts-image"><a href="#"><img src="assets/images/rp-1.jpg"-->
+        <!--                                                                                 alt="Post Thumbnail"/></a></div>-->
+        <!--                                <div class="widget-posts-body">-->
+        <!--                                    <div class="widget-posts-title"><a href="#">Designer Desk Essentials</a></div>-->
+        <!--                                    <div class="widget-posts-meta">23 january</div>-->
+        <!--                                </div>-->
+        <!--                            </li>-->
+        <!--                            <li class="clearfix">-->
+        <!--                                <div class="widget-posts-image"><a href="#"><img src="assets/images/rp-2.jpg"-->
+        <!--                                                                                 alt="Post Thumbnail"/></a></div>-->
+        <!--                                <div class="widget-posts-body">-->
+        <!--                                    <div class="widget-posts-title"><a href="#">Realistic Business Card Mockup</a>-->
+        <!--                                    </div>-->
+        <!--                                    <div class="widget-posts-meta">15 February</div>-->
+        <!--                                </div>-->
+        <!--                            </li>-->
+        <!--                            <li class="clearfix">-->
+        <!--                                <div class="widget-posts-image"><a href="#"><img src="assets/images/rp-3.jpg"-->
+        <!--                                                                                 alt="Post Thumbnail"/></a></div>-->
+        <!--                                <div class="widget-posts-body">-->
+        <!--                                    <div class="widget-posts-title"><a href="#">Eco bag Mockup</a></div>-->
+        <!--                                    <div class="widget-posts-meta">21 February</div>-->
+        <!--                                </div>-->
+        <!--                            </li>-->
+        <!--                            <li class="clearfix">-->
+        <!--                                <div class="widget-posts-image"><a href="#"><img src="assets/images/rp-4.jpg"-->
+        <!--                                                                                 alt="Post Thumbnail"/></a></div>-->
+        <!--                                <div class="widget-posts-body">-->
+        <!--                                    <div class="widget-posts-title"><a href="#">Bottle Mockup</a></div>-->
+        <!--                                    <div class="widget-posts-meta">2 March</div>-->
+        <!--                                </div>-->
+        <!--                            </li>-->
+        <!--                        </ul>-->
+    </div>
+    <!-- 태그 -->
+    <div class="widget">
+        <h5 class="widget-title font-alt">Tag</h5>
+        <div class="tags font-serif"><a href="#" rel="tag">Blog</a><a href="#" rel="tag">Photo</a><a
+                href="#" rel="tag">Video</a><a href="#" rel="tag">Image</a><a href="#"
+                                                                              rel="tag">Minimal</a><a
+                href="#" rel="tag">Post</a><a href="#" rel="tag">Theme</a><a href="#"
+                                                                             rel="tag">Ideas</a><a
+                href="#" rel="tag">Tags</a><a href="#" rel="tag">Bootstrap</a><a href="#" rel="tag">Popular</a><a
+                href="#" rel="tag">English</a>
+        </div>
+    </div>
+    <!-- 텍스트 -->
+    <div class="widget">
+        <!--                        <h5 class="widget-title font-alt">Text</h5>The languages only differ in their grammar, their-->
+        <!--                        pronunciation and their most common words. Everyone realizes why a new common language would-->
+        <!--                        be desirable: one could refuse to pay expensive translators.-->
+    </div>
+    <!-- 최근 달린 댓글 -->
+    <div class="widget">
+        <h5 class="widget-title font-alt">Recent Comments</h5>
+        <!--                        <ul class="icon-list">-->
+        <!--                            <li>Maria on <a href="#">Designer Desk Essentials</a></li>-->
+        <!--                            <li>John on <a href="#">Realistic Business Card Mockup</a></li>-->
+        <!--                            <li>Andy on <a href="#">Eco bag Mockup</a></li>-->
+        <!--                            <li>Jack on <a href="#">Bottle Mockup</a></li>-->
+        <!--                            <li>Mark on <a href="#">Our trip to the Alps</a></li>-->
+        <!--                        </ul>-->
+    </div>
+</div>
+<!-- left slider end -->
+</html>

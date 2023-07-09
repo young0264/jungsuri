@@ -5,8 +5,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Transactional
-public interface PostRepository extends JpaRepository<PostEntity, Long> {
+public interface PostRepository extends JpaRepository<PostEntity, Long>, PostReadRepository {
 
-//    PostEntity findById(long id);
     List<PostEntity> findAllByOrderByUpdatedAtDesc();
 }

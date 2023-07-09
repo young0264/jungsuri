@@ -1,0 +1,8 @@
+com/app/jungsuri/domain/comment/web/CommentControllerTest.class
+com/app/jungsuri/domain/account/web/EmailControllerTest.class
+com/app/jungsuri/domain/account/web/AccountControllerTest.class
+com/app/jungsuri/JungsuriApplicationTests.class
+com/app/jungsuri/domain/account/web/SettingsControllerTest.class
+com/app/jungsuri/infra/MockMvcTest.class
+com/app/jungsuri/domain/post/web/PostControllerTest.class
+com/app/jungsuri/domain/jooqExampleTest.class
