@@ -38,7 +38,6 @@ public class Account {
 
     private final String nickname;
 
-    @Lob
     private final String profileImage;
 
     private final LocalDateTime joinedAt;
