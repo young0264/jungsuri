@@ -38,4 +38,9 @@ public class PostService {
     public void deletePost(Long postId) {
         postRepository.delete(getPostEntity(postId));
     }
+
+    @Transactional(readOnly = true)
+    public PostEntity findPostEntityById(Long id) {
+        return postRepository.findPostEntityById(id);
+    }
 }
