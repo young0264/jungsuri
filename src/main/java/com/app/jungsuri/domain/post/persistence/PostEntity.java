@@ -21,29 +21,39 @@ public class PostEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name="title", nullable = false)
     private String title;
 
+    @Column(name="content", nullable = false)
     private String content;
 
+    @Column(name="image_path", nullable = false)
     private String imagePath;
 
+    @Column(name="created_at", nullable = false)
     private LocalDateTime createdAt;
 
+    @Column(name="updated_at", nullable = true)
     private LocalDateTime updatedAt;
 
     @NotNull
+    @Column(name="login_id", nullable = false)
     private String loginId;
 
+    @Column(name="author", nullable = false)
     private String author;
 
     @ManyToOne
     private AccountEntity accountEntity;
 
+    @Column(name="comment_count", nullable = false)
     private Integer commentCount;
 
-    private Long likeCount;
+//    @Column(name="like_count", nullable = false)
+//    private Long likeCount;
 
-    private Long viewCount;
+//    @Column(name="view_count", nullable = false)
+//    private Long viewCount;
 
 
     @OneToMany(mappedBy = "postEntity")
@@ -61,8 +71,8 @@ public class PostEntity {
                 ", loginId='" + loginId + '\'' +
                 ", author='" + author + '\'' +
                 ", commentCount=" + commentCount +
-                ", likeCount=" + likeCount +
-                ", viewCount=" + viewCount +
+//                ", likeCount=" + likeCount +
+//                ", viewCount=" + viewCount +
                 '}';
     }
 
