@@ -1,7 +1,6 @@
 package com.app.jungsuri.domain.account.model;
 
 import com.app.jungsuri.domain.account.persistence.AccountEntity;
-import jakarta.persistence.Lob;
 import lombok.*;
 import org.modelmapper.ModelMapper;
 
