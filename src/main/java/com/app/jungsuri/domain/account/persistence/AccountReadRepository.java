@@ -1,5 +1,8 @@
 package com.app.jungsuri.domain.account.persistence;
 
-public class AccountReadRepository {
+import java.util.List;
+
+public interface AccountReadRepository {
+    List<AccountEntity> findAllPostCreatedCheckedIsFalse();
 
 }
