@@ -1,2 +1,4 @@
-package com.app.jungsuri.domain.notification.persistence;public class NotificationReadRepository {
+package com.app.jungsuri.domain.notification.persistence;
+
+public class NotificationReadRepository {
 }

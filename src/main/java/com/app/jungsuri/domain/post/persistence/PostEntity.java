@@ -12,7 +12,7 @@ import java.util.List;
 @Getter
 @Setter
 @Builder
-@Table(name="post")
+@Table(name="POST")
 @NoArgsConstructor
 @AllArgsConstructor
 public class PostEntity {
@@ -27,7 +27,10 @@ public class PostEntity {
     @Column(name="content", nullable = false)
     private String content;
 
-    @Column(name="image_path", nullable = false)
+//    @Column(name="short_content", nullable = false)
+//    private String shortContent;
+
+    @Column(name="image_path", nullable = true)
     private String imagePath;
 
     @Column(name="created_at", nullable = false)

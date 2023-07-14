@@ -53,6 +53,8 @@ public class AccountEntity {
 
     private LocalDateTime joinedAt;
 
+    private boolean postCreatedChecked = false;
+
     public boolean isValidToken(String token) {
         return this.emailToken.equals(token);
     }

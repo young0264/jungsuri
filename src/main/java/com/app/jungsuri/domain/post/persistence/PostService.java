@@ -1,8 +1,10 @@
 package com.app.jungsuri.domain.post.persistence;
 
 import com.app.jungsuri.domain.account.persistence.AccountEntity;
+import com.app.jungsuri.domain.post.event.PostCreatedEvent;
 import com.app.jungsuri.domain.post.web.dto.PostCreateDto;
 import lombok.RequiredArgsConstructor;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -15,6 +17,7 @@ import java.util.List;
 public class PostService {
 
     private final PostRepository postRepository;
+    private final ApplicationEventPublisher eventPublisher;
 
     public List<PostEntity> getPostList() {
         return postRepository.findAllByOrderByUpdatedAtDesc();
@@ -22,6 +25,7 @@ public class PostService {
 
     public PostEntity createPost(PostCreateDto postCreateDto, AccountEntity accountEntity) {
         PostEntity postEntity = postCreateDto.toPost(accountEntity.getLoginId()).toEntity();
+        eventPublisher.publishEvent(new PostCreatedEvent(postEntity));
         return postRepository.save(postEntity);
     }
 
