@@ -99,8 +99,8 @@ jooq {
                 jdbc {
                     driver = 'com.mysql.cj.jdbc.Driver'
                     url = 'jdbc:mysql://localhost:3306/jungsuri'
-                    user = 'young'
-                    password = '7dmldud9!!'
+                    user = System.getenv('dbLoginId')
+                    password = System.getenv('dbPassword')
                     schema = 'jungsuri'
                 }
 
