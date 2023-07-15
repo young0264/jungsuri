@@ -21,15 +21,12 @@ import org.springframework.transaction.annotation.Transactional;
 public class PostEventListner {
 
     private final AccountRepository accountRepository;
-    private final PostRepository postRepository;
     private final NotificationRepository notificationRepository;
 
 
     @EventListener
     public void handlePostCreatedEvent(PostCreatedEvent postCreatedEvent) {
-        log.info("handlePostCreatedEvent");
         accountRepository.findAllPostCreatedCheckedIsFalse().forEach(accountEntity -> {
-            log.info(accountEntity.getEmail());
             notificationRepository.save(createNotification(accountEntity,postCreatedEvent.getPostEntity()));
         });
     }
