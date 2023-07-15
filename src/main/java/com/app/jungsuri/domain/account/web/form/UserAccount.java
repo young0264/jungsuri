@@ -1,11 +1,12 @@
 package com.app.jungsuri.domain.account.web.form;
 
 import com.app.jungsuri.domain.account.persistence.AccountEntity;
+import lombok.Getter;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
-
 import java.util.List;
 
+@Getter
 public class UserAccount extends User {
 
     private AccountEntity accountEntity;
