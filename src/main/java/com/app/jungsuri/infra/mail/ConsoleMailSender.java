@@ -12,6 +12,9 @@ import org.springframework.stereotype.Component;
 import java.io.InputStream;
 
 
+/**
+ * send 메서드 오버라이드 - not send -> console
+ */
 @Profile({"local", "dev", "test"})
 @Component
 @Slf4j
