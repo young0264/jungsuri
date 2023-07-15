@@ -70,13 +70,14 @@ dependencies {
     testImplementation('org.junit.platform:junit-platform-launcher:1.9.2')
     testImplementation('org.junit.jupiter:junit-jupiter:5.9.2')
 
-    //mail
-    implementation 'org.springframework.boot:spring-boot-starter-mail'
-
     //jooq
     implementation 'org.springframework.boot:spring-boot-starter-jooq'
     implementation 'org.jooq:jooq:3.18.0'
     jooqGenerator 'mysql:mysql-connector-java:8.0.25'
+
+    //mail
+    implementation 'org.springframework.boot:spring-boot-starter-mail'
+
 }
 
 tasks.named('test') {
