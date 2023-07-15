@@ -16,12 +16,18 @@ public class AccountReadRepositoryImpl implements AccountReadRepository {
 
     private final DSLContext dslContext;
 
-    @Override
     public List<AccountEntity> findAllPostCreatedCheckedIsFalse() {
         Result<Record> fetch = dslContext.select()
                 .from(ACCOUNT)
                 .where(ACCOUNT.POST_CREATED_CHECKED.eq(false))
                 .fetch();
         return fetch.into(AccountEntity.class);
+    }
+
+    public Long findIdByLoginId(String loginId){
+        return dslContext.select(ACCOUNT.ID)
+                .from(ACCOUNT)
+                .where(ACCOUNT.LOGIN_ID.eq(loginId))
+                .fetchOneInto(Long.class);
     }
 }
