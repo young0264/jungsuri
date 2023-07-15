@@ -1,4 +1,7 @@
 package com.app.jungsuri.domain.notification.persistence;
 
-public class NotificationReadRepository {
+
+public interface NotificationReadRepository {
+
+    public int findUncheckedNotificationCount(Long accountId);
 }
