@@ -17,6 +17,7 @@ public class Account implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private final Boolean emailVerified;
+    private final Boolean postCreatedChecked;
     private final LocalDateTime emailCheckTokenGeneratedAt;
     private final Long id;
     private final LocalDateTime joinedAt;
@@ -33,6 +34,7 @@ public class Account implements Serializable {
 
     public Account(Account value) {
         this.emailVerified = value.emailVerified;
+        this.postCreatedChecked = value.postCreatedChecked;
         this.emailCheckTokenGeneratedAt = value.emailCheckTokenGeneratedAt;
         this.id = value.id;
         this.joinedAt = value.joinedAt;
@@ -50,6 +52,7 @@ public class Account implements Serializable {
 
     public Account(
         Boolean emailVerified,
+        Boolean postCreatedChecked,
         LocalDateTime emailCheckTokenGeneratedAt,
         Long id,
         LocalDateTime joinedAt,
@@ -65,6 +68,7 @@ public class Account implements Serializable {
         String role
     ) {
         this.emailVerified = emailVerified;
+        this.postCreatedChecked = postCreatedChecked;
         this.emailCheckTokenGeneratedAt = emailCheckTokenGeneratedAt;
         this.id = id;
         this.joinedAt = joinedAt;
@@ -85,6 +89,13 @@ public class Account implements Serializable {
      */
     public Boolean getEmailVerified() {
         return this.emailVerified;
+    }
+
+    /**
+     * Getter for <code>jungsuri.account.post_created_checked</code>.
+     */
+    public Boolean getPostCreatedChecked() {
+        return this.postCreatedChecked;
     }
 
     /**
@@ -183,6 +194,7 @@ public class Account implements Serializable {
         StringBuilder sb = new StringBuilder("Account (");
 
         sb.append(emailVerified);
+        sb.append(", ").append(postCreatedChecked);
         sb.append(", ").append(emailCheckTokenGeneratedAt);
         sb.append(", ").append(id);
         sb.append(", ").append(joinedAt);

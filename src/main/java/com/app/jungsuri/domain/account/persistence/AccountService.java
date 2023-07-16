@@ -23,8 +23,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-@RequiredArgsConstructor
 @Transactional
+@RequiredArgsConstructor
 @Slf4j
 public class AccountService implements UserDetailsService {
     private final AccountRepository accountRepository;
@@ -91,23 +91,26 @@ public class AccountService implements UserDetailsService {
         login(accountEntity);
     }
 
-
-    public void sendSignUpConfirmEmail(AccountEntity accountEntity) {
-        SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
-        simpleMailMessage.setReplyTo(accountEntity.getEmail());
-        simpleMailMessage.setTo(accountEntity.getEmail());
-        simpleMailMessage.setSubject("[정수리 꼬순내] - 회원 가입 인증");
-        simpleMailMessage.setText("[ " + accountEntity.getEmailToken() +" ]\n\n [ ]안의 인증코드를 사이트에서 이메일 인증을 해주세요.\n\n 인증완료시 회원가입이 완료됩니다." );
-        javaMailSender.send(simpleMailMessage);
-    }
-
-
     public boolean isEmailValid(Principal principal) {
         if (principal != null) {
             AccountEntity accountEntity = findByLoginId(principal.getName());
             return accountEntity.isEmailVerified();
         }
         return false;
+    }
+
+    public void sendSignUpConfirmEmail(AccountEntity accountEntity) {
+        try {
+            log.info("accountEntity.getEmail() : " + accountEntity.getEmail());
+            SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
+            simpleMailMessage.setReplyTo(accountEntity.getEmail());
+            simpleMailMessage.setTo(accountEntity.getEmail());
+            simpleMailMessage.setSubject("[정수리 꼬순내] - 회원 가입 인증");
+            simpleMailMessage.setText("[ " + accountEntity.getEmailToken() + " ]\n\n [ ]안의 인증코드를 사이트에서 이메일 인증을 해주세요.\n\n 인증완료시 회원가입이 완료됩니다.");
+            javaMailSender.send(simpleMailMessage);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 }

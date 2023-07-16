@@ -91,7 +91,7 @@ public class Post extends TableImpl<PostRecord> {
     /**
      * The column <code>jungsuri.post.image_path</code>.
      */
-    public final TableField<PostRecord, String> IMAGE_PATH = createField(DSL.name("image_path"), SQLDataType.VARCHAR(255).nullable(false), this, "");
+    public final TableField<PostRecord, String> IMAGE_PATH = createField(DSL.name("image_path"), SQLDataType.VARCHAR(255), this, "");
 
     /**
      * The column <code>jungsuri.post.login_id</code>.
