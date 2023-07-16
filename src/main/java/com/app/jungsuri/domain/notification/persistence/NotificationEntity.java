@@ -33,12 +33,14 @@ public class NotificationEntity {
     @Enumerated(EnumType.STRING)
     private NotificationType type;
 
+    private String link;
+
     private LocalDateTime createdAt;
 
     @ManyToOne
     private AccountEntity accountEntity;
 
-
-
-
+    public void check() {
+        this.checked = true;
+    }
 }
