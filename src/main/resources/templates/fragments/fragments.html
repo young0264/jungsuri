@@ -94,16 +94,16 @@
             <ul class="nav navbar-nav navbar-right">
                 <li ><a  href="/post/list">게시물 리스트</a></li>
                 <li ><a  href="/post/create">게시물 작성</a></li>
-                <li ><a  href="/settings">프로필</a></li>
+                <li ><a  href="/settings/profile">프로필</a></li>
                 <li>
-                    <a>
+                    <a th:href="@{/settings/alarm}">
                         <div class="icon-badge-group">
                             <div class="col-md-4 col-sm-6 col-lg-3" th:if="${notificationCount == 0}">
                                 <i class="fa fa-fw">&#xF0F3;</i><span class="muted" ></span>
                             </div>
                             <div class="col-md-4 col-sm-6 col-lg-3" th:if="${notificationCount > 0}">
                                 <i class="fa fa-fw" style="color: indianred">&#xF0F3;</i>
-                                <span class="muted" style="color: indianred" th:text="${notificationCount}"></span>
+                                <span class="muted" style="color: indianred" th:text="${notificationCount}" th:href="@{/settings/alarm}"></span>
                             </div>
                         </div>
                     </a>
@@ -218,6 +218,52 @@
 </span>
 <!--nav footer 레이아웃 조각 end-->
 
+<!--프로필 left sidebar start-->
+<div th:fragment="profile_left_sidebar" class="col-sm-2 col-md-2 sidebar">
+    <div class="widget">
+        <form role="form">
+            <div class="search-box">
+                <input class="form-control" type="text" placeholder="Search..."/>
+                <button class="search-btn" type="submit"><i class="fa fa-search"></i></button>
+            </div>
+        </form>
+    </div>
+
+    <div class="widget">
+        <h3>HOME</h3>
+        <hr class="divider-w mt-10 ">
+
+        <ul class="icon-list">
+            <a th:href="@{/settings/profile}"><h4>프로필</h4></a>
+            <a th:href="@{/settings/alarm}"><h4>알림</h4></a>
+        </ul>
+    </div>
+
+    <!-- pupular posts 사진, 제목, 시간-->
+    <div class="widget">
+        <h5 class="widget-title font-alt">Popular Posts</h5>
+    </div>
+
+    <!-- 태그 -->
+    <div class="widget">
+        <h5 class="widget-title font-alt">Tag</h5>
+        <div class="tags font-serif">
+            <a href="#" rel="tag">Blog</a>
+            <a href="#" rel="tag">Photo</a>
+        </div>
+    </div>
+    <!-- 텍스트 -->
+    <div class="widget">
+    </div>
+    <!-- 최근 달린 댓글 -->
+    <div class="widget">
+        <h5 class="widget-title font-alt">Recent Comments</h5>
+
+    </div>
+</div>
+<!--프로필 left sidebar end-->
+
+<!--TODO : 머시기 left side bar-->
 <!-- left slider start-->
 <div th:fragment="left_sidebar" class="col-sm-4 col-md-3 sidebar">
     <div class="widget">
@@ -277,13 +323,11 @@
     <!-- 태그 -->
     <div class="widget">
         <h5 class="widget-title font-alt">Tag</h5>
-        <div class="tags font-serif"><a href="#" rel="tag">Blog</a><a href="#" rel="tag">Photo</a><a
-                href="#" rel="tag">Video</a><a href="#" rel="tag">Image</a><a href="#"
-                                                                              rel="tag">Minimal</a><a
-                href="#" rel="tag">Post</a><a href="#" rel="tag">Theme</a><a href="#"
-                                                                             rel="tag">Ideas</a><a
-                href="#" rel="tag">Tags</a><a href="#" rel="tag">Bootstrap</a><a href="#" rel="tag">Popular</a><a
-                href="#" rel="tag">English</a>
+        <div class="tags font-serif"><a href="#" rel="tag">Blog</a><a href="#" rel="tag">Photo</a>
+            <a href="#" rel="tag">Video</a><a href="#" rel="tag">Image</a><a href="#" rel="tag">Minimal</a>
+            <a href="#" rel="tag">Post</a><a href="#" rel="tag">Theme</a><a href="#" rel="tag">Ideas</a>
+            <a href="#" rel="tag">Tags</a><a href="#" rel="tag">Bootstrap</a><a href="#" rel="tag">Popular</a>
+            <a href="#" rel="tag">English</a>
         </div>
     </div>
     <!-- 텍스트 -->
