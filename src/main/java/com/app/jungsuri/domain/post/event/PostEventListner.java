@@ -2,10 +2,10 @@ package com.app.jungsuri.domain.post.event;
 
 import com.app.jungsuri.domain.account.persistence.AccountEntity;
 import com.app.jungsuri.domain.account.persistence.AccountRepository;
+import com.app.jungsuri.domain.notification.model.NotificationType;
 import com.app.jungsuri.domain.notification.persistence.NotificationEntity;
 import com.app.jungsuri.domain.notification.persistence.NotificationRepository;
 import com.app.jungsuri.domain.post.persistence.PostEntity;
-import com.app.jungsuri.domain.post.persistence.PostRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.event.EventListener;
@@ -35,9 +35,10 @@ public class PostEventListner {
         return NotificationEntity.builder()
                 .accountEntity(accountEntity)
                 .title(postEntity.getTitle())
-                .content(postEntity.getContent())
+                .message(NotificationType.getMessgeByType(NotificationType.POST_CREATED))
                 .checked(false)
-                .type("postCreated")
+                .link("localhost:8080/notification/check")
+                .type(NotificationType.POST_CREATED)
                 .createdAt(postEntity.getCreatedAt())
                 .build();
     }
