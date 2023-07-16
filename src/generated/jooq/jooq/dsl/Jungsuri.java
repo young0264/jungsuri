@@ -9,6 +9,7 @@ import java.util.List;
 
 import jooq.dsl.tables.Account;
 import jooq.dsl.tables.Comment;
+import jooq.dsl.tables.Notification;
 import jooq.dsl.tables.Post;
 
 import org.jooq.Catalog;
@@ -40,6 +41,11 @@ public class Jungsuri extends SchemaImpl {
     public final Comment COMMENT = Comment.COMMENT;
 
     /**
+     * The table <code>jungsuri.notification</code>.
+     */
+    public final Notification NOTIFICATION = Notification.NOTIFICATION;
+
+    /**
      * The table <code>jungsuri.post</code>.
      */
     public final Post POST = Post.POST;
@@ -62,6 +68,7 @@ public class Jungsuri extends SchemaImpl {
         return Arrays.asList(
             Account.ACCOUNT,
             Comment.COMMENT,
+            Notification.NOTIFICATION,
             Post.POST
         );
     }

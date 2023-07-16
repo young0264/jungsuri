@@ -6,6 +6,7 @@ package jooq.dsl;
 
 import jooq.dsl.tables.Account;
 import jooq.dsl.tables.Comment;
+import jooq.dsl.tables.Notification;
 import jooq.dsl.tables.Post;
 
 
@@ -24,6 +25,11 @@ public class Tables {
      * The table <code>jungsuri.comment</code>.
      */
     public static final Comment COMMENT = Comment.COMMENT;
+
+    /**
+     * The table <code>jungsuri.notification</code>.
+     */
+    public static final Notification NOTIFICATION = Notification.NOTIFICATION;
 
     /**
      * The table <code>jungsuri.post</code>.

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html
+        lang="ko"
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:sec="http://thymeleaf.org/extras/spring-security"
+        xmlns="http://www.w3.org/1999/xhtml"
+>
+<script>
+    let notification = {
+        check: function (notificationId) {
+            const data = {notificationId: notificationId};
+            fetch('/notification/check', {
+                method: 'PUT',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify(data)
+            })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('notification response was not ok');
+                    }
+                    alert('읽음 처리 되었습니다');
+                    window.location.reload(); // 페이지 새로고침
+                })
+                .catch(error => {
+                    alert('읽음 처리에 실패하였습니다');
+                    console.error('comment update fetch error:', error.message);
+                });
+        },
+    }
+</script>
+<head th:replace="~{/fragments/fragments.html :: head}"></head>
+<span th:replace="~{fragments/fragments.html :: nav_header}"></span>
+<body data-spy="scroll" data-target=".onpage-navigation" data-offset="60">
+<main>
+    <div class="main">
+        <section class="module bg-dark-30 about-page-header" data-background="assets/images/about_bg.jpg">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-6 col-sm-offset-3">
+                        <h1 class="module-title font-alt mb-0">Tabs &amp; Accordions</h1>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="module">
+            <div class="container">
+                <span th:replace="fragments/fragments.html :: profile_left_sidebar"></span>
+                <div class="col-sm-8 col-sm-offset-1">
+                    <div class="text-center " th:if="${error}">
+                        <div class="alert alert-danger" role="alert">
+                            <a th:text="${error}"></a>
+                        </div>
+                    </div>
+                    <h3 class="alert-info">읽지 않은 알림 <span style="color:orange;" th:text="${notificationList.size()}"></span>개 </h3>
+                    <hr class="divider-w mt-10 mb-20">
+                    <ul>
+                        <li>
+                            <div class="post" th:each="notification : ${notificationList}">
+                                <a th:onclick="notification.check([[${notification.id}]])">
+                                    <h3>
+                                        <span th:text="${notification.message}" style="color:orange"></span> 알림이 있습니다.
+                                        <span style="float:right;" th:text="${notification.createdAt}">date</span>
+                                    </h3>
+                                </a>
+                                <hr class="divider-w">
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+        <hr class="divider-d">
+    </div>
+    <div class="scroll-up"><a href="#totop"><i class="fa fa-angle-double-up"></i></a></div>
+</main>
+<!--  JavaScripts  -->
+</body>
+</html>
