@@ -4,6 +4,8 @@ import com.app.jungsuri.domain.account.persistence.AccountEntity;
 import com.app.jungsuri.domain.account.persistence.AccountService;
 import com.app.jungsuri.domain.account.persistence.SettingsService;
 import com.app.jungsuri.domain.account.web.dto.PasswordUpdateDto;
+import com.app.jungsuri.domain.notification.persistence.NotificationEntity;
+import com.app.jungsuri.domain.notification.persistence.NotificationService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import java.security.Principal;
+import java.util.List;
 
 @Slf4j
 @Controller
@@ -23,14 +26,26 @@ public class SettingsController {
 
     private final AccountService accountService;
     private final SettingsService settingsService;
+    private final NotificationService notificationService;
 
-    @GetMapping()
+    @GetMapping("/alarm")
+    public String showAlarmSettingPage(Model model, Principal principal) {
+        String loginId = principal.getName();
+        AccountEntity accountEntity = accountService.findByLoginId(loginId);
+        List<NotificationEntity> notificationList = notificationService.getNotificationEntitiesByAccountId(accountEntity.getId());
+        model.addAttribute("accountEntity", accountEntity);
+        model.addAttribute("notificationList", notificationList);
+        model.addAttribute("passwordUpdateDto", new PasswordUpdateDto());
+        return "account/alarm";
+    }
+
+    @GetMapping("/profile")
     public String showProfile(Model model, Principal principal) {
         String loginId = principal.getName();
         AccountEntity accountEntity = accountService.findByLoginId(loginId);
         model.addAttribute("accountEntity", accountEntity);
         model.addAttribute("passwordUpdateDto", new PasswordUpdateDto());
-        return "account/settings";
+        return "account/profile";
     }
 
     @PutMapping("/update/password")
