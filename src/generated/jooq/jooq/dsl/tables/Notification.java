@@ -11,6 +11,7 @@ import java.util.function.Function;
 
 import jooq.dsl.Jungsuri;
 import jooq.dsl.Keys;
+import jooq.dsl.enums.NotificationType;
 import jooq.dsl.tables.records.NotificationRecord;
 
 import org.jooq.Field;
@@ -74,9 +75,9 @@ public class Notification extends TableImpl<NotificationRecord> {
     public final TableField<NotificationRecord, Long> ID = createField(DSL.name("id"), SQLDataType.BIGINT.nullable(false).identity(true), this, "");
 
     /**
-     * The column <code>jungsuri.notification.content</code>.
+     * The column <code>jungsuri.notification.message</code>.
      */
-    public final TableField<NotificationRecord, String> CONTENT = createField(DSL.name("content"), SQLDataType.VARCHAR(255).nullable(false), this, "");
+    public final TableField<NotificationRecord, String> MESSAGE = createField(DSL.name("message"), SQLDataType.VARCHAR(255).nullable(false), this, "");
 
     /**
      * The column <code>jungsuri.notification.title</code>.
@@ -86,7 +87,7 @@ public class Notification extends TableImpl<NotificationRecord> {
     /**
      * The column <code>jungsuri.notification.type</code>.
      */
-    public final TableField<NotificationRecord, String> TYPE = createField(DSL.name("type"), SQLDataType.VARCHAR(255), this, "");
+    public final TableField<NotificationRecord, NotificationType> TYPE = createField(DSL.name("type"), SQLDataType.VARCHAR(17).asEnumDataType(jooq.dsl.enums.NotificationType.class), this, "");
 
     private Notification(Name alias, Table<NotificationRecord> aliased) {
         this(alias, aliased, null);
@@ -197,14 +198,14 @@ public class Notification extends TableImpl<NotificationRecord> {
     // -------------------------------------------------------------------------
 
     @Override
-    public Row7<Boolean, Long, LocalDateTime, Long, String, String, String> fieldsRow() {
+    public Row7<Boolean, Long, LocalDateTime, Long, String, String, NotificationType> fieldsRow() {
         return (Row7) super.fieldsRow();
     }
 
     /**
      * Convenience mapping calling {@link SelectField#convertFrom(Function)}.
      */
-    public <U> SelectField<U> mapping(Function7<? super Boolean, ? super Long, ? super LocalDateTime, ? super Long, ? super String, ? super String, ? super String, ? extends U> from) {
+    public <U> SelectField<U> mapping(Function7<? super Boolean, ? super Long, ? super LocalDateTime, ? super Long, ? super String, ? super String, ? super NotificationType, ? extends U> from) {
         return convertFrom(Records.mapping(from));
     }
 
@@ -212,7 +213,7 @@ public class Notification extends TableImpl<NotificationRecord> {
      * Convenience mapping calling {@link SelectField#convertFrom(Class,
      * Function)}.
      */
-    public <U> SelectField<U> mapping(Class<U> toType, Function7<? super Boolean, ? super Long, ? super LocalDateTime, ? super Long, ? super String, ? super String, ? super String, ? extends U> from) {
+    public <U> SelectField<U> mapping(Class<U> toType, Function7<? super Boolean, ? super Long, ? super LocalDateTime, ? super Long, ? super String, ? super String, ? super NotificationType, ? extends U> from) {
         return convertFrom(toType, Records.mapping(from));
     }
 }
