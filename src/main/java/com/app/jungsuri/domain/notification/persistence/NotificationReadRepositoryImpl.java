@@ -1,10 +1,12 @@
 package com.app.jungsuri.domain.notification.persistence;
 
+import jooq.dsl.tables.records.NotificationRecord;
 import lombok.RequiredArgsConstructor;
 import org.jooq.DSLContext;
+import org.jooq.Result;
 import org.jooq.impl.DSL;
 import org.springframework.stereotype.Repository;
-
+import java.util.List;
 import static jooq.dsl.tables.Notification.NOTIFICATION;
 
 @Repository
@@ -20,4 +22,12 @@ public class NotificationReadRepositoryImpl implements NotificationReadRepositor
                         , NOTIFICATION.CHECKED.eq(false)));
     }
 
+    @Override
+    public List<NotificationEntity> findUncheckedByAccountId(Long id) {
+        Result<NotificationRecord> result = dslContext.selectFrom(NOTIFICATION)
+                .where(NOTIFICATION.ACCOUNT_ENTITY_ID.eq(id)
+                    , NOTIFICATION.CHECKED.eq(false))
+                .fetch();
+        return result.into(NotificationEntity.class);
+    }
 }

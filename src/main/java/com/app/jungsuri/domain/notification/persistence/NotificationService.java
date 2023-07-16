@@ -13,7 +13,7 @@ public class NotificationService {
     private final NotificationRepository notificationRepository;
 
     public List<NotificationEntity> getNotificationEntitiesByAccountId(Long id) {
-        return notificationRepository.findAllByAccountId(id);
+        return notificationRepository.findUncheckedByAccountId(id);
     }
 
 
