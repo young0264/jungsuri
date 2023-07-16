@@ -1,6 +1,7 @@
 package com.app.jungsuri.domain.notification.persistence;
 
 import com.app.jungsuri.domain.account.persistence.AccountEntity;
+import com.app.jungsuri.domain.notification.model.NotificationType;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -24,12 +25,13 @@ public class NotificationEntity {
     @Column(name="title", nullable = false)
     private String title;
 
-    @Column(name="content", nullable = false)
-    private String content;
+    @Column(name="message", nullable = false)
+    private String message;
 
     private boolean checked = false;
 
-    private String type;
+    @Enumerated(EnumType.STRING)
+    private NotificationType type;
 
     private LocalDateTime createdAt;
 
