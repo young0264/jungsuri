@@ -50,7 +50,7 @@
                                 | 3 Comments | <a >Photography, </a>
                                 <a th:if="${post.loginId == #authentication.principal.username}" style="float:right">
                                     <div style="float:right">
-                                        <form th:action=" '/post/' + ${post.id} + '/delete' " th:method="delete">
+                                        <form th:action=" '/post/' + ${post.id}" th:method="delete">
                                             <button class="btn btn-danger bottom-right">삭제</button>
                                         </form>
                                     </div>
@@ -91,7 +91,7 @@
                         <div class="post-more"><a class="more-link" href="#">Read more</a></div>
                     </div>
                     <div>
-                        <a href="/post/create"><button class="btn btn-d btn-round" >글쓰기</button></a>
+                        <a href="/post"><button class="btn btn-d btn-round" >글쓰기</button></a>
                     </div>
                     <div class="pagination font-alt"><a href="#"><i class="fa fa-angle-left"></i></a><a
                             class="active" href="#">1</a><a href="#">2</a><a href="#">3</a><a href="#">4</a><a

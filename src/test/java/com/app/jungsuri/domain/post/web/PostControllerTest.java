@@ -43,7 +43,7 @@ class PostControllerTest {
     @WithMockUser(username = "12", password = "12")
     void post등록_viewpage가_보이는지() throws Exception {
 
-        mockMvc.perform(get("/post/create"))
+        mockMvc.perform(get("/post"))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(view().name("post/form"))
@@ -55,9 +55,10 @@ class PostControllerTest {
     @WithMockUser(username="12", password="12")
     void post등록_성공() throws Exception {
 
-        mockMvc.perform(post("/post/create")
+        mockMvc.perform(post("/post")
                         .param("title", "제목222")
-                        .param("content", "내용222"))
+                        .param("content", "내용222")
+                        .param("author", "작성자이름"))
                 .andDo(print())
                 .andExpect(status().is3xxRedirection())
                 .andExpect(view().name("redirect:/post/list"))
@@ -65,7 +66,6 @@ class PostControllerTest {
 
         AccountEntity accountEntity = accountService.findByLoginId("12");
         PostEntity postEntity = postService.createPost(new PostCreateDto("게시글 등록 제목", "게시글 등록 내용", "게시글 등록 이름", null, 0), accountEntity);
-
         Assertions.assertThat(postEntity.getTitle()).isEqualTo("게시글 등록 제목");
         Assertions.assertThat(postRepository.findPostEntityById(postEntity.getId()).getContent()).isEqualTo("게시글 등록 내용");
     }
@@ -75,7 +75,7 @@ class PostControllerTest {
     void post수정_성공() throws Exception {
         AccountEntity accountEntity = accountService.findByLoginId("12");
         PostEntity postEntity = postService.createPost(new PostCreateDto("수정전제목", "수정전내용", "수정전이름", null, 0), accountEntity);
-        mockMvc.perform(patch("/post/" + postEntity.getId() +"/update")
+        mockMvc.perform(patch("/post/" + postEntity.getId())
                         .param("title", "수정제목2")
                         .param("content", "수정내용2"))
                 .andDo(print())
@@ -84,6 +84,23 @@ class PostControllerTest {
                 .andExpect(authenticated());
         Assertions.assertThat(postEntity.getTitle()).isEqualTo("수정제목2");
         Assertions.assertThat(postEntity.getContent()).isEqualTo("수정내용2");
+    }
+
+    @Test
+    @WithMockUser(username = "12", password = "12")
+    void post삭제_성공() throws Exception {
+        AccountEntity accountEntity = accountService.findByLoginId("12");
+        PostEntity postEntity = postService.createPost(new PostCreateDto("수정전제목", "수정전내용", "수정전이름", null, 0), accountEntity);
+        mockMvc.perform(delete("/post/" + postEntity.getId()))
+                .andDo(print())
+                .andExpect(flash().attributeExists("delete_message"))
+                .andExpect(status().is3xxRedirection())
+                .andExpect(view().name("redirect:/post/list"))
+                .andExpect(authenticated());
+        PostEntity postEntity2 = postService.createPost(new PostCreateDto("수정전제목", "수정전내용", "수정전이름", null, 0), accountEntity);
+        postService.deletePost(postEntity2.getId());
+        postRepository.flush();
+        Assertions.assertThat(postRepository.findPostEntityById(postEntity2.getId())).isNull();
     }
 
 }

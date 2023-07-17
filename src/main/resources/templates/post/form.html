@@ -49,7 +49,7 @@
             <div class="col-sm-8 col-sm-offset-2">
                 <h4 class="font-alt mb-0">Basic Forms</h4>
                 <hr class="divider-w mt-10 mb-20">
-                <form class="form" th:action="@{/post/create}" method="post" th:object="${postCreateDto}">
+                <form class="form" th:action="@{/post}" method="post" th:object="${postCreateDto}">
                     <div class="form-group">
                         <input class="form-control" type="text" name="title" th:field="*{title}" placeholder="Default input"/>
                     </div>
@@ -79,7 +79,7 @@
                 <div class="col-sm-8 col-sm-offset-1">
                     <h4 class="font-alt mb-0">Basic Forms</h4>
                     <hr class="divider-w mt-10 mb-20">
-                    <form class="form" th:action=" '/post/'+ ${postId} + '/update'" th:method="patch" th:object="${postEntity}">
+                    <form class="form" th:action=" '/post/'+ ${postId} + "th:method="patch" th:object="${postEntity}">
                         <div class="form-group">
                             <input class="form-control" type="text" name="title" th:field="*{title}"
                                    th:value="${postEntity.title}" placeholder="Default input"/>
