@@ -79,7 +79,7 @@ class CommentControllerTest {
         PostEntity postEntity = postRepository.findById(createdPostId).orElseThrow(() -> new IllegalArgumentException("댓글등록 테스트 : id에 해당하는 게시글이 없습니다."));
 
         // when (controller, service 테스트)
-        mockMvc.perform(post("/comment/create")
+        mockMvc.perform(post("/comment")
                         .param("content", "댓글입니다.")
                         .param("loginId", "12")
                         .param("postId", postEntity.getId().toString())
@@ -106,7 +106,7 @@ class CommentControllerTest {
         CommentCreateDto commentCreateDto = new CommentCreateDto("짧은댓글", "12", createdPostId);
 
         // when
-        mockMvc.perform(post("/comment/create")
+        mockMvc.perform(post("/comment")
                         .param("content", "짧음")
                         .param("loginId", "12")
                         .param("postId", createdPostId.toString())
@@ -134,7 +134,7 @@ class CommentControllerTest {
         commentUpdateDto.setNewComment("수정한 댓글입니다.");
 
         //when
-        mockMvc.perform(put("/comment/update")
+        mockMvc.perform(put("/comment")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(commentUpdateDto))
                         .with(csrf()))
@@ -153,7 +153,7 @@ class CommentControllerTest {
         CommentDeleteDto commentDeleteDto = new CommentDeleteDto(createdCommentId, createdPostId);
 
         //when
-        mockMvc.perform(delete("/comment/delete")
+        mockMvc.perform(delete("/comment")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(commentDeleteDto))
                 .with(csrf())
