@@ -31,7 +31,7 @@ public class CommentController {
     private final AccountService accountService;
     private final PostService postService;
 
-    @PostMapping("/create")
+    @PostMapping("")
     public String create(@Valid @ModelAttribute("commentCreateDto") CommentCreateDto commentCreateDto,
                          BindingResult errors, RedirectAttributes redirectAttributes) {
         PostEntity postEntity = postService.getPostEntity(commentCreateDto.getPostId());
@@ -47,13 +47,13 @@ public class CommentController {
         return String.format("redirect:/post/%s/details", commentCreateDto.getPostId());
     }
 
-    @PutMapping("/update")
+    @PutMapping("")
     public ResponseEntity update(@RequestBody CommentUpdateDto commentUpdateDto) {
         commentService.updateComment(commentUpdateDto.getCommentId(), commentUpdateDto.getNewComment());
         return ResponseEntity.ok().build();
     }
 
-    @DeleteMapping("/delete")
+    @DeleteMapping("")
     public ResponseEntity delete(@RequestBody CommentDeleteDto commentDeleteDto) {
         PostEntity postEntity = postService.getPostEntity(commentDeleteDto.getPostId());
         commentService.deleteComment(commentDeleteDto.getCommentId(), postEntity);
