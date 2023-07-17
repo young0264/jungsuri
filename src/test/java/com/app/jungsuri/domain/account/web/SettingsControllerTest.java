@@ -26,18 +26,18 @@ class SettingsControllerTest {
     @Test
     @WithMockUser(username = "12" , password = "12")
     void settings_페이지이동() throws Exception {
-        mockMvc.perform(get("/settings"))
+        mockMvc.perform(get("/settings/profile"))
                 .andExpect(status().isOk())
                 .andExpect(model().attributeExists("accountEntity"))
                 .andExpect(model().attributeExists("passwordUpdateDto"))
-                .andExpect(view().name("account/settings"));
+                .andExpect(view().name("account/profile"));
     }
 //.contentType(MediaType.APPLICATION_JSON)
 //.content(objectMapper.writeValueAsString(dto))
     @Test
     @WithMockUser(username = "12" , password = "12")
     void 비밀번호_변경_성공() throws Exception {
-        mockMvc.perform(put("/settings/update/password")
+        mockMvc.perform(put("/settings/password")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(new PasswordUpdateDto("12","12","1234","1234")))
                         .with(csrf())
@@ -48,7 +48,7 @@ class SettingsControllerTest {
     @Test
     @WithMockUser(username = "12" , password = "12")
     void 비밀번호_변경_실패() throws Exception {
-        mockMvc.perform(put("/settings/update/password")
+        mockMvc.perform(put("/settings/password")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(new PasswordUpdateDto("12", "123", "1234", "1234")))
                 .with(csrf())
