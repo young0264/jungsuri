@@ -16,7 +16,7 @@
                 newPasswordConfirm: document.getElementById("newPasswordConfirm").value
             };
             event.preventDefault()
-            fetch('/settings/update/password', {
+            fetch('/settings/password', {
                 method: 'PUT',
                 headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify(data)

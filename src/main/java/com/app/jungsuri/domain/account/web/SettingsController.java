@@ -48,7 +48,7 @@ public class SettingsController {
         return "account/profile";
     }
 
-    @PutMapping("/update/password")
+    @PutMapping("/password")
     public ResponseEntity updatePassword(@RequestBody PasswordUpdateDto passwordUpdateDto) {
         try {
             settingsService.updatePassword(passwordUpdateDto);
