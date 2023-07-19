@@ -6,10 +6,14 @@ package jooq.dsl;
 
 import jooq.dsl.tables.Account;
 import jooq.dsl.tables.Comment;
+import jooq.dsl.tables.MountainEntity;
+import jooq.dsl.tables.MountainLocationEntity;
 import jooq.dsl.tables.Notification;
 import jooq.dsl.tables.Post;
 import jooq.dsl.tables.records.AccountRecord;
 import jooq.dsl.tables.records.CommentRecord;
+import jooq.dsl.tables.records.MountainEntityRecord;
+import jooq.dsl.tables.records.MountainLocationEntityRecord;
 import jooq.dsl.tables.records.NotificationRecord;
 import jooq.dsl.tables.records.PostRecord;
 
@@ -35,6 +39,9 @@ public class Keys {
     public static final UniqueKey<AccountRecord> KEY_ACCOUNT_UK_Q0UJA26QGU1ATULENWUP9RXYR = Internal.createUniqueKey(Account.ACCOUNT, DSL.name("KEY_account_UK_q0uja26qgu1atulenwup9rxyr"), new TableField[] { Account.ACCOUNT.EMAIL }, true);
     public static final UniqueKey<AccountRecord> KEY_ACCOUNT_UK_TQPUAQXALCAEDDPC0M6MCXOBG = Internal.createUniqueKey(Account.ACCOUNT, DSL.name("KEY_account_UK_tqpuaqxalcaeddpc0m6mcxobg"), new TableField[] { Account.ACCOUNT.LOGIN_ID }, true);
     public static final UniqueKey<CommentRecord> KEY_COMMENT_PRIMARY = Internal.createUniqueKey(Comment.COMMENT, DSL.name("KEY_comment_PRIMARY"), new TableField[] { Comment.COMMENT.ID }, true);
+    public static final UniqueKey<MountainEntityRecord> KEY_MOUNTAIN_ENTITY_PRIMARY = Internal.createUniqueKey(MountainEntity.MOUNTAIN_ENTITY, DSL.name("KEY_mountain_entity_PRIMARY"), new TableField[] { MountainEntity.MOUNTAIN_ENTITY.ID }, true);
+    public static final UniqueKey<MountainEntityRecord> KEY_MOUNTAIN_ENTITY_UK_6239SLP58J6LFRYEN0WS1C69S = Internal.createUniqueKey(MountainEntity.MOUNTAIN_ENTITY, DSL.name("KEY_mountain_entity_UK_6239slp58j6lfryen0ws1c69s"), new TableField[] { MountainEntity.MOUNTAIN_ENTITY.NAME }, true);
+    public static final UniqueKey<MountainLocationEntityRecord> KEY_MOUNTAIN_LOCATION_ENTITY_PRIMARY = Internal.createUniqueKey(MountainLocationEntity.MOUNTAIN_LOCATION_ENTITY, DSL.name("KEY_mountain_location_entity_PRIMARY"), new TableField[] { MountainLocationEntity.MOUNTAIN_LOCATION_ENTITY.ID }, true);
     public static final UniqueKey<NotificationRecord> KEY_NOTIFICATION_PRIMARY = Internal.createUniqueKey(Notification.NOTIFICATION, DSL.name("KEY_notification_PRIMARY"), new TableField[] { Notification.NOTIFICATION.ID }, true);
     public static final UniqueKey<PostRecord> KEY_POST_PRIMARY = Internal.createUniqueKey(Post.POST, DSL.name("KEY_post_PRIMARY"), new TableField[] { Post.POST.ID }, true);
 
@@ -44,6 +51,7 @@ public class Keys {
 
     public static final ForeignKey<CommentRecord, PostRecord> FK9N1H3P614QIGG7SIKIAKMU3PA = Internal.createForeignKey(Comment.COMMENT, DSL.name("FK9n1h3p614qigg7sikiakmu3pa"), new TableField[] { Comment.COMMENT.POST_ENTITY_ID }, Keys.KEY_POST_PRIMARY, new TableField[] { Post.POST.ID }, true);
     public static final ForeignKey<CommentRecord, AccountRecord> FKSTETQKXJYP52LPRDMSWGA4GMI = Internal.createForeignKey(Comment.COMMENT, DSL.name("FKstetqkxjyp52lprdmswga4gmi"), new TableField[] { Comment.COMMENT.ACCOUNT_ENTITY_ID }, Keys.KEY_ACCOUNT_PRIMARY, new TableField[] { Account.ACCOUNT.ID }, true);
+    public static final ForeignKey<MountainLocationEntityRecord, MountainEntityRecord> FKMGTIRC0XFI69GNVASI3NUSNPY = Internal.createForeignKey(MountainLocationEntity.MOUNTAIN_LOCATION_ENTITY, DSL.name("FKmgtirc0xfi69gnvasi3nusnpy"), new TableField[] { MountainLocationEntity.MOUNTAIN_LOCATION_ENTITY.MOUNTAIN_ENTITY_ID }, Keys.KEY_MOUNTAIN_ENTITY_PRIMARY, new TableField[] { MountainEntity.MOUNTAIN_ENTITY.ID }, true);
     public static final ForeignKey<NotificationRecord, AccountRecord> FKN2Q3MSN4YFV43J6M6690CVK75 = Internal.createForeignKey(Notification.NOTIFICATION, DSL.name("FKn2q3msn4yfv43j6m6690cvk75"), new TableField[] { Notification.NOTIFICATION.ACCOUNT_ENTITY_ID }, Keys.KEY_ACCOUNT_PRIMARY, new TableField[] { Account.ACCOUNT.ID }, true);
     public static final ForeignKey<PostRecord, AccountRecord> FKMSSEU6OHWWE5JTPBT8K45VJCG = Internal.createForeignKey(Post.POST, DSL.name("FKmsseu6ohwwe5jtpbt8k45vjcg"), new TableField[] { Post.POST.ACCOUNT_ENTITY_ID }, Keys.KEY_ACCOUNT_PRIMARY, new TableField[] { Account.ACCOUNT.ID }, true);
 }

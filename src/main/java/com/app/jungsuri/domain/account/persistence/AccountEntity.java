@@ -51,6 +51,8 @@ public class AccountEntity {
 
     private String profileImage;
 
+    private int mountainExp; //등산한 산 경험치 (높이)
+
     private LocalDateTime joinedAt;
 
     private boolean postCreatedChecked = false;

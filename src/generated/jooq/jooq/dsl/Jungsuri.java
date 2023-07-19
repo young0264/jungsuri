@@ -9,6 +9,8 @@ import java.util.List;
 
 import jooq.dsl.tables.Account;
 import jooq.dsl.tables.Comment;
+import jooq.dsl.tables.MountainEntity;
+import jooq.dsl.tables.MountainLocationEntity;
 import jooq.dsl.tables.Notification;
 import jooq.dsl.tables.Post;
 
@@ -41,6 +43,16 @@ public class Jungsuri extends SchemaImpl {
     public final Comment COMMENT = Comment.COMMENT;
 
     /**
+     * The table <code>jungsuri.mountain_entity</code>.
+     */
+    public final MountainEntity MOUNTAIN_ENTITY = MountainEntity.MOUNTAIN_ENTITY;
+
+    /**
+     * The table <code>jungsuri.mountain_location_entity</code>.
+     */
+    public final MountainLocationEntity MOUNTAIN_LOCATION_ENTITY = MountainLocationEntity.MOUNTAIN_LOCATION_ENTITY;
+
+    /**
      * The table <code>jungsuri.notification</code>.
      */
     public final Notification NOTIFICATION = Notification.NOTIFICATION;
@@ -68,6 +80,8 @@ public class Jungsuri extends SchemaImpl {
         return Arrays.asList(
             Account.ACCOUNT,
             Comment.COMMENT,
+            MountainEntity.MOUNTAIN_ENTITY,
+            MountainLocationEntity.MOUNTAIN_LOCATION_ENTITY,
             Notification.NOTIFICATION,
             Post.POST
         );
