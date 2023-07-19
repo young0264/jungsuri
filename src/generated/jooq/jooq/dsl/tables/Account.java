@@ -15,12 +15,12 @@ import jooq.dsl.tables.records.AccountRecord;
 
 import org.jooq.Field;
 import org.jooq.ForeignKey;
-import org.jooq.Function15;
+import org.jooq.Function16;
 import org.jooq.Identity;
 import org.jooq.Name;
 import org.jooq.Record;
 import org.jooq.Records;
-import org.jooq.Row15;
+import org.jooq.Row16;
 import org.jooq.Schema;
 import org.jooq.SelectField;
 import org.jooq.Table;
@@ -57,6 +57,11 @@ public class Account extends TableImpl<AccountRecord> {
      * The column <code>jungsuri.account.email_verified</code>.
      */
     public final TableField<AccountRecord, Boolean> EMAIL_VERIFIED = createField(DSL.name("email_verified"), SQLDataType.BIT.nullable(false), this, "");
+
+    /**
+     * The column <code>jungsuri.account.mountain_exp</code>.
+     */
+    public final TableField<AccountRecord, Integer> MOUNTAIN_EXP = createField(DSL.name("mountain_exp"), SQLDataType.INTEGER.nullable(false), this, "");
 
     /**
      * The column <code>jungsuri.account.post_created_checked</code>.
@@ -221,18 +226,18 @@ public class Account extends TableImpl<AccountRecord> {
     }
 
     // -------------------------------------------------------------------------
-    // Row15 type methods
+    // Row16 type methods
     // -------------------------------------------------------------------------
 
     @Override
-    public Row15<Boolean, Boolean, LocalDateTime, Long, LocalDateTime, String, String, String, String, String, String, String, String, String, String> fieldsRow() {
-        return (Row15) super.fieldsRow();
+    public Row16<Boolean, Integer, Boolean, LocalDateTime, Long, LocalDateTime, String, String, String, String, String, String, String, String, String, String> fieldsRow() {
+        return (Row16) super.fieldsRow();
     }
 
     /**
      * Convenience mapping calling {@link SelectField#convertFrom(Function)}.
      */
-    public <U> SelectField<U> mapping(Function15<? super Boolean, ? super Boolean, ? super LocalDateTime, ? super Long, ? super LocalDateTime, ? super String, ? super String, ? super String, ? super String, ? super String, ? super String, ? super String, ? super String, ? super String, ? super String, ? extends U> from) {
+    public <U> SelectField<U> mapping(Function16<? super Boolean, ? super Integer, ? super Boolean, ? super LocalDateTime, ? super Long, ? super LocalDateTime, ? super String, ? super String, ? super String, ? super String, ? super String, ? super String, ? super String, ? super String, ? super String, ? super String, ? extends U> from) {
         return convertFrom(Records.mapping(from));
     }
 
@@ -240,7 +245,7 @@ public class Account extends TableImpl<AccountRecord> {
      * Convenience mapping calling {@link SelectField#convertFrom(Class,
      * Function)}.
      */
-    public <U> SelectField<U> mapping(Class<U> toType, Function15<? super Boolean, ? super Boolean, ? super LocalDateTime, ? super Long, ? super LocalDateTime, ? super String, ? super String, ? super String, ? super String, ? super String, ? super String, ? super String, ? super String, ? super String, ? super String, ? extends U> from) {
+    public <U> SelectField<U> mapping(Class<U> toType, Function16<? super Boolean, ? super Integer, ? super Boolean, ? super LocalDateTime, ? super Long, ? super LocalDateTime, ? super String, ? super String, ? super String, ? super String, ? super String, ? super String, ? super String, ? super String, ? super String, ? super String, ? extends U> from) {
         return convertFrom(toType, Records.mapping(from));
     }
 }
