@@ -6,8 +6,8 @@ package jooq.dsl;
 
 import jooq.dsl.tables.Account;
 import jooq.dsl.tables.Comment;
-import jooq.dsl.tables.MountainEntity;
-import jooq.dsl.tables.MountainLocationEntity;
+import jooq.dsl.tables.Mountain;
+import jooq.dsl.tables.MountainLocation;
 import jooq.dsl.tables.Notification;
 import jooq.dsl.tables.Post;
 
@@ -29,14 +29,14 @@ public class Tables {
     public static final Comment COMMENT = Comment.COMMENT;
 
     /**
-     * The table <code>jungsuri.mountain_entity</code>.
+     * The table <code>jungsuri.mountain</code>.
      */
-    public static final MountainEntity MOUNTAIN_ENTITY = MountainEntity.MOUNTAIN_ENTITY;
+    public static final Mountain MOUNTAIN = Mountain.MOUNTAIN;
 
     /**
-     * The table <code>jungsuri.mountain_location_entity</code>.
+     * The table <code>jungsuri.mountain_location</code>.
      */
-    public static final MountainLocationEntity MOUNTAIN_LOCATION_ENTITY = MountainLocationEntity.MOUNTAIN_LOCATION_ENTITY;
+    public static final MountainLocation MOUNTAIN_LOCATION = MountainLocation.MOUNTAIN_LOCATION;
 
     /**
      * The table <code>jungsuri.notification</code>.
