@@ -25,22 +25,20 @@
         </section>
         <section class="module">
             <div class="container">
-                <div class="row multi-columns-row post-columns">
+                <div class="row multi-columns-row post-columns" >
                     <!-- list data 뿌리기 시작-->
-                    <div class="col-sm-6 col-md-3 col-lg-3">
-                        <div class="post">
-                            <div class="post-thumbnail"><a href="#"><img src="assets/images/post-1.jpg" alt="Blog-post Thumbnail"/></a></div>
-                            <div class="post-header font-alt">
-                                <h2 class="post-title"><a href="#">Our trip to the Alps</a></h2>
-                                <div class="post-meta">By&nbsp;<a href="#">Mark Stone</a>&nbsp;| 23 November | 3
-                                    Comments
+                    <div th:each="mountain : ${mountainEntities}">
+                        <div class="col-sm-6 col-md-3 col-lg-3">
+                            <div class="post">
+                                <div class="post-thumbnail"><a href="#"><img th:src="${mountain.imageUrl}" style="height: 150px;" alt="Blog-post Thumbnail"/></a></div>
+                                <div class="post-header font-alt">
+                                    <h4 class="post-title" th:text="${mountain.name}"><a href="#"></a></h4>
+                                </div>
+                                <div class="post-entry">
+                                    <p>높이 : <span th:text="${mountain.height}"></span></p>
+                                    <p>소재지 : <span th:text="${mountain.shortLocations}"></span></p>
                                 </div>
                             </div>
-                            <div class="post-entry">
-                                <p>A wonderful serenity has taken possession of my entire soul, like these sweet
-                                    mornings of spring which I enjoy with my whole heart.</p>
-                            </div>
-                            <div class="post-more"><a class="more-link" href="#">Read more</a></div>
                         </div>
                     </div>
                     <!-- list data 뿌리기 끝 -->
