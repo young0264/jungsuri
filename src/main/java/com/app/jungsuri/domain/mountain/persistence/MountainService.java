@@ -35,9 +35,10 @@ public class MountainService {
             String image_url = "https://www.forest.go.kr/" + mountainElement.getElementsByAttribute("src").attr("src");
             String mountainAllLocation = split[1];
             String mountainName = split1[0];
+            String shortLocations = mountainAllLocation.substring(0, Math.min(mountainAllLocation.length(), 20))+"...";
             int mountainHeight = getMountainHeight(split1);
 
-            MountainEntity mountainEntity= saveMountainEntity(new MountainEntity(mountainName, mountainHeight, image_url));
+            MountainEntity mountainEntity= saveMountainEntity(new MountainEntity(mountainName, mountainHeight, image_url, shortLocations));
             mountainLocationService.saveMountainLocation(mountainAllLocation, mountainEntity);
         }
     }
@@ -81,5 +82,10 @@ public class MountainService {
                 }
             }
         }
+    }
+
+    public List<MountainEntity> getMountainAllInfo() {
+        return  mountainRepository.findAll();
+//        return  mountainRepository.findAllMountains();
     }
 }
