@@ -44,3 +44,6 @@ applicdatioin.properties
 
 ###이메일 비밀번호
 /src/main/java/com/app/jungsuri/infra/config/AppConfig.java
+/src/main/resources/static/*
+/src/main/resources/application.properties
+build.gradle
