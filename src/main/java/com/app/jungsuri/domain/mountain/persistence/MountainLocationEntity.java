@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 
 @Entity
 @Getter
+@Table(name="mountainLocation")
 @NoArgsConstructor
 @AllArgsConstructor
 public class MountainLocationEntity {

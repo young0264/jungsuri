@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 
 @Entity
 @Getter
+@Table(name="mountain")
 @NoArgsConstructor
 @AllArgsConstructor
 public class MountainEntity {
@@ -22,9 +23,12 @@ public class MountainEntity {
 
     private String imageUrl;
 
-    public MountainEntity(String mountainName, int mountainHeight, String image_url_str) {
+    private String shortLocations;
+
+    public MountainEntity(String mountainName, int mountainHeight, String image_url_str, String shortLocations) {
         this.name = mountainName;
         this.height = mountainHeight;
         this.imageUrl = image_url_str;
+        this.shortLocations = shortLocations;
     }
 }
