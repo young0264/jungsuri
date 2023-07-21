@@ -13,6 +13,7 @@ import jooq.dsl.tables.Mountain;
 import jooq.dsl.tables.MountainLocation;
 import jooq.dsl.tables.Notification;
 import jooq.dsl.tables.Post;
+import jooq.dsl.tables.Tag;
 
 import org.jooq.Catalog;
 import org.jooq.Table;
@@ -63,6 +64,11 @@ public class Jungsuri extends SchemaImpl {
     public final Post POST = Post.POST;
 
     /**
+     * The table <code>jungsuri.tag</code>.
+     */
+    public final Tag TAG = Tag.TAG;
+
+    /**
      * No further instances allowed
      */
     private Jungsuri() {
@@ -83,7 +89,8 @@ public class Jungsuri extends SchemaImpl {
             Mountain.MOUNTAIN,
             MountainLocation.MOUNTAIN_LOCATION,
             Notification.NOTIFICATION,
-            Post.POST
+            Post.POST,
+            Tag.TAG
         );
     }
 }
