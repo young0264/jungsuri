@@ -10,6 +10,7 @@ import jooq.dsl.tables.Mountain;
 import jooq.dsl.tables.MountainLocation;
 import jooq.dsl.tables.Notification;
 import jooq.dsl.tables.Post;
+import jooq.dsl.tables.Tag;
 
 
 /**
@@ -47,4 +48,9 @@ public class Tables {
      * The table <code>jungsuri.post</code>.
      */
     public static final Post POST = Post.POST;
+
+    /**
+     * The table <code>jungsuri.tag</code>.
+     */
+    public static final Tag TAG = Tag.TAG;
 }

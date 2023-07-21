@@ -10,12 +10,14 @@ import jooq.dsl.tables.Mountain;
 import jooq.dsl.tables.MountainLocation;
 import jooq.dsl.tables.Notification;
 import jooq.dsl.tables.Post;
+import jooq.dsl.tables.Tag;
 import jooq.dsl.tables.records.AccountRecord;
 import jooq.dsl.tables.records.CommentRecord;
 import jooq.dsl.tables.records.MountainLocationRecord;
 import jooq.dsl.tables.records.MountainRecord;
 import jooq.dsl.tables.records.NotificationRecord;
 import jooq.dsl.tables.records.PostRecord;
+import jooq.dsl.tables.records.TagRecord;
 
 import org.jooq.ForeignKey;
 import org.jooq.TableField;
@@ -44,6 +46,7 @@ public class Keys {
     public static final UniqueKey<MountainLocationRecord> KEY_MOUNTAIN_LOCATION_PRIMARY = Internal.createUniqueKey(MountainLocation.MOUNTAIN_LOCATION, DSL.name("KEY_mountain_location_PRIMARY"), new TableField[] { MountainLocation.MOUNTAIN_LOCATION.ID }, true);
     public static final UniqueKey<NotificationRecord> KEY_NOTIFICATION_PRIMARY = Internal.createUniqueKey(Notification.NOTIFICATION, DSL.name("KEY_notification_PRIMARY"), new TableField[] { Notification.NOTIFICATION.ID }, true);
     public static final UniqueKey<PostRecord> KEY_POST_PRIMARY = Internal.createUniqueKey(Post.POST, DSL.name("KEY_post_PRIMARY"), new TableField[] { Post.POST.ID }, true);
+    public static final UniqueKey<TagRecord> KEY_TAG_PRIMARY = Internal.createUniqueKey(Tag.TAG, DSL.name("KEY_tag_PRIMARY"), new TableField[] { Tag.TAG.ID }, true);
 
     // -------------------------------------------------------------------------
     // FOREIGN KEY definitions
@@ -54,4 +57,5 @@ public class Keys {
     public static final ForeignKey<MountainLocationRecord, MountainRecord> FKAOY0VAEYLS649L5HB02FKI4K6 = Internal.createForeignKey(MountainLocation.MOUNTAIN_LOCATION, DSL.name("FKaoy0vaeyls649l5hb02fki4k6"), new TableField[] { MountainLocation.MOUNTAIN_LOCATION.MOUNTAIN_ENTITY_ID }, Keys.KEY_MOUNTAIN_PRIMARY, new TableField[] { Mountain.MOUNTAIN.ID }, true);
     public static final ForeignKey<NotificationRecord, AccountRecord> FKN2Q3MSN4YFV43J6M6690CVK75 = Internal.createForeignKey(Notification.NOTIFICATION, DSL.name("FKn2q3msn4yfv43j6m6690cvk75"), new TableField[] { Notification.NOTIFICATION.ACCOUNT_ENTITY_ID }, Keys.KEY_ACCOUNT_PRIMARY, new TableField[] { Account.ACCOUNT.ID }, true);
     public static final ForeignKey<PostRecord, AccountRecord> FKMSSEU6OHWWE5JTPBT8K45VJCG = Internal.createForeignKey(Post.POST, DSL.name("FKmsseu6ohwwe5jtpbt8k45vjcg"), new TableField[] { Post.POST.ACCOUNT_ENTITY_ID }, Keys.KEY_ACCOUNT_PRIMARY, new TableField[] { Account.ACCOUNT.ID }, true);
+    public static final ForeignKey<TagRecord, AccountRecord> FKMH4S27H0H3AQ585CHOW6G1XRB = Internal.createForeignKey(Tag.TAG, DSL.name("FKmh4s27h0h3aq585chow6g1xrb"), new TableField[] { Tag.TAG.ACCOUNT_ENTITY_ID }, Keys.KEY_ACCOUNT_PRIMARY, new TableField[] { Account.ACCOUNT.ID }, true);
 }
