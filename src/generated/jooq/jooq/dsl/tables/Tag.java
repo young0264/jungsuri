@@ -4,8 +4,6 @@
 package jooq.dsl.tables;
 
 
-import java.util.Arrays;
-import java.util.List;
 import java.util.function.Function;
 
 import jooq.dsl.Jungsuri;
@@ -14,12 +12,12 @@ import jooq.dsl.tables.records.TagRecord;
 
 import org.jooq.Field;
 import org.jooq.ForeignKey;
-import org.jooq.Function4;
+import org.jooq.Function2;
 import org.jooq.Identity;
 import org.jooq.Name;
 import org.jooq.Record;
 import org.jooq.Records;
-import org.jooq.Row4;
+import org.jooq.Row2;
 import org.jooq.Schema;
 import org.jooq.SelectField;
 import org.jooq.Table;
@@ -53,19 +51,9 @@ public class Tag extends TableImpl<TagRecord> {
     }
 
     /**
-     * The column <code>jungsuri.tag.account_entity_id</code>.
-     */
-    public final TableField<TagRecord, Long> ACCOUNT_ENTITY_ID = createField(DSL.name("account_entity_id"), SQLDataType.BIGINT, this, "");
-
-    /**
      * The column <code>jungsuri.tag.id</code>.
      */
     public final TableField<TagRecord, Long> ID = createField(DSL.name("id"), SQLDataType.BIGINT.nullable(false).identity(true), this, "");
-
-    /**
-     * The column <code>jungsuri.tag.dtype</code>.
-     */
-    public final TableField<TagRecord, String> DTYPE = createField(DSL.name("dtype"), SQLDataType.VARCHAR(31).nullable(false), this, "");
 
     /**
      * The column <code>jungsuri.tag.name</code>.
@@ -121,23 +109,6 @@ public class Tag extends TableImpl<TagRecord> {
     }
 
     @Override
-    public List<ForeignKey<TagRecord, ?>> getReferences() {
-        return Arrays.asList(Keys.FKMH4S27H0H3AQ585CHOW6G1XRB);
-    }
-
-    private transient Account _account;
-
-    /**
-     * Get the implicit join path to the <code>jungsuri.account</code> table.
-     */
-    public Account account() {
-        if (_account == null)
-            _account = new Account(this, Keys.FKMH4S27H0H3AQ585CHOW6G1XRB);
-
-        return _account;
-    }
-
-    @Override
     public Tag as(String alias) {
         return new Tag(DSL.name(alias), this);
     }
@@ -177,18 +148,18 @@ public class Tag extends TableImpl<TagRecord> {
     }
 
     // -------------------------------------------------------------------------
-    // Row4 type methods
+    // Row2 type methods
     // -------------------------------------------------------------------------
 
     @Override
-    public Row4<Long, Long, String, String> fieldsRow() {
-        return (Row4) super.fieldsRow();
+    public Row2<Long, String> fieldsRow() {
+        return (Row2) super.fieldsRow();
     }
 
     /**
      * Convenience mapping calling {@link SelectField#convertFrom(Function)}.
      */
-    public <U> SelectField<U> mapping(Function4<? super Long, ? super Long, ? super String, ? super String, ? extends U> from) {
+    public <U> SelectField<U> mapping(Function2<? super Long, ? super String, ? extends U> from) {
         return convertFrom(Records.mapping(from));
     }
 
@@ -196,7 +167,7 @@ public class Tag extends TableImpl<TagRecord> {
      * Convenience mapping calling {@link SelectField#convertFrom(Class,
      * Function)}.
      */
-    public <U> SelectField<U> mapping(Class<U> toType, Function4<? super Long, ? super Long, ? super String, ? super String, ? extends U> from) {
+    public <U> SelectField<U> mapping(Class<U> toType, Function2<? super Long, ? super String, ? extends U> from) {
         return convertFrom(toType, Records.mapping(from));
     }
 }
