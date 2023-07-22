@@ -96,6 +96,7 @@
                 <li ><a  href="/post/list">게시물 리스트</a></li>
                 <li ><a  href="/post">게시물 작성</a></li>
                 <li ><a  href="/settings/profile">프로필</a></li>
+                <li th:if="${userRole != null and userRole == 'ADMIN'}" ><a href="/settings/profile">관리자 페이지</a></li>
                 <li>
                     <a th:href="@{/settings/alarm}">
                         <div class="icon-badge-group">
