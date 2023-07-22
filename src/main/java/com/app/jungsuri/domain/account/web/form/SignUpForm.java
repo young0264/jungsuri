@@ -1,5 +1,6 @@
 package com.app.jungsuri.domain.account.web.form;
 
+import com.app.jungsuri.domain.account.web.UserRole;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -32,5 +33,6 @@ public class SignUpForm {
 
     private String location;
 
+    private UserRole userRole;
 
 }
