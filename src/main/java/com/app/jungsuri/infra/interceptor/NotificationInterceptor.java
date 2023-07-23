@@ -1,9 +1,7 @@
-package com.app.jungsuri.domain.notification.persistence;
+package com.app.jungsuri.infra.interceptor;
 
-import com.app.jungsuri.domain.account.persistence.AccountEntity;
 import com.app.jungsuri.domain.account.persistence.AccountRepository;
-import com.app.jungsuri.domain.account.web.form.UserAccount;
-import jakarta.mail.Session;
+import com.app.jungsuri.domain.notification.persistence.NotificationRepository;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
@@ -15,8 +13,8 @@ import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
-@Component
 @Slf4j
+@Component
 @RequiredArgsConstructor
 public class NotificationInterceptor implements HandlerInterceptor {
 

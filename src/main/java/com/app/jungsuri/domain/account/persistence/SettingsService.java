@@ -1,7 +1,8 @@
 package com.app.jungsuri.domain.account.persistence;
 
+import com.app.jungsuri.domain.account.web.dto.MountainExpUpdateDto;
 import com.app.jungsuri.domain.account.web.dto.PasswordUpdateDto;
-import com.app.jungsuri.domain.post.persistence.PostRepository;
+import com.app.jungsuri.domain.mountain.persistence.MountainRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -16,6 +17,7 @@ public class SettingsService {
 
     private final PasswordEncoder passwordEncoder;
     private final AccountRepository accountRepository;
+    private final MountainRepository mountainRepository;
 
     public void updatePassword(PasswordUpdateDto passwordUpdateDto) {
         AccountEntity accountEntity = accountRepository.findByLoginId(passwordUpdateDto.getLoginId()).orElseThrow(() -> new IllegalArgumentException("해당하는 아이디가 없습니다."));
@@ -39,6 +41,16 @@ public class SettingsService {
         if (!passwordUpdateDto.getNewPassword().equals(passwordUpdateDto.getNewPasswordConfirm())) {
             log.info("isMatchNewPassword :새로운 비밀번호가 일치하지 않습니다. ");
             throw new IllegalArgumentException("새로운 비밀번호가 서로 일치하지 않습니다.");
+        }
+    }
+
+    public void updateMountainExp(MountainExpUpdateDto mountainExpUpdateDto) {
+        String mountainName = mountainExpUpdateDto.getMountainName();
+
+        for (String loginId : mountainExpUpdateDto.getLoginIdArr()) {
+            AccountEntity accountEntity = accountRepository.findByLoginId(loginId).orElseThrow(() -> new IllegalArgumentException("해당하는 아이디가 없습니다."));
+            int mountainHeight = mountainRepository.findMountainHeightByName(mountainName);
+            accountEntity.updateMountainExp(mountainHeight);
         }
     }
 }

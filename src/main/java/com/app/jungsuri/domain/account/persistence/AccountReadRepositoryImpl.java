@@ -15,7 +15,7 @@ import static jooq.dsl.tables.Account.ACCOUNT;
 public class AccountReadRepositoryImpl implements AccountReadRepository {
 
     private final DSLContext dslContext;
-
+    @Override
     public List<AccountEntity> findAllPostCreatedCheckedIsFalse() {
         Result<Record> fetch = dslContext.select()
                 .from(ACCOUNT)
@@ -23,11 +23,18 @@ public class AccountReadRepositoryImpl implements AccountReadRepository {
                 .fetch();
         return fetch.into(AccountEntity.class);
     }
-
+    @Override
     public Long findIdByLoginId(String loginId){
         return dslContext.select(ACCOUNT.ID)
                 .from(ACCOUNT)
                 .where(ACCOUNT.LOGIN_ID.eq(loginId))
                 .fetchOneInto(Long.class);
+    }
+
+    @Override
+    public List<String> findAllUsersLoginId() {
+        return dslContext.select(ACCOUNT.LOGIN_ID)
+                .from(ACCOUNT)
+                .fetchInto(String.class);
     }
 }

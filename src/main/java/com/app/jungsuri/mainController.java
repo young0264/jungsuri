@@ -1,6 +1,7 @@
 package com.app.jungsuri;
 
 import com.app.jungsuri.domain.account.persistence.AccountService;
+import com.app.jungsuri.domain.account.web.UserRole;
 import com.app.jungsuri.domain.account.web.form.SignUpForm;
 import com.app.jungsuri.domain.mountain.persistence.MountainLocationService;
 import com.app.jungsuri.domain.mountain.persistence.MountainService;
@@ -11,10 +12,7 @@ import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-
 import java.io.IOException;
-import java.util.*;
 
 @Slf4j
 @Controller
@@ -27,7 +25,7 @@ public class mainController {
 
     @PostConstruct
     public String init() {
-        SignUpForm signUpForm = new SignUpForm("12", "12@naver.com", "12","남의영","","");
+        SignUpForm signUpForm = new SignUpForm("12", "12@naver.com", "12","남의영","","", UserRole.ADMIN);
         accountService.createNewAccount(signUpForm);
         return "main";
     }

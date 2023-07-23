@@ -38,11 +38,13 @@
     <meta name="msapplication-TileColor" content="#ffffff">
     <meta name="msapplication-TileImage" content="/titan/live/assets/images/favicons/ms-icon-144x144.png">
     <meta name="theme-color" content="#ffffff">
-    <!--
-    Stylesheets
-    =============================================
 
-    -->
+    <!--  tagify css. bootstrap 위쪽에 위치-->
+    <link rel="stylesheet" href="/node_modules/@yaireo/tagify/dist/tagify.css">
+
+    <!--  Stylesheets  =============================================  -->
+
+
     <!-- Default stylesheets-->
     <link href="/titan/live/assets/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Template specific stylesheets-->
@@ -75,10 +77,123 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
     <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script>
-
-
-
 </head>
+
+<style>
+    /* Suggestions items */
+    :root {
+        --tagify-dd-item-pad: .5em .7em;
+    }
+
+    .tagify__dropdown.users-list .tagify__dropdown__item{
+        display: grid;
+        grid-template-columns: auto 1fr;
+        gap: 0 1em;
+        grid-template-areas: "avatar name"
+                        "avatar email";
+    }
+
+    .tagify__dropdown.users-list .tagify__dropdown__item:hover .tagify__dropdown__item__avatar-wrap{
+        transform: scale(1.2);
+    }
+
+    .tagify__dropdown.users-list .tagify__dropdown__item__avatar-wrap{
+        grid-area: avatar;
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        overflow: hidden;
+        background: #EEE;
+        transition: .1s ease-out;
+    }
+
+    .tagify__dropdown.users-list img{
+        width: 100%;
+        vertical-align: top;
+    }
+
+    .tagify__dropdown.users-list header.tagify__dropdown__item > div,
+    .tagify__dropdown.users-list .tagify__dropdown__item strong{
+        grid-area: name;
+        width: 100%;
+        align-self: center;
+    }
+
+    .tagify__dropdown.users-list span{
+        grid-area: email;
+        width: 100%;
+        font-size: .9em;
+        opacity: .6;
+    }
+
+    .tagify__dropdown.users-list .tagify__dropdown__item__addAll{
+        border-bottom: 1px solid #DDD;
+        gap: 0;
+    }
+
+    .tagify__dropdown.users-list .remove-all-tags{
+        float: right;
+        font-size: .8em;
+        padding: .2em .3em;
+        border-radius: 3px;
+        user-select: none;
+    }
+
+    .tagify__dropdown.users-list .remove-all-tags:hover{
+        color: white;
+        background: salmon;
+    }
+
+
+    /* Tags items */
+    #users-list .tagify__tag{
+        white-space: nowrap;
+    }
+
+    #users-list .tagify__tag img{
+        width: 100%;
+        vertical-align: top;
+        pointer-events: none;
+    }
+
+
+    #users-list .tagify__tag:hover .tagify__tag__avatar-wrap{
+        transform: scale(1.6) translateX(-10%);
+    }
+
+    #users-list .tagify__tag .tagify__tag__avatar-wrap{
+        width: 16px;
+        height: 16px;
+        white-space: normal;
+        border-radius: 50%;
+        background: silver;
+        margin-right: 5px;
+        transition: .12s ease-out;
+    }
+
+    .users-list .tagify__dropdown__itemsGroup:empty{
+        display: none;
+    }
+
+    .users-list .tagify__dropdown__itemsGroup::before{
+        content: attr(data-title);
+        display: inline-block;
+        font-size: .9em;
+        padding: 4px 6px;
+        margin: var(--tagify-dd-item-pad);
+        font-style: italic;
+        border-radius: 4px;
+        background: #00ce8d;
+        color: white;
+        font-weight: 600;
+    }
+
+    .users-list .tagify__dropdown__itemsGroup:not(:first-of-type){
+        border-top: 1px solid #DDD;
+    }
+</style>
+
+
 <!--html head 조각 end-->
 <!--nav header 레이아웃 조각 start -->
 <span th:fragment="nav_header">
@@ -96,6 +211,7 @@
                 <li ><a  href="/post/list">게시물 리스트</a></li>
                 <li ><a  href="/post">게시물 작성</a></li>
                 <li ><a  href="/settings/profile">프로필</a></li>
+                <li th:if="${userRole != null and userRole == 'ADMIN'}" ><a href="/settings/admin">관리자 페이지</a></li>
                 <li>
                     <a th:href="@{/settings/alarm}">
                         <div class="icon-badge-group">
@@ -234,6 +350,7 @@
         <hr class="divider-w mt-10 ">
 
         <ul class="icon-list">
+            <a th:href="@{/settings/admin}"><h4>관리자 페이지</h4></a>
             <a th:href="@{/settings/profile}"><h4>프로필</h4></a>
             <a th:href="@{/settings/alarm}"><h4>알림</h4></a>
         </ul>

@@ -1,5 +1,6 @@
 package com.app.jungsuri.domain.account.web.form;
 
+import com.app.jungsuri.domain.account.web.UserRole;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -32,5 +33,7 @@ public class SignUpForm {
 
     private String location;
 
+    //TODO 관리자페이지에서 role 수정
+    private UserRole userRole = UserRole.USER;
 
 }

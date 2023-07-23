@@ -5,11 +5,14 @@ package jooq.dsl;
 
 
 import jooq.dsl.tables.Account;
+import jooq.dsl.tables.AccountTag;
 import jooq.dsl.tables.Comment;
 import jooq.dsl.tables.Mountain;
 import jooq.dsl.tables.MountainLocation;
+import jooq.dsl.tables.MountainTag;
 import jooq.dsl.tables.Notification;
 import jooq.dsl.tables.Post;
+import jooq.dsl.tables.Tag;
 
 
 /**
@@ -22,6 +25,11 @@ public class Tables {
      * The table <code>jungsuri.account</code>.
      */
     public static final Account ACCOUNT = Account.ACCOUNT;
+
+    /**
+     * The table <code>jungsuri.account_tag</code>.
+     */
+    public static final AccountTag ACCOUNT_TAG = AccountTag.ACCOUNT_TAG;
 
     /**
      * The table <code>jungsuri.comment</code>.
@@ -39,6 +47,11 @@ public class Tables {
     public static final MountainLocation MOUNTAIN_LOCATION = MountainLocation.MOUNTAIN_LOCATION;
 
     /**
+     * The table <code>jungsuri.mountain_tag</code>.
+     */
+    public static final MountainTag MOUNTAIN_TAG = MountainTag.MOUNTAIN_TAG;
+
+    /**
      * The table <code>jungsuri.notification</code>.
      */
     public static final Notification NOTIFICATION = Notification.NOTIFICATION;
@@ -47,4 +60,9 @@ public class Tables {
      * The table <code>jungsuri.post</code>.
      */
     public static final Post POST = Post.POST;
+
+    /**
+     * The table <code>jungsuri.tag</code>.
+     */
+    public static final Tag TAG = Tag.TAG;
 }
