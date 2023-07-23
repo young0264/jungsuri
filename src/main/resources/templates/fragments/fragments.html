@@ -96,7 +96,7 @@
                 <li ><a  href="/post/list">게시물 리스트</a></li>
                 <li ><a  href="/post">게시물 작성</a></li>
                 <li ><a  href="/settings/profile">프로필</a></li>
-                <li th:if="${userRole != null and userRole == 'ADMIN'}" ><a href="/settings/profile">관리자 페이지</a></li>
+                <li th:if="${userRole != null and userRole == 'ADMIN'}" ><a href="/settings/admin">관리자 페이지</a></li>
                 <li>
                     <a th:href="@{/settings/alarm}">
                         <div class="icon-badge-group">
@@ -235,6 +235,7 @@
         <hr class="divider-w mt-10 ">
 
         <ul class="icon-list">
+            <a th:href="@{/settings/admin}"><h4>관리자 페이지</h4></a>
             <a th:href="@{/settings/profile}"><h4>프로필</h4></a>
             <a th:href="@{/settings/alarm}"><h4>알림</h4></a>
         </ul>
