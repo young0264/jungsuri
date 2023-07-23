@@ -1,6 +1,7 @@
 package com.app.jungsuri.infra.config;
 
-import com.app.jungsuri.domain.notification.persistence.NotificationInterceptor;
+import com.app.jungsuri.infra.interceptor.AccountInterceptor;
+import com.app.jungsuri.infra.interceptor.NotificationInterceptor;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.security.StaticResourceLocation;
@@ -18,6 +19,7 @@ import java.util.stream.Collectors;
 public class WebConfig implements WebMvcConfigurer {
 
     private final NotificationInterceptor notificationInterceptor;
+    private final AccountInterceptor accountInterceptor;
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
@@ -25,8 +27,7 @@ public class WebConfig implements WebMvcConfigurer {
                 .flatMap(StaticResourceLocation::getPatterns)
                 .collect(Collectors.toList());
         staticResourcesPath.add("/titan/**");
-
-        registry.addInterceptor(notificationInterceptor)
-                .excludePathPatterns(staticResourcesPath);
+        registry.addInterceptor(notificationInterceptor).excludePathPatterns(staticResourcesPath);
+        registry.addInterceptor(accountInterceptor).excludePathPatterns(staticResourcesPath);
     }
 }

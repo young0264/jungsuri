@@ -20,5 +20,18 @@ public class MountainReadRepositoryImpl implements MountainReadRepository {
                 .fetchInto(MountainEntity.class);
     }
 
+    @Override
+    public List<String> findAllMountainsName() {
+        return dslContext.select(MOUNTAIN.NAME)
+                .from(MOUNTAIN)
+                .fetchInto(String.class);
+    }
 
+    @Override
+    public int findMountainHeightByName(String name) {
+        return dslContext.select(MOUNTAIN.HEIGHT)
+                .from(MOUNTAIN)
+                .where(MOUNTAIN.NAME.eq(name))
+                .fetchOneInto(int.class);
+    }
 }

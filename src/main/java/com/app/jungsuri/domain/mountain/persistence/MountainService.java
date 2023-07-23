@@ -86,6 +86,9 @@ public class MountainService {
 
     public List<MountainEntity> getMountainAllInfo() {
         return  mountainRepository.findAll();
-//        return  mountainRepository.findAllMountains();
+    }
+
+    public List<String> findAllMountainsName() {
+        return mountainRepository.findAllMountainsName();
     }
 }

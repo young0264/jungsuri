@@ -1,5 +1,6 @@
 package com.app.jungsuri.domain.account.persistence;
 
+import com.app.jungsuri.domain.account.web.UserRole;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.*;
@@ -53,6 +54,8 @@ public class AccountEntity {
 
     private int mountainExp; //등산한 산 경험치 (높이)
 
+    private UserRole userRole;
+
     private LocalDateTime joinedAt;
 
     private boolean postCreatedChecked = false;
@@ -77,5 +80,9 @@ public class AccountEntity {
 
     public void updatePassword(String newPassword) {
         this.password = newPassword;
+    }
+
+    public void updateMountainExp(int mountainHeight) {
+        this.mountainExp += mountainHeight;
     }
 }

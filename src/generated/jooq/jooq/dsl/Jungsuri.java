@@ -8,11 +8,14 @@ import java.util.Arrays;
 import java.util.List;
 
 import jooq.dsl.tables.Account;
+import jooq.dsl.tables.AccountTag;
 import jooq.dsl.tables.Comment;
 import jooq.dsl.tables.Mountain;
 import jooq.dsl.tables.MountainLocation;
+import jooq.dsl.tables.MountainTag;
 import jooq.dsl.tables.Notification;
 import jooq.dsl.tables.Post;
+import jooq.dsl.tables.Tag;
 
 import org.jooq.Catalog;
 import org.jooq.Table;
@@ -38,6 +41,11 @@ public class Jungsuri extends SchemaImpl {
     public final Account ACCOUNT = Account.ACCOUNT;
 
     /**
+     * The table <code>jungsuri.account_tag</code>.
+     */
+    public final AccountTag ACCOUNT_TAG = AccountTag.ACCOUNT_TAG;
+
+    /**
      * The table <code>jungsuri.comment</code>.
      */
     public final Comment COMMENT = Comment.COMMENT;
@@ -53,6 +61,11 @@ public class Jungsuri extends SchemaImpl {
     public final MountainLocation MOUNTAIN_LOCATION = MountainLocation.MOUNTAIN_LOCATION;
 
     /**
+     * The table <code>jungsuri.mountain_tag</code>.
+     */
+    public final MountainTag MOUNTAIN_TAG = MountainTag.MOUNTAIN_TAG;
+
+    /**
      * The table <code>jungsuri.notification</code>.
      */
     public final Notification NOTIFICATION = Notification.NOTIFICATION;
@@ -61,6 +74,11 @@ public class Jungsuri extends SchemaImpl {
      * The table <code>jungsuri.post</code>.
      */
     public final Post POST = Post.POST;
+
+    /**
+     * The table <code>jungsuri.tag</code>.
+     */
+    public final Tag TAG = Tag.TAG;
 
     /**
      * No further instances allowed
@@ -79,11 +97,14 @@ public class Jungsuri extends SchemaImpl {
     public final List<Table<?>> getTables() {
         return Arrays.asList(
             Account.ACCOUNT,
+            AccountTag.ACCOUNT_TAG,
             Comment.COMMENT,
             Mountain.MOUNTAIN,
             MountainLocation.MOUNTAIN_LOCATION,
+            MountainTag.MOUNTAIN_TAG,
             Notification.NOTIFICATION,
-            Post.POST
+            Post.POST,
+            Tag.TAG
         );
     }
 }

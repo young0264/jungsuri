@@ -1,0 +1,306 @@
+<!DOCTYPE html  >
+<html
+        lang="ko"
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:sec="http://thymeleaf.org/extras/spring-security"
+        xmlns="http://www.w3.org/1999/xhtml"
+>
+<!-- tagify 시작 -->
+<script src="https://cdn.jsdelivr.net/npm/@yaireo/tagify"></script>
+<script src="https://cdn.jsdelivr.net/npm/@yaireo/tagify/dist/tagify.polyfills.min.js"></script>
+<script type="application/javascript" th:inline="javascript">
+    let mountainName = "";
+    let LoginIdArr = new Set([]);
+    let settings = {
+        mountain_exp: function () {
+            if(mountainName === "" || LoginIdArr.size === 0){
+                alert("값을 선택해주세요.");
+                return;
+            }
+            let newLoginIdArr = Array.from(LoginIdArr);
+            let data = {
+                "mountainName": mountainName,
+                "LoginIdArr": newLoginIdArr,
+            };
+            console.log(JSON.stringify(data));
+            //TODO
+            fetch('/settings/mountain-exp', {
+                method: 'PATCH',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify(data),
+            })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('등산 경험치 반영에 실패하였습니다.');
+                    }
+                    alert('참여회원의 경험치가 성공적으로 반영 되었습니다.');
+                    window.location.reload(); // 페이지 새로고침
+                })
+                .catch(error => {
+                    console.error('There was a problem with the fetch operation:', error);
+                });
+        },
+    };
+    // https://www.mockaroo.com/
+</script>
+
+<head th:replace="~{/fragments/fragments.html :: head}"></head>
+<span th:replace="~{fragments/fragments.html :: nav_header}"></span>
+<body data-spy="scroll" data-target=".onpage-navigation" data-offset="60">
+
+<main>
+    <div class="main">
+        <section class="module bg-dark-30 about-page-header" data-background="assets/images/about_bg.jpg">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-6 col-sm-offset-3">
+                        <h1 class="module-title font-alt mb-0">Tabs &amp; Accordions</h1>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="module">
+            <div class="container">
+                <span th:replace="fragments/fragments.html :: profile_left_sidebar"></span>
+
+                <div class="col-sm-8 col-sm-offset-1">
+
+                    <div class="text-center " th:if="${error}">
+                        <div class="alert alert-danger" role="alert">
+                            <a th:text="${error}"></a>
+                        </div>
+                    </div>
+                    <h4 class="font-alt mb-0">관리자 페이지</h4>
+                    <hr class="divider-w mt-10 mb-20">
+                    <!-- tab 시작 -->
+                    <div role="tabpanel">
+                        <ul class="nav nav-tabs font-alt" role="tablist">
+                            <li><a href="#mountain_exp" data-toggle="tab"><span class="icon-circle-compass"></span>등산 경험치 부여</a>
+                            </li>
+                        </ul>
+                        <div class="tab-content">
+                            <div class="tab-pane" id="mountain_exp">
+                                <!-- select tagify : 산 목록-->
+                                <input name='tags-select-mode' class='selectMode' placeholder="Please select" />
+                                <script type="application/javascript" th:inline="javascript">
+                                    console.log(/*[[${mountainNameList}]]*/);
+                                    var input = document.querySelector('input[name=tags-select-mode]'),
+                                        tagify = new Tagify(input, {
+                                            enforceWhitelist: true,
+                                            mode: "select",
+                                            whitelist: /*[[${mountainNameList}]]*/,
+                                            blacklist: ['foo', 'bar'],
+                                        });
+
+                                    // bind events
+                                    tagify.on('add', onAddTag);
+                                    tagify.DOM.input.addEventListener('focus', onSelectFocus);
+
+                                    function onAddTag(e){
+                                        mountainName = e.detail.data.value;
+                                    }
+
+                                    function onSelectFocus(e){
+                                        console.log(e)
+                                    }
+                                </script>
+
+                                <!-- input tagify : 유저 목록-->
+                                <input name='input' class='some_class_name'
+                                       placeholder='write some tags'
+                                       value='css, html, javascript, css'
+                                       data-blacklist='.NET,PHP'>
+                                <script type="application/javascript" th:inline="javascript">
+                                    var inputElm = document.querySelector('input[name=input]'),
+                                        tagify = new Tagify(inputElm, {
+                                            enforceWhitelist: true,
+                                            whitelist: /*[[${userLoginIdList}]]*/
+                                            // Array of values. stackoverflow.com/a/43375571/104380
+                                    })
+
+                                    // "remove all tags" button event listener
+                                    // document.querySelector('.tags--removeAllBtn')
+                                    //     .addEventListener('click', tagify.removeAllTags.bind(tagify))
+
+                                    // Chainable event listeners
+                                    tagify.on('add', onAddTag)
+                                        .on('remove', onRemoveTag)
+                                        .on('input', onInput)
+                                        .on('edit', onTagEdit)
+                                        .on('invalid', onInvalidTag)
+                                        .on('click', onTagClick)
+                                        .on('focus', onTagifyFocusBlur)
+                                        .on('blur', onTagifyFocusBlur)
+                                        .on('dropdown:hide dropdown:show', e => console.log(e.type))
+                                        .on('dropdown:select', onDropdownSelect)
+
+                                    var mockAjax = (function mockAjax(){
+                                        var timeout;
+                                        return function(duration){
+                                            clearTimeout(timeout); // abort last request
+                                            return new Promise(function(resolve, reject){
+                                                timeout = setTimeout(resolve, duration || 700, /*[[${userLoginIdList}]]*/)
+                                            })
+                                        }
+                                    })()
+
+                                    // tag added callback
+                                    function onAddTag(e){
+                                        console.log("onAddTag: ", e.detail);
+                                        console.log("original input value: ", inputElm.value)
+                                        tagify.off('add', onAddTag) // exmaple of removing a custom Tagify event
+                                    }
+
+                                    // tag remvoed callback
+                                    function onRemoveTag(e){
+                                        console.log("onRemoveTag:", e.detail, "tagify instance value:", tagify.value)
+                                        LoginIdArr.delete(e.detail.data.value);
+                                        console.log("tag_array: ", LoginIdArr);
+                                    }
+
+                                    // on character(s) added/removed (user is typing/deleting)
+                                    function onInput(e){
+                                        console.log("onInput: ", e.detail);
+                                        tagify.whitelist = null; // reset current whitelist
+                                        tagify.loading(true) // show the loader animation
+
+                                        // get new whitelist from a delayed mocked request (Promise)
+                                        mockAjax()
+                                            .then(function(result){
+                                                tagify.settings.whitelist = result.concat(tagify.value) // add already-existing tags to the new whitelist array
+
+                                                tagify
+                                                    .loading(false)
+                                                    // render the suggestions dropdown.
+                                                    .dropdown.show(e.detail.value);
+                                            })
+                                            .catch(err => tagify.dropdown.hide())
+                                    }
+
+                                    function onTagEdit(e){
+                                        console.log("onTagEdit: ", e.detail);
+                                    }
+
+                                    // invalid tag added callback
+                                    function onInvalidTag(e){
+                                        console.log("onInvalidTag: ", e.detail);
+                                    }
+
+                                    // invalid tag added callback
+                                    function onTagClick(e){
+                                        console.log(e.detail);
+                                        console.log("onTagClick: ", e.detail);
+                                    }
+
+                                    function onTagifyFocusBlur(e){
+                                        console.log(e.type, "event fired")
+                                    }
+
+                                    function onDropdownSelect(e){
+                                        console.log("onDropdownSelect: ", e.detail)
+                                        LoginIdArr.add(e.detail.data);
+                                    }
+                                </script>
+                                <input class="form-control" type="button" value="등산 참여 등록" onclick="settings.mountain_exp()">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <div class="module-small bg-dark">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-3">
+                        <div class="widget">
+                            <h5 class="widget-title font-alt">About Titan</h5>
+                            <p>The languages only differ in their grammar, their pronunciation and their most common
+                                words.</p>
+                            <p>Phone: +1 234 567 89 10</p>Fax: +1 234 567 89 10
+                            <p>Email:<a href="#">somecompany@example.com</a></p>
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="widget">
+                            <h5 class="widget-title font-alt">Recent Comments</h5>
+                            <ul class="icon-list">
+                                <li>Maria on <a href="#">Designer Desk Essentials</a></li>
+                                <li>John on <a href="#">Realistic Business Card Mockup</a></li>
+                                <li>Andy on <a href="#">Eco bag Mockup</a></li>
+                                <li>Jack on <a href="#">Bottle Mockup</a></li>
+                                <li>Mark on <a href="#">Our trip to the Alps</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="widget">
+                            <h5 class="widget-title font-alt">Blog Categories</h5>
+                            <ul class="icon-list">
+                                <li><a href="#">Photography - 7</a></li>
+                                <li><a href="#">Web Design - 3</a></li>
+                                <li><a href="#">Illustration - 12</a></li>
+                                <li><a href="#">Marketing - 1</a></li>
+                                <li><a href="#">Wordpress - 16</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="widget">
+                            <h5 class="widget-title font-alt">Popular Posts</h5>
+                            <ul class="widget-posts">
+                                <li class="clearfix">
+                                    <div class="widget-posts-body">
+                                        <div class="widget-posts-title"><a href="#">Designer Desk Essentials</a></div>
+                                        <div class="widget-posts-meta">23 january</div>
+                                    </div>
+                                </li>
+                                <li class="clearfix">
+                                    <div class="widget-posts-body">
+                                        <div class="widget-posts-title"><a href="#">Realistic Business Card Mockup</a>
+                                        </div>
+                                        <div class="widget-posts-meta">15 February</div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr class="divider-d">
+        <footer class="footer bg-dark">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <p class="copyright font-alt">&copy; 2017&nbsp;<a href="index.html">TitaN</a>, All Rights
+                            Reserved</p>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="footer-social-links"><a href="#"><i class="fa fa-facebook"></i></a><a href="#"><i
+                                class="fa fa-twitter"></i></a><a href="#"><i class="fa fa-dribbble"></i></a><a href="#"><i
+                                class="fa fa-skype"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+    <div class="scroll-up"><a href="#totop"><i class="fa fa-angle-double-up"></i></a></div>
+</main>
+
+<!--  JavaScripts  -->
+<!--<script src="assets/lib/jquery/dist/jquery.js"></script>-->
+<!--<script src="assets/lib/bootstrap/dist/js/bootstrap.min.js"></script>-->
+<!--<script src="assets/lib/wow/dist/wow.js"></script>-->
+<!--<script src="assets/lib/jquery.mb.ytplayer/dist/jquery.mb.YTPlayer.js"></script>-->
+<!--<script src="assets/lib/isotope/dist/isotope.pkgd.js"></script>-->
+<!--<script src="assets/lib/imagesloaded/imagesloaded.pkgd.js"></script>-->
+<!--<script src="assets/lib/flexslider/jquery.flexslider.js"></script>-->
+<!--<script src="assets/lib/owl.carousel/dist/owl.carousel.min.js"></script>-->
+<!--<script src="assets/lib/smoothscroll.js"></script>-->
+<!--<script src="assets/lib/magnific-popup/dist/jquery.magnific-popup.js"></script>-->
+<!--<script src="assets/lib/simple-text-rotator/jquery.simple-text-rotator.min.js"></script>-->
+<!--<script src="assets/js/plugins.js"></script>-->
+<!--<script src="assets/js/main.js"></script>-->
+</body>
+</html>
