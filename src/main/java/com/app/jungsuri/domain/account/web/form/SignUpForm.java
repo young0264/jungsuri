@@ -33,6 +33,6 @@ public class SignUpForm {
 
     private String location;
 
-    private UserRole userRole;
+    private UserRole userRole = UserRole.USER;
 
 }
