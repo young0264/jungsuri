@@ -13,7 +13,10 @@
     let LoginIdArr = new Set([]);
     let settings = {
         mountain_exp: function () {
-            alert("reflect mountain exp");
+            if(mountainName === "" || LoginIdArr.size === 0){
+                alert("값을 선택해주세요.");
+                return;
+            }
             let newLoginIdArr = Array.from(LoginIdArr);
             let data = {
                 "mountainName": mountainName,
@@ -101,13 +104,13 @@
                                         console.log(e)
                                     }
                                 </script>
+
                                 <!-- input tagify : 유저 목록-->
                                 <input name='input' class='some_class_name'
                                        placeholder='write some tags'
                                        value='css, html, javascript, css'
                                        data-blacklist='.NET,PHP'>
                                 <script type="application/javascript" th:inline="javascript">
-                                    console.log(/*[[${userLoginIdList}]]*/);
                                     var inputElm = document.querySelector('input[name=input]'),
                                         tagify = new Tagify(inputElm, {
                                             enforceWhitelist: true,
@@ -136,7 +139,7 @@
                                         return function(duration){
                                             clearTimeout(timeout); // abort last request
                                             return new Promise(function(resolve, reject){
-                                                timeout = setTimeout(resolve, duration || 700, whitelist)
+                                                timeout = setTimeout(resolve, duration || 700, /*[[${userLoginIdList}]]*/)
                                             })
                                         }
                                     })()
