@@ -33,6 +33,7 @@ public class SignUpForm {
 
     private String location;
 
+    //TODO 관리자페이지에서 role 수정
     private UserRole userRole = UserRole.USER;
 
 }
