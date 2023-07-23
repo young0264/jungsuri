@@ -81,4 +81,8 @@ public class AccountEntity {
     public void updatePassword(String newPassword) {
         this.password = newPassword;
     }
+
+    public void updateMountainExp(int mountainHeight) {
+        this.mountainExp += mountainHeight;
+    }
 }
