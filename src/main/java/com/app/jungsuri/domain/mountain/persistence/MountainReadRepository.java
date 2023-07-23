@@ -6,5 +6,8 @@ public interface MountainReadRepository {
 
     List<MountainEntity> findAllMountains();
 
+    List<String> findAllMountainsName();
+
+    int findMountainHeightByName(String name);
 }
 
