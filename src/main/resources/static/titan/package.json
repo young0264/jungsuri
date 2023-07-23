@@ -19,5 +19,8 @@
   "homepage": "https://github.com/technext/titan#readme",
   "devDependencies": {
     "gh-pages": "^4.0.0"
+  },
+  "dependencies": {
+    "@yaireo/tagify": "^4.17.8"
   }
 }
