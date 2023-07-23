@@ -38,11 +38,13 @@
     <meta name="msapplication-TileColor" content="#ffffff">
     <meta name="msapplication-TileImage" content="/titan/live/assets/images/favicons/ms-icon-144x144.png">
     <meta name="theme-color" content="#ffffff">
-    <!--
-    Stylesheets
-    =============================================
 
-    -->
+    <!--  tagify css. bootstrap 위쪽에 위치-->
+    <link rel="stylesheet" href="/node_modules/@yaireo/tagify/dist/tagify.css">
+
+    <!--  Stylesheets  =============================================  -->
+
+
     <!-- Default stylesheets-->
     <link href="/titan/live/assets/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Template specific stylesheets-->
@@ -75,10 +77,13 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
     <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script>
-
-
-
 </head>
+
+<style>
+
+</style>
+
+
 <!--html head 조각 end-->
 <!--nav header 레이아웃 조각 start -->
 <span th:fragment="nav_header">
