@@ -1,13 +1,22 @@
 package com.app.jungsuri.domain.account.web;
 
+import com.app.jungsuri.domain.account.persistence.AccountEntity;
+import com.app.jungsuri.domain.account.persistence.AccountRepository;
+import com.app.jungsuri.domain.account.persistence.SettingsService;
+import com.app.jungsuri.domain.account.web.dto.MountainExpUpdateDto;
 import com.app.jungsuri.domain.account.web.dto.PasswordUpdateDto;
+import com.app.jungsuri.domain.mountain.persistence.MountainRepository;
 import com.app.jungsuri.infra.MockMvcTest;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
+
+import java.util.List;
+
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
@@ -22,6 +31,12 @@ class SettingsControllerTest {
     @Autowired
     private ObjectMapper objectMapper;
 
+    @Autowired
+    private SettingsService settingsService;
+    @Autowired
+    private MountainRepository mountainRepository;
+    @Autowired
+    private AccountRepository accountRepository;
 
     @Test
     @WithMockUser(username = "12" , password = "12")
@@ -67,4 +82,13 @@ class SettingsControllerTest {
                 .andExpect(status().isOk());
     }
 
+    @Test
+    @WithMockUser(username = "12" , password = "12")
+    void 등산경험치_반영이_정상적으로_되는지() throws Exception {
+        AccountEntity accountEntity = accountRepository.findByLoginId("12").orElseThrow(null);
+        MountainExpUpdateDto mountainExpUpdateDto = new MountainExpUpdateDto("가리산", List.of("12"));
+        int mountainHeight = mountainRepository.findMountainHeightByName("가리산");
+        settingsService.updateMountainExp(mountainExpUpdateDto);
+        Assertions.assertThat(accountEntity.getMountainExp()).isEqualTo(mountainHeight);
+    }
 }
