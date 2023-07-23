@@ -113,4 +113,7 @@ public class AccountService implements UserDetailsService {
         }
     }
 
+    public List<String> getAllUsersLoginId() {
+        return accountRepository.findAllUsersLoginId();
+    }
 }
