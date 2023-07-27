@@ -21,11 +21,12 @@ public class WeatherApiTest {
     @WithMockUser(username = "12", password = "12")
     public void test() throws IOException, ParseException {
         String BASE_URL = "http://api.openweathermap.org/data/2.5/weather";
-        String apiKey = "707030ec5c754c712499024828387e91"; // 발급받은 API key
+        String apiKey = "발급받은 API key"; // 발급받은 API key
         StringBuilder urlBuilder = new StringBuilder(BASE_URL);
         try {
             //WeatherEntity로 출력 시작
-            urlBuilder.append("?" + URLEncoder.encode("q", "UTF-8") + "=Koesan");
+            //seongnam: 1897000, koesan: 1842800, seoul: 1835848
+            urlBuilder.append("?" + URLEncoder.encode("q", "UTF-8") + "=seoul");
             urlBuilder.append("&" + URLEncoder.encode("appid", "UTF-8") + "=" + apiKey);
             urlBuilder.append("&" + URLEncoder.encode("lang", "UTF-8") + "=kr");
             urlBuilder.append("&" + URLEncoder.encode("units", "UTF-8") + "=metric");
