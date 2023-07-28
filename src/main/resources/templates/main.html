@@ -5,8 +5,10 @@
         xmlns:sec="http://thymeleaf.org/extras/spring-security">
 <head th:replace="~{fragments/fragments.html :: head}"></head>
 <style>
-    html {
-        background-size: cover;
+    .weather-img {
+        background-size: contain;
+        background-position: center;
+
         transition: background-image 0.2s ease-in-out;
         box-shadow: inset 0 0 0 1000px rgba(0,0,0,.4);
         height: 100%;
@@ -35,30 +37,23 @@
 </style>
 <script type="application/javascript" th:inline="javascript">
 
-    let weather = {
-        getWeatherData: function () {
-            city = document.getElementById("weather_city").value;
+    // let weather = {
+    //     getWeatherData: function () {
+    //         city = document.getElementById("weather_city").value;
+    //         fetch("?city=" + city)
+    //             .then(response => response.json()
+    //                 .then(data => {
+    //                     // 서버에서 받은 데이터를 처리하고 main 페이지로 이동
+    //                     console.log("weatherData: ", data);
+    //                     location.href = "/main"; // main 페이지로 이동
+    //                 }))
+    //
+    //             .catch(error => {
+    //                 console.error("Error fetching weather data: ", error);
+    //             });
+    //     }
+    // }
 
-            event.preventDefault()
-            fetch(`/weather?city=${city}`, {
-                method: 'GET',
-                headers: {'Content-Type': 'application/json'},
-            })
-                .then(response => {
-                    if (response.ok) {
-                        alert("날씨를 가져왔습니다.");
-                    }else{
-                        response.json().then(
-                            data => {
-                                alert(data.message);
-                            }).catch(error => {
-                            console.log("error : " + error);
-                        });
-                    }
-                    window.location.reload();
-                })
-        },
-    }
 </script>
 <body data-spy="scroll" data-target=".onpage-navigation" data-offset="60">
 <main>
@@ -75,19 +70,20 @@
         </div>
     </section>
     <div class="main">
-        <section class="module" id="weather">
+        <section class="module  weather-default weather-img" id="weather">
             <div class="container">
-                <div class="row">
-                    <h2 class="module-title font-alt">현재 **지역의 날씨.</h2>
-
+                <div class="row" >
+                    <h2 class="module-title font-alt">현재 <span th:text="${weatherData.name}"></span> 지역의 날씨.</h2>
                     <div class="col-sm-2 col-sm-offset-2">
-<!--                        <input id="search_city" placeholder="search" list="weather_city" onclick="weather.getWeatherData()"></input>-->
-                        <select id="weather_city" onchange="weather.getWeatherData()">
-                            <option value="seoul">서울</option>
-                            <option value="seongnam">성남</option>
-                            <option value="suwon">수원</option>
-                            <option value="daegu">대구</option>
-                        </select>
+                        <form  id="weatherForm" action="/" method="get" style="color: black;">
+                            <select class="form-control" id="city" name="city" style="text-align: center"  >
+                                <option th:value="seoul" th:selected="${weatherData.name}=='Seoul'">서울</option>
+                                <option th:value="seongnam" th:selected="${weatherData.name}=='Seongnam-si'">성남</option>
+                                <option th:value="suwon" th:selected="${weatherData.name}=='Suwon-si'">수원</option>
+                                <option th:value="daegu" th:selected="${weatherData.name}=='Daegu'">대구</option>
+                            </select>
+                            <button class="btn btn-block btn-round btn-d" type="submit">검색</button>
+                        </form>
                     </div>
                     <div class="col-sm-8 col-sm-offset-2">
                         <div class="module-subtitle font-serif large-text">
