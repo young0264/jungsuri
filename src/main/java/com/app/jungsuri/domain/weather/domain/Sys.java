@@ -20,4 +20,11 @@ public class Sys {
 
     /** 일몰 시간, 유닉스, UTC */
     private long sunset;
+
+    /** 일출시간 ex) '오전 hh:mm */
+    private String sunriseTime;
+
+    /** 일몰시간 ex) '오후 hh:mm */
+    private String sunsetTime;
+
 }
