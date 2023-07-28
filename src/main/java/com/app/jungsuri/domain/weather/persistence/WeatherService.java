@@ -18,7 +18,7 @@ import java.time.format.DateTimeFormatter;
 @Transactional
 public class WeatherService {
     private final String BASE_URL = "http://api.openweathermap.org/data/2.5/weather";
-    private final String apiKey = "${WEATHER_API_KEY}"; // 발급받은 API key
+    private final String apiKey = "발급받은 API key"; // 발급받은 API key//
 
     public WeatherEntity getWeatherData(String cityName) {
         RestTemplate restTemplate = new RestTemplate();
@@ -36,6 +36,7 @@ public class WeatherService {
             setSunTime(weatherEntity);
             /** 데이터 변환 끝 **/
 
+            log.info("weatherEntity : " + weatherEntity.toString());
             return weatherEntity;
         } catch (Exception e ) {
             throw new RuntimeException(e);
