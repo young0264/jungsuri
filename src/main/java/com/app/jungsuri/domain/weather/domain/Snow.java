@@ -2,8 +2,13 @@ package com.app.jungsuri.domain.weather.domain;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
-@Data
+@Getter
+@Setter
+@ToString
 public class Snow {
     /** 지난 1 시간 동안의 눈량, mm */
     @JsonProperty("1h")

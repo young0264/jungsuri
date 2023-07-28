@@ -1,9 +1,11 @@
 package com.app.jungsuri.domain.weather;
 
 import com.app.jungsuri.domain.weather.persistence.WeatherEntity;
+import com.app.jungsuri.domain.weather.persistence.WeatherService;
 import com.app.jungsuri.infra.MockMvcTest;
 import org.json.simple.parser.ParseException;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.web.client.RestTemplate;
 
@@ -17,6 +19,15 @@ import java.net.URLEncoder;
 @MockMvcTest
 public class WeatherApiTest {
 
+    @Autowired
+    private WeatherService weatherService;
+
+    @Test
+    @WithMockUser(username = "12", password = "12")
+    public void weatherServiceTest() {
+        weatherService.getWeatherData("seoul");
+    }
+
     @Test
     @WithMockUser(username = "12", password = "12")
     public void test() throws IOException, ParseException {
@@ -27,7 +38,7 @@ public class WeatherApiTest {
             //WeatherEntity로 출력 시작
             //seongnam: 1897000, koesan: 1842800, seoul: 1835848
             urlBuilder.append("?" + URLEncoder.encode("q", "UTF-8") + "=seoul");
-            urlBuilder.append("&" + URLEncoder.encode("appid", "UTF-8") + "=" + apiKey);
+            urlBuilder.append("&" + URLEncoder.encode("appid", "UTF-8") + "=" + System.getenv("weatherAPIKey"));
             urlBuilder.append("&" + URLEncoder.encode("lang", "UTF-8") + "=kr");
             urlBuilder.append("&" + URLEncoder.encode("units", "UTF-8") + "=metric");
 
