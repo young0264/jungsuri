@@ -3,6 +3,8 @@ package com.app.jungsuri.domain.account.web;
 import com.app.jungsuri.domain.account.persistence.AccountEntity;
 import com.app.jungsuri.domain.account.persistence.AccountService;
 import com.app.jungsuri.domain.account.web.form.SignUpForm;
+import com.app.jungsuri.domain.weather.persistence.WeatherEntity;
+import com.app.jungsuri.domain.weather.persistence.WeatherService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -11,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import java.security.Principal;
 
 @Controller
@@ -18,13 +21,16 @@ import java.security.Principal;
 @Slf4j
 public class AccountController {
     private final AccountService accountService;
+    private final WeatherService weatherService;
 
     @GetMapping("/")
-    public String mainPage(Principal principal, Model model) {
+    public String mainPage(@RequestParam(value="city", defaultValue="seoul") String city, Principal principal, Model model) {
         boolean emailValid = accountService.isEmailValid(principal);
+        WeatherEntity weatherData = weatherService.getWeatherData(city);
         if (!emailValid) {
             model.addAttribute("error", "이메일 인증이 되지않은 계정입니다.");
         }
+        model.addAttribute("weatherData", weatherData);
         return "main";
     }
 
