@@ -1,9 +1,13 @@
 package com.app.jungsuri.domain.weather.domain;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
-@Data
-public class System {
+@Getter
+@Setter
+@ToString
+public class Sys {
     private int type;
 
     private int id;

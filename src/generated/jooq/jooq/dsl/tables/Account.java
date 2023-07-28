@@ -13,14 +13,15 @@ import jooq.dsl.Jungsuri;
 import jooq.dsl.Keys;
 import jooq.dsl.tables.records.AccountRecord;
 
+import org.jooq.Check;
 import org.jooq.Field;
 import org.jooq.ForeignKey;
-import org.jooq.Function16;
+import org.jooq.Function17;
 import org.jooq.Identity;
 import org.jooq.Name;
 import org.jooq.Record;
 import org.jooq.Records;
-import org.jooq.Row16;
+import org.jooq.Row17;
 import org.jooq.Schema;
 import org.jooq.SelectField;
 import org.jooq.Table;
@@ -28,6 +29,7 @@ import org.jooq.TableField;
 import org.jooq.TableOptions;
 import org.jooq.UniqueKey;
 import org.jooq.impl.DSL;
+import org.jooq.impl.Internal;
 import org.jooq.impl.SQLDataType;
 import org.jooq.impl.TableImpl;
 
@@ -67,6 +69,11 @@ public class Account extends TableImpl<AccountRecord> {
      * The column <code>jungsuri.account.post_created_checked</code>.
      */
     public final TableField<AccountRecord, Boolean> POST_CREATED_CHECKED = createField(DSL.name("post_created_checked"), SQLDataType.BIT.nullable(false), this, "");
+
+    /**
+     * The column <code>jungsuri.account.user_role</code>.
+     */
+    public final TableField<AccountRecord, Byte> USER_ROLE = createField(DSL.name("user_role"), SQLDataType.TINYINT, this, "");
 
     /**
      * The column <code>jungsuri.account.email_check_token_generated_at</code>.
@@ -187,6 +194,13 @@ public class Account extends TableImpl<AccountRecord> {
     }
 
     @Override
+    public List<Check<AccountRecord>> getChecks() {
+        return Arrays.asList(
+            Internal.createCheck(this, DSL.name("account_chk_1"), "(`user_role` between 0 and 1)", true)
+        );
+    }
+
+    @Override
     public Account as(String alias) {
         return new Account(DSL.name(alias), this);
     }
@@ -226,18 +240,18 @@ public class Account extends TableImpl<AccountRecord> {
     }
 
     // -------------------------------------------------------------------------
-    // Row16 type methods
+    // Row17 type methods
     // -------------------------------------------------------------------------
 
     @Override
-    public Row16<Boolean, Integer, Boolean, LocalDateTime, Long, LocalDateTime, String, String, String, String, String, String, String, String, String, String> fieldsRow() {
-        return (Row16) super.fieldsRow();
+    public Row17<Boolean, Integer, Boolean, Byte, LocalDateTime, Long, LocalDateTime, String, String, String, String, String, String, String, String, String, String> fieldsRow() {
+        return (Row17) super.fieldsRow();
     }
 
     /**
      * Convenience mapping calling {@link SelectField#convertFrom(Function)}.
      */
-    public <U> SelectField<U> mapping(Function16<? super Boolean, ? super Integer, ? super Boolean, ? super LocalDateTime, ? super Long, ? super LocalDateTime, ? super String, ? super String, ? super String, ? super String, ? super String, ? super String, ? super String, ? super String, ? super String, ? super String, ? extends U> from) {
+    public <U> SelectField<U> mapping(Function17<? super Boolean, ? super Integer, ? super Boolean, ? super Byte, ? super LocalDateTime, ? super Long, ? super LocalDateTime, ? super String, ? super String, ? super String, ? super String, ? super String, ? super String, ? super String, ? super String, ? super String, ? super String, ? extends U> from) {
         return convertFrom(Records.mapping(from));
     }
 
@@ -245,7 +259,7 @@ public class Account extends TableImpl<AccountRecord> {
      * Convenience mapping calling {@link SelectField#convertFrom(Class,
      * Function)}.
      */
-    public <U> SelectField<U> mapping(Class<U> toType, Function16<? super Boolean, ? super Integer, ? super Boolean, ? super LocalDateTime, ? super Long, ? super LocalDateTime, ? super String, ? super String, ? super String, ? super String, ? super String, ? super String, ? super String, ? super String, ? super String, ? super String, ? extends U> from) {
+    public <U> SelectField<U> mapping(Class<U> toType, Function17<? super Boolean, ? super Integer, ? super Boolean, ? super Byte, ? super LocalDateTime, ? super Long, ? super LocalDateTime, ? super String, ? super String, ? super String, ? super String, ? super String, ? super String, ? super String, ? super String, ? super String, ? super String, ? extends U> from) {
         return convertFrom(toType, Records.mapping(from));
     }
 }

@@ -3,6 +3,7 @@ package com.app.jungsuri.domain.weather.persistence;
 import com.app.jungsuri.domain.weather.domain.*;
 import lombok.Data;
 
+import java.lang.System;
 import java.util.List;
 
 /**
@@ -12,6 +13,8 @@ import java.util.List;
 public class WeatherEntity {
 
     private List<Weather> weather;
+
+    private Sys sys;
 
     /** 내부 매개 변수 */
     private String base;
@@ -43,4 +46,24 @@ public class WeatherEntity {
 
     /** 내부 매개 변수 */
     private int cod;
+
+    @Override
+    public String toString() {
+        return "WeatherEntity{" +
+                "weather=" + weather +
+                ", sys=" + sys.toString() +
+                ", base='" + base + '\'' +
+                ", main=" + main +
+                ", wind=" + wind +
+                ", clouds=" + clouds +
+                ", rain=" + rain +
+                ", snow=" + snow +
+                ", visibility=" + visibility +
+                ", dt=" + dt +
+                ", timezone=" + timezone +
+                ", id=" + id +
+                ", name='" + name + '\'' +
+                ", cod=" + cod +
+                '}';
+    }
 }

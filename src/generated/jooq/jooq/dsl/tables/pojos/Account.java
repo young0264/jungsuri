@@ -19,6 +19,7 @@ public class Account implements Serializable {
     private final Boolean emailVerified;
     private final Integer mountainExp;
     private final Boolean postCreatedChecked;
+    private final Byte userRole;
     private final LocalDateTime emailCheckTokenGeneratedAt;
     private final Long id;
     private final LocalDateTime joinedAt;
@@ -37,6 +38,7 @@ public class Account implements Serializable {
         this.emailVerified = value.emailVerified;
         this.mountainExp = value.mountainExp;
         this.postCreatedChecked = value.postCreatedChecked;
+        this.userRole = value.userRole;
         this.emailCheckTokenGeneratedAt = value.emailCheckTokenGeneratedAt;
         this.id = value.id;
         this.joinedAt = value.joinedAt;
@@ -56,6 +58,7 @@ public class Account implements Serializable {
         Boolean emailVerified,
         Integer mountainExp,
         Boolean postCreatedChecked,
+        Byte userRole,
         LocalDateTime emailCheckTokenGeneratedAt,
         Long id,
         LocalDateTime joinedAt,
@@ -73,6 +76,7 @@ public class Account implements Serializable {
         this.emailVerified = emailVerified;
         this.mountainExp = mountainExp;
         this.postCreatedChecked = postCreatedChecked;
+        this.userRole = userRole;
         this.emailCheckTokenGeneratedAt = emailCheckTokenGeneratedAt;
         this.id = id;
         this.joinedAt = joinedAt;
@@ -107,6 +111,13 @@ public class Account implements Serializable {
      */
     public Boolean getPostCreatedChecked() {
         return this.postCreatedChecked;
+    }
+
+    /**
+     * Getter for <code>jungsuri.account.user_role</code>.
+     */
+    public Byte getUserRole() {
+        return this.userRole;
     }
 
     /**
@@ -207,6 +218,7 @@ public class Account implements Serializable {
         sb.append(emailVerified);
         sb.append(", ").append(mountainExp);
         sb.append(", ").append(postCreatedChecked);
+        sb.append(", ").append(userRole);
         sb.append(", ").append(emailCheckTokenGeneratedAt);
         sb.append(", ").append(id);
         sb.append(", ").append(joinedAt);
