@@ -1,6 +1,5 @@
 package com.app.jungsuri.domain.weather.domain;
 
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -20,4 +19,7 @@ public class Weather {
 
     /** 날씨 아이콘 ID */
     private String icon;
+
+    /** 날씨 이미지 경로 **/
+    private String imgSrc;
 }
