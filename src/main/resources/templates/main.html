@@ -4,14 +4,16 @@
         xmlns:th="http://www.thymeleaf.org"
         xmlns:sec="http://thymeleaf.org/extras/spring-security">
 <head th:replace="~{fragments/fragments.html :: head}"></head>
+
 <style>
     .weather-img {
         background-size: contain;
         background-position: center;
+        background-repeat: no-repeat;
 
         transition: background-image 0.2s ease-in-out;
-        box-shadow: inset 0 0 0 1000px rgba(0,0,0,.4);
-        height: 100%;
+        /*box-shadow: inset 0 0 0 1000px rgba(0,0,0,.4);*/
+        /*height: 100%;*/
         font-family: 'Varela', sans-serif;
         color: rgba(225,225,225,.85);
     }
@@ -20,6 +22,8 @@
         background-image: url('https://images.unsplash.com/photo-1604949210966-9440c324823f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NjB8fHN1bnxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=800&q=60');
     }
     .weather-clear{
+        background-image: url('https://images.unsplash.com/photo-1462524500090-89443873e2b4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80');
+
 
     }
     .weather-clouds{
@@ -35,7 +39,13 @@
 
     }
 </style>
+<script src="https://momentjs.com/downloads/moment-with-locales.js"></script>
+
 <script type="application/javascript" th:inline="javascript">
+    // import moment from "moment";
+    // let now = new Date();
+    // let now_str = moment(now).format('LLLL');
+    // console.log(now_str);
 
     // let weather = {
     //     getWeatherData: function () {
@@ -70,29 +80,127 @@
         </div>
     </section>
     <div class="main">
-        <section class="module  weather-default weather-img" id="weather">
-            <div class="container">
-                <div class="row" >
-                    <h2 class="module-title font-alt">현재 <span th:text="${weatherData.name}"></span> 지역의 날씨.</h2>
-                    <div class="col-sm-2 col-sm-offset-2">
-                        <form  id="weatherForm" action="/" method="get" style="color: black;">
-                            <select class="form-control" id="city" name="city" style="text-align: center"  >
-                                <option th:value="seoul" th:selected="${weatherData.name}=='Seoul'">서울</option>
-                                <option th:value="seongnam" th:selected="${weatherData.name}=='Seongnam-si'">성남</option>
-                                <option th:value="suwon" th:selected="${weatherData.name}=='Suwon-si'">수원</option>
-                                <option th:value="daegu" th:selected="${weatherData.name}=='Daegu'">대구</option>
-                            </select>
-                            <button class="btn btn-block btn-round btn-d" type="submit">검색</button>
-                        </form>
+        <section class="module  " id="weather">
+            <div class="post">
+                <div class="post-images-slider ">
+                    <h5 class="post-images-slider weather-clear weather-img "></h5>
+                </div>
+            </div>
+<!--            날씨부분-->
+            <section class="module" id="alt-features">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-6 col-sm-offset-3">
+                            <h2 class="module-subtitle font-alt">
+                                <img th:src="'https://openweathermap.org/img/wn/' + ${weatherData.weather.get(0).icon} + '@2x.png'">
+                                현재 <span th:text="${weatherData.name}"></span> 지역의 날씨
+                                <img th:src="'https://openweathermap.org/img/wn/' + ${weatherData.weather.get(0).icon} + '@2x.png'">
+                            </h2>
+<!--                            <div class="module-subtitle font-serif">A wonderful serenity has taken possession of my entire soul, like these sweet mornings of spring which I enjoy with my whole heart.</div>-->
+                        </div>
                     </div>
-                    <div class="col-sm-8 col-sm-offset-2">
-                        <div class="module-subtitle font-serif large-text">
-                            <h3></h3>
+                    <div class="row">
+                        <div class="col-sm-6 col-md-3 col-lg-3">
+                            <div class="alt-features-item">
+                                <form  id="weatherForm" action="/" method="get" style="color: black;">
+                                    <select class="form-control" id="city" name="city" style="text-align: center"  >
+                                        <option th:value="seoul" th:selected="${weatherData.name}=='Seoul'">서울</option>
+                                        <option th:value="seongnam" th:selected="${weatherData.name}=='Seongnam-si'">성남</option>
+                                        <option th:value="suwon" th:selected="${weatherData.name}=='Suwon-si'">수원</option>
+                                        <option th:value="bucheon" th:selected="${weatherData.name}=='Bucheon-si'">부천</option>
+                                        <option th:value="cheongju" th:selected="${weatherData.name}=='Cheongju-si'">청주</option>
+                                        <option th:value="gyeongju" th:selected="${weatherData.name}=='Gyeongju'">경주</option>
+                                        <option th:value="daegu" th:selected="${weatherData.name}=='Daegu'">대구</option>
+                                        <option th:value="busan" th:selected="${weatherData.name}=='Busan'">부산</option>
+                                        <option th:value="jeju" th:selected="${weatherData.name}=='Jeju city'">제주</option>
+                                    </select>
+                                    <button class="btn btn-block btn-round btn-d" type="submit">검색</button>
+                                </form>
+                            </div>
+                            <div class="alt-features-item">
+                                <div class="alt-features-icon"><img th:src="'https://openweathermap.org/img/wn/' + ${weatherData.weather.get(0).icon} + '@2x.png'"></div>
+                                <img th:src="'https://openweathermap.org/img/wn/' + ${weatherData.weather.get(0).icon} + '@2x.png'">
+
+                                <h3 class="alt-features-title font-alt" th:text="${weatherData.weather.get(0).getMain()}"></h3>
+                            </div>
+                            <div class="alt-features-item">
+                                <div class="alt-features-icon"><span class="icon-alarmclock"></span></div>
+                                <h3 class="alt-features-title font-alt">일출/일몰 시간</h3>
+                                일출시간 : <span th:text="${weatherData.getSys().getSunriseTime()}"></span>
+                                <br>
+                                일몰시간 : <span th:text="${weatherData.getSys().getSunsetTime()}"></span>
+                            </div>
+                            <div class="alt-features-item">
+                                <div class="alt-features-icon"><span class="icon-tools"></span></div>
+                                <h3 class="alt-features-title font-alt">날짜(DATE)</h3>
+                                <span th:text="${#dates.format(#dates.createNow(), 'EEEE, yyyy-MM-dd')}"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-6 hidden-xs hidden-sm">
+                            <div class="alt-services-image align-center "><img th:src="${weatherData.getWeather().get(0).getImgSrc()}" alt="Feature Image"></div>
+                        </div>
+                        <div class="col-sm-6 col-md-3 col-lg-3">
+                            <div class="alt-features-item">
+                                <div class="alt-features-icon"><span class="icon-beaker"></span></div>
+                                <h3 class="alt-features-title font-alt">습도(HUMIDITY)</h3>
+                                <span th:text="${weatherData.getMain().getHumidity()} + '%'"></span>
+                            </div>
+                            <div class="alt-features-item">
+                                <div class="alt-features-icon"><span class="icon-linegraph"></span></div>
+                                <h3 class="alt-features-title font-alt">기온(TEMPERATURE)</h3>
+                                <span th:text="'현재 온도 : ' + ${weatherData.getMain().getTemp()} + '℃' "></span>
+                                <br>
+                                <span th:text="'체감 온도 : ' + ${weatherData.getMain().getFeels_like()} + '℃'"></span>
+                                <hr>
+                                <span th:text="'최소 온도 : ' + ${weatherData.getMain().getTemp_min()} + '℃'"></span>
+                                <br>
+                                <span th:text="'최대 온도 : ' + ${weatherData.getMain().getTemp_max()} + '℃'"></span>
+                                <hr>
+
+
+                            </div>
+                            <div class="alt-features-item">
+                                <div class="alt-features-icon"><span class="icon-cloud"></span></div>
+                                <h3 class="alt-features-title font-alt">구름(CLOUD)</h3>
+                                <span th:text="'구름 : ' + ${weatherData.getClouds().getAll()} + '%'"></span>
+
+                            </div>
+                            <div class="alt-features-item">
+                                <div class="alt-features-icon"><span class="icon-flag"></span></div>
+                                <h3 class="alt-features-title font-alt">바람(WIND)</h3>
+                                <span th:text="'풍속 : ' + ${weatherData.getWind().getSpeed()} + '%'"></span>
+                            </div>
                         </div>
                     </div>
                 </div>
+            </section>
+            <!--            날씨부분-->
 
-            </div>
+            <!--            원본코드-->
+<!--            <div class="post-images-slider weather-clear weather-img" >-->
+<!--                <div class="row" >-->
+
+<!--                    <div class="col-sm-2 col-sm-offset-2">-->
+<!--                        <form  id="weatherForm" action="/" method="get" style="color: black;">-->
+<!--                            <select class="form-control" id="city" name="city" style="text-align: center"  >-->
+<!--                                <option th:value="seoul" th:selected="${weatherData.name}=='Seoul'">서울</option>-->
+<!--                                <option th:value="seongnam" th:selected="${weatherData.name}=='Seongnam-si'">성남</option>-->
+<!--                                <option th:value="suwon" th:selected="${weatherData.name}=='Suwon-si'">수원</option>-->
+<!--                                <option th:value="daegu" th:selected="${weatherData.name}=='Daegu'">대구</option>-->
+<!--                            </select>-->
+<!--                            <button class="btn btn-block btn-round btn-d" type="submit">검색</button>-->
+<!--                        </form>-->
+<!--                    </div>-->
+<!--                    <div class="col-sm-8 col-sm-offset-2">-->
+<!--                        <div class="module-subtitle font-serif large-text">-->
+<!--                            <h3></h3>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+
+<!--            </div>-->
+            <!--            원본코드-->
+
         </section>
         <section class="module" id="about">
             <div class="container">
