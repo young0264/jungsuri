@@ -1,25 +1,26 @@
 package com.app.jungsuri.domain.weather.persistence;
 
 import com.app.jungsuri.domain.weather.domain.*;
-import lombok.Data;
-
-import java.lang.System;
-import java.util.List;
+import lombok.*;
 
 /**
  * OpenWeath API - 현재 날씨 데이터
  */
-@Data
+@Setter
+@Getter
+@Builder
+@ToString
+@NoArgsConstructor
+@AllArgsConstructor
 public class WeatherEntity {
 
-    private List<Weather> weather;
+    private Weather weather;
 
-    private Sys sys;
+    private SunTimeInfo sunTimeInfo;
 
-    /** 내부 매개 변수 */
-    private String base;
+    private Temperature temperature;
 
-    private Main main;
+    private Atmospheric atmospheric;
 
     private Wind wind;
 
@@ -29,41 +30,9 @@ public class WeatherEntity {
 
     private Snow snow;
 
-    /** 가시성 */
-    private int visibility;
+    private City city;
 
-    /** 데이터 계산 시간, 유닉스, UTC */
-    private long dt;
+    /** 사용자에게 필요하지 않은 내부 매개(메타) 정보들 */
+    private WeatherConfig weatherConfig;
 
-    /** UTC에서 초 단위로 이동 */
-    private int timezone;
-
-    /** 도시 ID */
-    private long id;
-
-    /** 도시 이름 */
-    private String name;
-
-    /** 내부 매개 변수 */
-    private int cod;
-
-    @Override
-    public String toString() {
-        return "WeatherEntity{" +
-                "weather=" + weather +
-                ", sys=" + sys.toString() +
-                ", base='" + base + '\'' +
-                ", main=" + main +
-                ", wind=" + wind +
-                ", clouds=" + clouds +
-                ", rain=" + rain +
-                ", snow=" + snow +
-                ", visibility=" + visibility +
-                ", dt=" + dt +
-                ", timezone=" + timezone +
-                ", id=" + id +
-                ", name='" + name + '\'' +
-                ", cod=" + cod +
-                '}';
-    }
 }

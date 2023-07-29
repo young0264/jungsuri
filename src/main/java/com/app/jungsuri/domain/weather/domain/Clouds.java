@@ -1,15 +1,16 @@
 package com.app.jungsuri.domain.weather.domain;
 
-import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 @Getter
 @Setter
+@Builder
 @ToString
 public class Clouds {
 
-    /** 흐림, % */
-    private int all;
+    /** 흐림정도 %, 구름속도 */
+    private int cloudiness;
+
+    private float speed;
+
 }
