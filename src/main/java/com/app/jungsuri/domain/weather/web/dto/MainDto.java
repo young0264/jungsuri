@@ -1,6 +1,5 @@
-package com.app.jungsuri.domain.weather.domain;
+package com.app.jungsuri.domain.weather.web.dto;
 
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
