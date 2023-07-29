@@ -1,8 +1,7 @@
 package com.app.jungsuri.domain.weather.persistence;
 
-import com.app.jungsuri.domain.weather.domain.Sys;
-import com.app.jungsuri.domain.weather.domain.Weather;
-import com.app.jungsuri.domain.weather.domain.WeatherImage;
+import com.app.jungsuri.domain.weather.domain.*;
+import com.app.jungsuri.domain.weather.web.dto.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,7 +17,7 @@ import java.time.format.DateTimeFormatter;
 @Transactional
 public class WeatherService {
     private final String BASE_URL = "http://api.openweathermap.org/data/2.5/weather";
-    private final String apiKey = "발급받은 API key"; // 발급받은 API key//
+    private final String apiKey = System.getenv("weatherAPIKey"); // 발급받은 API key//
 
     public WeatherEntity getWeatherData(String cityName) {
         RestTemplate restTemplate = new RestTemplate();
@@ -29,29 +28,37 @@ public class WeatherService {
             urlBuilder.append("&" + URLEncoder.encode("lang", "UTF-8") + "=kr");
             urlBuilder.append("&" + URLEncoder.encode("units", "UTF-8") + "=metric");
 
-            WeatherEntity weatherEntity = restTemplate.getForObject(urlBuilder.toString(), WeatherEntity.class);
+            WeatherTotalDto weatherTotalDto = restTemplate.getForObject(urlBuilder.toString(), WeatherTotalDto.class);
+            WeatherEntity weatherEntity = mapToWeatherData(weatherTotalDto);
 
-            /** 데이터 변환 시작 **/
-            setWeatherImgSrc(weatherEntity);
-            setSunTime(weatherEntity);
-            /** 데이터 변환 끝 **/
-
-            log.info("weatherEntity : " + weatherEntity.toString());
             return weatherEntity;
         } catch (Exception e ) {
             throw new RuntimeException(e);
         }
     }
 
-    private void setWeatherImgSrc(WeatherEntity weatherEntity) {
-        Weather weather = weatherEntity.getWeather().get(0);
-        weather.setImgSrc(WeatherImage.getImgSrc(weather.getMain()));
+    public WeatherEntity mapToWeatherData(WeatherTotalDto weatherTotalDto) {
+        return WeatherEntity.builder()
+                .weather(initWeather(weatherTotalDto))
+                .sunTimeInfo(initSunTimeInfo(weatherTotalDto))
+                .temperature(initTemperature(weatherTotalDto))
+                .atmospheric(initAtmospheric(weatherTotalDto))
+                .wind(initWind(weatherTotalDto))
+                .clouds(initClouds(weatherTotalDto))
+                .rain(initRain(weatherTotalDto))
+                .snow(initSnow(weatherTotalDto))
+                .city(initCity(weatherTotalDto))
+                .weatherConfig(initConfig(weatherTotalDto))
+                .build();
     }
 
-    private void setSunTime(WeatherEntity weatherEntity) {
-        Sys sys = weatherEntity.getSys();
-        sys.setSunriseTime(getWeatherSunTime(sys.getSunrise()));
-        sys.setSunsetTime(getWeatherSunTime(sys.getSunset()));
+    private WeatherConfig initConfig(WeatherTotalDto weatherTotalDto) {
+        return WeatherConfig.builder()
+                .base(weatherTotalDto.getBase())
+                .cod(weatherTotalDto.getCod())
+                .timezone(weatherTotalDto.getTimezone())
+                .dt(weatherTotalDto.getDt())
+                .build();
     }
 
     private String getWeatherSunTime(Long unixTimestamp) {
@@ -69,5 +76,100 @@ public class WeatherService {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("a h:mm");
         // 오전 또는 오후를 포함한 시간 출력
         return localDateTime.format(formatter);
+    }
+
+
+    private City initCity(WeatherTotalDto weatherTotalDto) {
+        return City.builder()
+                .id(weatherTotalDto.getId())
+                .name(weatherTotalDto.getName())
+                .build();
+    }
+
+    private Snow initSnow(WeatherTotalDto weatherTotalDto) {
+        SnowDto snowDto = weatherTotalDto.getSnow();
+        if(snowDto == null) return null;
+        return Snow.builder()
+                .snowPast1h(snowDto.getSnow1h())
+                .snowPast3h(snowDto.getSnow3h())
+                .build();
+    }
+
+    private Rain initRain(WeatherTotalDto weatherTotalDto) {
+        RainDto rainDto = weatherTotalDto.getRain();
+        if (rainDto == null) {
+            return null;
+        }
+        return Rain.builder()
+                .rainPast1h(rainDto.getRain1h())
+                .rainPast3h(rainDto.getRain3h())
+                .build();
+    }
+
+    private Clouds initClouds(WeatherTotalDto weatherTotalDto) {
+        CloudsDto clouds = weatherTotalDto.getClouds();
+        if(clouds == null) return null;
+        return Clouds.builder()
+                .cloudiness(clouds.getAll())
+                .speed(clouds.getSpeed())
+                .build();
+    }
+
+    private Wind initWind(WeatherTotalDto weatherTotalDto) {
+        WindDto windDto = weatherTotalDto.getWind();
+        if(windDto == null) return null;
+        return Wind.builder()
+                .speed(windDto.getSpeed())
+                .direction(windDto.getDeg())
+                .gust(windDto.getGust())
+                .build();
+    }
+
+    private Atmospheric initAtmospheric(WeatherTotalDto weatherTotalDto) {
+        MainDto mainDto = weatherTotalDto.getMain();
+        if(mainDto == null) return null;
+        return Atmospheric.builder()
+                .pressure(mainDto.getPressure())
+                .humidity(mainDto.getHumidity())
+                .seaLevel(mainDto.getSea_level())
+                .groundLevel(mainDto.getGrnd_level())
+                .visibility(weatherTotalDto.getVisibility())
+                .build();
+    }
+
+    private Temperature initTemperature(WeatherTotalDto weatherTotalDto) {
+        MainDto mainDto = weatherTotalDto.getMain();
+        if(mainDto == null) return null;
+        return Temperature.builder()
+                .temp(mainDto.getTemp())
+                .feelsLike(mainDto.getFeels_like())
+                .tempMin(mainDto.getTemp_min())
+                .tempMax(mainDto.getTemp_max())
+                .build();
+    }
+
+    private SunTimeInfo initSunTimeInfo(WeatherTotalDto weatherTotalDto) {
+        SysDto sysDto = weatherTotalDto.getSys();
+        if(sysDto == null) return null;
+        return SunTimeInfo.builder()
+                .type(sysDto.getType())
+                .id(sysDto.getId())
+                .sunrise(sysDto.getSunrise())
+                .sunset(sysDto.getSunset())
+                .sunriseTime(getWeatherSunTime(sysDto.getSunrise()))
+                .sunsetTime(getWeatherSunTime(sysDto.getSunset()))
+                .build();
+    }
+
+    private Weather initWeather(WeatherTotalDto weatherTotalDto) {
+        WeatherDto weatherinfo = weatherTotalDto.getWeather().get(0);
+        if(weatherinfo == null) return null;
+        return Weather.builder()
+                .id(weatherinfo.getId())
+                .statusEn(weatherinfo.getMain())
+                .statusKo(weatherinfo.getDescription())
+                .iconId(weatherinfo.getIcon())
+                .imgSrc(WeatherImageDto.getImgSrc(weatherinfo.getMain()))
+                .build();
     }
 }
