@@ -26,11 +26,11 @@ public class AccountController {
     @GetMapping("/")
     public String mainPage(@RequestParam(value="city", defaultValue="seoul") String city, Principal principal, Model model) {
         boolean emailValid = accountService.isEmailValid(principal);
-        WeatherEntity weatherData = weatherService.getWeatherData(city);
+        WeatherEntity weatherEntity = weatherService.getWeatherData(city);
         if (!emailValid) {
             model.addAttribute("error", "이메일 인증이 되지않은 계정입니다.");
         }
-        model.addAttribute("weatherData", weatherData);
+        model.addAttribute("weatherData", weatherEntity);
         return "main";
     }
 
