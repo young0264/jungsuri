@@ -7,7 +7,7 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class Weather {
+public class WeatherDto {
     /** 기상 조건 ID */
     private int id;
 

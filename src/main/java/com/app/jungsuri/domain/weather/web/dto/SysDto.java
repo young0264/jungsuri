@@ -7,7 +7,7 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class Sys {
+public class SysDto {
     private int type;
 
     private int id;

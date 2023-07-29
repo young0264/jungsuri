@@ -8,7 +8,7 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class Snow {
+public class SnowDto {
     /** 지난 1 시간 동안의 눈량, mm */
     @JsonProperty("1h")
     private float snow1h;
