@@ -7,6 +7,10 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class CityDto {
-    private String city;
+public class Clouds {
+
+    /** 흐림, % */
+    private int all;
+    private float speed; //test
+
 }
