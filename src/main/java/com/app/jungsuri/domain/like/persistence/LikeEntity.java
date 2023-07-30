@@ -36,6 +36,7 @@ public class LikeEntity {
     private CommentEntity commentEntity;
 
     @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
     private LikeType type;
 
     @Column(name="created_at", nullable = false)
