@@ -77,6 +77,85 @@
                 });
         },
     }
+
+    let like = {
+        modifyPostLike: function (accountId, postId) {
+            let data = {
+                accountId: accountId,
+                postId: postId
+            };
+            fetch('/like/post',{
+                method: 'PATCH',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify(data)
+            }).then(
+                response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.json();
+                })
+                .then(
+                    data => {
+                        document.getElementById("post_like_count").innerText = data['likeCount'];
+                        const heartIcon = document.getElementById("heart");
+                        if (data['like'] === true) {
+                            heartIcon.classList.add("fas");
+                            heartIcon.classList.remove("far");
+                            heartIcon.style.color = "red";
+                        } else {
+                            heartIcon.classList.add("far");
+                            heartIcon.classList.remove("fas");
+                            heartIcon.style.color = "";
+                        }
+                    }
+                )
+                .catch(error => {
+                    console.error('There was a problem with the fetch operation:', error);
+                }
+            )
+        },
+
+        modifyCommentLike: function (accountId, commentId){
+            let data = {
+                accountId: accountId,
+                commentId: commentId
+            };
+            fetch('/like/comment',{
+                method: 'PATCH',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify(data)
+            }).then(
+                response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.json();
+                })
+                .then(
+                    data => {
+                        console.log(data);
+
+                        document.getElementById("comment_like_count").innerText = data['likeCount'];
+                        const heartIcon = document.getElementById("heart_comment");
+                        if (data['like'] === true) {
+                            heartIcon.classList.add("fas");
+                            heartIcon.classList.remove("far");
+                            heartIcon.style.color = "red";
+                        } else {
+                            heartIcon.classList.add("far");
+                            heartIcon.classList.remove("fas");
+                            heartIcon.style.color = "";
+                        }
+                    }
+                )
+                .catch(error => {
+                    console.error('There was a problem with the fetch operation:', error);
+                }
+            )
+
+    }
+    }
 </script>
 
 <span th:replace="~{/fragments/fragments.html :: head}"></span>
@@ -111,7 +190,11 @@
                 </div>
                 <!-- 게시글  end-->
                 <!-- 댓글 list start-->
-                <h5 class="borderline"></h5>
+                <hr>
+                <div class="post-meta-wrap">
+                    <a id="heart" class="far fa-heart" style="font-size: 20px; " th:onclick="like.modifyPostLike(/*[[${accountEntity.getId()}]]*/ , /*[[${postEntity.getId()}]]*/)"> 좋아요 <span id="post_like_count" th:text="${postEntity.likeCount}"></span>개 </a>
+                </div>
+                <hr>
                 <h4 class="comment-title ">There are <span th:text="${postEntity.commentCount}"></span> comments</h4>
 
                 <div class="comment clearfix" th:each="comment : ${commentList}">
@@ -119,11 +202,16 @@
                             src="https://s3.amazonaws.com/uifaces/faces/twitter/ryanbattles/128.jpg"
                             alt="avatar"/></div>
                     <div class="comment-content clearfix">
-                        <div class="comment-author font-alt"><a href="#" th:text="${comment.author}"></a></div>
+                        <div class="comment-author font-alt">
+                            <a href="#" th:text="${comment.author}"></a>
+                            <a id="heart_comment" class="far fa-heart" style="font-size: 15px; " th:onclick="like.modifyCommentLike(/*[[${accountEntity.getId()}]]*/ , /*[[${comment .getId()}]]*/)"> 좋아요 <span id="comment_like_count" th:text="${comment.likeCount}"></span>개 </a>
+                        </div>
                         <div class="comment-body">
                             <p th:text="${comment.content}"></p>
                         </div>
                         <div class="comment-meta font-alt">
+
+<!--                            <a href="#" th:text="${comment.createdAt.toLocalDate()}">시간</a>-->
                             <a href="#" th:text="${comment.createdAt.toLocalDate()}">시간</a>
                             <a class="1" href="#">Reply</a>
                             <button type="button" class="btn btn-g btn-round" data-toggle="modal"
@@ -165,51 +253,14 @@
                     </div>
                 </div>
                 <!--                댓글 수정 모달 end -->
-
                 <!-- 댓글 list end-->
-
-                <!-- 댓글 list 샘플 start  class comment는 여백이 너무 큼-->
-                <!--                <div class="comments">-->
-                <!--                    <h4 class="comment-title font-alt">There are 3 comments</h4>-->
-                <!--                    <div class="comment clearfix">-->
-                <!--                        <div class="comment-avatar"><img-->
-                <!--                                src="https://s3.amazonaws.com/uifaces/faces/twitter/ryanbattles/128.jpg"-->
-                <!--                                alt="avatar"/></div>-->
-                <!--                        <div class="comment-content clearfix">-->
-                <!--                            <div class="comment-author font-alt"><a href="#">John Doe</a></div>-->
-                <!--                            <div class="comment-body">-->
-                <!--                                <p>The European languages are members of the same family. Their separate-->
-                <!--                                    existence is a myth. For science, music, sport, etc, Europe uses the same-->
-                <!--                                    vocabulary. The European languages are members of the same family. Their-->
-                <!--                                    separate existence is a myth.</p>-->
-                <!--                            </div>-->
-                <!--                            <div class="comment-meta font-alt">Today, 14:55 - <a href="#">Reply</a>-->
-                <!--                            </div>-->
-                <!--                        </div>-->
-                <!--                        <div class="comment clearfix">-->
-                <!--                            <div class="comment-avatar"><img-->
-                <!--                                    src="https://s3.amazonaws.com/uifaces/faces/twitter/draganbabic/128.jpg"-->
-                <!--                                    alt="avatar"/></div>-->
-                <!--                            <div class="comment-content clearfix">-->
-                <!--                                <div class="comment-author font-alt"><a href="#">Mark Stone</a></div>-->
-                <!--                                <div class="comment-body">-->
-                <!--                                    <p>Europe uses the same vocabulary. The European languages are members of-->
-                <!--                                        the same family. Their separate existence is a myth.</p>-->
-                <!--                                </div>-->
-                <!--                                <div class="comment-meta font-alt">Today, 15:34 - <a href="#">Reply</a>-->
-                <!--                                </div>-->
-                <!--                            </div>-->
-                <!--                        </div>-->
-                <!--                    </div>-->
-                <!--                </div>-->
-                <!-- 댓글 list 샘플 end-->
 
                 <!-- 댓글 작성 start -->
                 <h4 class="comment-form-title font-alt">Add your comment</h4>
                 <form method="post" th:action="@{/comment}" th:object="${commentCreateDto}">
                     <div class="form-group">
                         <textarea class="form-control" th:field="*{content}" rows="4" placeholder="Comment" required th:min="5" th:max="50"></textarea>
-                        <input type="hidden" th:name="loginId" th:value="${loginId}">
+                        <input type="hidden" th:name="loginId" th:value="${accountEntity.loginId}">
                         <input type="hidden" th:name="postId" th:value="${postId}">
                     </div>
                     <div class="text-center " th:if="${comment_create_error}">

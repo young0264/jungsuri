@@ -24,7 +24,7 @@ public class PostService {
     }
 
     public PostEntity createPost(PostCreateDto postCreateDto, AccountEntity accountEntity) {
-        PostEntity postEntity = postCreateDto.toPost(accountEntity.getLoginId()).toEntity();
+        PostEntity postEntity = new PostEntity(postCreateDto, accountEntity.getLoginId());
         eventPublisher.publishEvent(new PostCreatedEvent(postEntity));
         return postRepository.save(postEntity);
     }

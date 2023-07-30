@@ -15,12 +15,12 @@ import jooq.dsl.tables.records.PostRecord;
 
 import org.jooq.Field;
 import org.jooq.ForeignKey;
-import org.jooq.Function10;
+import org.jooq.Function12;
 import org.jooq.Identity;
 import org.jooq.Name;
 import org.jooq.Record;
 import org.jooq.Records;
-import org.jooq.Row10;
+import org.jooq.Row12;
 import org.jooq.Schema;
 import org.jooq.SelectField;
 import org.jooq.Table;
@@ -57,6 +57,16 @@ public class Post extends TableImpl<PostRecord> {
      * The column <code>jungsuri.post.comment_count</code>.
      */
     public final TableField<PostRecord, Integer> COMMENT_COUNT = createField(DSL.name("comment_count"), SQLDataType.INTEGER.nullable(false), this, "");
+
+    /**
+     * The column <code>jungsuri.post.like_count</code>.
+     */
+    public final TableField<PostRecord, Integer> LIKE_COUNT = createField(DSL.name("like_count"), SQLDataType.INTEGER.nullable(false), this, "");
+
+    /**
+     * The column <code>jungsuri.post.view_count</code>.
+     */
+    public final TableField<PostRecord, Integer> VIEW_COUNT = createField(DSL.name("view_count"), SQLDataType.INTEGER.nullable(false), this, "");
 
     /**
      * The column <code>jungsuri.post.account_entity_id</code>.
@@ -208,18 +218,18 @@ public class Post extends TableImpl<PostRecord> {
     }
 
     // -------------------------------------------------------------------------
-    // Row10 type methods
+    // Row12 type methods
     // -------------------------------------------------------------------------
 
     @Override
-    public Row10<Integer, Long, LocalDateTime, Long, LocalDateTime, String, String, String, String, String> fieldsRow() {
-        return (Row10) super.fieldsRow();
+    public Row12<Integer, Integer, Integer, Long, LocalDateTime, Long, LocalDateTime, String, String, String, String, String> fieldsRow() {
+        return (Row12) super.fieldsRow();
     }
 
     /**
      * Convenience mapping calling {@link SelectField#convertFrom(Function)}.
      */
-    public <U> SelectField<U> mapping(Function10<? super Integer, ? super Long, ? super LocalDateTime, ? super Long, ? super LocalDateTime, ? super String, ? super String, ? super String, ? super String, ? super String, ? extends U> from) {
+    public <U> SelectField<U> mapping(Function12<? super Integer, ? super Integer, ? super Integer, ? super Long, ? super LocalDateTime, ? super Long, ? super LocalDateTime, ? super String, ? super String, ? super String, ? super String, ? super String, ? extends U> from) {
         return convertFrom(Records.mapping(from));
     }
 
@@ -227,7 +237,7 @@ public class Post extends TableImpl<PostRecord> {
      * Convenience mapping calling {@link SelectField#convertFrom(Class,
      * Function)}.
      */
-    public <U> SelectField<U> mapping(Class<U> toType, Function10<? super Integer, ? super Long, ? super LocalDateTime, ? super Long, ? super LocalDateTime, ? super String, ? super String, ? super String, ? super String, ? super String, ? extends U> from) {
+    public <U> SelectField<U> mapping(Class<U> toType, Function12<? super Integer, ? super Integer, ? super Integer, ? super Long, ? super LocalDateTime, ? super Long, ? super LocalDateTime, ? super String, ? super String, ? super String, ? super String, ? super String, ? extends U> from) {
         return convertFrom(toType, Records.mapping(from));
     }
 }
