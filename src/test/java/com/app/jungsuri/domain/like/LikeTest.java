@@ -59,5 +59,16 @@ public class LikeTest {
 
         Assertions.assertThat(likeService.isCheckedPostLike(accountEntity.getId(),createdPostId)).isTrue();
     }
+    @Test
+    @WithMockUser(username = "12", password = "12")
+    void 좋아요_delete_Test() {
+        AccountEntity accountEntity = accountService.findByLoginId("12");
+        likeService.updatePostLike(accountEntity.getId(), createdPostId);
+        likeService.updatePostLike(accountEntity.getId(), createdPostId);
+
+        Assertions.assertThat(likeService.isCheckedPostLike(accountEntity.getId(),createdPostId)).isFalse();
+    }
+
+
 
 }
