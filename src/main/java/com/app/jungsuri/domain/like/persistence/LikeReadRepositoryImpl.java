@@ -20,4 +20,12 @@ public class LikeReadRepositoryImpl implements LikeReadRepository {
         );
     }
 
+    @Override
+    public boolean isCheckedCommentLike(Long accountId, Long commentId) {
+        return dslContext.fetchExists(
+                dslContext.selectOne()
+                        .from(LIKES)
+                        .where(LIKES.TYPE.equal(LikesType.COMMENT), LIKES.ACCOUNT_ENTITY_ID.eq(commentId), LIKES.COMMENT_ENTITY_ID.eq(commentId))
+        );
+    }
 }
