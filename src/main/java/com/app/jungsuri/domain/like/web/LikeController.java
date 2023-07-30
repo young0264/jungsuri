@@ -1,6 +1,7 @@
 package com.app.jungsuri.domain.like.web;
 
 import com.app.jungsuri.domain.like.persistence.LikeService;
+import com.app.jungsuri.domain.like.web.dto.CommentLikeUpdateDto;
 import com.app.jungsuri.domain.like.web.dto.LikeUpdateResultDto;
 import com.app.jungsuri.domain.like.web.dto.PostLikeUpdateDto;
 import lombok.RequiredArgsConstructor;
@@ -16,6 +17,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 public class LikeController {
 
     private final LikeService likeService;
+
+    @PatchMapping("/like/comment")
+    public ResponseEntity modifyLike(@RequestBody CommentLikeUpdateDto commentLikeUpdateDto) {
+        LikeUpdateResultDto likeUpdateResultDto = likeService.updateCommentLike(commentLikeUpdateDto.getAccountId(), commentLikeUpdateDto.getCommentId());
+        return ResponseEntity.ok(likeUpdateResultDto);
+    }
 
     @PatchMapping("/like/post")
     public ResponseEntity modifyLike(@RequestBody PostLikeUpdateDto postLikeUpdateDto) {
