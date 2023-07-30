@@ -2,6 +2,8 @@ package com.app.jungsuri.domain.like.persistence;
 
 import com.app.jungsuri.domain.account.persistence.AccountRepository;
 import com.app.jungsuri.domain.like.domain.LikeType;
+import com.app.jungsuri.domain.like.web.dto.LikeUpdateResultDto;
+import com.app.jungsuri.domain.post.persistence.PostEntity;
 import com.app.jungsuri.domain.post.persistence.PostRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -20,14 +22,18 @@ public class LikeService {
     private final PostRepository postRepository;
     private final AccountRepository accountRepository;
 
-    public void updatePostLike(Long accountId, Long postId) {
+    public LikeUpdateResultDto updatePostLike(Long accountId, Long postId) {
+        PostEntity postEntity = postRepository.findById(postId).orElseThrow(() -> new IllegalArgumentException("ID에 해당하는 게시글이 없습니다."));
+        LikeUpdateResultDto likeUpdateResultDto;
+
         if(!isCheckedPostLike(accountId, postId)) {
-            log.info("not checked post like");
+            likeUpdateResultDto = new LikeUpdateResultDto(postEntity.increaseLikeCount(),true);
             likeRepository.save(getLikeEntity(accountId, postId));
         } else {
-            log.info("checked post like");
+            likeUpdateResultDto = new LikeUpdateResultDto(postEntity.decreaseLikeCount(),false);
             likeRepository.deleteLikeByPostId(accountId, postId);
         }
+        return likeUpdateResultDto;
     }
 
     private LikeEntity getLikeEntity(Long accountId, Long postId) {
