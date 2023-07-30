@@ -51,13 +51,13 @@ public class PostEntity {
     private AccountEntity accountEntity;
 
     @Column(name="comment_count", nullable = false)
-    private Integer commentCount;
+    private int commentCount;
 
     @Column(name="like_count", nullable = false)
-    private Integer likeCount;
+    private int likeCount;
 
     @Column(name="view_count", nullable = false)
-    private Integer viewCount;
+    private int viewCount;
 
 
     @OneToMany(mappedBy = "postEntity")
@@ -105,5 +105,13 @@ public class PostEntity {
         this.loginId = loginId;
         this.likeCount = 0;
         this.viewCount = 0;
+    }
+
+    public int increaseLikeCount() {
+        return this.likeCount += 1;
+    }
+    public int decreaseLikeCount() {
+        if(this.likeCount == 0) return 0;
+        return this.likeCount -= 1;
     }
 }
