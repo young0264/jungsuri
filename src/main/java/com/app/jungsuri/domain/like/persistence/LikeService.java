@@ -4,11 +4,13 @@ import com.app.jungsuri.domain.account.persistence.AccountRepository;
 import com.app.jungsuri.domain.like.domain.LikeType;
 import com.app.jungsuri.domain.post.persistence.PostRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 
+@Slf4j
 @Service
 @Transactional
 @RequiredArgsConstructor
@@ -20,9 +22,11 @@ public class LikeService {
 
     public void updatePostLike(Long accountId, Long postId) {
         if(!isCheckedPostLike(accountId, postId)) {
+            log.info("not checked post like");
             likeRepository.save(getLikeEntity(accountId, postId));
         } else {
-            likeRepository.deleteByAccountEntityIdAndPostEntityId(accountId, postId);
+            log.info("checked post like");
+            likeRepository.deleteLikeByPostId(accountId, postId);
         }
     }
 
