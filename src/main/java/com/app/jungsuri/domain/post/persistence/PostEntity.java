@@ -2,6 +2,7 @@ package com.app.jungsuri.domain.post.persistence;
 
 import com.app.jungsuri.domain.account.persistence.AccountEntity;
 import com.app.jungsuri.domain.comment.persistence.CommentEntity;
+import com.app.jungsuri.domain.post.web.dto.PostCreateDto;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
@@ -50,13 +51,13 @@ public class PostEntity {
     private AccountEntity accountEntity;
 
     @Column(name="comment_count", nullable = false)
-    private Integer commentCount;
+    private int commentCount;
 
-//    @Column(name="like_count", nullable = false)
-//    private Long likeCount;
+    @Column(name="like_count", nullable = false)
+    private int likeCount;
 
-//    @Column(name="view_count", nullable = false)
-//    private Long viewCount;
+    @Column(name="view_count", nullable = false)
+    private int viewCount;
 
 
     @OneToMany(mappedBy = "postEntity")
@@ -74,8 +75,8 @@ public class PostEntity {
                 ", loginId='" + loginId + '\'' +
                 ", author='" + author + '\'' +
                 ", commentCount=" + commentCount +
-//                ", likeCount=" + likeCount +
-//                ", viewCount=" + viewCount +
+                ", likeCount=" + likeCount +
+                ", viewCount=" + viewCount +
                 '}';
     }
 
@@ -92,5 +93,25 @@ public class PostEntity {
 
     public void decreaseCommentCount() {
         this.commentCount--;
+    }
+
+    public PostEntity(PostCreateDto postCreateDto, String loginId) {
+        this.title = postCreateDto.getTitle();
+        this.content = postCreateDto.getContent();
+        this.author = postCreateDto.getAuthor();
+        this.imagePath = postCreateDto.getImagePath();
+        this.commentCount = postCreateDto.getCommentCount();
+        this.createdAt = LocalDateTime.now();
+        this.loginId = loginId;
+        this.likeCount = 0;
+        this.viewCount = 0;
+    }
+
+    public int increaseLikeCount() {
+        return this.likeCount += 1;
+    }
+    public int decreaseLikeCount() {
+        if(this.likeCount == 0) return 0;
+        return this.likeCount -= 1;
     }
 }

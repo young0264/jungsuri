@@ -17,6 +17,8 @@ public class Post implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private final Integer commentCount;
+    private final Integer likeCount;
+    private final Integer viewCount;
     private final Long accountEntityId;
     private final LocalDateTime createdAt;
     private final Long id;
@@ -29,6 +31,8 @@ public class Post implements Serializable {
 
     public Post(Post value) {
         this.commentCount = value.commentCount;
+        this.likeCount = value.likeCount;
+        this.viewCount = value.viewCount;
         this.accountEntityId = value.accountEntityId;
         this.createdAt = value.createdAt;
         this.id = value.id;
@@ -42,6 +46,8 @@ public class Post implements Serializable {
 
     public Post(
         Integer commentCount,
+        Integer likeCount,
+        Integer viewCount,
         Long accountEntityId,
         LocalDateTime createdAt,
         Long id,
@@ -53,6 +59,8 @@ public class Post implements Serializable {
         String title
     ) {
         this.commentCount = commentCount;
+        this.likeCount = likeCount;
+        this.viewCount = viewCount;
         this.accountEntityId = accountEntityId;
         this.createdAt = createdAt;
         this.id = id;
@@ -69,6 +77,20 @@ public class Post implements Serializable {
      */
     public Integer getCommentCount() {
         return this.commentCount;
+    }
+
+    /**
+     * Getter for <code>jungsuri.post.like_count</code>.
+     */
+    public Integer getLikeCount() {
+        return this.likeCount;
+    }
+
+    /**
+     * Getter for <code>jungsuri.post.view_count</code>.
+     */
+    public Integer getViewCount() {
+        return this.viewCount;
     }
 
     /**
@@ -139,6 +161,8 @@ public class Post implements Serializable {
         StringBuilder sb = new StringBuilder("Post (");
 
         sb.append(commentCount);
+        sb.append(", ").append(likeCount);
+        sb.append(", ").append(viewCount);
         sb.append(", ").append(accountEntityId);
         sb.append(", ").append(createdAt);
         sb.append(", ").append(id);

@@ -27,7 +27,7 @@ public class CommentEntity {
 
     private String author;
 
-    private Integer likeCount;
+    private Integer likeCount = 0;
 
     private LocalDateTime createdAt;
 
@@ -42,6 +42,14 @@ public class CommentEntity {
     public void updateComment(String newComment) {
         this.content = newComment;
         this.updatedAt = LocalDateTime.now();
+    }
+
+    public int increaseLikeCount() {
+        return this.likeCount += 1;
+    }
+    public int decreaseLikeCount() {
+        if(this.likeCount == 0) return 0;
+        return this.likeCount -= 1;
     }
 
     @Override
