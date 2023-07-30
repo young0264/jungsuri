@@ -97,7 +97,7 @@
                 })
                 .then(
                     data => {
-                        document.getElementById("postLikeCount").innerText = data['likeCount'];
+                        document.getElementById("post_like_count").innerText = data['likeCount'];
                         const heartIcon = document.getElementById("heart");
                         if (data['like'] === true) {
                             heartIcon.classList.add("fas");
@@ -115,6 +115,46 @@
                 }
             )
         },
+
+        modifyCommentLike: function (accountId, commentId){
+            let data = {
+                accountId: accountId,
+                commentId: commentId
+            };
+            fetch('/like/comment',{
+                method: 'PATCH',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify(data)
+            }).then(
+                response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.json();
+                })
+                .then(
+                    data => {
+                        console.log(data);
+
+                        document.getElementById("comment_like_count").innerText = data['likeCount'];
+                        const heartIcon = document.getElementById("heart_comment");
+                        if (data['like'] === true) {
+                            heartIcon.classList.add("fas");
+                            heartIcon.classList.remove("far");
+                            heartIcon.style.color = "red";
+                        } else {
+                            heartIcon.classList.add("far");
+                            heartIcon.classList.remove("fas");
+                            heartIcon.style.color = "";
+                        }
+                    }
+                )
+                .catch(error => {
+                    console.error('There was a problem with the fetch operation:', error);
+                }
+            )
+
+    }
     }
 </script>
 
@@ -152,7 +192,7 @@
                 <!-- 댓글 list start-->
                 <hr>
                 <div class="post-meta-wrap">
-                    <a id="heart" class="far fa-heart" style="font-size: 20px; " th:onclick="like.modifyPostLike(/*[[${accountEntity.getId()}]]*/ , /*[[${postEntity.getId()}]]*/)"> 좋아요 <span id="postLikeCount" th:text="${postEntity.likeCount}"></span>개 </a>
+                    <a id="heart" class="far fa-heart" style="font-size: 20px; " th:onclick="like.modifyPostLike(/*[[${accountEntity.getId()}]]*/ , /*[[${postEntity.getId()}]]*/)"> 좋아요 <span id="post_like_count" th:text="${postEntity.likeCount}"></span>개 </a>
                 </div>
                 <hr>
                 <h4 class="comment-title ">There are <span th:text="${postEntity.commentCount}"></span> comments</h4>
@@ -162,11 +202,16 @@
                             src="https://s3.amazonaws.com/uifaces/faces/twitter/ryanbattles/128.jpg"
                             alt="avatar"/></div>
                     <div class="comment-content clearfix">
-                        <div class="comment-author font-alt"><a href="#" th:text="${comment.author}"></a></div>
+                        <div class="comment-author font-alt">
+                            <a href="#" th:text="${comment.author}"></a>
+                            <a id="heart_comment" class="far fa-heart" style="font-size: 15px; " th:onclick="like.modifyCommentLike(/*[[${accountEntity.getId()}]]*/ , /*[[${comment .getId()}]]*/)"> 좋아요 <span id="comment_like_count" th:text="${comment.likeCount}"></span>개 </a>
+                        </div>
                         <div class="comment-body">
                             <p th:text="${comment.content}"></p>
                         </div>
                         <div class="comment-meta font-alt">
+
+<!--                            <a href="#" th:text="${comment.createdAt.toLocalDate()}">시간</a>-->
                             <a href="#" th:text="${comment.createdAt.toLocalDate()}">시간</a>
                             <a class="1" href="#">Reply</a>
                             <button type="button" class="btn btn-g btn-round" data-toggle="modal"
