@@ -16,4 +16,11 @@ public class LikeWriteRepositoryImpl implements LikeWriteRepository{
                 .where(LIKES.ACCOUNT_ENTITY_ID.eq(accountId), LIKES.POST_ENTITY_ID.eq(postId))
                 .execute();
     }
+
+    @Override
+    public void deleteLikeByCommentId(Long accountId, Long commentId) {
+        dslContext.delete(LIKES)
+                .where(LIKES.ACCOUNT_ENTITY_ID.eq(accountId), LIKES.COMMENT_ENTITY_ID.eq(commentId))
+                .execute();
+    }
 }
