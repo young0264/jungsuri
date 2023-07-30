@@ -1,15 +1,19 @@
 package com.app.jungsuri.domain.like.persistence;
 
 import com.app.jungsuri.domain.account.persistence.AccountEntity;
+import com.app.jungsuri.domain.comment.persistence.CommentEntity;
 import com.app.jungsuri.domain.like.domain.LikeType;
 import com.app.jungsuri.domain.post.persistence.PostEntity;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import java.time.LocalDateTime;
 
 @Entity
 @Getter
+@Builder
 @Table(name="likes")
 @AllArgsConstructor
 @NoArgsConstructor
@@ -21,19 +25,19 @@ public class LikeEntity {
 
     @JoinColumn(nullable = false)
     @ManyToOne
+    private AccountEntity accountEntity;
+
+    @JoinColumn(nullable = true)
+    @ManyToOne
     private PostEntity postEntity;
 
-    @JoinColumn(nullable = false)
+    @JoinColumn(nullable = true)
     @ManyToOne
-    private AccountEntity accountEntity;
+    private CommentEntity commentEntity;
 
     @Column(nullable = false)
     private LikeType type;
 
     @Column(name="created_at", nullable = false)
-    private String createdAt;
-
-    @Column(name="updated_at", nullable = true)
-    private String updatedAt;
-
+    private LocalDateTime createdAt;
 }
