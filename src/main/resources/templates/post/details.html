@@ -111,7 +111,12 @@
                 </div>
                 <!-- 게시글  end-->
                 <!-- 댓글 list start-->
-                <h5 class="borderline"></h5>
+                <hr>
+                <div class="post-meta-wrap">
+                    <div id="heart" class="far fa-heart" style="font-size: 20px; "> 좋아요 <span ></span>개 </div>
+<!--                    <div id="heart" class="fas fa-heart" style="color: red; font-size: 20px; "> 좋아요 <span ></span>개 </div>-->
+                </div>
+                <hr>
                 <h4 class="comment-title ">There are <span th:text="${postEntity.commentCount}"></span> comments</h4>
 
                 <div class="comment clearfix" th:each="comment : ${commentList}">
