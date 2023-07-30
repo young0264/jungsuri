@@ -53,7 +53,7 @@ public class LikeTest {
     }
     @Test
     @WithMockUser(username = "12", password = "12")
-    void 좋아요_create_Test() {
+    void 게시글_좋아요_create_Test() {
         AccountEntity accountEntity = accountService.findByLoginId("12");
         likeService.updatePostLike(accountEntity.getId(), createdPostId);
 
@@ -61,12 +61,29 @@ public class LikeTest {
     }
     @Test
     @WithMockUser(username = "12", password = "12")
-    void 좋아요_delete_Test() {
+    void 게시글_좋아요_delete_Test() {
         AccountEntity accountEntity = accountService.findByLoginId("12");
         likeService.updatePostLike(accountEntity.getId(), createdPostId);
         likeService.updatePostLike(accountEntity.getId(), createdPostId);
 
         Assertions.assertThat(likeService.isCheckedPostLike(accountEntity.getId(),createdPostId)).isFalse();
+    }
+    @Test
+    @WithMockUser(username = "12", password = "12")
+    void 댓글_좋아요_create_Test() {
+        AccountEntity accountEntity = accountService.findByLoginId("12");
+        likeService.updateCommentLike(accountEntity.getId(), createdCommentId);
+
+        Assertions.assertThat(likeService.isCheckedCommentLike(accountEntity.getId(),createdCommentId)).isTrue();
+    }
+    @Test
+    @WithMockUser(username = "12", password = "12")
+    void 댓글_좋아요_delete_Test() {
+        AccountEntity accountEntity = accountService.findByLoginId("12");
+        likeService.updateCommentLike(accountEntity.getId(), createdCommentId);
+        likeService.updateCommentLike(accountEntity.getId(), createdCommentId);
+
+        Assertions.assertThat(likeService.isCheckedPostLike(accountEntity.getId(),createdCommentId)).isFalse();
     }
 
 
