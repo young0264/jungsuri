@@ -7,6 +7,7 @@ package jooq.dsl;
 import jooq.dsl.tables.Account;
 import jooq.dsl.tables.AccountTag;
 import jooq.dsl.tables.Comment;
+import jooq.dsl.tables.Likes;
 import jooq.dsl.tables.Mountain;
 import jooq.dsl.tables.MountainLocation;
 import jooq.dsl.tables.MountainTag;
@@ -35,6 +36,11 @@ public class Tables {
      * The table <code>jungsuri.comment</code>.
      */
     public static final Comment COMMENT = Comment.COMMENT;
+
+    /**
+     * The table <code>jungsuri.likes</code>.
+     */
+    public static final Likes LIKES = Likes.LIKES;
 
     /**
      * The table <code>jungsuri.mountain</code>.

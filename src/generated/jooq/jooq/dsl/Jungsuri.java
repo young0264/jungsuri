@@ -10,6 +10,7 @@ import java.util.List;
 import jooq.dsl.tables.Account;
 import jooq.dsl.tables.AccountTag;
 import jooq.dsl.tables.Comment;
+import jooq.dsl.tables.Likes;
 import jooq.dsl.tables.Mountain;
 import jooq.dsl.tables.MountainLocation;
 import jooq.dsl.tables.MountainTag;
@@ -49,6 +50,11 @@ public class Jungsuri extends SchemaImpl {
      * The table <code>jungsuri.comment</code>.
      */
     public final Comment COMMENT = Comment.COMMENT;
+
+    /**
+     * The table <code>jungsuri.likes</code>.
+     */
+    public final Likes LIKES = Likes.LIKES;
 
     /**
      * The table <code>jungsuri.mountain</code>.
@@ -99,6 +105,7 @@ public class Jungsuri extends SchemaImpl {
             Account.ACCOUNT,
             AccountTag.ACCOUNT_TAG,
             Comment.COMMENT,
+            Likes.LIKES,
             Mountain.MOUNTAIN,
             MountainLocation.MOUNTAIN_LOCATION,
             MountainTag.MOUNTAIN_TAG,
