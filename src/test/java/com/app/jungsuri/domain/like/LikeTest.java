@@ -53,7 +53,7 @@ public class LikeTest {
     }
     @Test
     @WithMockUser(username = "12", password = "12")
-    void 좋아요기능_update_Test() {
+    void 좋아요_create_Test() {
         AccountEntity accountEntity = accountService.findByLoginId("12");
         likeService.updatePostLike(accountEntity.getId(), createdPostId);
 
