@@ -106,12 +106,12 @@
                                 </script>
 
                                 <!-- input tagify : 유저 목록-->
-                                <input name='input' class='some_class_name'
+                                <input name='attendees' class='some_class_name'
                                        placeholder='등산 참석 인원'
                                        value=''
                                        data-blacklist='.NET,PHP'>
                                 <script type="application/javascript" th:inline="javascript">
-                                    var inputElm = document.querySelector('input[name=input]'),
+                                    var inputElm = document.querySelector('input[name=attendees]'),
                                         tagify = new Tagify(inputElm, {
                                             enforceWhitelist: true,
                                             whitelist: /*[[${userLoginIdList}]]*/
