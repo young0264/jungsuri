@@ -13,7 +13,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
-
+import java.util.ArrayList;
 import static org.springframework.security.test.web.servlet.response.SecurityMockMvcResultMatchers.authenticated;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
@@ -65,7 +65,7 @@ class PostControllerTest {
                 .andExpect(authenticated());
 
         AccountEntity accountEntity = accountService.findByLoginId("12");
-        PostEntity postEntity = postService.createPost(new PostCreateDto("게시글 등록 제목", "게시글 등록 내용", "게시글 등록 이름", null, 0), accountEntity);
+        PostEntity postEntity = postService.createPost(new PostCreateDto("게시글 등록 제목", "게시글 등록 내용", "게시글 등록 이름", null, 0,new ArrayList<>()), accountEntity);
         Assertions.assertThat(postEntity.getTitle()).isEqualTo("게시글 등록 제목");
         Assertions.assertThat(postRepository.findPostEntityById(postEntity.getId()).getContent()).isEqualTo("게시글 등록 내용");
     }
@@ -74,7 +74,7 @@ class PostControllerTest {
     @WithMockUser(username="12", password="12")
     void post수정_성공() throws Exception {
         AccountEntity accountEntity = accountService.findByLoginId("12");
-        PostEntity postEntity = postService.createPost(new PostCreateDto("수정전제목", "수정전내용", "수정전이름", null, 0), accountEntity);
+        PostEntity postEntity = postService.createPost(new PostCreateDto("수정전제목", "수정전내용", "수정전이름", null, 0, new ArrayList<>()), accountEntity);
         mockMvc.perform(patch("/post/" + postEntity.getId())
                         .param("title", "수정제목2")
                         .param("content", "수정내용2"))
@@ -90,14 +90,14 @@ class PostControllerTest {
     @WithMockUser(username = "12", password = "12")
     void post삭제_성공() throws Exception {
         AccountEntity accountEntity = accountService.findByLoginId("12");
-        PostEntity postEntity = postService.createPost(new PostCreateDto("수정전제목", "수정전내용", "수정전이름", null, 0), accountEntity);
+        PostEntity postEntity = postService.createPost(new PostCreateDto("수정전제목", "수정전내용", "수정전이름", null, 0, new ArrayList<>()), accountEntity);
         mockMvc.perform(delete("/post/" + postEntity.getId()))
                 .andDo(print())
                 .andExpect(flash().attributeExists("delete_message"))
                 .andExpect(status().is3xxRedirection())
                 .andExpect(view().name("redirect:/post/list"))
                 .andExpect(authenticated());
-        PostEntity postEntity2 = postService.createPost(new PostCreateDto("수정전제목", "수정전내용", "수정전이름", null, 0), accountEntity);
+        PostEntity postEntity2 = postService.createPost(new PostCreateDto("수정전제목", "수정전내용", "수정전이름", null, 0, new ArrayList<>()), accountEntity);
         postService.deletePost(postEntity2.getId());
         postRepository.flush();
         Assertions.assertThat(postRepository.findPostEntityById(postEntity2.getId())).isNull();
