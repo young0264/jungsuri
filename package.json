@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "@yaireo/tagify": "^4.17.8",
     "moment": "^2.29.4"
   }
 }
