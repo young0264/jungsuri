@@ -15,8 +15,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.test.context.support.WithMockUser;
-
-import static org.junit.jupiter.api.Assertions.*;
+import java.util.ArrayList;
 
 @MockMvcTest
 public class LikeTest {
@@ -38,7 +37,7 @@ public class LikeTest {
     @WithMockUser(username = "12", password = "12")
     void init() throws Exception {
 
-        PostCreateDto postCreateDto = new PostCreateDto("게시글 init 제목", "내용", "등록자이름", "12", 0);
+        PostCreateDto postCreateDto = new PostCreateDto("게시글 init 제목", "내용", "등록자이름", "12", 0, new ArrayList<>());
 
         /** Account Entity , Post Entity, Comment Entity 생성 */
         AccountEntity accountEntity = accountService.findByLoginId("12");

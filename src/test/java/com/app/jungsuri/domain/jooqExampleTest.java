@@ -11,6 +11,7 @@ import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.test.context.support.WithMockUser;
+import java.util.ArrayList;
 
 @MockMvcTest
 public class jooqExampleTest {
@@ -29,7 +30,7 @@ public class jooqExampleTest {
     @WithMockUser(username="12", password="12")
     public void test() {
         AccountEntity accountEntity = accountRepository.findByLoginId("12").orElseThrow(RuntimeException::new);
-        PostEntity postEntity = postService.createPost(new PostCreateDto("제목", "내용", accountEntity.getName(), "12", 0), accountEntity);
+        PostEntity postEntity = postService.createPost(new PostCreateDto("제목", "내용", accountEntity.getName(), "12", 0, new ArrayList<>()), accountEntity);
 
         /**
          * jooq로 조회
