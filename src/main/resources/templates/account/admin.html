@@ -75,13 +75,13 @@
                     <!-- tab 시작 -->
                     <div role="tabpanel">
                         <ul class="nav nav-tabs font-alt" role="tablist">
-                            <li><a href="#mountain_exp" data-toggle="tab"><span class="icon-circle-compass"></span>등산 경험치 부여</a>
+                            <li class="active"><a href="#mountain_exp" data-toggle="tab" ><span class="icon-circle-compass"></span>등산 경험치 부여</a>
                             </li>
                         </ul>
                         <div class="tab-content">
-                            <div class="tab-pane" id="mountain_exp">
+                            <div class="tab-pane active" id="mountain_exp">
                                 <!-- select tagify : 산 목록-->
-                                <input name='tags-select-mode' class='selectMode' placeholder="Please select" />
+                                <input name='tags-select-mode' class='selectMode' placeholder="산 목록" />
                                 <script type="application/javascript" th:inline="javascript">
                                     console.log(/*[[${mountainNameList}]]*/);
                                     var input = document.querySelector('input[name=tags-select-mode]'),
@@ -96,7 +96,7 @@
                                     tagify.on('add', onAddTag);
                                     tagify.DOM.input.addEventListener('focus', onSelectFocus);
 
-                                    function onAddTag(e){
+                                    function onAddTag(e) {
                                         mountainName = e.detail.data.value;
                                     }
 
@@ -106,12 +106,12 @@
                                 </script>
 
                                 <!-- input tagify : 유저 목록-->
-                                <input name='input' class='some_class_name'
-                                       placeholder='write some tags'
-                                       value='css, html, javascript, css'
+                                <input name='attendees' class='some_class_name'
+                                       placeholder='등산 참석 인원'
+                                       value=''
                                        data-blacklist='.NET,PHP'>
                                 <script type="application/javascript" th:inline="javascript">
-                                    var inputElm = document.querySelector('input[name=input]'),
+                                    var inputElm = document.querySelector('input[name=attendees]'),
                                         tagify = new Tagify(inputElm, {
                                             enforceWhitelist: true,
                                             whitelist: /*[[${userLoginIdList}]]*/

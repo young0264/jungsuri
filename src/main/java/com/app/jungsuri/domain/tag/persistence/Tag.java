@@ -5,6 +5,8 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
+
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -16,5 +18,9 @@ public abstract class Tag {
     private Long id;
 
     private String name;
+
+    private int usedCount = 0;
+
+    private LocalDateTime createdAt;
 
 }

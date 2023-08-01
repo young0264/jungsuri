@@ -10,6 +10,7 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class MountainTag extends Tag{
+    //TODO : tag service를 만들어서 mountain_tag하고 tag 둘 다 저장
 
     @ManyToOne
     private MountainEntity mountainEntity;
