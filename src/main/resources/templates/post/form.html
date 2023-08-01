@@ -56,12 +56,75 @@
                 <input name='hash_tag' value='' placeholder="해시태그를 입력해 주세요.">
                 <script type="application/javascript" th:inline="javascript">
                     // The DOM element you wish to replace with Tagify
-                    var input = document.querySelector('input[name=hash_tag]');
-
+                    var inputElm = document.querySelector('input[name=hash_tag]');
+                    let tag_array = new Set([]);
                     // initialize Tagify on the above input node reference
-                    let tagify = new Tagify(input);
+                    let tagify = new Tagify(inputElm);
 
-                    console.log(input.value());
+                    tagify.on('add', onAddTag)
+                        .on('remove', onRemoveTag)
+                        .on('edit', onTagEdit)
+                        .on('invalid', onInvalidTag)
+                        .on('click', onTagClick)
+                        .on('focus', onTagifyFocusBlur)
+                        .on('blur', onTagifyFocusBlur)
+                        .on('dropdown:hide dropdown:show', e => console.log(e.type))
+
+                    var mockAjax = (function mockAjax(){
+                        var timeout;
+                        return function(duration){
+                            clearTimeout(timeout); // abort last request
+                            return new Promise(function(resolve, reject){
+                                timeout = setTimeout(resolve, duration || 700, /*[[${userLoginIdList}]]*/)
+                            })
+                        }
+                    })()
+
+                    // tag added callback
+                    function onAddTag(e){
+                        tag_array.add(e.detail.data.value);
+                        console.log("tag_array  : ", document.getElementById("tagArr"));
+                        console.log("tag_array add : ", tag_array);
+
+                        // tagify.off('add', onAddTag) // Tagify event 중지(제거)
+                    }
+
+                    // tag remvoed callback
+                    function onRemoveTag(e){
+                        tag_array.delete(e.detail.data.value);
+                        console.log("onRemoveTag:", e.detail, "tagify instance value:", tagify.value)
+                        console.log("tag_array delete : ", tag_array);
+                    }
+
+
+                    function onTagEdit(e){
+                        console.log("onTagEdit: ", e.detail);
+                    }
+
+                    // invalid tag added callback
+                    function onInvalidTag(e){
+                        console.log("onInvalidTag: ", e.detail);
+                    }
+
+                    // invalid tag added callback
+                    function onTagClick(e){
+                        console.log(e.detail);
+                        console.log("onTagClick: ", e.detail);
+                    }
+
+                    function onTagifyFocusBlur(e){
+                        console.log(e.type, "event fired")
+                    }
+
+                    function submitForm() {
+                        alert("submit form");
+                        alert(Array.from(tag_array));
+                        alert(JSON.stringify(Array.from(tag_array)));
+                        console.log("JSON.stringify(tag_array)",JSON.stringify(Array.from(tag_array)))
+                        document.getElementById("tagArr").value = Array.from(tag_array);
+                        document.querySelector(".form").submit();
+                    }
+
                 </script>
                 <!-- tagify 해시태그 끝 -->
 
@@ -77,8 +140,10 @@
                     </div>
 
                     <input type="hidden" name="author" th:value="${#authentication.name}">
+                    <input id="tagArr" name="tagArr" value="">
                     <textarea id="summernote" th:field="*{content}" class="form-control"  placeholder="content"></textarea>
-                    <button class="btn btn-round btn-b" type="submit">게시글 등록</button>
+<!--                    <button class="btn btn-round btn-b" type="submit">게시글 등록</button>-->
+                    <button class="btn btn-round btn-b" onclick="submitForm()">게시글 등록</button>
                 </form>
             </div>
         </div>
