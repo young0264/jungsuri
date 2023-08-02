@@ -1,17 +1,16 @@
 package com.app.jungsuri.domain.tag.persistence;
 
 import jakarta.persistence.*;
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-
+import lombok.*;
 import java.time.LocalDateTime;
 
 @Entity
 @Getter
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
-@Inheritance(strategy = InheritanceType.JOINED)
-public abstract class Tag {
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@Inheritance(strategy = InheritanceType.JOINED) //because
+public class Tag {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,4 +22,13 @@ public abstract class Tag {
 
     private LocalDateTime createdAt;
 
+    public Tag(String name, int usedCount, LocalDateTime createdAt) {
+        this.name = name;
+        this.usedCount = usedCount;
+        this.createdAt = createdAt;
+    }
+
+    public void increaseUsedCount() {
+        this.usedCount += 1;
+    }
 }
