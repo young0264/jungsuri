@@ -5,6 +5,7 @@ package jooq.dsl.tables.pojos;
 
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 
 
 /**
@@ -15,20 +16,42 @@ public class Tag implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
+    private final Integer usedCount;
+    private final LocalDateTime createdAt;
     private final Long id;
     private final String name;
 
     public Tag(Tag value) {
+        this.usedCount = value.usedCount;
+        this.createdAt = value.createdAt;
         this.id = value.id;
         this.name = value.name;
     }
 
     public Tag(
+        Integer usedCount,
+        LocalDateTime createdAt,
         Long id,
         String name
     ) {
+        this.usedCount = usedCount;
+        this.createdAt = createdAt;
         this.id = id;
         this.name = name;
+    }
+
+    /**
+     * Getter for <code>jungsuri.tag.used_count</code>.
+     */
+    public Integer getUsedCount() {
+        return this.usedCount;
+    }
+
+    /**
+     * Getter for <code>jungsuri.tag.created_at</code>.
+     */
+    public LocalDateTime getCreatedAt() {
+        return this.createdAt;
     }
 
     /**
@@ -49,7 +72,9 @@ public class Tag implements Serializable {
     public String toString() {
         StringBuilder sb = new StringBuilder("Tag (");
 
-        sb.append(id);
+        sb.append(usedCount);
+        sb.append(", ").append(createdAt);
+        sb.append(", ").append(id);
         sb.append(", ").append(name);
 
         sb.append(")");

@@ -4,6 +4,7 @@
 package jooq.dsl.tables;
 
 
+import java.time.LocalDateTime;
 import java.util.function.Function;
 
 import jooq.dsl.Jungsuri;
@@ -12,12 +13,12 @@ import jooq.dsl.tables.records.TagRecord;
 
 import org.jooq.Field;
 import org.jooq.ForeignKey;
-import org.jooq.Function2;
+import org.jooq.Function4;
 import org.jooq.Identity;
 import org.jooq.Name;
 import org.jooq.Record;
 import org.jooq.Records;
-import org.jooq.Row2;
+import org.jooq.Row4;
 import org.jooq.Schema;
 import org.jooq.SelectField;
 import org.jooq.Table;
@@ -49,6 +50,16 @@ public class Tag extends TableImpl<TagRecord> {
     public Class<TagRecord> getRecordType() {
         return TagRecord.class;
     }
+
+    /**
+     * The column <code>jungsuri.tag.used_count</code>.
+     */
+    public final TableField<TagRecord, Integer> USED_COUNT = createField(DSL.name("used_count"), SQLDataType.INTEGER.nullable(false), this, "");
+
+    /**
+     * The column <code>jungsuri.tag.created_at</code>.
+     */
+    public final TableField<TagRecord, LocalDateTime> CREATED_AT = createField(DSL.name("created_at"), SQLDataType.LOCALDATETIME(6), this, "");
 
     /**
      * The column <code>jungsuri.tag.id</code>.
@@ -148,18 +159,18 @@ public class Tag extends TableImpl<TagRecord> {
     }
 
     // -------------------------------------------------------------------------
-    // Row2 type methods
+    // Row4 type methods
     // -------------------------------------------------------------------------
 
     @Override
-    public Row2<Long, String> fieldsRow() {
-        return (Row2) super.fieldsRow();
+    public Row4<Integer, LocalDateTime, Long, String> fieldsRow() {
+        return (Row4) super.fieldsRow();
     }
 
     /**
      * Convenience mapping calling {@link SelectField#convertFrom(Function)}.
      */
-    public <U> SelectField<U> mapping(Function2<? super Long, ? super String, ? extends U> from) {
+    public <U> SelectField<U> mapping(Function4<? super Integer, ? super LocalDateTime, ? super Long, ? super String, ? extends U> from) {
         return convertFrom(Records.mapping(from));
     }
 
@@ -167,7 +178,7 @@ public class Tag extends TableImpl<TagRecord> {
      * Convenience mapping calling {@link SelectField#convertFrom(Class,
      * Function)}.
      */
-    public <U> SelectField<U> mapping(Class<U> toType, Function2<? super Long, ? super String, ? extends U> from) {
+    public <U> SelectField<U> mapping(Class<U> toType, Function4<? super Integer, ? super LocalDateTime, ? super Long, ? super String, ? extends U> from) {
         return convertFrom(toType, Records.mapping(from));
     }
 }
