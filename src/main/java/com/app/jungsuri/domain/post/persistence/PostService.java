@@ -7,6 +7,7 @@ import com.app.jungsuri.domain.tag.persistence.PostTag;
 import com.app.jungsuri.domain.tag.persistence.Tag;
 import com.app.jungsuri.domain.tag.persistence.repository.PostTagRepository;
 import com.app.jungsuri.domain.tag.persistence.repository.TagRepository;
+import jakarta.persistence.EntityManager;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.ApplicationEventPublisher;
@@ -23,6 +24,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class PostService {
 
+    private final EntityManager entityManager;
     private final TagRepository tagRepository;
     private final PostTagRepository postTagRepository;//여기에 read repository가 있는데. 만지면 아노디지.
 //    private final PostTagReadRepository postTagReadRepository;
@@ -43,21 +45,34 @@ public class PostService {
 
     public void createTags(List<String> tagList, PostEntity postEntity) {
         for (String tagName : tagList) {
-            Optional<Tag> optionalTag = Optional.ofNullable(existTag(tagName));
-            Tag tag = optionalTag.orElseGet(() -> new Tag(tagName, 0, LocalDateTime.now()));
+//            Optional<Tag> optionalTag = Optional.ofNullable(existTag(tagName));
+//            Tag tag = optionalTag.orElseGet(() -> new Tag(tagName, LocalDateTime.now()));
+
+            Tag tag = existTag(tagName);
+            if (tag == null) {
+                tag = new Tag(tagName, LocalDateTime.now());
+            } else {
+                log.info("tag name : " + tagName);
+                log.info("not empty tag : " + tag.toString());
+            }
+
+            tag.increaseUsedCount();
+            PostTag postTag = new PostTag(postEntity, tag);
+            postTagRepository.save(postTag);
+            tagRepository.save(tag);
 
             //TODO : refactoring
             /** 비어있을 경우, */
-            if(optionalTag.isEmpty()) {
-                tagRepository.save(tag);
-                PostTag postTag = new PostTag(postEntity, tag);
-                postTagRepository.save(postTag);
-            }
+//            if (optionalTag.isEmpty()) {
+//                tagRepository.save(tag);
+//            } else {
+//                log.info("tag is already exist : " + tag.getUsedCount());
+//            }
+//            entityManager.flush();
             /** tag usedCount만 update 할 경우, */
-            else if(optionalTag.isPresent()) {
-                tag.increaseUsedCount();
-            }
-            tag.increaseUsedCount();
+
+            log.info("tag 2: " + tag.toString());
+
         }
     }
 

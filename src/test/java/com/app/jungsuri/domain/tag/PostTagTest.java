@@ -26,6 +26,15 @@ public class PostTagTest {
     @Autowired
     private PostTagRepository postTagRepository;
 
+//    @Test
+//    void tag_create_성공() {
+//
+//        AccountEntity accountEntity = accountService.findByLoginId("12");
+//        PostCreateDto postCreateDto = new PostCreateDto("게시글 등록 제목", "게시글 등록 내용", "게시글 등록 이름", null, 0,   new ArrayList<>(Arrays.asList("태그1", "태그2", "태그3")));
+//        postService.createPost(postCreateDto, accountEntity);
+//
+//    }
+
     @Test
     void tag가_존재하는지_확인() {
 
@@ -34,6 +43,7 @@ public class PostTagTest {
         postService.createPost(postCreateDto, accountEntity);
 
         Tag tag = postTagRepository.existTag("태그1").orElse(null);
+        System.out.println(tag.toString());
 
         Assertions.assertThat(tag).isNotNull();
 

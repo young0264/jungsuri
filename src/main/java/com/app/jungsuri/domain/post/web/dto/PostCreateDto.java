@@ -9,7 +9,6 @@ import java.util.List;
 @Setter
 @ToString
 @NoArgsConstructor
-@AllArgsConstructor
 public class PostCreateDto {
 
     String title;
@@ -21,4 +20,12 @@ public class PostCreateDto {
     @JsonProperty("tagList")
     List<String> tagList ;
 
+    public PostCreateDto(String title, String content, String author, String imagePath, Integer commentCount, List<String> tagList) {
+        this.title = title;
+        this.content = content;
+        this.author = author;
+        this.imagePath = imagePath;
+        this.commentCount = commentCount;
+        this.tagList = tagList;
+    }
 }

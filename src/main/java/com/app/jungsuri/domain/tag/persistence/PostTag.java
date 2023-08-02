@@ -4,6 +4,8 @@ import com.app.jungsuri.domain.post.persistence.PostEntity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.time.LocalDateTime;
+
 @Entity
 @Getter
 @NoArgsConstructor
@@ -19,9 +21,12 @@ public class PostTag {
     @ManyToOne
     private Tag tag;
 
+    private LocalDateTime createdAt;
+
     public PostTag(PostEntity postEntity, Tag tag) {
         this.postEntity = postEntity;
         this.tag = tag;
+        this.createdAt = LocalDateTime.now();
     }
 
 }
