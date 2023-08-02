@@ -83,9 +83,7 @@
                     // tag added callback
                     function onAddTag(e){
                         tag_array.add(e.detail.data.value);
-                        console.log("tag_array  : ", document.getElementById("tagArr"));
-                        console.log("tag_array add : ", tag_array);
-
+                        console.log("onAddTag : ", e.detail.data.value)
                         // tagify.off('add', onAddTag) // Tagify event 중지(제거)
                     }
 
@@ -121,7 +119,7 @@
                         alert(Array.from(tag_array));
                         alert(JSON.stringify(Array.from(tag_array)));
                         console.log("JSON.stringify(tag_array)",JSON.stringify(Array.from(tag_array)))
-                        document.getElementById("tagArr").value = Array.from(tag_array);
+                        document.getElementById("tagList").value = Array.from(tag_array);
                         document.querySelector(".form").submit();
                     }
 
@@ -140,7 +138,7 @@
                     </div>
 
                     <input type="hidden" name="author" th:value="${#authentication.name}">
-                    <input id="tagArr" name="tagArr" value="">
+                    <input id="tagList" name="tagList" value="">
                     <textarea id="summernote" th:field="*{content}" class="form-control"  placeholder="content"></textarea>
 <!--                    <button class="btn btn-round btn-b" type="submit">게시글 등록</button>-->
                     <button class="btn btn-round btn-b" onclick="submitForm()">게시글 등록</button>
