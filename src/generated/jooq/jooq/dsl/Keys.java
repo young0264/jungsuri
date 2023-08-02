@@ -13,6 +13,8 @@ import jooq.dsl.tables.MountainLocation;
 import jooq.dsl.tables.MountainTag;
 import jooq.dsl.tables.Notification;
 import jooq.dsl.tables.Post;
+import jooq.dsl.tables.PostHashTag;
+import jooq.dsl.tables.PostTag;
 import jooq.dsl.tables.Tag;
 import jooq.dsl.tables.records.AccountRecord;
 import jooq.dsl.tables.records.AccountTagRecord;
@@ -22,7 +24,9 @@ import jooq.dsl.tables.records.MountainLocationRecord;
 import jooq.dsl.tables.records.MountainRecord;
 import jooq.dsl.tables.records.MountainTagRecord;
 import jooq.dsl.tables.records.NotificationRecord;
+import jooq.dsl.tables.records.PostHashTagRecord;
 import jooq.dsl.tables.records.PostRecord;
+import jooq.dsl.tables.records.PostTagRecord;
 import jooq.dsl.tables.records.TagRecord;
 
 import org.jooq.ForeignKey;
@@ -55,6 +59,8 @@ public class Keys {
     public static final UniqueKey<MountainTagRecord> KEY_MOUNTAIN_TAG_PRIMARY = Internal.createUniqueKey(MountainTag.MOUNTAIN_TAG, DSL.name("KEY_mountain_tag_PRIMARY"), new TableField[] { MountainTag.MOUNTAIN_TAG.ID }, true);
     public static final UniqueKey<NotificationRecord> KEY_NOTIFICATION_PRIMARY = Internal.createUniqueKey(Notification.NOTIFICATION, DSL.name("KEY_notification_PRIMARY"), new TableField[] { Notification.NOTIFICATION.ID }, true);
     public static final UniqueKey<PostRecord> KEY_POST_PRIMARY = Internal.createUniqueKey(Post.POST, DSL.name("KEY_post_PRIMARY"), new TableField[] { Post.POST.ID }, true);
+    public static final UniqueKey<PostHashTagRecord> KEY_POST_HASH_TAG_PRIMARY = Internal.createUniqueKey(PostHashTag.POST_HASH_TAG, DSL.name("KEY_post_hash_tag_PRIMARY"), new TableField[] { PostHashTag.POST_HASH_TAG.ID }, true);
+    public static final UniqueKey<PostTagRecord> KEY_POST_TAG_PRIMARY = Internal.createUniqueKey(PostTag.POST_TAG, DSL.name("KEY_post_tag_PRIMARY"), new TableField[] { PostTag.POST_TAG.ID }, true);
     public static final UniqueKey<TagRecord> KEY_TAG_PRIMARY = Internal.createUniqueKey(Tag.TAG, DSL.name("KEY_tag_PRIMARY"), new TableField[] { Tag.TAG.ID }, true);
 
     // -------------------------------------------------------------------------
@@ -73,4 +79,8 @@ public class Keys {
     public static final ForeignKey<MountainTagRecord, MountainRecord> FKSKNBYMDINHQ0DM6F748CCYAX0 = Internal.createForeignKey(MountainTag.MOUNTAIN_TAG, DSL.name("FKsknbymdinhq0dm6f748ccyax0"), new TableField[] { MountainTag.MOUNTAIN_TAG.MOUNTAIN_ENTITY_ID }, Keys.KEY_MOUNTAIN_PRIMARY, new TableField[] { Mountain.MOUNTAIN.ID }, true);
     public static final ForeignKey<NotificationRecord, AccountRecord> FKN2Q3MSN4YFV43J6M6690CVK75 = Internal.createForeignKey(Notification.NOTIFICATION, DSL.name("FKn2q3msn4yfv43j6m6690cvk75"), new TableField[] { Notification.NOTIFICATION.ACCOUNT_ENTITY_ID }, Keys.KEY_ACCOUNT_PRIMARY, new TableField[] { Account.ACCOUNT.ID }, true);
     public static final ForeignKey<PostRecord, AccountRecord> FKMSSEU6OHWWE5JTPBT8K45VJCG = Internal.createForeignKey(Post.POST, DSL.name("FKmsseu6ohwwe5jtpbt8k45vjcg"), new TableField[] { Post.POST.ACCOUNT_ENTITY_ID }, Keys.KEY_ACCOUNT_PRIMARY, new TableField[] { Account.ACCOUNT.ID }, true);
+    public static final ForeignKey<PostHashTagRecord, TagRecord> FKAKQBM4YLVJY0T94U9SDFP0YUX = Internal.createForeignKey(PostHashTag.POST_HASH_TAG, DSL.name("FKakqbm4ylvjy0t94u9sdfp0yux"), new TableField[] { PostHashTag.POST_HASH_TAG.ID }, Keys.KEY_TAG_PRIMARY, new TableField[] { Tag.TAG.ID }, true);
+    public static final ForeignKey<PostHashTagRecord, PostRecord> FKSGM30YTFRII1A8U73KQRD4R2P = Internal.createForeignKey(PostHashTag.POST_HASH_TAG, DSL.name("FKsgm30ytfrii1a8u73kqrd4r2p"), new TableField[] { PostHashTag.POST_HASH_TAG.POST_ENTITY_ID }, Keys.KEY_POST_PRIMARY, new TableField[] { Post.POST.ID }, true);
+    public static final ForeignKey<PostTagRecord, TagRecord> FKAC1WDCHD2PNUR3FL225OBMLG0 = Internal.createForeignKey(PostTag.POST_TAG, DSL.name("FKac1wdchd2pnur3fl225obmlg0"), new TableField[] { PostTag.POST_TAG.TAG_ID }, Keys.KEY_TAG_PRIMARY, new TableField[] { Tag.TAG.ID }, true);
+    public static final ForeignKey<PostTagRecord, PostRecord> FKEDU8N21PDYWBAFR0KQMB76K6M = Internal.createForeignKey(PostTag.POST_TAG, DSL.name("FKedu8n21pdywbafr0kqmb76k6m"), new TableField[] { PostTag.POST_TAG.POST_ENTITY_ID }, Keys.KEY_POST_PRIMARY, new TableField[] { Post.POST.ID }, true);
 }
