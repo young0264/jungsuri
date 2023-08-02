@@ -18,7 +18,7 @@ public class PostCreateDto {
     String imagePath;
     Integer commentCount = 0;
 
-    @JsonProperty("tagArr")
-    List<String> tagArr ;
+    @JsonProperty("tagList")
+    List<String> tagList ;
 
 }
