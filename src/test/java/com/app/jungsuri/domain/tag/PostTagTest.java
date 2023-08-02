@@ -38,4 +38,16 @@ public class PostTagTest {
         Assertions.assertThat(tag).isNotNull();
 
     }
+
+    @Test
+    void tag_count가_정상적으로_증가하는지() {
+        AccountEntity accountEntity = accountService.findByLoginId("12");
+        PostCreateDto postCreateDto = new PostCreateDto("게시글 등록 제목", "게시글 등록 내용", "게시글 등록 이름", null, 0,   new ArrayList<>(Arrays.asList("태그1", "태그2", "태그3")));
+        postService.createPost(postCreateDto, accountEntity);
+
+        Tag tag = postTagRepository.existTag("태그1").orElse(null);
+        tag.increaseUsedCount();
+        tag.increaseUsedCount();
+        Assertions.assertThat(tag.getUsedCount()).isEqualTo(2);
+    }
 }
