@@ -14,6 +14,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import java.util.ArrayList;
+import java.util.Arrays;
+
 import static org.springframework.security.test.web.servlet.response.SecurityMockMvcResultMatchers.authenticated;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
@@ -58,14 +60,17 @@ class PostControllerTest {
         mockMvc.perform(post("/post")
                         .param("title", "제목222")
                         .param("content", "내용222")
-                        .param("author", "작성자이름"))
+                        .param("author", "작성자이름")
+                        .param("tagList", "태그1", "태그2", "태그3"))
                 .andDo(print())
                 .andExpect(status().is3xxRedirection())
                 .andExpect(view().name("redirect:/post/list"))
                 .andExpect(authenticated());
 
         AccountEntity accountEntity = accountService.findByLoginId("12");
-        PostEntity postEntity = postService.createPost(new PostCreateDto("게시글 등록 제목", "게시글 등록 내용", "게시글 등록 이름", null, 0,new ArrayList<>()), accountEntity);
+        PostCreateDto postCreateDto = new PostCreateDto("게시글 등록 제목", "게시글 등록 내용", "게시글 등록 이름", null, 0,  new ArrayList<>());
+        PostEntity postEntity = postService.createPost(postCreateDto, accountEntity);
+
         Assertions.assertThat(postEntity.getTitle()).isEqualTo("게시글 등록 제목");
         Assertions.assertThat(postRepository.findPostEntityById(postEntity.getId()).getContent()).isEqualTo("게시글 등록 내용");
     }

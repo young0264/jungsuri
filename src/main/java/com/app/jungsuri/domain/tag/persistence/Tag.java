@@ -7,6 +7,7 @@ import java.time.LocalDateTime;
 @Entity
 @Getter
 @Builder
+@ToString
 @NoArgsConstructor
 @AllArgsConstructor
 @Inheritance(strategy = InheritanceType.JOINED) //because
@@ -22,9 +23,8 @@ public class Tag {
 
     private LocalDateTime createdAt;
 
-    public Tag(String name, int usedCount, LocalDateTime createdAt) {
+    public Tag(String name, LocalDateTime createdAt) {
         this.name = name;
-        this.usedCount = usedCount;
         this.createdAt = createdAt;
     }
 
