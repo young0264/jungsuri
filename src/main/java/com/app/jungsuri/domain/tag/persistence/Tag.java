@@ -17,10 +17,13 @@ public class Tag {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "name")
     private String name;
 
+    @Column(name = "used_count")
     private int usedCount = 0;
 
+    @Column(name = "created_at")
     private LocalDateTime createdAt;
 
     public Tag(String name, LocalDateTime createdAt) {
@@ -30,5 +33,15 @@ public class Tag {
 
     public void increaseUsedCount() {
         this.usedCount += 1;
+    }
+
+
+    @Override
+    public String toString() {
+        return "Tag{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", usedCount=" + usedCount +
+                ", createdAt=" + createdAt;
     }
 }
