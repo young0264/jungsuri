@@ -49,7 +49,7 @@ public class TagTest {
     }
 
     @Test
-    void 태그가_정상적으로_생성되는지() {
+    void 태그들이_정상적으로_생성되는지() {
         AccountEntity accountEntity = accountService.findByLoginId("12");
         PostCreateDto postCreateDto = new PostCreateDto("게시글 등록 제목", "게시글 등록 내용", "게시글 등록 이름", null, 0,  new ArrayList<>());
         PostEntity postEntity = postService.createPost(postCreateDto, accountEntity);
