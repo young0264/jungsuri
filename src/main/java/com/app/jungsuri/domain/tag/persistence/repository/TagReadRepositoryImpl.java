@@ -3,6 +3,8 @@ package com.app.jungsuri.domain.tag.persistence.repository;
 import com.app.jungsuri.domain.tag.persistence.Tag;
 import lombok.RequiredArgsConstructor;
 import org.jooq.DSLContext;
+
+import java.util.List;
 import java.util.Optional;
 import static jooq.dsl.tables.Tag.TAG;
 
@@ -17,5 +19,11 @@ public class TagReadRepositoryImpl implements TagReadRepository {
                 .where(TAG.NAME.eq(name))
                 .fetchOptionalInto(Tag.class);
 
+    }
+
+    public List<String> findAllTagsName() {
+        return dslContext.select(TAG.NAME)
+                .from(TAG)
+                .fetchInto(String.class);
     }
 }
