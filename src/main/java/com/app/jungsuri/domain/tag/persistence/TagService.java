@@ -26,20 +26,22 @@ public class TagService {
 
     public void createTags(List<String> tagList, PostEntity postEntity) {
         for (String tagName : tagList) {
-
-            /** 태그가 있으면 used += 1, 태그가 없으면 태그를 만들고 used += 1 */
-            Optional<Tag> optionalTag = findByName(tagName);
-            optionalTag.ifPresentOrElse(existTag -> {
-                existTag.increaseUsedCount();
-                tagRepository.save(existTag);
-                postTagRepository.save(new PostTag(postEntity, existTag));
-            }, () -> {
-                Tag tag = new Tag(tagName, LocalDateTime.now());
-                tagRepository.save(tag);
-                postTagRepository.save(new PostTag(postEntity, tag));
-            });
-
+            createTag(postEntity, tagName);
         }
+    }
+
+    private void createTag(PostEntity postEntity, String tagName) {
+        /** 태그가 있으면 used += 1, 태그가 없으면 태그를 생성후 used += 1 */
+        Optional<Tag> optionalTag = findByName(tagName);
+        optionalTag.ifPresentOrElse(existTag -> {
+            existTag.increaseUsedCount();
+            tagRepository.save(existTag);
+            postTagRepository.save(new PostTag(postEntity, existTag));
+        }, () -> {
+            Tag tag = new Tag(tagName, LocalDateTime.now());
+            tagRepository.save(tag);
+            postTagRepository.save(new PostTag(postEntity, tag));
+        });
     }
 
 }
