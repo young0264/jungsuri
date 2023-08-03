@@ -32,6 +32,7 @@ public class PostController {
     public String list(Model model) {
         List<PostEntity> postList = postService.getPostList();
         model.addAttribute("postList", postList);
+        model.addAttribute("tagList", tagService.getTagNameList());
         return "post/list";
     }
 
