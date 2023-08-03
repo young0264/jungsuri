@@ -6,6 +6,7 @@ import com.app.jungsuri.domain.comment.web.dto.CommentCreateDto;
 import com.app.jungsuri.domain.post.persistence.PostService;
 import com.app.jungsuri.domain.post.web.dto.PostCreateDto;
 import com.app.jungsuri.domain.post.persistence.PostEntity;
+import com.app.jungsuri.domain.tag.persistence.TagService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -22,6 +23,7 @@ import java.util.List;
 @Slf4j
 public class PostController {
 
+    private final TagService tagService;
     private final PostService postService;
     private final AccountService accountService;
 
@@ -30,7 +32,6 @@ public class PostController {
     public String list(Model model) {
         List<PostEntity> postList = postService.getPostList();
         model.addAttribute("postList", postList);
-        log.info("here is post List");
         return "post/list";
     }
 
@@ -46,7 +47,9 @@ public class PostController {
     @PostMapping("")
     public String write(@ModelAttribute("postCreateDto") PostCreateDto postCreateDto, Principal principal, RedirectAttributes redirectAttributes){
         AccountEntity accountEntity = accountService.findByLoginId(principal.getName());
-        postService.createPost(postCreateDto, accountEntity);
+        PostEntity postEntity = postService.createPost(postCreateDto, accountEntity);
+        tagService.createTags(postCreateDto.getTagList(), postEntity);
+
         redirectAttributes.addFlashAttribute("message", "게시물이 성공적으로 등록되었습니다.");
         return "redirect:/post/list";
     }
