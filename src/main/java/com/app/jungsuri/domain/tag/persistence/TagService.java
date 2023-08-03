@@ -44,4 +44,7 @@ public class TagService {
         });
     }
 
+    public List<Tag> getTagList() {
+        return tagRepository.findAll();
+    }
 }
