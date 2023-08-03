@@ -17,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 
 @MockMvcTest
@@ -62,7 +63,31 @@ public class TagTest {
         Assertions.assertThat(tagRepository.findByName("태그2").orElse(new Tag()).getUsedCount()).isEqualTo(2);
         Assertions.assertThat(tagRepository.findByName("태그3").orElse(new Tag()).getUsedCount()).isEqualTo(2);
         Assertions.assertThat(tagRepository.findByName("태그4").orElse(new Tag()).getUsedCount()).isEqualTo(1);
+    }
 
+    @Test
+    void 전체_태그찾기() {
+        AccountEntity accountEntity = accountService.findByLoginId("12");
+        PostCreateDto postCreateDto = new PostCreateDto("게시글 등록 제목", "게시글 등록 내용", "게시글 등록 이름", null, 0,  new ArrayList<>());
+        PostEntity postEntity = postService.createPost(postCreateDto, accountEntity);
+
+        tagService.createTags(Arrays.asList("태그1", "태그2", "태그3"), postEntity);
+
+        Assertions.assertThat(tagService.getTagList().size()).isEqualTo(3);
+    }
+
+    @Test
+    void 전체_태그이름만_찾기() {
+        AccountEntity accountEntity = accountService.findByLoginId("12");
+        PostCreateDto postCreateDto = new PostCreateDto("게시글 등록 제목", "게시글 등록 내용", "게시글 등록 이름", null, 0,  new ArrayList<>());
+        PostEntity postEntity = postService.createPost(postCreateDto, accountEntity);
+
+        tagService.createTags(Arrays.asList("태그1", "태그2", "태그3"), postEntity);
+        List<String> tagNameList = tagService.getTagNameList();
+
+        Assertions.assertThat(tagNameList.size()).isEqualTo(3);
+        Assertions.assertThat(tagNameList.get(0)).isEqualTo("태그1");
+        Assertions.assertThat(tagNameList.get(2)).isEqualTo("태그3");
     }
 
 }
