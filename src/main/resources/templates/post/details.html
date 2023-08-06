@@ -8,6 +8,72 @@
 
 
 <script th:inline="javascript">
+    var accountId = /*[[${accountEntity.id}]]*/;
+    var postId = /*[[${postEntity.id}]]*/;
+    console.log("accountId : ", accountId);
+    console.log("postId : ", postId);
+
+    /** 화면이 새로고침 될 때, 이미 like를 누른 댓글은 표시*/
+    document.addEventListener('DOMContentLoaded', function() {
+        loadCommentLikes(accountId, postId);
+        loadPostLikes(accountId, postId);
+    });
+    /** 현재 게시물에 좋아요를 눌렀는지, 표시*/
+    function loadPostLikes(accountId, postId) {
+        fetch('/like/post?accountId='+accountId+'&postId='+postId, {
+            method: 'GET',
+            headers: {'Content-Type': 'application/json'},
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                const heartIcon = document.getElementById("heart");
+                if (data === true) {
+                    heartIcon.classList.add("fas");
+                    heartIcon.classList.remove("far");
+                    heartIcon.style.color = "red";
+                } else {
+                    heartIcon.classList.add("far");
+                    heartIcon.classList.remove("fas");
+                    heartIcon.style.color = "";
+                }
+            })
+            .catch(error => {
+                console.error('There was a problem with the fetch operation:', error);
+            });
+    }
+
+    /**이 게시물에 해당하는 댓글에 좋아요를 눌렀으면, 누른 댓글 id만 가져와서 표시해주기.*/
+    function loadCommentLikes(accountId, postId) {
+        fetch('/like/comment?accountId='+accountId+'&postId='+postId, {
+            method: 'GET',
+            headers: {'Content-Type': 'application/json'},
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                for (let i = 0; i < data.length; i++) {
+                    const commentId = data[i];
+                    const heartIcon = document.getElementById("heart_comment_"+commentId);
+                    heartIcon.classList.add("fas");
+                    heartIcon.classList.remove("far");
+                    heartIcon.style.color = "red";
+                }
+            })
+            .catch(error => {
+                console.error('There was a problem with the fetch operation:', error);
+            });
+
+    }
+
 
     /**
      * comment를 받아서 textarea 에 넣어주는 함수
@@ -111,9 +177,9 @@
                     }
                 )
                 .catch(error => {
-                    console.error('There was a problem with the fetch operation:', error);
-                }
-            )
+                        console.error('There was a problem with the fetch operation:', error);
+                    }
+                )
         },
 
         modifyCommentLike: function (accountId, postId, commentId){
@@ -149,11 +215,11 @@
                     }
                 )
                 .catch(error => {
-                    console.error('There was a problem with the fetch operation:', error);
-                }
-            )
+                        console.error('There was a problem with the fetch operation:', error);
+                    }
+                )
 
-    }
+        }
     }
 </script>
 
@@ -203,9 +269,9 @@
                     <div class="comment-content clearfix">
                         <div class="comment-author font-alt">
                             <a href="#" th:text="${comment.author}"></a>
-<!--                            <a id="heart_comment" class="far fa-heart" style="font-size: 15px; "-->
-                            <a  th:id="'heart_comment_' + ${comment.id}" id="" class="far fa-heart" style="font-size: 15px; "
-                               th:onclick="like.modifyCommentLike(/*[[${accountEntity.getId()}]]*/, /*[[${postEntity.id}]]*/ , /*[[${comment .getId()}]]*/)">
+                            <!--                            <a id="heart_comment" class="far fa-heart" style="font-size: 15px; "-->
+                            <a  th:id="'heart_comment_' + ${comment.id}" class="far fa-heart" style="font-size: 15px; "
+                                th:onclick="like.modifyCommentLike(/*[[${accountEntity.getId()}]]*/, /*[[${postEntity.id}]]*/ , /*[[${comment .getId()}]]*/)">
                                 좋아요
                                 <span th:id="'comment_like_count_' + ${comment.id}" th:text="${comment.likeCount}"></span>개 </a>
                         </div>
@@ -214,7 +280,7 @@
                         </div>
                         <div class="comment-meta font-alt">
 
-<!--                            <a href="#" th:text="${comment.createdAt.toLocalDate()}">시간</a>-->
+                            <!--                            <a href="#" th:text="${comment.createdAt.toLocalDate()}">시간</a>-->
                             <a href="#" th:text="${comment.createdAt.toLocalDate()}">시간</a>
                             <a class="1" href="#">Reply</a>
                             <button type="button" class="btn btn-g btn-round" data-toggle="modal"
