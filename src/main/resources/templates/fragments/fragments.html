@@ -434,14 +434,14 @@
                         "remove" : onRemoveTag,
                         "dropdown:select" : onDropdownSelect ,
                     },
-                    dropdown : {
+                    dropdown: {
                         position: 'text',
                         enabled: 1 // show suggestions dropdown after 1 typed character
-                    }
+                    },
                 })
                 button = input.nextElementSibling;  // "add new tag" action-button
 
-            button.addEventListener("click", onAddButtonClick)
+            button.addEventListener("click", onAddButtonClick);
 
             function onSearchTags() {
                 let searchArr = Array.from(searchTags)

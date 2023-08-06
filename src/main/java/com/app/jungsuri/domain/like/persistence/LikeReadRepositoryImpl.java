@@ -25,7 +25,7 @@ public class LikeReadRepositoryImpl implements LikeReadRepository {
         return dslContext.fetchExists(
                 dslContext.selectOne()
                         .from(LIKES)
-                        .where(LIKES.TYPE.equal(LikesType.COMMENT), LIKES.ACCOUNT_ENTITY_ID.eq(commentId), LIKES.COMMENT_ENTITY_ID.eq(commentId))
+                        .where(LIKES.TYPE.equal(LikesType.COMMENT), LIKES.ACCOUNT_ENTITY_ID.eq(accountId), LIKES.COMMENT_ENTITY_ID.eq(commentId))
         );
     }
 }

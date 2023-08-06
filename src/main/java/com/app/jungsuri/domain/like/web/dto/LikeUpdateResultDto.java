@@ -11,10 +11,13 @@ import lombok.ToString;
 @NoArgsConstructor
 public class LikeUpdateResultDto {
 
+    /** post id, comment id*/
+    private Long id;
     private int likeCount;
     private boolean isLike;
 
-    public LikeUpdateResultDto(int likeCount, boolean isLike) {
+    public LikeUpdateResultDto(int likeCount, boolean isLike, Long id) {
+        this.id = id;
         this.likeCount = likeCount;
         this.isLike = isLike;
     }
