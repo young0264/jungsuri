@@ -46,4 +46,8 @@ public class PostService {
     public PostEntity findPostEntityById(Long id) {
         return postRepository.findPostEntityById(id);
     }
+
+    public List<PostEntity> getPostListByTags(List<String> searchTags) {
+        return postRepository.findAllByTags(searchTags);
+    }
 }
