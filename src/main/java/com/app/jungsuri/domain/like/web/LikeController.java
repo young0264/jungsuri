@@ -20,7 +20,7 @@ public class LikeController {
 
     @PatchMapping("/like/comment")
     public ResponseEntity modifyLike(@RequestBody CommentLikeUpdateDto commentLikeUpdateDto) {
-        LikeUpdateResultDto likeUpdateResultDto = likeService.updateCommentLike(commentLikeUpdateDto.getAccountId(), commentLikeUpdateDto.getCommentId());
+        LikeUpdateResultDto likeUpdateResultDto = likeService.updateCommentLike(commentLikeUpdateDto);
         return ResponseEntity.ok(likeUpdateResultDto);
     }
 
