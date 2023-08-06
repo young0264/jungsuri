@@ -116,9 +116,10 @@
             )
         },
 
-        modifyCommentLike: function (accountId, commentId){
+        modifyCommentLike: function (accountId, postId, commentId){
             let data = {
                 accountId: accountId,
+                postId: postId,
                 commentId: commentId
             };
             fetch('/like/comment',{
@@ -134,16 +135,8 @@
                 })
                 .then(
                     data => {
-                        console.log(data);
-                        var element = document.getElementById('comment_' + commentId);
-                        console.log("element", element);
-                        if (element) {
-                            var commentLikeCountElement = element.querySelector('#heart_comment_count');
-                            if (commentLikeCountElement) {
-                                commentLikeCountElement.textContent = newLikeCount;
-                            }
-                        }
-                        const heartIcon = document.getElementById("heart_comment");
+                        document.getElementById("comment_like_count_"+commentId).innerText = data['likeCount'];
+                        const heartIcon = document.getElementById("heart_comment_"+commentId);
                         if (data['like'] === true) {
                             heartIcon.classList.add("fas");
                             heartIcon.classList.remove("far");
@@ -207,13 +200,14 @@
                     <div class="comment-avatar"><img
                             src="https://s3.amazonaws.com/uifaces/faces/twitter/ryanbattles/128.jpg"
                             alt="avatar"/></div>
-                    <div class="comment-content clearfix" th:id="'comment_' + ${comment.id}">
+                    <div class="comment-content clearfix">
                         <div class="comment-author font-alt">
                             <a href="#" th:text="${comment.author}"></a>
-                            <a id="heart_comment" class="far fa-heart" style="font-size: 15px; "
-                               th:onclick="like.modifyCommentLike(/*[[${accountEntity.getId()}]]*/ , /*[[${comment .getId()}]]*/)">
+<!--                            <a id="heart_comment" class="far fa-heart" style="font-size: 15px; "-->
+                            <a  th:id="'heart_comment_' + ${comment.id}" id="" class="far fa-heart" style="font-size: 15px; "
+                               th:onclick="like.modifyCommentLike(/*[[${accountEntity.getId()}]]*/, /*[[${postEntity.id}]]*/ , /*[[${comment .getId()}]]*/)">
                                 좋아요
-                                <span id="comment_like_count" th:text="${comment.likeCount}"></span>개 </a>
+                                <span th:id="'comment_like_count_' + ${comment.id}" th:text="${comment.likeCount}"></span>개 </a>
                         </div>
                         <div class="comment-body">
                             <p th:text="${comment.content}"></p>
