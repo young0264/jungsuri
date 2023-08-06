@@ -70,6 +70,7 @@ public class PostController {
         AccountEntity accountEntity = accountService.findByLoginId(principal.getName());
 
         model.addAttribute("accountEntity", accountEntity);
+        model.addAttribute("tagList", tagService.getTagNameList());
         model.addAttribute("postEntity", postEntity);
         model.addAttribute("commentCreateDto", new CommentCreateDto());
         model.addAttribute("commentList", postEntity.getCommentList());
