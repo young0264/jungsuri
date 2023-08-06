@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Slf4j
 @Service
@@ -48,7 +49,7 @@ public class LikeService {
         return likeUpdateResultDto;
     }
 
-    /** 특정 post에 좋아요 여부에 따른 update*/
+    /** 특정 post에 좋아요 여부에 따른 좋아요 수정.(update) */
     public LikeUpdateResultDto updatePostLike(Long accountId, Long postId) {
         AccountEntity accountEntity = accountRepository.findById(accountId).orElseThrow(() -> new IllegalArgumentException("ID에 해당하는 유저가 없습니다."));
         PostEntity postEntity = postRepository.findById(postId).orElseThrow(() -> new IllegalArgumentException("ID에 해당하는 게시글이 없습니다."));
@@ -77,6 +78,10 @@ public class LikeService {
         return likeRepository.isCheckedCommentLike(accountId, commentId);
     }
 
+    /** 현재 유저 id에서 post에 댓글중에 좋아요를 누른 comment id 리스트 가져오기*/
+    public List<Long> getCommentLikeList(Long accountId, Long postId) {
+        return likeRepository.getCommentLikeList(accountId, postId);
+    }
 
     private LikeEntity getLikeEntity(AccountEntity accountEntity, PostEntity postEntity, CommentEntity commentEntity, LikeType type) {
         return LikeEntity.builder()
