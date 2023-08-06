@@ -193,7 +193,6 @@
     }
 </style>
 
-
 <!--html head 조각 end-->
 <!--nav header 레이아웃 조각 start -->
 <span th:fragment="nav_header">
@@ -414,10 +413,14 @@
     <div class="widget">
         <h5 class="widget-title font-alt">Tag</h5>
         <h5>검색할 태그를 선택해 주세요.</h5>
-        <input class='customLook' >
-        <button type="button">+</button>
+            <input class='customLook' id="searchTags" name="searchTags">
+            <button type="button">+</button>
+            <button class="btn btn-primary" onclick="onSearchTags()">검색</button>
+
         <!--   tagify script, style  start -->
         <script type="text/javascript" th:inline="javascript">
+
+            let searchTags = new Set();
 
             console.log("taglist : ",/*[[${tagList}]]*/)
             var input = document.querySelector('.customLook'),
@@ -428,30 +431,58 @@
                     callbacks: {
                         "invalid": onInvalidTag,
                         "focus" : focus,
+                        "remove" : onRemoveTag,
                         "dropdown:select" : onDropdownSelect ,
                     },
                     dropdown : {
                         position: 'text',
                         enabled: 1 // show suggestions dropdown after 1 typed character
                     }
-                }),
+                })
                 button = input.nextElementSibling;  // "add new tag" action-button
 
             button.addEventListener("click", onAddButtonClick)
 
+            function onSearchTags() {
+                let searchArr = Array.from(searchTags)
+                let data = {
+                    "searchTags": searchArr,
+                };
+                $.ajax({
+                    url: "list",
+                    type: "POST",
+                    contentType: "application/json",
+                    headers: {
+                        'X-Requested-With': 'XMLHttpRequest',
+                    },
+                    data: JSON.stringify(data),
+                    success: function (res) {
+                        $("#post_list").replaceWith(res);
+                    },
+                    error: function (err) {
+                        console.error("로그인 중 에러 발생");
+                    }
+                });
+            }
+
+            function onInvalidTag(e) {
+                console.log("invalid", e.detail)
+            }
+
             function onDropdownSelect(e) {
-                console.log("onDropdownSelect: ", e.detail);
+                console.log("onDropdownSelect value : ", e.detail.data.value);
+                searchTags.add(e.detail.data.value);
+                console.log("searchTags : ", searchTags);
+            }
 
-
+            function onRemoveTag(e){
+                console.log("onRemoveTag : " , e.detail.data.value);
+                searchTags.delete(e.detail.data.value);
             }
 
             function onAddButtonClick(){
                 console.log("plus button clicked");
                 tagify.addEmptyTag()
-            }
-
-            function onInvalidTag(e){
-                console.log("invalid", e.detail)
             }
         </script>
         <style>
@@ -524,7 +555,6 @@
             <a href="#" rel="tag" th:each="tag : ${tagList}" th:text="${tag}" style="font-size: 15px;"></a>
         </div>
         <li><a href="#" style="font-size: 15px;">모두보기</a></li>
-
 
     </div>
     <!-- 텍스트 -->
