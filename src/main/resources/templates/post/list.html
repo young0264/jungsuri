@@ -38,7 +38,8 @@
                 <div class="col-sm-8 col-sm-offset-1">
 
                     <!--   게시글 main form start  -->
-                    <div class="post" th:each="post : ${postList}">
+                    <div id="post_list">
+                        <div class="post" th:each="post : ${postList}">
                         <div class="post-thumbnail">
                             <a href="#"><img src="/images/banner_mountain01.jpg" alt="Blog-post Thumbnail"/>
                             </a>
@@ -64,6 +65,7 @@
                             <p th:placeholder="post." th:text="${post.content.replaceAll('<(/)?([a-zA-Z]*)(\\s[a-zA-Z]*=[^>]*)?(\\s)*(/)?>', '')}"></p>
                         </div>
                         <div class="post-more"><a class="more-link" href="#">Read more</a></div>
+                    </div>
                     </div>
                     <!--   게시글 main form end  -->
 

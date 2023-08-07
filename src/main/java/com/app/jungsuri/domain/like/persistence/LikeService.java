@@ -5,6 +5,7 @@ import com.app.jungsuri.domain.account.persistence.AccountRepository;
 import com.app.jungsuri.domain.comment.persistence.CommentEntity;
 import com.app.jungsuri.domain.comment.persistence.CommentRepository;
 import com.app.jungsuri.domain.like.domain.LikeType;
+import com.app.jungsuri.domain.like.web.dto.CommentLikeUpdateDto;
 import com.app.jungsuri.domain.like.web.dto.LikeUpdateResultDto;
 import com.app.jungsuri.domain.post.persistence.PostEntity;
 import com.app.jungsuri.domain.post.persistence.PostRepository;
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Slf4j
 @Service
@@ -27,32 +29,37 @@ public class LikeService {
     private final CommentRepository commentRepository;
 
     /** 특정 comment에 좋아요 여부에 따른 update*/
-    public LikeUpdateResultDto updateCommentLike(Long accountId, Long commentId) {
+    public LikeUpdateResultDto updateCommentLike(CommentLikeUpdateDto commentLikeUpdateDto) {
+        Long accountId = commentLikeUpdateDto.getAccountId();
+        Long postId = commentLikeUpdateDto.getPostId();
+        Long commentId = commentLikeUpdateDto.getCommentId();
+
         AccountEntity accountEntity = accountRepository.findById(accountId).orElseThrow(() -> new IllegalArgumentException("ID에 해당하는 유저가 없습니다."));
+        PostEntity postEntity = postRepository.findById(postId).orElseThrow(() -> new IllegalArgumentException("ID에 해당하는 게시글이 없습니다."));
         CommentEntity commentEntity = commentRepository.findById(commentId).orElseThrow(() -> new IllegalArgumentException("ID에 해당하는 댓글이 없습니다."));
         LikeUpdateResultDto likeUpdateResultDto;
 
         if(!isCheckedCommentLike(accountId, commentId)) {
-            likeUpdateResultDto = new LikeUpdateResultDto(commentEntity.increaseLikeCount() ,true);
-            likeRepository.save(getLikeEntity(accountEntity, null, commentEntity, LikeType.COMMENT));
+            likeUpdateResultDto = new LikeUpdateResultDto(commentEntity.increaseLikeCount() ,true, commentId);
+            likeRepository.save(getLikeEntity(accountEntity, postEntity, commentEntity, LikeType.COMMENT));
         } else {
-            likeUpdateResultDto = new LikeUpdateResultDto(commentEntity.decreaseLikeCount(), false);
+            likeUpdateResultDto = new LikeUpdateResultDto(commentEntity.decreaseLikeCount(), false, commentId);
             likeRepository.deleteLikeByCommentId(accountId, commentId);
         }
         return likeUpdateResultDto;
     }
 
-    /** 특정 post에 좋아요 여부에 따른 update*/
+    /** 특정 post에 좋아요 여부에 따른 좋아요 수정.(update) */
     public LikeUpdateResultDto updatePostLike(Long accountId, Long postId) {
         AccountEntity accountEntity = accountRepository.findById(accountId).orElseThrow(() -> new IllegalArgumentException("ID에 해당하는 유저가 없습니다."));
         PostEntity postEntity = postRepository.findById(postId).orElseThrow(() -> new IllegalArgumentException("ID에 해당하는 게시글이 없습니다."));
         LikeUpdateResultDto likeUpdateResultDto;
 
         if(!isCheckedPostLike(accountId, postId)) {
-            likeUpdateResultDto = new LikeUpdateResultDto(postEntity.increaseLikeCount(),true);
+            likeUpdateResultDto = new LikeUpdateResultDto(postEntity.increaseLikeCount(),true, postId);
             likeRepository.save(getLikeEntity(accountEntity, postEntity, null, LikeType.POST));
         } else {
-            likeUpdateResultDto = new LikeUpdateResultDto(postEntity.decreaseLikeCount(),false);
+            likeUpdateResultDto = new LikeUpdateResultDto(postEntity.decreaseLikeCount(),false, postId);
             likeRepository.deleteLikeByPostId(accountId, postId);
         }
         return likeUpdateResultDto;
@@ -71,6 +78,10 @@ public class LikeService {
         return likeRepository.isCheckedCommentLike(accountId, commentId);
     }
 
+    /** 현재 유저 id에서 post에 댓글중에 좋아요를 누른 comment id 리스트 가져오기*/
+    public List<Long> getCommentLikeList(Long accountId, Long postId) {
+        return likeRepository.getCommentLikeList(accountId, postId);
+    }
 
     private LikeEntity getLikeEntity(AccountEntity accountEntity, PostEntity postEntity, CommentEntity commentEntity, LikeType type) {
         return LikeEntity.builder()

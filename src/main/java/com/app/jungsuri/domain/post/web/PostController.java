@@ -6,13 +6,13 @@ import com.app.jungsuri.domain.comment.web.dto.CommentCreateDto;
 import com.app.jungsuri.domain.post.persistence.PostService;
 import com.app.jungsuri.domain.post.web.dto.PostCreateDto;
 import com.app.jungsuri.domain.post.persistence.PostEntity;
-import com.app.jungsuri.domain.tag.persistence.TagService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
 import java.security.Principal;
 import java.util.List;
 
@@ -22,7 +22,6 @@ import java.util.List;
 @Slf4j
 public class PostController {
 
-    private final TagService tagService;
     private final PostService postService;
     private final AccountService accountService;
 
@@ -47,10 +46,7 @@ public class PostController {
     @PostMapping("")
     public String write(@ModelAttribute("postCreateDto") PostCreateDto postCreateDto, Principal principal, RedirectAttributes redirectAttributes){
         AccountEntity accountEntity = accountService.findByLoginId(principal.getName());
-
-        PostEntity postEntity = postService.createPost(postCreateDto, accountEntity);
-        tagService.createTags(postCreateDto.getTagList(), postEntity);
-
+        postService.createPost(postCreateDto, accountEntity);
         redirectAttributes.addFlashAttribute("message", "게시물이 성공적으로 등록되었습니다.");
         return "redirect:/post/list";
     }
