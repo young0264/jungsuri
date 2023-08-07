@@ -3,6 +3,7 @@ package com.app.jungsuri.domain.like.persistence;
 import jooq.dsl.enums.LikesType;
 import lombok.RequiredArgsConstructor;
 import org.jooq.DSLContext;
+import java.util.List;
 import static jooq.dsl.tables.Likes.LIKES;
 
 @RequiredArgsConstructor
@@ -25,7 +26,15 @@ public class LikeReadRepositoryImpl implements LikeReadRepository {
         return dslContext.fetchExists(
                 dslContext.selectOne()
                         .from(LIKES)
-                        .where(LIKES.TYPE.equal(LikesType.COMMENT), LIKES.ACCOUNT_ENTITY_ID.eq(commentId), LIKES.COMMENT_ENTITY_ID.eq(commentId))
+                        .where(LIKES.TYPE.equal(LikesType.COMMENT), LIKES.ACCOUNT_ENTITY_ID.eq(accountId), LIKES.COMMENT_ENTITY_ID.eq(commentId))
         );
+    }
+
+    @Override
+    public List<Long> getCommentLikeList(Long loginId, Long postId) {
+        return dslContext.select(LIKES.COMMENT_ENTITY_ID)
+                .from(LIKES)
+                .where(LIKES.TYPE.equal(LikesType.COMMENT), LIKES.ACCOUNT_ENTITY_ID.eq(loginId), LIKES.POST_ENTITY_ID.eq(postId))
+                .fetch(LIKES.COMMENT_ENTITY_ID);
     }
 }

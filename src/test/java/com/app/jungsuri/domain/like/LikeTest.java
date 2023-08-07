@@ -6,6 +6,7 @@ import com.app.jungsuri.domain.comment.persistence.CommentEntity;
 import com.app.jungsuri.domain.comment.persistence.CommentService;
 import com.app.jungsuri.domain.comment.web.dto.CommentCreateDto;
 import com.app.jungsuri.domain.like.persistence.LikeService;
+import com.app.jungsuri.domain.like.web.dto.CommentLikeUpdateDto;
 import com.app.jungsuri.domain.post.persistence.PostEntity;
 import com.app.jungsuri.domain.post.persistence.PostService;
 import com.app.jungsuri.domain.post.web.dto.PostCreateDto;
@@ -71,16 +72,16 @@ public class LikeTest {
     @WithMockUser(username = "12", password = "12")
     void 댓글_좋아요_create_Test() {
         AccountEntity accountEntity = accountService.findByLoginId("12");
-        likeService.updateCommentLike(accountEntity.getId(), createdCommentId);
+        likeService.updateCommentLike(new CommentLikeUpdateDto(accountEntity.getId(), createdPostId, createdCommentId));
 
-        Assertions.assertThat(likeService.isCheckedCommentLike(accountEntity.getId(),createdCommentId)).isTrue();
+        Assertions.assertThat(likeService.isCheckedCommentLike(accountEntity.getId(), createdCommentId)).isTrue();
     }
     @Test
     @WithMockUser(username = "12", password = "12")
     void 댓글_좋아요_delete_Test() {
         AccountEntity accountEntity = accountService.findByLoginId("12");
-        likeService.updateCommentLike(accountEntity.getId(), createdCommentId);
-        likeService.updateCommentLike(accountEntity.getId(), createdCommentId);
+        likeService.updateCommentLike(new CommentLikeUpdateDto(accountEntity.getId(), createdPostId, createdCommentId));
+        likeService.updateCommentLike(new CommentLikeUpdateDto(accountEntity.getId(), createdPostId, createdCommentId));
 
         Assertions.assertThat(likeService.isCheckedPostLike(accountEntity.getId(),createdCommentId)).isFalse();
     }
