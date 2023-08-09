@@ -32,18 +32,21 @@
 
                 <!-- left slider start col-sm-4-->
                 <!-- TODO : map용 left side bar 만들기 -->
-                <span th:replace="fragments/fragments.html :: left_sidebar"></span>
+<!--                <span th:replace="fragments/fragments.html :: left_sidebar"></span>-->
                 <!-- left slider end -->
 
                 <div id="map" style="width:600px;height:600px;"></div>
                 <!-- kakao map api 시작 -->
                 <script>
-                    var container = document.getElementById('map');
-                    var options = {
-                        center: new kakao.maps.LatLng(33.450701, 126.570667),
-                        level: 10
+                    var mapContainer = document.getElementById('map'); // 지도를 표시할 div
+                    var mapOption = {
+                        center: new kakao.maps.LatLng(37.566826, 126.9786567), // 지도의 중심좌표
+                        // level: 3 // 지도의 확대 레벨
                     };
-                    var map = new kakao.maps.Map(container, options);
+
+
+                    var map = new kakao.maps.Map(mapContainer, mapOption); //지도를 생성합니다
+
                     // 일반 지도와 스카이뷰로 지도 타입을 전환할 수 있는 지도타입 컨트롤을 생성합니다
                     var mapTypeControl = new kakao.maps.MapTypeControl();
 
@@ -70,14 +73,10 @@
 
                             // 마커와 인포윈도우를 표시합니다
                             displayMarker(locPosition, message);
-
                         });
-
                     } else { // HTML5의 GeoLocation을 사용할 수 없을때 마커 표시 위치와 인포윈도우 내용을 설정합니다
-
                         var locPosition = new kakao.maps.LatLng(33.450701, 126.570667),
                             message = 'geolocation을 사용할수 없어요..'
-
                         displayMarker(locPosition, message);
                     }
 
