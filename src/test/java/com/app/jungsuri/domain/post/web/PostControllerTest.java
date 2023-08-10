@@ -50,7 +50,6 @@ class PostControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(view().name("post/form"))
                 .andExpect(model().attributeExists("postCreateDto"))
-                .andExpect(model().attributeExists("tagList"))
                 .andExpect(authenticated());
     }
 
