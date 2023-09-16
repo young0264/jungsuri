@@ -47,3 +47,6 @@ applicdatioin.properties
 /src/main/resources/static/*
 /src/main/resources/application.properties
 build.gradle
+
+###도커파일
+dockerfile
