@@ -5,6 +5,7 @@ package jooq.dsl.tables.pojos;
 
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 
 
 /**
@@ -15,24 +16,35 @@ public class PostTag implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
+    private final LocalDateTime createdAt;
     private final Long id;
     private final Long postEntityId;
     private final Long tagId;
 
     public PostTag(PostTag value) {
+        this.createdAt = value.createdAt;
         this.id = value.id;
         this.postEntityId = value.postEntityId;
         this.tagId = value.tagId;
     }
 
     public PostTag(
+        LocalDateTime createdAt,
         Long id,
         Long postEntityId,
         Long tagId
     ) {
+        this.createdAt = createdAt;
         this.id = id;
         this.postEntityId = postEntityId;
         this.tagId = tagId;
+    }
+
+    /**
+     * Getter for <code>jungsuri.post_tag.created_at</code>.
+     */
+    public LocalDateTime getCreatedAt() {
+        return this.createdAt;
     }
 
     /**
@@ -60,7 +72,8 @@ public class PostTag implements Serializable {
     public String toString() {
         StringBuilder sb = new StringBuilder("PostTag (");
 
-        sb.append(id);
+        sb.append(createdAt);
+        sb.append(", ").append(id);
         sb.append(", ").append(postEntityId);
         sb.append(", ").append(tagId);
 

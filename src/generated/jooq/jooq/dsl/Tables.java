@@ -13,7 +13,6 @@ import jooq.dsl.tables.MountainLocation;
 import jooq.dsl.tables.MountainTag;
 import jooq.dsl.tables.Notification;
 import jooq.dsl.tables.Post;
-import jooq.dsl.tables.PostHashTag;
 import jooq.dsl.tables.PostTag;
 import jooq.dsl.tables.Tag;
 
@@ -68,11 +67,6 @@ public class Tables {
      * The table <code>jungsuri.post</code>.
      */
     public static final Post POST = Post.POST;
-
-    /**
-     * The table <code>jungsuri.post_hash_tag</code>.
-     */
-    public static final PostHashTag POST_HASH_TAG = PostHashTag.POST_HASH_TAG;
 
     /**
      * The table <code>jungsuri.post_tag</code>.

@@ -4,6 +4,7 @@
 package jooq.dsl.tables;
 
 
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
 import java.util.function.Function;
@@ -14,12 +15,12 @@ import jooq.dsl.tables.records.PostTagRecord;
 
 import org.jooq.Field;
 import org.jooq.ForeignKey;
-import org.jooq.Function3;
+import org.jooq.Function4;
 import org.jooq.Identity;
 import org.jooq.Name;
 import org.jooq.Record;
 import org.jooq.Records;
-import org.jooq.Row3;
+import org.jooq.Row4;
 import org.jooq.Schema;
 import org.jooq.SelectField;
 import org.jooq.Table;
@@ -51,6 +52,11 @@ public class PostTag extends TableImpl<PostTagRecord> {
     public Class<PostTagRecord> getRecordType() {
         return PostTagRecord.class;
     }
+
+    /**
+     * The column <code>jungsuri.post_tag.created_at</code>.
+     */
+    public final TableField<PostTagRecord, LocalDateTime> CREATED_AT = createField(DSL.name("created_at"), SQLDataType.LOCALDATETIME(6), this, "");
 
     /**
      * The column <code>jungsuri.post_tag.id</code>.
@@ -183,18 +189,18 @@ public class PostTag extends TableImpl<PostTagRecord> {
     }
 
     // -------------------------------------------------------------------------
-    // Row3 type methods
+    // Row4 type methods
     // -------------------------------------------------------------------------
 
     @Override
-    public Row3<Long, Long, Long> fieldsRow() {
-        return (Row3) super.fieldsRow();
+    public Row4<LocalDateTime, Long, Long, Long> fieldsRow() {
+        return (Row4) super.fieldsRow();
     }
 
     /**
      * Convenience mapping calling {@link SelectField#convertFrom(Function)}.
      */
-    public <U> SelectField<U> mapping(Function3<? super Long, ? super Long, ? super Long, ? extends U> from) {
+    public <U> SelectField<U> mapping(Function4<? super LocalDateTime, ? super Long, ? super Long, ? super Long, ? extends U> from) {
         return convertFrom(Records.mapping(from));
     }
 
@@ -202,7 +208,7 @@ public class PostTag extends TableImpl<PostTagRecord> {
      * Convenience mapping calling {@link SelectField#convertFrom(Class,
      * Function)}.
      */
-    public <U> SelectField<U> mapping(Class<U> toType, Function3<? super Long, ? super Long, ? super Long, ? extends U> from) {
+    public <U> SelectField<U> mapping(Class<U> toType, Function4<? super LocalDateTime, ? super Long, ? super Long, ? super Long, ? extends U> from) {
         return convertFrom(toType, Records.mapping(from));
     }
 }
