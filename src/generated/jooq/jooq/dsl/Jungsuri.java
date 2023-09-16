@@ -16,7 +16,6 @@ import jooq.dsl.tables.MountainLocation;
 import jooq.dsl.tables.MountainTag;
 import jooq.dsl.tables.Notification;
 import jooq.dsl.tables.Post;
-import jooq.dsl.tables.PostHashTag;
 import jooq.dsl.tables.PostTag;
 import jooq.dsl.tables.Tag;
 
@@ -84,11 +83,6 @@ public class Jungsuri extends SchemaImpl {
     public final Post POST = Post.POST;
 
     /**
-     * The table <code>jungsuri.post_hash_tag</code>.
-     */
-    public final PostHashTag POST_HASH_TAG = PostHashTag.POST_HASH_TAG;
-
-    /**
      * The table <code>jungsuri.post_tag</code>.
      */
     public final PostTag POST_TAG = PostTag.POST_TAG;
@@ -123,7 +117,6 @@ public class Jungsuri extends SchemaImpl {
             MountainTag.MOUNTAIN_TAG,
             Notification.NOTIFICATION,
             Post.POST,
-            PostHashTag.POST_HASH_TAG,
             PostTag.POST_TAG,
             Tag.TAG
         );
