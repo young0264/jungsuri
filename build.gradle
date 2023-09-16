@@ -12,11 +12,31 @@ buildscript {
     }
 }
 
+
 plugins {
     id 'java'
     id 'org.springframework.boot' version '3.1.1'
     id 'io.spring.dependency-management' version '1.0.11.RELEASE'
     id 'nu.studer.jooq' version '6.0.1'  // gradle-jooq-plugin
+    id 'application'
+}
+//application {
+////    mainClassName = 'com/jungsuri/JungsuriApplication.java' // 메인 클래스 패키지 및 이름으로 변경
+//    mainClassName = 'src/main/java/com/jungsuri/JungsuriApplication.java' // 메인 클래스 패키지 및 이름으로 변경
+//}
+jar {
+    enabled = false
+}
+//jar {
+//    enabled = false
+//    manifest {
+//        attributes 'Main-Class': 'src/main/java/com/jungsuri/JungsuriApplication'
+//    }
+//}
+tasks.jar {
+    manifest {
+        attributes["Main-Class"] = "com/jungsuri/JungsuriApplication"
+    }
 }
 
 group = 'com.app'
@@ -85,7 +105,6 @@ dependencies {
     // https://mvnrepository.com/artifact/com.googlecode.json-simple/json-simple
     implementation group: 'com.googlecode.json-simple', name: 'json-simple', version: '1.1.1'
 
-
 }
 
 tasks.named('test') {
@@ -106,10 +125,22 @@ jooq {
 //                onError = 'LOG'  // FAIL, LOG, SILENT
 
                 jdbc {
+//                    dbLoginId=young;
+//                    dbPassword=7dmldud9!!;
+//                    jooqVersion=3.18.0;
+//                    mailSendLoginId=euiyoung1403;
+//                    mailSendPassword=uzbxqeqwunkivcug;
+//                    weatherAPIKey=707030ec5c754c712499024828387e91
+
                     driver = 'com.mysql.cj.jdbc.Driver'
-                    url = 'jdbc:mysql://localhost:3306/jungsuri'
-                    user = System.getenv('dbLoginId')
-                    password = System.getenv('dbPassword')
+//                    url = 'jdbc:mysql://mysql-docker-container:3306/jungsuri'
+//                    url = 'jdbc:mysql://localhost:3306/jungsuri'
+                    url = 'jdbc:mysql://127.0.0.1:3306/jungsuri'
+//                    url = 'jdbc:mysql://mysql:3306/jungsuri'
+//                    user = System.getenv('dbLoginId')
+//                    password = System.getenv('dbPassword')
+                    user = 'young'
+                    password = '7dmldud9!!'
                     schema = 'jungsuri'
                 }
 
@@ -143,4 +174,5 @@ jooq {
         }
     }
 }
+
 
