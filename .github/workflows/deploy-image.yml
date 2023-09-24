@@ -24,5 +24,5 @@ jobs:
 
       - name: Deploy to Docker
         run: |
-          docker build -t my-java-app .
-          docker run -d -p 8002:8002 my-java-app
+          docker build -t jungsuri .
+          docker run -p 8002:8002 --name jungsuri-container --network jungsuri-network -d 'ny2485/jungsuri'
