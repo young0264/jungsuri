@@ -50,3 +50,6 @@ build.gradle
 
 ###도커파일
 dockerfile
+
+###pem파일
+.pem

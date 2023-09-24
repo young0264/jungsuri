@@ -234,9 +234,11 @@
                         </form>
                     </a>
                     <a sec:authorize="!isAuthenticated()" th:href="@{/login}">
-                        <form th:action="@{/}" method="post">
-                            <input class="btn btn-b btn-round" type="submit" value="로그인"/>
-                        </form>
+                        <input class="btn btn-b btn-round" type="submit" value="로그인"/>
+
+<!--                        <form th:action="@{/}" method="post">-->
+<!--                            <input class="btn btn-b btn-round" type="submit" value="로그인"/>-->
+<!--                        </form>-->
                     </a>
                 </li>
                 <li><i class="fa fa-fw fa-bell-o" style="color: red; width: 20px; height: 20px;"></i></li>
