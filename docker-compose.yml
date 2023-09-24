@@ -1,22 +1,48 @@
-# Use root/example as user/password credentials
 version: '3.1'
 
 services:
-
-  db:
-    image: mysql
-    # NOTE: use of "mysql_native_password" is not recommended: https://dev.mysql.com/doc/refman/8.0/en/upgrading-from-previous-series.html#upgrade-caching-sha2-password
-    # (this is just an example, not intended to be a production configuration)
-    command: --default-authentication-plugin=mysql_native_password
-    restart: always
+  jungsuri:  # 컨테이너 이름
+    build:  # Dockerfile의 빌드 설정
+      context: ./  # Dockerfile이 있는 디렉터리 경로
+      dockerfile: dockerfile  # Dockerfile의 이름
+    image: jungsuri-image  # 이미지 이름 (나중에 사용할 수 있도록 이름 설정)
     environment:
-        MYSQL_USER: young
-        MYSQL_PASSWORD: 7dmldud9!!
-        MYSQL_DATABASE: jungsuri
-        MYSQL_ROOT_PASSWORD: 7dmldud9!!
-
-  adminer:
-    image: adminer
-    restart: always
+      SPRING_PROFILES_ACTIVE : dev
+      dbLoginId : young
+      dbPassword : 7dmldud9!!
+      jooqVersion : 3.18.0
+      mailSendLoginId : euiyoung1403
+      mailSendPassword : uzbxqeqwunkivcug
+      weatherAPIKey : 707030ec5c754c712499024828387e91
+      MYSQL_ROOT_PASSWORD : 7dmldud9!!
+      MYSQL_ALLOW_EMPTY_PASSWORD : 7dmldud9!!
+      MYSQL_USER : young
+      MYSQL_PASSWORD : 7dmldud9!!
+      MYSQL_DATABASE : jungsuri
+      MYSQL_RANDOM_ROOT_PASSWORD : 7dmldud9!!
     ports:
-      - 3306:3306
+      - "8002:8002"
+    depends_on:
+      - jungsuri-db
+    networks:
+      - jungsuri-network
+    volumes:
+      - ./build/libs/jungsuri-0.0.1-SNAPSHOT.jar:/app/app.jar
+
+
+  jungsuri-db:
+    image: mysql:8.1
+    environment:
+      MYSQL_ROOT_PASSWORD : 7dmldud9!!
+      MYSQL_DATABASE : jungsuri
+      MYSQL_USER : young
+      MYSQL_PASSWORD : 7dmldud9!!
+      MYSQL_ALLOW_EMPTY_PASSWORD : yes
+    ports:
+      - "3306:3306"
+    networks:
+      - jungsuri-network
+
+networks:
+  jungsuri-network:
+    driver: bridge

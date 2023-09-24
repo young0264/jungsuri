@@ -2,6 +2,15 @@
 import nu.studer.gradle.jooq.JooqEdition
 
 buildscript {
+    ext {
+        profile = "localhost"
+        if (project.hasProperty('dev')) {
+            profile = "jungsuri-db"
+//            profile = "172.18.0.2"
+//            profile = "172.18.0.2"
+        }
+    }
+
     repositories {
         maven {
             url 'https://plugins.gradle.org/m2/'
@@ -11,6 +20,9 @@ buildscript {
         classpath("nu.studer:gradle-jooq-plugin:3.0.3")
     }
 }
+//ifconfig
+//apt-get install iputils-ping
+//apt-get install net-tools
 
 
 plugins {
@@ -20,19 +32,9 @@ plugins {
     id 'nu.studer.jooq' version '6.0.1'  // gradle-jooq-plugin
     id 'application'
 }
-//application {
-////    mainClassName = 'com/jungsuri/JungsuriApplication.java' // 메인 클래스 패키지 및 이름으로 변경
-//    mainClassName = 'src/main/java/com/jungsuri/JungsuriApplication.java' // 메인 클래스 패키지 및 이름으로 변경
-//}
 jar {
     enabled = false
 }
-//jar {
-//    enabled = false
-//    manifest {
-//        attributes 'Main-Class': 'src/main/java/com/jungsuri/JungsuriApplication'
-//    }
-//}
 tasks.jar {
     manifest {
         attributes["Main-Class"] = "com/jungsuri/JungsuriApplication"
@@ -46,7 +48,6 @@ sourceCompatibility = '17'
 repositories {
     mavenCentral()
 }
-
 dependencies {
     /**
      * basic setting
@@ -107,38 +108,27 @@ dependencies {
 
 }
 
+//val profile123 = 'localhost:3306'
+
 tasks.named('test') {
     useJUnitPlatform()
 }
-
 jooq {
+
     version = '3.18.0'  // default (can be omitted)
     edition = JooqEdition.OSS  // default (can be omitted)
 
+// name of the jOOQ configuration
     configurations {
-        main {  // name of the jOOQ configuration
+        main {
             generateSchemaSourceOnCompilation = true  // default (can be omitted)
 //      TRACE, DEBUG, INFO, WARN, ERROR, FATAL
             generationTool {
                 logging = org.jooq.meta.jaxb.Logging.DEBUG
-//                logging = 'WARN'
-//                onError = 'LOG'  // FAIL, LOG, SILENT
 
                 jdbc {
-//                    dbLoginId=young;
-//                    dbPassword=7dmldud9!!;
-//                    jooqVersion=3.18.0;
-//                    mailSendLoginId=euiyoung1403;
-//                    mailSendPassword=uzbxqeqwunkivcug;
-//                    weatherAPIKey=707030ec5c754c712499024828387e91
-
                     driver = 'com.mysql.cj.jdbc.Driver'
-//                    url = 'jdbc:mysql://mysql-docker-container:3306/jungsuri'
-//                    url = 'jdbc:mysql://localhost:3306/jungsuri'
-                    url = 'jdbc:mysql://127.0.0.1:3306/jungsuri'
-//                    url = 'jdbc:mysql://mysql:3306/jungsuri'
-//                    user = System.getenv('dbLoginId')
-//                    password = System.getenv('dbPassword')
+                    url = "jdbc:mysql://${profile}:3306/jungsuri"
                     user = 'young'
                     password = '7dmldud9!!'
                     schema = 'jungsuri'
