@@ -95,7 +95,6 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-jooq'
     implementation 'org.jooq:jooq:3.18.0'
     jooqGenerator 'mysql:mysql-connector-java:8.0.25'
-    jooqGenerator file("src/main/resources")
 
     //mail
     implementation 'org.springframework.boot:spring-boot-starter-mail'
