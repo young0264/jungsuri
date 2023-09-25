@@ -128,8 +128,8 @@ jooq {
 
                 jdbc {
                     driver = 'com.mysql.cj.jdbc.Driver'
-                    url = "jdbc:mysql://jungsuri-db:3306/jungsuri"
-//                    url = "jdbc:mysql://${profile}:3306/jungsuri"
+//                    url = "jdbc:mysql://jungsuri-db:3306/jungsuri"
+                    url = "jdbc:mysql://${profile}:3306/jungsuri"
                     user = 'young'
                     password = '7dmldud9!!'
                     schema = 'jungsuri'
