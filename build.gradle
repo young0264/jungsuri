@@ -121,7 +121,7 @@ jooq {
 // name of the jOOQ configuration
     configurations {
         main {
-            generateSchemaSourceOnCompilation = true  // default (can be omitted)
+//            generateSchemaSourceOnCompilation = true  // default (can be omitted)
 //      TRACE, DEBUG, INFO, WARN, ERROR,  FATAL
             generationTool {
                 logging = org.jooq.meta.jaxb.Logging.DEBUG
