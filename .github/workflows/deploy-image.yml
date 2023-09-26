@@ -65,7 +65,7 @@ jobs:
         with:
           arguments: build
       - name: Run JAR
-        run: java -jar build/libs/생성된_JAR_파일명.jar
+        run: java -jar build/libs/jungsuri-0.0.1-SNAPSHOT.jar
       # The USERNAME and TOKEN need to correspond to the credentials environment variables used in
       # the publishing section of your build.gradle
       - name: Publish to GitHub Packages
