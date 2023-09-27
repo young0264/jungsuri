@@ -5,7 +5,8 @@ buildscript {
     ext {
         profile = "localhost"
         if (project.hasProperty('dev')) {
-            profile = "jungsuri-db"
+            profile = ""
+//            profile = "jungsuri-db"
 //            profile = "172.18.0.2"
 //            profile = "172.18.0.2"
         }
