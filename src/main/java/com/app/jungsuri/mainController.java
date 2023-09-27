@@ -21,7 +21,7 @@ public class mainController {
 
     private final AccountService accountService;
     private final MountainService mountainService;
-    private final MountainLocationService mountainLocationService;
+//    private final MountainLocationService mountainLocationService;
 
     @PostConstruct
     public String init() {
