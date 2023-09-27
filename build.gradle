@@ -17,9 +17,9 @@ buildscript {
             url 'https://plugins.gradle.org/m2/'
         }
     }
-//    dependencies {
-//        classpath("nu.studer:gradle-jooq-plugin:3.0.3")
-//    }
+    dependencies {
+        classpath("nu.studer:gradle-jooq-plugin:3.0.3")
+    }
 }
 //ifconfig .
 //apt-get install iputils-ping
@@ -151,7 +151,8 @@ jooq {
                 jdbc {
                     driver = 'com.mysql.cj.jdbc.Driver'
 //                    url = "jdbc:mysql://jungsuri-db:3306/jungsuri"
-                    url = "jdbc:mysql://${profile}:3306/jungsuri1"
+//                    url = "jdbc:mysql://${profile}:3306/jungsuri"
+                    url = "jdbc:mysql://:3306/jungsuri"
                     user = 'young'
                     password = '7dmldud9!!'
                     schema = 'jungsuri'
