@@ -27,10 +27,12 @@ buildscript {
 
 plugins {
     id 'java'
-    id 'org.springframework.boot' version '3.1.1'
+    id 'org.springframework.boot' version '3.1.4'
     id 'io.spring.dependency-management' version '1.0.11.RELEASE'
     id 'nu.studer.jooq' version '6.0.1'  // gradle-jooq-plugin
     id 'application'
+    id "org.flywaydb.flyway" version "9.0.0"
+
 }
 jar {
     enabled = false
@@ -94,6 +96,7 @@ dependencies {
     //jooq
     implementation 'org.springframework.boot:spring-boot-starter-jooq'
     implementation 'org.jooq:jooq:3.18.0'
+//    jooqGenerator 'mysql:mysql-connector-java:8.1'
     jooqGenerator 'mysql:mysql-connector-java:8.0.25'
 
     //mail
@@ -106,13 +109,32 @@ dependencies {
     // https://mvnrepository.com/artifact/com.googlecode.json-simple/json-simple
     implementation group: 'com.googlecode.json-simple', name: 'json-simple', version: '1.1.1'
 
-}
+    //flyway
+    implementation 'org.flywaydb:flyway-core:9.0.0'
+//    implementation 'org.flywaydb:flyway-mysql'
+    implementation 'org.flywaydb:flyway-mysql:8.4.4'
 
-//val profile123 = 'localhost:3306'
+//    runtimeOnly 'mysql:mysql-connector-java'
+//    implementation 'org.flywaydb:flyway-core:7.15.0'
+
+
+}
 
 tasks.named('test') {
     useJUnitPlatform()
 }
+
+//flyway settings
+flyway{
+    url = "jdbc:mysql://${profile}:3306/jungsuri"
+    user='young'
+    password='7dmldud9!!'
+    locations=["filesystem:src/main/resources/db/migration"]
+//    mysql하고 flyway downgrade해야하나..
+}
+
+
+// jooq settings
 jooq {
 
     version = '3.18.0'  // default (can be omitted)
