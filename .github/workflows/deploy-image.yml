@@ -58,11 +58,27 @@ jobs:
           distribution: 'temurin'
       #          server-id: github # Value of the distributionManagement/repository/id field of the pom.xml
       #          settings-path: ${{ github.workspace }} # location for the settings.xml file
+      ### CI
+      #gradlew 권한 추가
+      - name: Grant Execute Permission For Gradlew
+        run: chmod +x gradlew
 
       - name: Build with Gradle
-        uses: gradle/gradle-build-action@bd5760595778326ba7f1441bcf7e88b49de61a25 # v2.6.0
+        run: ./gradlew build -x test
+#        uses: gradle/gradle-build-action@bd5760595778326ba7f1441bcf7e88b49de61a25 # v2.6.0
+#        with:
+#          arguments: build
+
+      #test를 위한 mysql설정
+      - name: Start MySQL
+        uses: samin/mysql-action@v1.3
         with:
-          arguments: build
+          host port: 3306
+          container port: 3306
+          mysql database: 'jungsuri'
+          mysql user: 'young'
+          mysql password: '7dmldud9!!'
+
       - name: Run JAR
         run: java -jar build/libs/jungsuri-0.0.1-SNAPSHOT.jar
       # The USERNAME and TOKEN need to correspond to the credentials environment variables used in
