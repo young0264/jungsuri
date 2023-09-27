@@ -79,7 +79,7 @@ public class WebSecurityConfig implements WebMvcConfigurer {
     }
 
 
-    // PasswordEncoder가 bean으로만 등록되어 잇으면 spring security에서 사용함
+    // PasswordEncoder가 bean으로만 등록되어 잇으면 spring security에서 사용함.
     // PasswordEncoder를 직접 생성하는게 아닌 createDelegatingPasswordEncoder에 위임
     @Bean
     public PasswordEncoder passwordEncoder() {
