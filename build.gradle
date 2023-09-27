@@ -17,9 +17,9 @@ buildscript {
             url 'https://plugins.gradle.org/m2/'
         }
     }
-    dependencies {
-        classpath("nu.studer:gradle-jooq-plugin:3.0.3")
-    }
+//    dependencies {
+//        classpath("nu.studer:gradle-jooq-plugin:3.0.3")
+//    }
 }
 //ifconfig .
 //apt-get install iputils-ping
@@ -131,7 +131,6 @@ flyway{
     user='young'
     password='7dmldud9!!'
     locations=["filesystem:src/main/resources/db/migration"]
-//    mysql하고 flyway downgrade해야하나..
 }
 
 
