@@ -49,22 +49,6 @@ jobs:
     permissions:
       contents: read
       packages: write
-    services:
-      mysql:
-        image: mysql:8.1
-        container_name: mysql-container  # 컨테이너의 이름 설정 (원하는 대로 변경 가능)
-        environment:
-          MYSQL_ROOT_USER: young  # MySQL 루트 사용자의 비밀번호 설정
-          MYSQL_ROOT_PASSWORD: 7dmldud9!!  # MySQL 루트 사용자의 비밀번호 설정
-          MYSQL_DATABASE: jungsuri  # 데이터베이스 이름 설정
-          MYSQL_USER: young
-          MYSQL_PASSWORD: 7dmldud9!!
-          MYSQL_ROOT_HOST: '%'
-        ports:
-          - "3306:3306"  # 호스트와 컨테이너 간의 포트 매핑 (호스트 포트:컨테이너 포트)
-        networks:
-          jungsuri-network  # 컨테이너가 연결될 네트워크 설정 (아래에서 정의한 네트워크와 동일하게 설정)
-
     steps:
       - uses: actions/checkout@v3
       - name: Set up JDK 18
