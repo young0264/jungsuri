@@ -154,7 +154,7 @@ jooq {
                     url = "jdbc:mysql://${profile}:3306/jungsuri"
                     user = 'young'
                     password = '${DB_PASSWORD}'
-//                    schema = 'jungsuri'
+                    schema = 'jungsuri'
                 }
 
                 generator {
