@@ -3,9 +3,12 @@ package com.app.jungsuri.domain.like.persistence;
 import jooq.dsl.enums.LikesType;
 import lombok.RequiredArgsConstructor;
 import org.jooq.DSLContext;
+import org.springframework.stereotype.Repository;
+
 import java.util.List;
 import static jooq.dsl.tables.Likes.LIKES;
 
+@Repository
 @RequiredArgsConstructor
 public class LikeReadRepositoryImpl implements LikeReadRepository {
 
