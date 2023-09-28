@@ -54,5 +54,5 @@ dockerfile
 ###pem파일
 .pem
 
-#temp 임시 ignore
+#temp 임시 ignore .
 /src/test/*
