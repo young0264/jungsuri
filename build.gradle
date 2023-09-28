@@ -159,32 +159,32 @@ jooq {
                     schema = 'jungsuri'
                 }
 
-                generator {
-                    name = 'org.jooq.codegen.DefaultGenerator'
-                    strategy {
-                        name = 'org.jooq.codegen.DefaultGeneratorStrategy'
-                    }
-                    database {
-                        // https://www.jooq.org/doc/3.15/manual/code-generation/codegen-advanced/codegen-config-database/codegen-database-name/
-                        name = 'org.jooq.meta.mysql.MySQLDatabase'
-                        inputSchema = 'jungsuri'
-
-                        includes = '.*' // 정규표현식
-                        excludes = 'test_.* | temp_.*'
-                    }
-                    generate {
-                        generatedSerialVersionUID = 'CONSTANT'
-                        javaTimeTypes = true    // java.time.*
-                        deprecated = false
-                        records = true
-                        immutablePojos = true
-                        fluentSetters = true
-                    }
-                    target {
-                        packageName = 'jooq.dsl'
-                        directory = 'src/generated/jooq/'  // default (can be omitted)
-                    }
-                }
+//                generator {
+//                    name = 'org.jooq.codegen.DefaultGenerator'
+//                    strategy {
+//                        name = 'org.jooq.codegen.DefaultGeneratorStrategy'
+//                    }
+//                    database {
+//                        // https://www.jooq.org/doc/3.15/manual/code-generation/codegen-advanced/codegen-config-database/codegen-database-name/
+//                        name = 'org.jooq.meta.mysql.MySQLDatabase'
+//                        inputSchema = 'jungsuri'
+//
+//                        includes = '.*' // 정규표현식
+//                        excludes = 'test_.* | temp_.*'
+//                    }
+//                    generate {
+//                        generatedSerialVersionUID = 'CONSTANT'
+//                        javaTimeTypes = true    // java.time.*
+//                        deprecated = false
+//                        records = true
+//                        immutablePojos = true
+//                        fluentSetters = true
+//                    }
+//                    target {
+//                        packageName = 'jooq.dsl'
+//                        directory = 'src/generated/jooq/'  // default (can be omitted)
+//                    }
+//                }
             }
         }
     }
