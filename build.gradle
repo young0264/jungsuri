@@ -28,13 +28,19 @@ buildscript {
 
 plugins {
     id 'java'
+    id 'application'
     id 'org.springframework.boot' version '3.1.4'
     id 'io.spring.dependency-management' version '1.0.11.RELEASE'
-    id 'nu.studer.jooq' version '6.0.1'  // gradle-jooq-plugin
-    id 'application'
     id "org.flywaydb.flyway" version "9.0.0"
-
+    id 'nu.studer.jooq' version '6.0.1'  // gradle-jooq-plugin
 }
+
+// Java 버전 명시
+java {
+    sourceCompatibility = JavaVersion.VERSION_18  // 원하는 Java 버전으로 변경하세요.
+    targetCompatibility = JavaVersion.VERSION_18
+}
+
 jar {
     enabled = false
 }
@@ -97,8 +103,7 @@ dependencies {
     //jooq
     implementation 'org.springframework.boot:spring-boot-starter-jooq'
     implementation 'org.jooq:jooq-codegen:3.18.0'
-//    jooqGenerator 'mysql:mysql-connector-java:8.0.25'
-
+    jooqGenerator 'mysql:mysql-connector-java:8.0.25'
 
     //mail
     implementation 'org.springframework.boot:spring-boot-starter-mail'
@@ -145,7 +150,7 @@ jooq {
 //            generateSchemaSourceOnCompilation = true  // default (can be omitted)
 //       TRACE, DEBUG, INFO, WARN, ERROR,  FATAL
             generationTool {
-                logging = org.jooq.meta.jaxb.Logging.DEBUG
+//                logging = org.jooq.meta.jaxb.Logging.DEBUG
 
                 jdbc {
                     driver = 'com.mysql.cj.jdbc.Driver'
@@ -157,34 +162,50 @@ jooq {
                     schema = 'jungsuri'
                 }
 
-//                generator {
-//                    name = 'org.jooq.codegen.DefaultGenerator'
-//                    strategy {
-//                        name = 'org.jooq.codegen.DefaultGeneratorStrategy'
-//                    }
-//                    database {
-//                        // https://www.jooq.org/doc/3.15/manual/code-generation/codegen-advanced/codegen-config-database/codegen-database-name/
-//                        name = 'org.jooq.meta.mysql.MySQLDatabase'
-//                        inputSchema = 'jungsuri'
-//
-//                        includes = '.*' // 정규표현식
-//                        excludes = 'test_.* | temp_.*'
-//                    }
-//                    generate {
-//                        generatedSerialVersionUID = 'CONSTANT'
-//                        javaTimeTypes = true    // java.time.*
-//                        deprecated = false
-//                        records = true
-//                        immutablePojos = true
-//                        fluentSetters = true
-//                    }
-//                    target {
-//                        packageName = 'jooq.dsl'
-//                        directory = 'src/generated/jooq/'  // default (can be omitted)
-//                    }
-//                }
+                generator {
+
+                    name = 'org.jooq.codegen.DefaultGenerator'
+                    strategy {
+                        name = 'org.jooq.codegen.DefaultGeneratorStrategy'
+                    }
+                    database {
+                        // https://www.jooq.org/doc/3.15/manual/code-generation/codegen-advanced/codegen-config-database/codegen-database-name/
+                        name = 'org.jooq.meta.mysql.MySQLDatabase'
+                        inputSchema = 'jungsuri'
+
+                        includes = '.*' // 정규표현식
+                        excludes = 'test_.* | temp_.*'
+                    }
+                    generate {
+                        generatedSerialVersionUID = 'CONSTANT'
+                        javaTimeTypes = true    // java.time.*
+                        deprecated = false
+                        records = true
+                        immutablePojos = true
+                        fluentSetters = true
+                    }
+                    target {
+                        packageName = 'jooq.dsl'
+                        directory = 'src/generated/jooq/'  // default (can be omitted)
+                    }
+                }
             }
         }
     }
 }
 
+// jooq error logs
+tasks.generateJooq.with {
+    def out = new ByteArrayOutputStream()
+    javaExecSpec = { JavaExecSpec s ->
+        s.standardOutput = out
+        s.errorOutput = out
+        s.ignoreExitValue = true
+        s.jvmArgs= ["-Dorg.slf4j.simpleLogger.defaultLogLevel=debug"]
+    }
+    execResultHandler = { ExecResult r ->
+        if (r.exitValue != 0) {
+            throw new GradleException("JOOQ Generation failed : \n\n" + out.toString())
+        }
+    }
+}
