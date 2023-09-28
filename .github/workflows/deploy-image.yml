@@ -74,7 +74,7 @@ jobs:
           mysql password: '7dmldud9!!'
 
       - name: Run JAR
-        run: java -jar target/jungsuri-1.0-SNAPSHOT.jar
+        run: java -jar /target/jungsuri-1.0-SNAPSHOT.jar
 #        run: java -jar build/libs/jungsuri-0.0.1-SNAPSHOT.jar
 
       - name: Build with Gradle
