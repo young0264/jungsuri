@@ -28,6 +28,7 @@ public class NotificationEntity {
     @Column(name="message", nullable = false)
     private String message;
 
+    @Builder.Default
     private boolean checked = false;
 
     @Enumerated(EnumType.STRING)

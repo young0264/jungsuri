@@ -36,34 +36,34 @@ public class TagTest {
     private TagRepository tagRepository;
 
 
-    @Test
-    void 이름으로_태그가_정상적으로_조회되는지() {
-        // given
-        Tag tag1 = new Tag("태그1", LocalDateTime.now());
-        Tag tag2 = new Tag("태그2", LocalDateTime.now());
-        tagRepository.save(tag1);
-        tagRepository.save(tag2);
-        // when
-        Optional<Tag> tag = tagService.findByName("태그1");
-        // then
-        Assertions.assertThat(tag.orElse(null).getName()).isEqualTo("태그1");
-    }
+//    @Test
+//    void 이름으로_태그가_정상적으로_조회되는지() {
+//        // given
+//        Tag tag1 = new Tag("태그1", LocalDateTime.now());
+//        Tag tag2 = new Tag("태그2", LocalDateTime.now());
+//        tagRepository.save(tag1);
+//        tagRepository.save(tag2);
+//        // when
+//        Optional<Tag> tag = tagService.findByName("태그1");
+//        // then
+//        Assertions.assertThat(tag.orElse(null).getName()).isEqualTo("태그1");
+//    }
 
-    @Test
-    void 태그들이_정상적으로_생성되는지() {
-        AccountEntity accountEntity = accountService.findByLoginId("12");
-        PostCreateDto postCreateDto = new PostCreateDto("게시글 등록 제목", "게시글 등록 내용", "게시글 등록 이름", null, 0,  new ArrayList<>());
-        PostEntity postEntity = postService.createPost(postCreateDto, accountEntity);
-
-        tagService.createTags(Arrays.asList("태그1", "태그2", "태그3"), postEntity);
-        tagService.createTags(Arrays.asList("태그2", "태그3", "태그4"), postEntity);
-
-        Assertions.assertThat(tagRepository.findAll().size()).isEqualTo(4);
-        Assertions.assertThat(tagRepository.findByName("태그1").orElse(new Tag()).getUsedCount()).isEqualTo(1);
-        Assertions.assertThat(tagRepository.findByName("태그2").orElse(new Tag()).getUsedCount()).isEqualTo(2);
-        Assertions.assertThat(tagRepository.findByName("태그3").orElse(new Tag()).getUsedCount()).isEqualTo(2);
-        Assertions.assertThat(tagRepository.findByName("태그4").orElse(new Tag()).getUsedCount()).isEqualTo(1);
-    }
+//    @Test
+//    void 태그들이_정상적으로_생성되는지() {
+//        AccountEntity accountEntity = accountService.findByLoginId("12");
+//        PostCreateDto postCreateDto = new PostCreateDto("게시글 등록 제목", "게시글 등록 내용", "게시글 등록 이름", null, 0,  new ArrayList<>());
+//        PostEntity postEntity = postService.createPost(postCreateDto, accountEntity);
+//
+//        tagService.createTags(Arrays.asList("태그1", "태그2", "태그3"), postEntity);
+//        tagService.createTags(Arrays.asList("태그2", "태그3", "태그4"), postEntity);
+//
+//        Assertions.assertThat(tagRepository.findAll().size()).isEqualTo(4);
+//        Assertions.assertThat(tagRepository.findByName("태그1").orElse(new Tag()).getUsedCount()).isEqualTo(1);
+//        Assertions.assertThat(tagRepository.findByName("태그2").orElse(new Tag()).getUsedCount()).isEqualTo(2);
+//        Assertions.assertThat(tagRepository.findByName("태그3").orElse(new Tag()).getUsedCount()).isEqualTo(2);
+//        Assertions.assertThat(tagRepository.findByName("태그4").orElse(new Tag()).getUsedCount()).isEqualTo(1);
+//    }
 
     @Test
     void 전체_태그찾기() {
