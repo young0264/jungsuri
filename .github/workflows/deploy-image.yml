@@ -63,6 +63,11 @@ jobs:
       - name: Grant Execute Permission For Gradlew
         run: chmod +x gradlew
 
+      #dev property 실행
+      - name: Run with Dev Profile
+        env:
+          GRADLE_OPTS: -Dspring.profiles.active=dev
+        run: ./gradlew build
 
 
       #test를 위한 mysql설정

@@ -3,7 +3,7 @@ import nu.studer.gradle.jooq.JooqEdition
 
 buildscript {
     ext {
-        profile = "localhost"
+        profile = ""
         if (project.hasProperty('dev')) {
             profile = ""
 //            profile = "jungsuri-db"
