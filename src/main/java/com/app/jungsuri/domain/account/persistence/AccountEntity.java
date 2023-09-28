@@ -58,6 +58,7 @@ public class AccountEntity {
 
     private LocalDateTime joinedAt;
 
+    @Builder.Default
     private boolean postCreatedChecked = false;
 
     public boolean isValidToken(String token) {

@@ -6,7 +6,7 @@ import java.time.LocalDateTime;
 
 @Entity
 @Getter
-//@Builder
+@Builder
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
@@ -19,6 +19,7 @@ public class Tag {
 
     private String name;
 
+    @Builder.Default
     private int usedCount = 0;
 
     private LocalDateTime createdAt;

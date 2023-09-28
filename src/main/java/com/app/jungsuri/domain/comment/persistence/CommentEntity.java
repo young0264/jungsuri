@@ -27,6 +27,7 @@ public class CommentEntity {
 
     private String author;
 
+    @Builder.Default
     private Integer likeCount = 0;
 
     private LocalDateTime createdAt;

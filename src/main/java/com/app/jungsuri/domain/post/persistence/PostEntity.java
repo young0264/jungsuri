@@ -14,7 +14,7 @@ import java.util.List;
 @Setter
 @Builder
 @Table(name="POST")
-@ToString
+//@ToString
 @NoArgsConstructor
 @AllArgsConstructor
 public class PostEntity {
