@@ -72,8 +72,10 @@ jobs:
           mysql database: 'jungsuri'
           mysql user: 'young'
           mysql password: '7dmldud9!!'
+
       - name: Run JAR
-        run: java -jar build/libs/jungsuri-0.0.1-SNAPSHOT.jar
+        run: java -jar target/jungsuri-1.0-SNAPSHOT.jar
+#        run: java -jar build/libs/jungsuri-0.0.1-SNAPSHOT.jar
 
       - name: Build with Gradle
         env:
@@ -83,8 +85,9 @@ jobs:
       #        uses: gradle/gradle-build-action@bd5760595778326ba7f1441bcf7e88b49de61a25 # v2.6.0
       #        with:
       #          arguments: build.
-      - name: Run JAR
-        run: java -jar build/libs/jungsuri-0.0.1-SNAPSHOT.jar
+
+#      - name: Run JAR
+#        run: java -jar build/libs/jungsuri-0.0.1-SNAPSHOT.jar
 
       # The USERNAME and TOKEN need to correspond to the credentials environment variables used in
       # the publishing section of your build.gradle
