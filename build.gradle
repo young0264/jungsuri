@@ -135,7 +135,7 @@ flyway{
 }
 
 
-// jooq settings
+// jooq settings.
 jooq {
 
     version = '3.18.0'  // default (can be omitted)
