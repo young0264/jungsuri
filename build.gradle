@@ -59,7 +59,7 @@ repositories {
 }
 dependencies {
     /**
-     * basic setting
+     * basic setting.
      * 	- jpa
      * 	- jooq
      * 	- web starter service
