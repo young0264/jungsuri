@@ -1,13 +1,12 @@
 package com.app.jungsuri.domain.account.web.form;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
-import org.springframework.security.config.annotation.web.configurers.CsrfConfigurer;
-import org.springframework.security.config.annotation.web.configurers.HttpBasicConfigurer;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
@@ -16,65 +15,35 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import java.util.stream.Stream;
 
+@Slf4j
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig implements WebMvcConfigurer {
 
-//    @Bean
-//    public AuthenticationProvider authenticationProvider() {
-//        return new CustomAuthenticationProvider();
-//    }
 
-    // 이전코드
-//    @Bean
-//    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-//        http.csrf().disable()
-//                .authorizeHttpRequests((requests) -> requests
-//                        .requestMatchers("/", "/home", "/signup", "/login").permitAll()
-////                        .requestMatchers("/admin/**").hasRole("ADMIN")
-//                        .anyRequest().authenticated());
-//        http
-//                .formLogin((form) -> form
-//                        .loginPage("/login")
-//                        .permitAll()
-//                        .defaultSuccessUrl("/", true));
-//        http
-//                .logout((logout) -> logout
-//                        .logoutSuccessUrl("/")
-//                        .permitAll());
-//        return http.build();
-//    }
-
-//    new 코드
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+
         http
-                .csrf(AbstractHttpConfigurer::disable)
-                .authorizeHttpRequests((requests) -> requests
-//                        .requestMatchers("/", "/home", "/signup", "/login")
-                        .requestMatchers(
-                                Stream
-                                .of("/", "/home", "/signup", "/login")
-                                .map(AntPathRequestMatcher::antMatcher)
-                                .toArray(AntPathRequestMatcher[]::new)
-                        )
-                        .permitAll()
-                        .requestMatchers(
-                                Stream
-                                .of("/admin/**")
-                                .map(AntPathRequestMatcher::antMatcher)
-                                .toArray(AntPathRequestMatcher[]::new)
-                        ).hasRole("ADMIN")
-                        .anyRequest().authenticated());
+            .csrf(AbstractHttpConfigurer::disable)
+            .authorizeHttpRequests(
+                    (requests) -> requests
+                    .requestMatchers(
+                            Stream
+                            .of("/", "/error", "/home", "/signup", "/login", "/check-email-token")
+                            .map(AntPathRequestMatcher::antMatcher)
+                            .toArray(AntPathRequestMatcher[]::new)).permitAll()
+                    .requestMatchers(new AntPathRequestMatcher("/settings/admin")).hasAuthority("ADMIN")
+            );
         http
-                .formLogin((form) -> form
-                        .loginPage("/login")
-                        .permitAll()
-                        .defaultSuccessUrl("/", true));
+            .formLogin((form) -> form
+                    .loginPage("/login")
+                    .permitAll()
+                    .defaultSuccessUrl("/", true));
         http
-                .logout((logout) -> logout
-                        .logoutSuccessUrl("/")
-                        .permitAll());
+            .logout((logout) -> logout
+                    .logoutSuccessUrl("/")
+                    .permitAll());
         return http.build();
     }
 
@@ -91,13 +60,11 @@ public class WebSecurityConfig implements WebMvcConfigurer {
     public WebSecurityCustomizer webSecurityCustomizer() {
         return (web) -> web
                 .ignoring()
-//                .requestMatchers("/images/**", "/titan/**")
                 .requestMatchers(
                         Stream
                         .of("/images/**", "/titan/**")
                         .map(AntPathRequestMatcher::antMatcher)
-                        .toArray(AntPathRequestMatcher[]::new))
-                ;
+                        .toArray(AntPathRequestMatcher[]::new));
     }
 
 }
