@@ -21,7 +21,7 @@ public class mainController {
 
     private final AccountService accountService;
     private final MountainService mountainService;
-//    private final MountainLocationService mountainLocationService;
+    private final MountainLocationService mountainLocationService;
 
     @PostConstruct
     public String init() {
@@ -30,18 +30,18 @@ public class mainController {
         return "main";
     }
 
-    @PostConstruct
-    public void initMountainInfo() {
-        final String mountainInfoUrl = "https://www.forest.go.kr/kfsweb/kfi/kfs/foreston/main/contents/FmmntSrch/selectFmmntSrchList.do?mn=NKFS_03_01_12&orgId=&mntUnit=100&mntIndex=1&searchMnt=&searchCnd3=&mntnInfoGbn=&mntnInfoSsnCd=&mntnInfoThmCd=&mntnInfoTmCd=&mntnHaslvCd=&mntnInfoLvlCd=";
-        Connection connect = Jsoup.connect(mountainInfoUrl);
-
-        try {
-            Document document = connect.get();
-            mountainService.saveMountainInfo(document);
-        } catch (IOException e) {
-            e.printStackTrace();
-            throw new RuntimeException(e);
-        }
-    }
+//    @PostConstruct
+//    public void initMountainInfo() {
+//        final String mountainInfoUrl = "https://www.forest.go.kr/kfsweb/kfi/kfs/foreston/main/contents/FmmntSrch/selectFmmntSrchList.do?mn=NKFS_03_01_12&orgId=&mntUnit=100&mntIndex=1&searchMnt=&searchCnd3=&mntnInfoGbn=&mntnInfoSsnCd=&mntnInfoThmCd=&mntnInfoTmCd=&mntnHaslvCd=&mntnInfoLvlCd=";
+//        Connection connect = Jsoup.connect(mountainInfoUrl);
+//
+//        try {
+//            Document document = connect.get();
+//            mountainService.saveMountainInfo(document);
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//            throw new RuntimeException(e);
+//        }
+//    }
 
 }
