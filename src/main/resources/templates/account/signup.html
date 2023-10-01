@@ -7,7 +7,7 @@
         xmlns:th="http://www.thymeleaf.org"
         xmlns:sec="http://thymeleaf.org/extras/spring-security">
 
-<head th:replace="~{/fragments/fragments.html :: head}"></head>
+<head th:replace="~{fragments/fragments.html :: head}"></head>
 
 <body data-spy="scroll" data-target=".onpage-navigation" data-offset="60">
 <main>
@@ -42,6 +42,15 @@
                         <div class="col-sm-5 col-sm-offset-1 mb-sm-40" id="signup_init_info" name="signup_init_info">
                             <h4 class="font-alt">회원가입</h4>
                             <hr class="divider-w mb-10">
+                            <div>
+                                <label>회원</label>
+                                <select class="form-control" id="userRole" name="userRole">
+<!--                                    <option value="ADMIN"></option>-->
+                                    <option value="ADMIN">선택</option>
+                                    <option value="USER">운영진</option>
+                                    <option value="USER">일반회원</option>
+                                </select>
+                            </div>
                             <div class="form-group">
                                 <label>아이디</label>
                                 <input class="form-control" th:field="*{loginId}" id="username" type="text" name="username"
