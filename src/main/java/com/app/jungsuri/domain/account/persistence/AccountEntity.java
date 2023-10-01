@@ -5,7 +5,11 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 import java.time.LocalDateTime;
+import java.util.Collection;
 import java.util.UUID;
 
 @Entity
@@ -17,7 +21,7 @@ import java.util.UUID;
 @AllArgsConstructor
 @Table(name = "account")
 @EqualsAndHashCode(of = "id")
-public class AccountEntity {
+public class AccountEntity implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -61,6 +65,9 @@ public class AccountEntity {
     @Builder.Default
     private boolean postCreatedChecked = false;
 
+    @Transient
+    private Collection<SimpleGrantedAuthority> authorities;
+
     public boolean isValidToken(String token) {
         return this.emailToken.equals(token);
     }
@@ -85,5 +92,59 @@ public class AccountEntity {
 
     public void updateMountainExp(int mountainHeight) {
         this.mountainExp += mountainHeight;
+    }
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return this.authorities;
+    }
+
+    @Override
+    public String getUsername() {
+        return this.name;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "{" +
+                "id=" + id +
+                ", bio='" + bio + '\'' +
+                ", name='" + name + '\'' +
+                ", role='" + role + '\'' +
+                ", email='" + email + '\'' +
+                ", emailToken='" + emailToken + '\'' +
+                ", emailCheckTokenGeneratedAt=" + emailCheckTokenGeneratedAt +
+                ", emailVerified=" + emailVerified +
+                ", location='" + location + '\'' +
+                ", occupation='" + occupation + '\'' +
+                ", loginId='" + loginId + '\'' +
+                ", password='" + password + '\'' +
+                ", profileImage='" + profileImage + '\'' +
+                ", mountainExp=" + mountainExp +
+                ", userRole=" + userRole +
+                ", joinedAt=" + joinedAt +
+                ", postCreatedChecked=" + postCreatedChecked +
+                ", authorities=" + authorities +
+                '}';
     }
 }
