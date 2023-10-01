@@ -15,8 +15,8 @@ import java.io.InputStream;
 /**
  * send 메서드 오버라이드 - not send -> console
  */
-@Profile({"local", "dev", "test"})
-@Component
+//@Profile({"local", "test"})
+//@Component
 @Slf4j
 public class ConsoleMailSender implements JavaMailSender {
     @Override
