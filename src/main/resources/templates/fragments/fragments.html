@@ -345,7 +345,7 @@
         <hr class="divider-w mt-10 ">
 
         <ul class="icon-list">
-            <a th:href="@{/settings/admin}"><h4>관리자 페이지</h4></a>
+            <a th:if="${userRole != null and userRole == 'ADMIN'}" th:href="@{/settings/admin}"><h4>관리자 페이지</h4></a>
             <a th:href="@{/settings/profile}"><h4>프로필</h4></a>
             <a th:href="@{/settings/alarm}"><h4>알림</h4></a>
         </ul>
