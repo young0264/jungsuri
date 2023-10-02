@@ -58,3 +58,6 @@ dockerfile
 
 #properties
 /src/main/resources/application.properties
+
+#github
+./.github
