@@ -1,46 +1,38 @@
 package com.app.jungsuri.domain.account.persistence;
 
 import com.app.jungsuri.domain.account.web.form.SignUpForm;
-import com.app.jungsuri.domain.account.web.form.UserAccount;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import java.security.Principal;
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
 @Transactional
 @RequiredArgsConstructor
 @Slf4j
-public class AccountService implements UserDetailsService {
+public class AccountService {
     private final AccountRepository accountRepository;
     private final JavaMailSender javaMailSender;
     private final PasswordEncoder passwordEncoder;
     private final ModelMapper modelMapper;
 
 
-    //TODO login method 권한인증 안됨.()
     public void login(AccountEntity accountEntity) {
-        System.out.println("로그인 시작");
-
         UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(
                 accountEntity.getLoginId(),
                 accountEntity.getPassword(),
-                List.of(new SimpleGrantedAuthority("ROLE_USER"))
+                List.of(new SimpleGrantedAuthority(accountEntity.getUserRole().toString()))
         );
         SecurityContext context = SecurityContextHolder.getContext();
         context.setAuthentication(token);
@@ -51,7 +43,6 @@ public class AccountService implements UserDetailsService {
         AccountEntity accountEntity = accountRepository.save(modelMapper.map(signUpForm, AccountEntity.class));
         accountEntity.generateEmailCheckToken();
         sendSignUpConfirmEmail(accountEntity);
-
         return accountEntity;
     }
 
@@ -59,33 +50,11 @@ public class AccountService implements UserDetailsService {
         return passwordEncoder.encode(rawPassword);
     }
 
-
-
-    /**
-     * spring security
-     */
-    @Transactional(readOnly = true)
-    @Override
-    public UserDetails loadUserByUsername(String loginId) throws UsernameNotFoundException {
-        AccountEntity accountEntity = accountRepository.findByLoginId(loginId).orElseThrow(() -> new UsernameNotFoundException("로그인 아이디에 해당하는 유저는 존재하지 않습니다."));
-        if (accountEntity == null) {
-            throw new UsernameNotFoundException("로그인 아이디에 해당하는 유저는 존재하지 않습니다.");
-        }
-        //권한 정보 등록
-//        List<GrantedAuthority> roles = new ArrayList<>();
-//        roles.add(new SimpleGrantedAuthority(accountEntity.getRole()));
-//        roles.add(new SimpleGrantedAuthority("ROLE_USER"));
-        //AccountContext 생성자로 UserDetails 타입 생성
-//        AccountContext accountContext = new AccountContext(accountEntity, roles);
-
-        return new UserAccount(accountEntity);
-    }
-
-
     public AccountEntity findByLoginId(String loginId) {
         return accountRepository.findByLoginId(loginId).orElseThrow(() -> new UsernameNotFoundException("로그인 아이디에 해당하는 유저는 존재하지 않습니다."));
     }
 
+    /**이메일 인증 후*/
     public void completeSignUp(AccountEntity accountEntity) {
         accountEntity.completeSignUp();
         login(accountEntity);
