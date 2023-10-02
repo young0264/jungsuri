@@ -61,10 +61,11 @@ public class SettingsController {
     }
 
     @GetMapping("/admin")
-    public String showAdminSettingPage(Model model) {
+    public String showAdminSettingPage(Model model,Principal principal) {
         List<String> userLoginIdList = accountService.getAllUsersLoginId();
         List<String> mountainNameList = mountainService.findAllMountainsName();
-        model.addAllAttributes(Map.of("userLoginIdList", userLoginIdList, "mountainNameList", mountainNameList));
+        AccountEntity accountEntity = accountService.findByLoginId(principal.getName());
+        model.addAllAttributes(Map.of("userLoginIdList", userLoginIdList, "mountainNameList", mountainNameList,"userRole", accountEntity.getUserRole().toString()));
         return "account/admin";
     }
 
