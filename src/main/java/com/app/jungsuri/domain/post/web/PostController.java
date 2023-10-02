@@ -26,6 +26,7 @@ public class PostController {
     private final TagService tagService;
     private final PostService postService;
     private final AccountService accountService;
+//    private final CommentService commentService;
 
     /** 게시글 태그 (or 조건) 검색 */
     @PostMapping("/list")
@@ -39,8 +40,10 @@ public class PostController {
     @GetMapping("/list")
     public String list(Model model) {
         List<PostEntity> postList = postService.getPostList();
+        List<PostEntity> postListByTop5 = postService.getPostListByTop5();
         model.addAttribute("postList", postList);
         model.addAttribute("tagList", tagService.getTagNameList());
+        model.addAttribute("postListByTop5", postListByTop5);
         return "post/list";
     }
 
@@ -67,8 +70,10 @@ public class PostController {
     @GetMapping("/{postId}/details")
     public String view(@PathVariable Long postId, Model model, Principal principal) {
         PostEntity postEntity = postService.getPostEntity(postId);
+        List<PostEntity> postListByTop5 = postService.getPostListByTop5();
         AccountEntity accountEntity = accountService.findByLoginId(principal.getName());
 
+        model.addAttribute("postListByTop5", postListByTop5);
         model.addAttribute("accountEntity", accountEntity);
         model.addAttribute("tagList", tagService.getTagNameList());
         model.addAttribute("postEntity", postEntity);

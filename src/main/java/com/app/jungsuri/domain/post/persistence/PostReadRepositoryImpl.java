@@ -33,5 +33,13 @@ public class PostReadRepositoryImpl implements PostReadRepository {
                 .fetchInto(PostEntity.class);
     }
 
+    public List<PostEntity> findTop5ByLikeCountAsc() {
+        return dslContext.select()
+                .from(POST)
+                .orderBy(POST.LIKE_COUNT.desc())
+                .limit(5)
+                .fetchInto(PostEntity.class);
+    }
+
 }
 

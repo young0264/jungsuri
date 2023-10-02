@@ -115,4 +115,5 @@ public class PostEntity {
         if(this.likeCount == 0) return 0;
         return this.likeCount -= 1;
     }
+
 }
