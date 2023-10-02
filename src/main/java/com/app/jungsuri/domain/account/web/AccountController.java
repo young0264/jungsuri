@@ -52,8 +52,6 @@ public class AccountController {
         }
         AccountEntity newAccount = accountService.createNewAccount(signUpForm);
         accountService.login(newAccount);
-        return "redirect:/";
+        return "redirect:/account/login";
     }
-
-
 }
