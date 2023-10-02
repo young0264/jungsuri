@@ -6,7 +6,7 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.test.context.ActiveProfiles;
 
 @SpringBootApplication
-@ActiveProfiles("local")
+@ActiveProfiles("${profile}")
 //@ConditionalOnProperty(prefix = "spring.flyway", name = "enabled", matchIfMissing = true)
 public class JungsuriApplication {
 
