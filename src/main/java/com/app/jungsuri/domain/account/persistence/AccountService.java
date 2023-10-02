@@ -70,7 +70,6 @@ public class AccountService {
 
     public void sendSignUpConfirmEmail(AccountEntity accountEntity) {
         try {
-            log.info("accountEntity.getEmail() : " + accountEntity.getEmail());
             SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
             simpleMailMessage.setReplyTo(accountEntity.getEmail());
             simpleMailMessage.setTo(accountEntity.getEmail());

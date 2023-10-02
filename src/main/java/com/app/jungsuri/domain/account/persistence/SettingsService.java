@@ -32,14 +32,12 @@ public class SettingsService {
 
     private void isMatchCurrentPassword(PasswordUpdateDto passwordUpdateDto, AccountEntity accountEntity) {
         if (!passwordEncoder.matches(passwordUpdateDto.getCurrentPassword(), accountEntity.getPassword())) {
-            log.info("isMatchNewPassword :현재 비밀번호가 일치하지 않습니다. ");
             throw new IllegalArgumentException("현재 비밀번호가 일치하지 않습니다.");
         }
     }
 
     private void isMatchNewPassword(PasswordUpdateDto passwordUpdateDto) {
         if (!passwordUpdateDto.getNewPassword().equals(passwordUpdateDto.getNewPasswordConfirm())) {
-            log.info("isMatchNewPassword :새로운 비밀번호가 일치하지 않습니다. ");
             throw new IllegalArgumentException("새로운 비밀번호가 서로 일치하지 않습니다.");
         }
     }
