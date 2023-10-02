@@ -32,9 +32,21 @@ public class WebSecurityConfig implements WebMvcConfigurer {
                             Stream
                             .of("/", "/error", "/home", "/signup", "/login", "/check-email-token")
                             .map(AntPathRequestMatcher::antMatcher)
-                            .toArray(AntPathRequestMatcher[]::new)).permitAll()
-                    .requestMatchers(new AntPathRequestMatcher("/settings/admin")).hasAuthority("ADMIN")
+                            .toArray(AntPathRequestMatcher[]::new))
+                            .permitAll()
             );
+        http
+                .csrf(AbstractHttpConfigurer::disable)
+                .authorizeHttpRequests(
+                        (requests) -> requests
+                                .requestMatchers(
+                                        Stream.of("/settings/admin")
+                                                .map(AntPathRequestMatcher::antMatcher)
+                                                .toArray(AntPathRequestMatcher[]::new)
+                                ).hasAuthority("ADMIN")
+                                .anyRequest().authenticated()
+                );
+
         http
             .formLogin((form) -> form
                     .loginPage("/login")
