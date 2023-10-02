@@ -30,7 +30,6 @@ public class PostController {
     public String list(Model model) {
         List<PostEntity> postList = postService.getPostList();
         model.addAttribute("postList", postList);
-        log.info("here is post List");
         return "post/list";
     }
 
