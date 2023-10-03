@@ -450,9 +450,9 @@
                 tagify.addEmptyTag()
             }
 
-            function moveToPostDetail(id) {
-                console.log("moveToPostDetail id : ", id);
-                location.href = "/post/" + id + "/details";
+            function moveToPostDetail(post_id) {
+                console.log("moveToPostDetail id : ", post_id);
+                location.href = "/post/" + post_id + "/details";
             }
         </script>
         <style>
@@ -587,6 +587,15 @@
     <!-- 최근 달린 댓글 -->
     <div class="widget">
         <h5 class="widget-title font-alt">Recent Comments</h5>
+<!--        recentCommentListTop5 -->
+        <ul class="icon-list">
+            <div th:each="recentComment : ${recentCommentListTop5}" th:if="${recentCommentListTop5}ne null">
+                <li>
+                    <a href="#"  th:text="${recentComment.content}"></a>
+                    <div style="float: right" th:text="${#temporals.format(recentComment.createdAt, 'yy년-MM월-dd일')}"></div>
+                </li>
+            </div>
+        </ul>
         <!--                        <ul class="icon-list">-->
         <!--                            <li>Maria on <a href="#">Designer Desk Essentials</a></li>-->
         <!--                            <li>John on <a href="#">Realistic Business Card Mockup</a></li>-->
