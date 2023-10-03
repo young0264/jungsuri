@@ -1,4 +1,8 @@
 package com.app.jungsuri.domain.comment.persistence;
 
-public class CommentReadRepository {
+import java.util.List;
+
+public interface CommentReadRepository {
+
+    List<CommentEntity> findTop5ByOrderByCreatedAtDesc();
 }
