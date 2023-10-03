@@ -6,7 +6,6 @@
         xmlns="http://www.w3.org/1999/xhtml"
 >
 
-
 <script th:inline="javascript">
     var accountId = /*[[${accountEntity.id}]]*/;
     var postId = /*[[${postEntity.id}]]*/;
@@ -74,21 +73,19 @@
 
     }
 
-
     /**
      * comment를 받아서 textarea 에 넣어주는 함수
      */
     let commentContent = null;
     let commentIdValue = null;
 
-    //th라서 빛이 안들어옴
+    /** 댓글 기능(th라서 빛이 안들어옴) */
     let comment = {
 
         showUpdateModal: function (content, commentIdParam) {
             commentContent = content;
             commentIdValue = commentIdParam;
             document.getElementById("modal-comment-content").value = content;
-
         },
 
         update: function () {
@@ -144,6 +141,7 @@
         },
     }
 
+    /** 좋아요 기능 */
     let like = {
         modifyPostLike: function (accountId, postId) {
             let data = {
