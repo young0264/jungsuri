@@ -49,6 +49,7 @@ public class PostEntity {
     private String author;
 
     @ManyToOne
+    @JoinColumn(name="account_entity_id", nullable = false)
     private AccountEntity accountEntity;
 
     @Column(name="comment_count", nullable = false)
@@ -96,14 +97,15 @@ public class PostEntity {
         this.commentCount--;
     }
 
-    public PostEntity(PostCreateDto postCreateDto, String loginId) {
+    public PostEntity(PostCreateDto postCreateDto,AccountEntity accountEntity) {
         this.title = postCreateDto.getTitle();
         this.content = postCreateDto.getContent();
         this.author = postCreateDto.getAuthor();
         this.imagePath = postCreateDto.getImagePath();
         this.commentCount = postCreateDto.getCommentCount();
         this.createdAt = LocalDateTime.now();
-        this.loginId = loginId;
+        this.loginId = accountEntity.getLoginId();
+        this.accountEntity = accountEntity;
         this.likeCount = 0;
         this.viewCount = 0;
     }
