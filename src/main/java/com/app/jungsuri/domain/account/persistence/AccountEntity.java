@@ -29,6 +29,7 @@ public class AccountEntity implements UserDetails {
 
     private String bio;
 
+    @Column(name = "name", nullable = true)
     private String name;
 
     private String role; //TODO ENUM으로 -> 관리자가 부여해주는 방식
