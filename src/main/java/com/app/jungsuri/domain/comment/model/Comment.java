@@ -42,4 +42,8 @@ public class Comment {
                 .build();
     }
 
+    public String toString() {
+        return "Comment(id=" + this.getId() + ", content=" + this.getContent() + ", author=" + this.getAuthor() + ", likeCount=" + this.getLikeCount() + ", createdAt=" + this.getCreatedAt() + ", updatedAt=" + this.getUpdatedAt() + ", postEntity=" + this.getPostEntity() + ", accountEntity=" + this.getAccountEntity() + ")";
+    }
+
 }
