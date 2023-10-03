@@ -4,10 +4,7 @@ package com.app.jungsuri.domain.comment.persistence;
 import com.app.jungsuri.domain.account.persistence.AccountEntity;
 import com.app.jungsuri.domain.post.persistence.PostEntity;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.time.LocalDateTime;
 
@@ -23,21 +20,29 @@ public class CommentEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name="content", nullable = false)
     private String content;
 
+    @Column(name="author", nullable = false)
     private String author;
 
     @Builder.Default
+    @Column(name="like_count", nullable = false)
     private Integer likeCount = 0;
 
+    @Column(name="created_at", nullable = false)
     private LocalDateTime createdAt;
 
+    @Column(name="updated_at", nullable = true)
     private LocalDateTime updatedAt;
 
+
     @ManyToOne
+    @JoinColumn(name="post_entity_id", nullable = false)
     private PostEntity postEntity;
 
     @ManyToOne
+    @JoinColumn(name="account_entity_id", nullable = false)
     private AccountEntity accountEntity;
 
     public void updateComment(String newComment) {
