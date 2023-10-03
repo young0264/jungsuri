@@ -3,6 +3,7 @@ package com.app.jungsuri.domain.comment.web;
 
 import com.app.jungsuri.domain.account.persistence.AccountEntity;
 import com.app.jungsuri.domain.account.persistence.AccountService;
+import com.app.jungsuri.domain.comment.model.Comment;
 import com.app.jungsuri.domain.comment.persistence.CommentService;
 import com.app.jungsuri.domain.comment.web.dto.CommentCreateDto;
 import com.app.jungsuri.domain.comment.web.dto.CommentDeleteDto;
@@ -36,7 +37,8 @@ public class CommentController {
                          BindingResult errors, RedirectAttributes redirectAttributes) {
         PostEntity postEntity = postService.getPostEntity(commentCreateDto.getPostId());
         AccountEntity accountEntity = accountService.findByLoginId(commentCreateDto.getLoginId());
-        commentService.createComment(commentCreateDto.toComment(accountEntity, postEntity));
+        Comment comment = commentCreateDto.toComment(accountEntity, postEntity);
+        commentService.createComment(comment);
 
         if (errors.hasErrors()) {
             List<ObjectError> allErrors = errors.getAllErrors();
