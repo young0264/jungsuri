@@ -2,6 +2,8 @@ package com.app.jungsuri.domain.post.web;
 
 import com.app.jungsuri.domain.account.persistence.AccountEntity;
 import com.app.jungsuri.domain.account.persistence.AccountService;
+import com.app.jungsuri.domain.comment.persistence.CommentEntity;
+import com.app.jungsuri.domain.comment.persistence.CommentService;
 import com.app.jungsuri.domain.comment.web.dto.CommentCreateDto;
 import com.app.jungsuri.domain.post.persistence.PostService;
 import com.app.jungsuri.domain.post.web.dto.PostCreateDto;
@@ -26,7 +28,7 @@ public class PostController {
     private final TagService tagService;
     private final PostService postService;
     private final AccountService accountService;
-//    private final CommentService commentService;
+    private final CommentService commentService;
 
     /** 게시글 태그 (or 조건) 검색 */
     @PostMapping("/list")
@@ -41,9 +43,12 @@ public class PostController {
     public String list(Model model) {
         List<PostEntity> postList = postService.getPostList();
         List<PostEntity> postListByTop5 = postService.getPostListByTop5();
+        List<CommentEntity> recentCommentListTop5 = commentService.getRecentCommentList();
+
         model.addAttribute("postList", postList);
         model.addAttribute("tagList", tagService.getTagNameList());
         model.addAttribute("postListByTop5", postListByTop5);
+        model.addAttribute("recentCommentListTop5", recentCommentListTop5);
         return "post/list";
     }
 
@@ -72,6 +77,7 @@ public class PostController {
         PostEntity postEntity = postService.getPostEntity(postId);
         List<PostEntity> postListByTop5 = postService.getPostListByTop5();
         AccountEntity accountEntity = accountService.findByLoginId(principal.getName());
+        List<CommentEntity> recentCommentListTop5 = commentService.getRecentCommentList();
 
         model.addAttribute("postListByTop5", postListByTop5);
         model.addAttribute("accountEntity", accountEntity);
@@ -79,6 +85,8 @@ public class PostController {
         model.addAttribute("postEntity", postEntity);
         model.addAttribute("commentCreateDto", new CommentCreateDto());
         model.addAttribute("commentList", postEntity.getCommentList());
+        model.addAttribute("recentCommentListTop5", recentCommentListTop5);
+
         return "post/details";
     }
 

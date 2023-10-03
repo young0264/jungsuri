@@ -34,7 +34,7 @@ public class PostService {
 
     /** 게시글 생성 */
     public PostEntity createPost(PostCreateDto postCreateDto, AccountEntity accountEntity) {
-        PostEntity postEntity = new PostEntity(postCreateDto, accountEntity.getLoginId());
+        PostEntity postEntity = new PostEntity(postCreateDto, accountEntity);
         eventPublisher.publishEvent(new PostCreatedEvent(postEntity));
         return postRepository.save(postEntity);
     }
