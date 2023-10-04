@@ -64,38 +64,28 @@
                         <div class="post-entry">
                             <p th:placeholder="post." th:text="${post.content.replaceAll('<(/)?([a-zA-Z]*)(\\s[a-zA-Z]*=[^>]*)?(\\s)*(/)?>', '')}"></p>
                         </div>
-                        <div class="post-more"><a class="more-link" href="#">Read more</a></div>
+<!--                        <div class="post-more"><a class="more-link" href="#">Read more</a></div>-->
                     </div>
                     </div>
                     <!--   게시글 main form end  -->
-
-                    <div class="post">
-                        <div class="post-images-slider">
-                            <ul class="slides">
-                                <li><img src="/images/jungsuri_logo.png" alt="Blog Slider Image"/></li>
-<!--                                <li><img src="/images/jungsuri_logo.png" alt="Blog Slider Image"/></li>-->
-                                <!--                                <li><img src="/images/banner_mountain02.jpg" alt="Blog Slider Image"/></li>-->
-                            </ul>
-                        </div>
-                        <div class="post-header font-alt">
-                            <h2 class="post-title"><a href="#">Post with slideshow</a></h2>
-                            <div class="post-meta">By&nbsp;<a href="#">Mark Stone</a>| 23 November | 3 Comments | <a
-                                    href="#">Marketing, </a><a href="#">Web Design</a>
-                            </div>
-                        </div>
-                        <div class="post-entry">
-                            <p>A wonderful serenity has taken possession of my entire soul, like these sweet
-                                mornings of spring which I enjoy with my whole heart. I am alone, and feel the charm
-                                of existence in this spot, which was created for the bliss of souls like mine.</p>
-                        </div>
-                        <div class="post-more"><a class="more-link" href="#">Read more</a></div>
+                    <div class="background-image">
+                        <!-- 내용 -->
+                        <img src="/images/jungsuri_logo.png" alt="Blog Slider Image" style="width: 50%">
                     </div>
+
                     <div>
                         <a href="/post"><button class="btn btn-d btn-round" >글쓰기</button></a>
                     </div>
-                    <div class="pagination font-alt"><a href="#"><i class="fa fa-angle-left"></i></a><a
-                            class="active" href="#">1</a><a href="#">2</a><a href="#">3</a><a href="#">4</a><a
-                            href="#"><i class="fa fa-angle-right"></i></a>
+                    <div class="pagination font-alt" >
+<!--                        <a th:href="'/post/list?pageNumber='+${startPageNum}">-->
+<!--                            <i class="fa fa-angle-left">이전</i>-->
+<!--                        </a>-->
+                        <div class="pagination font-alt"  th:each="currentPage : ${#numbers.sequence(1, pagingCount)}">
+                            <a th:href="'/post/list?currentPageNumber='+${currentPage}" class="active" th:text="${currentPage}"></a>
+                        </div>
+<!--                        <a th:href="'/post/list?pageNumber='+${nextPageNum}">-->
+<!--                            <i class="fa fa-angle-right">다음</i>-->
+<!--                        </a>-->
                     </div>
                 </div>
                 <!--   게시글 post list end   -->
