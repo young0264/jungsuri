@@ -87,4 +87,55 @@ public class PostService {
     private int getStartRowNum(int pageNumber) {
         return PostPage.PAGE_ROW_SIZE.getValue()*(pageNumber-1)+1;
     }
+
+    /** pagination 시작버튼 button */
+    public int getStartPageNum(int currentPageNumber) {
+        int pageBtnSize = PostPage.PAGE_BTN_SIZE.getValue();
+        int quotient = (currentPageNumber/pageBtnSize);
+
+        if(currentPageNumber < 5) {
+            return 1;
+        }
+        if(currentPageNumber % pageBtnSize == 0) {
+            return (quotient-1)*pageBtnSize+1;
+        }return (quotient-1)*pageBtnSize;
+    }
+
+    /** pagination 끝버튼 button */
+    public int getEndPageNum(int currentPageNumber) {
+        int lastPageButtonNumber = getLastPageButtonNumber();
+        int pageBtnSize = PostPage.PAGE_BTN_SIZE.getValue();
+        int quotient = (currentPageNumber / pageBtnSize);
+
+        /** 마지막 last page button 숫자가 더 작으면 last page button숫자 반환  */
+        if (lastPageButtonNumber < (quotient + 1) * pageBtnSize) {
+            return lastPageButtonNumber;
+        }
+        if (currentPageNumber % pageBtnSize == 0) {
+            return quotient * pageBtnSize;
+        }
+        return (quotient + 1) * pageBtnSize;
+
+    }
+
+    /** 가장 마지막 pagination button 가져오기 */
+    private int getLastPageButtonNumber() {
+        int postCount = getPostCount();
+        int pageBtnSize = PostPage.PAGE_BTN_SIZE.getValue();
+
+        if(postCount % pageBtnSize == 0) {
+            return postCount/pageBtnSize;
+        }return postCount/pageBtnSize + 1;
+    }
+
+
+    /** 페이징 버튼 갯수를 반환 */
+    public int getPagingNumber() {
+        int postCount = getPostCount();
+
+        if(postCount % PostPage.PAGE_ROW_SIZE.getValue() == 0) {
+            return postCount / PostPage.PAGE_ROW_SIZE.getValue();
+        }return postCount / PostPage.PAGE_ROW_SIZE.getValue() + 1;
+    }
+
 }
