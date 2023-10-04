@@ -9,4 +9,8 @@ public interface PostReadRepository {
     List<PostEntity> findAllByTags(List<String> searchTags);
 
     List<PostEntity> findTop5ByLikeCountAsc();
+
+    List<PostEntity> findPostListByPagination(int startRowNum);
+
+    int getPostCount();
 }
