@@ -10,6 +10,7 @@ import com.app.jungsuri.domain.post.web.dto.PostCreateDto;
 import com.app.jungsuri.domain.post.persistence.PostEntity;
 import com.app.jungsuri.domain.post.web.dto.PostSearchDto;
 import com.app.jungsuri.domain.tag.persistence.TagService;
+import com.app.jungsuri.infra.pagination.PostPage;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -33,6 +34,7 @@ public class PostController {
     /** 게시글 태그 (or 조건) 검색 */
     @PostMapping("/list")
     public String search(@RequestBody PostSearchDto postSearchDto, Model model) {
+
         List<PostEntity> postListByTags = postService.getPostListByTags(postSearchDto.getSearchTags());
         model.addAttribute("postList", postListByTags);
         return "post/list :: #post_list ";
@@ -40,17 +42,75 @@ public class PostController {
 
     /** 게시글 목록 조회 */
     @GetMapping("/list")
-    public String list(Model model) {
-        List<PostEntity> postList = postService.getPostList();
-        List<PostEntity> postListByTop5 = postService.getPostListByTop5();
+    public String list(@RequestParam(required = false, defaultValue = "1") int currentPageNumber , Model model) {
+
+        log.info("currentPageNumber : " + currentPageNumber);
+        List<PostEntity> postListByPagination = postService.getPostListByPagination(currentPageNumber);
+        List<PostEntity> postListByTop5 = postService.getTop5ListByLikeCount();
         List<CommentEntity> recentCommentListTop5 = commentService.getRecentCommentList();
 
-        model.addAttribute("postList", postList);
+        model.addAttribute("startPageNum", getStartPageNum(currentPageNumber));
+        model.addAttribute("nextPageNum", getEndPageNum(currentPageNumber)+1);
+        model.addAttribute("pagingCount", getPagingNumber());
+        model.addAttribute("postList", postListByPagination);
         model.addAttribute("tagList", tagService.getTagNameList());
         model.addAttribute("postListByTop5", postListByTop5);
         model.addAttribute("recentCommentListTop5", recentCommentListTop5);
         return "post/list";
     }
+
+
+    /** pagination 시작버튼 button */
+    private int getStartPageNum(int currentPageNumber) {
+        int pageBtnSize = PostPage.PAGE_BTN_SIZE.getValue();
+        int quotient = (currentPageNumber/pageBtnSize);
+
+        if(currentPageNumber < 5) {
+            return 1;
+        }
+        if(currentPageNumber % pageBtnSize == 0) {
+            return (quotient-1)*pageBtnSize+1;
+        }return (quotient-1)*pageBtnSize;
+    }
+
+    /** pagination 끝버튼 button */
+    private int getEndPageNum(int currentPageNumber) {
+        int lastPageButtonNumber = getLastPageButtonNumber();
+        int pageBtnSize = PostPage.PAGE_BTN_SIZE.getValue();
+        int quotient = (currentPageNumber / pageBtnSize);
+
+        /** 마지막 last page button 숫자가 더 작으면 last page button숫자 반환  */
+        if (lastPageButtonNumber < (quotient + 1) * pageBtnSize) {
+            return lastPageButtonNumber;
+        }
+        if (currentPageNumber % pageBtnSize == 0) {
+            return quotient * pageBtnSize;
+        }
+        return (quotient + 1) * pageBtnSize;
+
+    }
+
+    /** 가장 마지막 pagination button 가져오기 */
+    private int getLastPageButtonNumber() {
+        int postCount = postService.getPostCount();
+        int pageBtnSize = PostPage.PAGE_BTN_SIZE.getValue();
+
+        if(postCount % pageBtnSize == 0) {
+            return postCount/pageBtnSize;
+        }return postCount/pageBtnSize + 1;
+    }
+
+
+
+    /** 페이징 버튼 갯수를 반환 */
+    private int getPagingNumber() {
+        int postCount = postService.getPostCount();
+
+        if(postCount % PostPage.PAGE_ROW_SIZE.getValue() == 0) {
+            return postCount / PostPage.PAGE_ROW_SIZE.getValue();
+        }return postCount / PostPage.PAGE_ROW_SIZE.getValue() + 1;
+    }
+
 
     /** 게시글 등록 화면 이동 */
     @GetMapping("")
@@ -75,7 +135,7 @@ public class PostController {
     @GetMapping("/{postId}/details")
     public String view(@PathVariable Long postId, Model model, Principal principal) {
         PostEntity postEntity = postService.getPostEntity(postId);
-        List<PostEntity> postListByTop5 = postService.getPostListByTop5();
+        List<PostEntity> postListByTop5 = postService.getTop5ListByLikeCount();
         AccountEntity accountEntity = accountService.findByLoginId(principal.getName());
         List<CommentEntity> recentCommentListTop5 = commentService.getRecentCommentList();
 

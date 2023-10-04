@@ -3,6 +3,7 @@ package com.app.jungsuri.domain.post.persistence;
 import com.app.jungsuri.domain.account.persistence.AccountEntity;
 import com.app.jungsuri.domain.post.event.PostCreatedEvent;
 import com.app.jungsuri.domain.post.web.dto.PostCreateDto;
+import com.app.jungsuri.infra.pagination.PostPage;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.ApplicationEventPublisher;
@@ -20,9 +21,24 @@ public class PostService {
     private final ApplicationEventPublisher eventPublisher;
 
     /**
+     * 게시글 count 가져오기
+     */
+    public int getPostCount() {
+        return postRepository.getPostCount();
+    }
+
+    /**
+     * pagination number에 따른 post list 가져오기
+     */
+    public List<PostEntity> getPostListByPagination(int pageNumber) {
+        return postRepository.findPostListByPagination(getStartRowNum(pageNumber));
+    }
+
+
+    /**
      * 인기 게시글(top5) post entity 가져오기
      */
-    public List<PostEntity> getPostListByTop5() {
+    public List<PostEntity> getTop5ListByLikeCount() {
         return postRepository.findTop5ByLikeCountAsc();
     }
 
@@ -35,6 +51,7 @@ public class PostService {
     /** 게시글 생성 */
     public PostEntity createPost(PostCreateDto postCreateDto, AccountEntity accountEntity) {
         PostEntity postEntity = new PostEntity(postCreateDto, accountEntity);
+        log.info("createPost getLoginId  : " + accountEntity.getLoginId());
         eventPublisher.publishEvent(new PostCreatedEvent(postEntity));
         return postRepository.save(postEntity);
     }
@@ -64,5 +81,10 @@ public class PostService {
     /** tags(태그들)에 해당하는 게시글 가져오기 */
     public List<PostEntity> getPostListByTags(List<String> searchTags) {
         return postRepository.findAllByTags(searchTags);
+    }
+
+    /** page number에 따른 list start row number 가져오기 */
+    private int getStartRowNum(int pageNumber) {
+        return PostPage.PAGE_ROW_SIZE.getValue()*(pageNumber-1)+1;
     }
 }
