@@ -60,4 +60,4 @@ dockerfile
 /src/main/resources/application.properties
 
 #github
-./.github
+/.github
