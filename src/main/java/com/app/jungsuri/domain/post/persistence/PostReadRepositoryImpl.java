@@ -17,6 +17,7 @@ public class PostReadRepositoryImpl implements PostReadRepository {
     private final DSLContext dslContext;
 
     /** 현재 등록된 모든 게시물의 갯수를 반환 */
+    @Override
     public int getPostCount() {
         return dslContext.selectCount()
                 .from(POST)
@@ -24,6 +25,7 @@ public class PostReadRepositoryImpl implements PostReadRepository {
     }
 
     /** id에 해당하는 post 가져오기 */
+    @Override
     public PostEntity findPostEntityById(Long id) {
         return dslContext.select()
                         .from(POST)
@@ -33,6 +35,7 @@ public class PostReadRepositoryImpl implements PostReadRepository {
 
 
     /** Tag에 해당하는 post 가져오기 */
+    @Override
     public List<PostEntity> findAllByTags(List<String> searchTags) {
         var tagSubQuery = dslContext.select(TAG.ID)
                 .from(TAG)
@@ -47,6 +50,7 @@ public class PostReadRepositoryImpl implements PostReadRepository {
     }
 
     /** 좋아요 갯수가 많은 5개의 게시글 가져오기 */
+    @Override
     public List<PostEntity> findTop5ByLikeCountAsc() {
         return dslContext.select()
                 .from(POST)
@@ -56,6 +60,7 @@ public class PostReadRepositoryImpl implements PostReadRepository {
     }
 
     /** pagination 적용된 post list 가져오기 */
+    @Override
     public List<PostEntity> findPostListByPagination(int startRowNum) {
         return dslContext.select()
                 .from(POST)
@@ -64,5 +69,14 @@ public class PostReadRepositoryImpl implements PostReadRepository {
                 .fetchInto(PostEntity.class);
     }
 
+    /** 최근 게시글 3개 가져오기 */
+    @Override
+    public List<PostEntity> findPostListByRecentTop3() {
+        return dslContext.select()
+                .from(POST)
+                .orderBy(POST.CREATED_AT.desc())
+                .limit(3)
+                .fetchInto(PostEntity.class);
+    }
 }
 

@@ -137,4 +137,9 @@ public class PostService {
         }return postCount / PostPage.PAGE_ROW_SIZE.getValue() + 1;
     }
 
+    /** 최신 게시글 3개 가져오기 */
+    public List<PostEntity> getPostListByRecentTop3() {
+        return postRepository.findPostListByRecentTop3();
+    }
+
 }
