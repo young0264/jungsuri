@@ -35,17 +35,18 @@ public class CommentController {
     @PostMapping("")
     public String create(@Valid @ModelAttribute("commentCreateDto") CommentCreateDto commentCreateDto,
                          BindingResult errors, RedirectAttributes redirectAttributes) {
-        PostEntity postEntity = postService.getPostEntity(commentCreateDto.getPostId());
-        AccountEntity accountEntity = accountService.findByLoginId(commentCreateDto.getLoginId());
-        Comment comment = commentCreateDto.toComment(accountEntity, postEntity);
-        commentService.createComment(comment);
-
         if (errors.hasErrors()) {
             List<ObjectError> allErrors = errors.getAllErrors();
             allErrors.stream().forEach(objectError -> {
                 redirectAttributes.addFlashAttribute("comment_create_error", objectError.getDefaultMessage());
             });
+            return String.format("redirect:/post/%s/details", commentCreateDto.getPostId());
         }
+        PostEntity postEntity = postService.getPostEntity(commentCreateDto.getPostId());
+        AccountEntity accountEntity = accountService.findByLoginId(commentCreateDto.getLoginId());
+        Comment comment = commentCreateDto.toComment(accountEntity, postEntity);
+        commentService.createComment(comment);
+
         return String.format("redirect:/post/%s/details", commentCreateDto.getPostId());
     }
 
