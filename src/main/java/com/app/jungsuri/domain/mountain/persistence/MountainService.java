@@ -1,5 +1,6 @@
 package com.app.jungsuri.domain.mountain.persistence;
 
+import com.app.jungsuri.infra.pagination.MountainPage;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.jsoup.nodes.Document;
@@ -21,6 +22,7 @@ public class MountainService {
     private final MountainLocationService mountainLocationService;
     private final MountainRepository mountainRepository;
 
+    /** 100대 명산 크롤링 - 저장 */
     public void saveMountainInfo(Document document) {
         Elements mountainElements = document.getElementsByClass("list_item");
         for (Element mountainElement : mountainElements) {
@@ -43,10 +45,12 @@ public class MountainService {
         }
     }
 
+    /** mountain Entity 저장 */
     private MountainEntity saveMountainEntity(MountainEntity mountainEntity) {
         return mountainRepository.save(mountainEntity);
     }
 
+    /** mountain 산높이 가져오기 */
     private int getMountainHeight(String[] split1) {
         int mountainHeight;
         boolean isContainDot = split1[1].contains(".");
@@ -56,6 +60,87 @@ public class MountainService {
             mountainHeight = Integer.parseInt(split1[1].substring(0, split1[1].length() - 1));
         }
         return mountainHeight;
+    }
+
+
+    /** mountain 모든 list 정보 가져오기*/
+    public List<MountainEntity> getMountainAllInfo() {
+        return  mountainRepository.findAll();
+    }
+
+    /** 모든 산 이름 가져오기 */
+    public List<String> findAllMountainsName() {
+        return mountainRepository.findAllMountainsName();
+    }
+
+    /**
+     * pagination 적용된 mountain list 가져오기
+     */
+    public List<MountainEntity> getMountainListByPagination(int currentPageNumber) {
+        log.info("currentPageNumber : " + currentPageNumber);
+        log.info("getStartRowNum(currentPageNumber) : " + getStartRowNum(currentPageNumber));
+        return mountainRepository.findMountainListByPagination(getStartRowNum(currentPageNumber));
+    }
+
+    /** page number에 따른 list start row number 가져오기 */
+    private int getStartRowNum(int pageNumber) {
+        return MountainPage.PAGE_ROW_SIZE.getValue()*(pageNumber-1)+1;
+    }
+
+    /** pagination 시작버튼 button */
+    public int getStartPageNum(int currentPageNumber) {
+        int pageBtnSize = MountainPage.PAGE_BTN_SIZE.getValue();
+        int quotient = (currentPageNumber/pageBtnSize);
+
+        if(currentPageNumber < 5) {
+            return 1;
+        }
+        if(currentPageNumber % pageBtnSize == 0) {
+            return (quotient-1)*pageBtnSize+1;
+        }return (quotient-1)*pageBtnSize;
+    }
+
+    /** pagination 끝버튼 button */
+    public int getEndPageNum(int currentPageNumber) {
+        int lastPageButtonNumber = getLastPageButtonNumber();
+        int pageBtnSize = MountainPage.PAGE_BTN_SIZE.getValue();
+        int quotient = (currentPageNumber / pageBtnSize);
+
+        /** 마지막 last page button 숫자가 더 작으면 last page button숫자 반환  */
+        if (lastPageButtonNumber < (quotient + 1) * pageBtnSize) {
+            return lastPageButtonNumber;
+        }
+        if (currentPageNumber % pageBtnSize == 0) {
+            return quotient * pageBtnSize;
+        }
+        return (quotient + 1) * pageBtnSize;
+
+    }
+
+    /** 가장 마지막 pagination button 가져오기 */
+    private int getLastPageButtonNumber() {
+        int mountainCount = getMountainCount();
+        int pageBtnSize = MountainPage.PAGE_BTN_SIZE.getValue();
+
+        if(mountainCount % pageBtnSize == 0) {
+            return mountainCount/pageBtnSize;
+        }return mountainCount/pageBtnSize + 1;
+    }
+
+
+    /** 페이징 버튼 갯수를 반환 */
+    public int getPagingNumber() {
+        int mountainCount = getMountainCount();
+
+        if(mountainCount % MountainPage.PAGE_ROW_SIZE.getValue() == 0) {
+            return mountainCount / MountainPage.PAGE_ROW_SIZE.getValue();
+        }return mountainCount / MountainPage.PAGE_ROW_SIZE.getValue() + 1;
+    }
+
+
+    /** mountain list 갯수 가져오기 */
+    public int getMountainCount() {
+        return mountainRepository.getMountainCount();
     }
 
 
@@ -82,13 +167,5 @@ public class MountainService {
                 }
             }
         }
-    }
-
-    public List<MountainEntity> getMountainAllInfo() {
-        return  mountainRepository.findAll();
-    }
-
-    public List<String> findAllMountainsName() {
-        return mountainRepository.findAllMountainsName();
     }
 }

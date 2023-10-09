@@ -43,9 +43,8 @@
                     </div>
                     <!-- list data 뿌리기 끝 -->
                 </div>
-                <div class="pagination font-alt"><a href="#"><i class="fa fa-angle-left"></i></a><a
-                        class="active" href="#">1</a><a href="#">2</a><a href="#">3</a><a href="#">4</a><a
-                        href="#"><i class="fa fa-angle-right"></i></a>
+                <div class="pagination font-alt"  th:each="currentPage : ${#numbers.sequence(1, pagingCount)}">
+                    <a th:href="'/mountain/list?currentPageNumber='+${currentPage}" class="active" th:text="${currentPage}"></a>
                 </div>
             </div>
         </section>
