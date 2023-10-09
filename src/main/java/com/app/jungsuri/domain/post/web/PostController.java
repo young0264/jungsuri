@@ -10,7 +10,6 @@ import com.app.jungsuri.domain.post.web.dto.PostCreateDto;
 import com.app.jungsuri.domain.post.persistence.PostEntity;
 import com.app.jungsuri.domain.post.web.dto.PostSearchDto;
 import com.app.jungsuri.domain.tag.persistence.TagService;
-import com.app.jungsuri.infra.pagination.PostPage;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -44,13 +43,12 @@ public class PostController {
     @GetMapping("/list")
     public String list(@RequestParam(required = false, defaultValue = "1") int currentPageNumber , Model model) {
 
-        log.info("currentPageNumber : " + currentPageNumber);
         List<PostEntity> postListByPagination = postService.getPostListByPagination(currentPageNumber);
         List<PostEntity> postListByTop5 = postService.getTop5ListByLikeCount();
         List<CommentEntity> recentCommentListTop5 = commentService.getRecentCommentList();
 
-        model.addAttribute("startPageNum", postService.getStartPageNum(currentPageNumber));
-        model.addAttribute("nextPageNum", postService.getEndPageNum(currentPageNumber)+1);
+        model.addAttribute("beforePageNum", postService.getBeforePageNum(currentPageNumber));
+        model.addAttribute("nextPageNum", postService.getEndPageNum(currentPageNumber));
         model.addAttribute("pagingCount", postService.getPagingNumber());
         model.addAttribute("postList", postListByPagination);
         model.addAttribute("tagList", tagService.getTagNameList());
