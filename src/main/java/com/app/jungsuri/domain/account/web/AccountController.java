@@ -21,18 +21,6 @@ import java.security.Principal;
 @Slf4j
 public class AccountController {
     private final AccountService accountService;
-    private final WeatherService weatherService;
-
-    @GetMapping("/")
-    public String mainPage(@RequestParam(value="city", defaultValue="seoul") String city, Principal principal, Model model) {
-        boolean emailValid = accountService.isEmailValid(principal);
-        WeatherEntity weatherEntity = weatherService.getWeatherData(city);
-        if (!emailValid) {
-            model.addAttribute("error", "이메일 인증이 되지않은 계정입니다.");
-        }
-        model.addAttribute("weatherData", weatherEntity);
-        return "main";
-    }
 
     @GetMapping("/login")
     public String login() {

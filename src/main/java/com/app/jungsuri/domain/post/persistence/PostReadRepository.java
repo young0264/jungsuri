@@ -12,5 +12,7 @@ public interface PostReadRepository {
 
     List<PostEntity> findPostListByPagination(int startRowNum);
 
+    List<PostEntity> findPostListByRecentTop3();
+
     int getPostCount();
 }
