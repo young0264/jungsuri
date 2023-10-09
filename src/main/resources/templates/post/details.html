@@ -238,13 +238,16 @@
             <div class="col-sm-8 col-sm-offset-1">
                 <!-- 게시글  start-->
                 <div class="post" th:object="${postEntity}">
-                    <div class="post-thumbnail"><img src="/static/images/jungsuri_logo.png" alt="Blog Featured Image"/>
-                    </div>
+<!--                    <div class="post-thumbnail">-->
+<!--                        <img src="/static/images/jungsuri_logo.png" alt="Blog Featured Image"/>-->
+<!--                    </div>-->
                     <div class="post-header font-alt">
                         <h1 class="post-title" th:text="${postEntity.title}"></h1>
-                        <div class="post-meta">By&nbsp;<a href="#" th:text="${postEntity.author}"></a>| 23 November | 3
-                            Comments | <a
-                                    href="#">Photography, </a><a href="#">Web Design</a>
+                        <div class="post-meta">
+                            By&nbsp;<a href="#" th:text="${postEntity.author}"></a>
+                            | <a href="#" th:text="${postEntity.createdAt.toLocalDate()}"></a>
+                            | <a href="#" th:text="${postEntity.commentCount}"></a>
+                             Comments |
                         </div>
                     </div>
                     <div class="post-entry " style="height: 300px">
