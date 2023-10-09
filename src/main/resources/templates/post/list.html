@@ -46,9 +46,10 @@
                         </div>
                         <div class="post-header font-alt">
                             <h2 class="post-title"><a th:href="'/post/' + ${post.id} + '/details'" th:text="${post.title}"></a></h2>
-                            <div class="post-meta">By&nbsp;
-                                <a th:text="${post.author} + ' | ' + ${post.getCreatedAt().toLocalDate()}"></a>
-                                | 3 Comments | <a >Photography, </a>
+                            <div class="post-meta">
+                                By&nbsp;:<a th:text="${post.author} + ' | '  "></a>
+                                Date : <a th:text="${post.getCreatedAt().toLocalDate()} + ' | '"></a>
+                                Comments : <a th:text=" ${post.commentCount}"></a>
                                 <a th:if="${post.loginId == #authentication.principal.username}" style="float:right">
                                     <div style="float:right">
                                         <form th:action=" '/post/' + ${post.id}" th:method="delete">

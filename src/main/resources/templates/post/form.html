@@ -46,11 +46,22 @@
 <body data-spy="scroll" data-target=".onpage-navigation" data-offset="60">
 <!--게시글 등록 form-->
 <div th:if="${mode}=='create'">
-    <section class="module">
+    <section class="module bg-dark-60 about-page-header" data-background="assets/images/about_bg.jpg" style="width: 100%">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-6 col-sm-offset-3">
+                    <h1 class="module-title font-alt mb-0">게시글 등록 </h1>
+                </div>
+            </div>
+        </div>
+    </section>
+
+<section class="module">
     <div class="container">
+
         <div class="row">
             <div class="col-sm-8 col-sm-offset-2">
-                <h4 class="font-alt mb-0">Basic Forms</h4>
+                <h4 class="font-alt mb-0">게시글 등록</h4>
                 <hr class="divider-w mt-10 mb-20">
                 <!-- tagify 해시태그 시작 -->
                 <input name='hash_tag' value='' placeholder="해시태그를 입력해 주세요.">

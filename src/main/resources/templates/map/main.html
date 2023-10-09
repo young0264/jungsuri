@@ -13,18 +13,20 @@
 <body>
 
 <div class="main">
-    <section class="module bg-dark-60 blog-page-header" data-background=" assets/images/blog_bg.jpg">
+<!--    <section class="home-section home-parallax home-fade bg-dark-30" id="home" data-background="./images/jungsuri_logo.png">-->
+
+
+    <section class="module bg-dark-60 about-page-header" style="width: 100%">
         <div class="container">
             <div class="row">
                 <div class="col-sm-6 col-sm-offset-3">
-                    <h2 class="module-title font-alt">MAP</h2>
-                    <div class="module-subtitle font-serif">
-                        등산 경로를 지도에서 확인하세요.
-                    </div>
+                    <h1 class="module-title font-alt">MAP</h1>
+                    <h2 class="module-title font-alt mb-0"> 등산 경로를 지도에서 확인하세요.</h2>
                 </div>
             </div>
         </div>
     </section>
+
     <section class="module">
         <div class="container">
             <button class="btn btn-primary" onclick="mountain_record_start()">등산 경로 기록 시작</button>
@@ -38,7 +40,7 @@
                 <!-- TODO : map용 left side bar 만들기 -->
                 <!-- left slider end -->
 
-                <div id="map" style="width:600px;height:600px;"></div>
+                <div id="map" style="width:1000px;height:600px;"></div>
                 <!-- kakao map api 시작 -->
                 <script>
 
