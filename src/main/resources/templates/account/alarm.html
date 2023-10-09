@@ -54,22 +54,25 @@
                     <h3 class="alert-info">읽지 않은 알림 <span style="color:orange;" th:text="${notificationList.size()}"></span>개 </h3>
                     <hr class="divider-w mt-10 mb-20">
                     <ul>
-                        <li>
-                            <div class="post" th:each="notification : ${notificationList}">
-                                <a th:onclick="notification.check([[${notification.id}]])">
-                                    <h3>
-                                        <span th:text="${notification.message}" style="color:orange"></span> 알림이 있습니다.
-                                        <span style="float:right;" th:text="${notification.createdAt}">date</span>
-                                    </h3>
-                                </a>
-                                <hr class="divider-w">
-                            </div>
-                        </li>
+                        <div class="post" th:each="notification : ${notificationList}">
+                            <li>
+
+                            <a th:onclick="notification.check([[${notification.id}]])">
+                                <h3>
+                                    <span th:text="${notification.message}" style="color:orange"></span> 알림이 있습니다.
+                                    <span style="float:right;" th:text="${notification.createdAt}">date</span>
+                                </h3>
+                            </a>
+                            </li>
+
+                            <hr class="divider-w">
+
+                        </div>
                     </ul>
                 </div>
             </div>
         </section>
-        <hr class="divider-d">
+        <div th:replace="~{fragments/fragments.html :: nav_footer}"></div>
     </div>
     <div class="scroll-up"><a href="#totop"><i class="fa fa-angle-double-up"></i></a></div>
 </main>
