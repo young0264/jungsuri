@@ -7,7 +7,6 @@ import java.time.LocalDateTime;
 @Entity
 @Getter
 @Builder
-@ToString
 @NoArgsConstructor
 @AllArgsConstructor
 @Inheritance(strategy = InheritanceType.JOINED) //because
@@ -20,6 +19,7 @@ public class Tag {
     @Column(name="name", unique = true)
     private String name;
 
+    @Builder.Default
     @Column(name="used_count")
     private int usedCount = 0;
 

@@ -71,7 +71,7 @@ public class Post extends TableImpl<PostRecord> {
     /**
      * The column <code>jungsuri.post.account_entity_id</code>.
      */
-    public final TableField<PostRecord, Long> ACCOUNT_ENTITY_ID = createField(DSL.name("account_entity_id"), SQLDataType.BIGINT, this, "");
+    public final TableField<PostRecord, Long> ACCOUNT_ENTITY_ID = createField(DSL.name("account_entity_id"), SQLDataType.BIGINT.nullable(false), this, "");
 
     /**
      * The column <code>jungsuri.post.created_at</code>.

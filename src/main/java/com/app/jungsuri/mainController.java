@@ -58,12 +58,14 @@ public class mainController {
 
     @PostConstruct
     public void initAccount() {
+        log.info("initAccount");
         SignUpForm signUpForm = new SignUpForm("12", "12@naver.com", "12","남의영","","", UserRole.ADMIN);
         accountService.createNewAccount(signUpForm);
     }
 
     @PostConstruct
     public void initMountainInfo() {
+        log.info("initMountainInfo");
         final String mountainInfoUrl = "https://www.forest.go.kr/kfsweb/kfi/kfs/foreston/main/contents/FmmntSrch/selectFmmntSrchList.do?mn=NKFS_03_01_12&orgId=&mntUnit=100&mntIndex=1&searchMnt=&searchCnd3=&mntnInfoGbn=&mntnInfoSsnCd=&mntnInfoThmCd=&mntnInfoTmCd=&mntnHaslvCd=&mntnInfoLvlCd=";
         Connection connect = Jsoup.connect(mountainInfoUrl);
 
@@ -78,6 +80,7 @@ public class mainController {
 
     @PostConstruct
     public void postTestInit() {
+        log.info("postTestInit");
         AccountEntity accountEntity = accountService.findByLoginId("12");
 
 //        PostEntity postEntity = createPost(PostCreateDto postCreateDto, AccountEntity accountEntity)

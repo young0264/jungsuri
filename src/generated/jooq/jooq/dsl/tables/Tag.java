@@ -5,6 +5,8 @@ package jooq.dsl.tables;
 
 
 import java.time.LocalDateTime;
+import java.util.Arrays;
+import java.util.List;
 import java.util.function.Function;
 
 import jooq.dsl.Jungsuri;
@@ -54,7 +56,7 @@ public class Tag extends TableImpl<TagRecord> {
     /**
      * The column <code>jungsuri.tag.used_count</code>.
      */
-    public final TableField<TagRecord, Integer> USED_COUNT = createField(DSL.name("used_count"), SQLDataType.INTEGER.nullable(false), this, "");
+    public final TableField<TagRecord, Integer> USED_COUNT = createField(DSL.name("used_count"), SQLDataType.INTEGER, this, "");
 
     /**
      * The column <code>jungsuri.tag.created_at</code>.
@@ -117,6 +119,11 @@ public class Tag extends TableImpl<TagRecord> {
     @Override
     public UniqueKey<TagRecord> getPrimaryKey() {
         return Keys.KEY_TAG_PRIMARY;
+    }
+
+    @Override
+    public List<UniqueKey<TagRecord>> getUniqueKeys() {
+        return Arrays.asList(Keys.KEY_TAG_UK_1WDPSED5KNA2Y38HNBGRNHI5B);
     }
 
     @Override
