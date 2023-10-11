@@ -56,17 +56,17 @@ public class Comment extends TableImpl<CommentRecord> {
     /**
      * The column <code>jungsuri.comment.like_count</code>.
      */
-    public final TableField<CommentRecord, Integer> LIKE_COUNT = createField(DSL.name("like_count"), SQLDataType.INTEGER, this, "");
+    public final TableField<CommentRecord, Integer> LIKE_COUNT = createField(DSL.name("like_count"), SQLDataType.INTEGER.nullable(false), this, "");
 
     /**
      * The column <code>jungsuri.comment.account_entity_id</code>.
      */
-    public final TableField<CommentRecord, Long> ACCOUNT_ENTITY_ID = createField(DSL.name("account_entity_id"), SQLDataType.BIGINT, this, "");
+    public final TableField<CommentRecord, Long> ACCOUNT_ENTITY_ID = createField(DSL.name("account_entity_id"), SQLDataType.BIGINT.nullable(false), this, "");
 
     /**
      * The column <code>jungsuri.comment.created_at</code>.
      */
-    public final TableField<CommentRecord, LocalDateTime> CREATED_AT = createField(DSL.name("created_at"), SQLDataType.LOCALDATETIME(6), this, "");
+    public final TableField<CommentRecord, LocalDateTime> CREATED_AT = createField(DSL.name("created_at"), SQLDataType.LOCALDATETIME(6).nullable(false), this, "");
 
     /**
      * The column <code>jungsuri.comment.id</code>.
@@ -76,7 +76,7 @@ public class Comment extends TableImpl<CommentRecord> {
     /**
      * The column <code>jungsuri.comment.post_entity_id</code>.
      */
-    public final TableField<CommentRecord, Long> POST_ENTITY_ID = createField(DSL.name("post_entity_id"), SQLDataType.BIGINT, this, "");
+    public final TableField<CommentRecord, Long> POST_ENTITY_ID = createField(DSL.name("post_entity_id"), SQLDataType.BIGINT.nullable(false), this, "");
 
     /**
      * The column <code>jungsuri.comment.updated_at</code>.
@@ -86,12 +86,12 @@ public class Comment extends TableImpl<CommentRecord> {
     /**
      * The column <code>jungsuri.comment.author</code>.
      */
-    public final TableField<CommentRecord, String> AUTHOR = createField(DSL.name("author"), SQLDataType.VARCHAR(255), this, "");
+    public final TableField<CommentRecord, String> AUTHOR = createField(DSL.name("author"), SQLDataType.VARCHAR(255).nullable(false), this, "");
 
     /**
      * The column <code>jungsuri.comment.content</code>.
      */
-    public final TableField<CommentRecord, String> CONTENT = createField(DSL.name("content"), SQLDataType.VARCHAR(255), this, "");
+    public final TableField<CommentRecord, String> CONTENT = createField(DSL.name("content"), SQLDataType.VARCHAR(255).nullable(false), this, "");
 
     private Comment(Name alias, Table<CommentRecord> aliased) {
         this(alias, aliased, null);
