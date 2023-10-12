@@ -433,8 +433,6 @@
                                         By&nbsp;:<a th:text="${postEntity.author} + ' | '  "></a>
                                         Date : <a th:text="${postEntity.getCreatedAt().toLocalDate()} + ' | '"></a>
                                         Comments : <a th:text=" ${postEntity.commentCount}"></a>
-
-                                        <a th:if="${postEntity.loginId == #authentication.principal.username}" style="float:right"></a>
                                     </div>
                                 </div>
                             </div>
