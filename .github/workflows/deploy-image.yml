@@ -44,6 +44,8 @@ on:
       - main  # 또는 원하는 브랜치로 변경
 env:
   AWS_REGION: ap-northeast-2
+  CODE_DEPLOY_APPLICATION_NAME: jungsuri-app
+  CODE_DEPLOY_DEPLOYMENT_GROUP_NAME: junsguri-deploy-group
 
 jobs:
   build:
@@ -88,6 +90,14 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ${{ env.AWS_REGION }}
 
+  # (5) 빌드 결과물을 S3 버킷에 업로드
+      - name: Upload to AWS S3
+        run: |
+          aws deploy push \
+            --application-name ${{ env.CODE_DEPLOY_APPLICATION_NAME }} \
+            --ignore-hidden-files \
+            --s3-location s3://$S3_BUCKET_NAME/$GITHUB_SHA.zip \
+            --source .
 
 
 #      - name: Run JAR
