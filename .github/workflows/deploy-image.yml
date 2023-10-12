@@ -75,7 +75,8 @@ jobs:
 
       - name: Build with Gradle
         env:
-          GRADLE_OPTS: -Dspring.profiles.active=local
+#          GRADLE_OPTS: -Dspring.profiles.active=local
+          GRADLE_OPTS: -Dspring.profiles.active=prod
         run: ./gradlew build -x test
 
       - name: Run JAR
