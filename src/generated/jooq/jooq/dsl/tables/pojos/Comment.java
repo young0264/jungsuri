@@ -16,65 +16,44 @@ public class Comment implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    private final Integer likeCount;
-    private final Long accountEntityId;
-    private final LocalDateTime createdAt;
     private final Long id;
-    private final Long postEntityId;
-    private final LocalDateTime updatedAt;
     private final String author;
     private final String content;
+    private final LocalDateTime createdAt;
+    private final Integer likeCount;
+    private final LocalDateTime updatedAt;
+    private final Long accountEntityId;
+    private final Long postEntityId;
 
     public Comment(Comment value) {
-        this.likeCount = value.likeCount;
-        this.accountEntityId = value.accountEntityId;
-        this.createdAt = value.createdAt;
         this.id = value.id;
-        this.postEntityId = value.postEntityId;
-        this.updatedAt = value.updatedAt;
         this.author = value.author;
         this.content = value.content;
+        this.createdAt = value.createdAt;
+        this.likeCount = value.likeCount;
+        this.updatedAt = value.updatedAt;
+        this.accountEntityId = value.accountEntityId;
+        this.postEntityId = value.postEntityId;
     }
 
     public Comment(
-        Integer likeCount,
-        Long accountEntityId,
-        LocalDateTime createdAt,
         Long id,
-        Long postEntityId,
-        LocalDateTime updatedAt,
         String author,
-        String content
+        String content,
+        LocalDateTime createdAt,
+        Integer likeCount,
+        LocalDateTime updatedAt,
+        Long accountEntityId,
+        Long postEntityId
     ) {
-        this.likeCount = likeCount;
-        this.accountEntityId = accountEntityId;
-        this.createdAt = createdAt;
         this.id = id;
-        this.postEntityId = postEntityId;
-        this.updatedAt = updatedAt;
         this.author = author;
         this.content = content;
-    }
-
-    /**
-     * Getter for <code>jungsuri.comment.like_count</code>.
-     */
-    public Integer getLikeCount() {
-        return this.likeCount;
-    }
-
-    /**
-     * Getter for <code>jungsuri.comment.account_entity_id</code>.
-     */
-    public Long getAccountEntityId() {
-        return this.accountEntityId;
-    }
-
-    /**
-     * Getter for <code>jungsuri.comment.created_at</code>.
-     */
-    public LocalDateTime getCreatedAt() {
-        return this.createdAt;
+        this.createdAt = createdAt;
+        this.likeCount = likeCount;
+        this.updatedAt = updatedAt;
+        this.accountEntityId = accountEntityId;
+        this.postEntityId = postEntityId;
     }
 
     /**
@@ -82,20 +61,6 @@ public class Comment implements Serializable {
      */
     public Long getId() {
         return this.id;
-    }
-
-    /**
-     * Getter for <code>jungsuri.comment.post_entity_id</code>.
-     */
-    public Long getPostEntityId() {
-        return this.postEntityId;
-    }
-
-    /**
-     * Getter for <code>jungsuri.comment.updated_at</code>.
-     */
-    public LocalDateTime getUpdatedAt() {
-        return this.updatedAt;
     }
 
     /**
@@ -112,18 +77,53 @@ public class Comment implements Serializable {
         return this.content;
     }
 
+    /**
+     * Getter for <code>jungsuri.comment.created_at</code>.
+     */
+    public LocalDateTime getCreatedAt() {
+        return this.createdAt;
+    }
+
+    /**
+     * Getter for <code>jungsuri.comment.like_count</code>.
+     */
+    public Integer getLikeCount() {
+        return this.likeCount;
+    }
+
+    /**
+     * Getter for <code>jungsuri.comment.updated_at</code>.
+     */
+    public LocalDateTime getUpdatedAt() {
+        return this.updatedAt;
+    }
+
+    /**
+     * Getter for <code>jungsuri.comment.account_entity_id</code>.
+     */
+    public Long getAccountEntityId() {
+        return this.accountEntityId;
+    }
+
+    /**
+     * Getter for <code>jungsuri.comment.post_entity_id</code>.
+     */
+    public Long getPostEntityId() {
+        return this.postEntityId;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder("Comment (");
 
-        sb.append(likeCount);
-        sb.append(", ").append(accountEntityId);
-        sb.append(", ").append(createdAt);
-        sb.append(", ").append(id);
-        sb.append(", ").append(postEntityId);
-        sb.append(", ").append(updatedAt);
+        sb.append(id);
         sb.append(", ").append(author);
         sb.append(", ").append(content);
+        sb.append(", ").append(createdAt);
+        sb.append(", ").append(likeCount);
+        sb.append(", ").append(updatedAt);
+        sb.append(", ").append(accountEntityId);
+        sb.append(", ").append(postEntityId);
 
         sb.append(")");
         return sb.toString();

@@ -54,39 +54,9 @@ public class Post extends TableImpl<PostRecord> {
     }
 
     /**
-     * The column <code>jungsuri.post.comment_count</code>.
-     */
-    public final TableField<PostRecord, Integer> COMMENT_COUNT = createField(DSL.name("comment_count"), SQLDataType.INTEGER.nullable(false), this, "");
-
-    /**
-     * The column <code>jungsuri.post.like_count</code>.
-     */
-    public final TableField<PostRecord, Integer> LIKE_COUNT = createField(DSL.name("like_count"), SQLDataType.INTEGER.nullable(false), this, "");
-
-    /**
-     * The column <code>jungsuri.post.view_count</code>.
-     */
-    public final TableField<PostRecord, Integer> VIEW_COUNT = createField(DSL.name("view_count"), SQLDataType.INTEGER.nullable(false), this, "");
-
-    /**
-     * The column <code>jungsuri.post.account_entity_id</code>.
-     */
-    public final TableField<PostRecord, Long> ACCOUNT_ENTITY_ID = createField(DSL.name("account_entity_id"), SQLDataType.BIGINT.nullable(false), this, "");
-
-    /**
-     * The column <code>jungsuri.post.created_at</code>.
-     */
-    public final TableField<PostRecord, LocalDateTime> CREATED_AT = createField(DSL.name("created_at"), SQLDataType.LOCALDATETIME(6).nullable(false), this, "");
-
-    /**
      * The column <code>jungsuri.post.id</code>.
      */
     public final TableField<PostRecord, Long> ID = createField(DSL.name("id"), SQLDataType.BIGINT.nullable(false).identity(true), this, "");
-
-    /**
-     * The column <code>jungsuri.post.updated_at</code>.
-     */
-    public final TableField<PostRecord, LocalDateTime> UPDATED_AT = createField(DSL.name("updated_at"), SQLDataType.LOCALDATETIME(6), this, "");
 
     /**
      * The column <code>jungsuri.post.author</code>.
@@ -94,14 +64,29 @@ public class Post extends TableImpl<PostRecord> {
     public final TableField<PostRecord, String> AUTHOR = createField(DSL.name("author"), SQLDataType.VARCHAR(255).nullable(false), this, "");
 
     /**
+     * The column <code>jungsuri.post.comment_count</code>.
+     */
+    public final TableField<PostRecord, Integer> COMMENT_COUNT = createField(DSL.name("comment_count"), SQLDataType.INTEGER.nullable(false), this, "");
+
+    /**
      * The column <code>jungsuri.post.content</code>.
      */
     public final TableField<PostRecord, String> CONTENT = createField(DSL.name("content"), SQLDataType.VARCHAR(255).nullable(false), this, "");
 
     /**
+     * The column <code>jungsuri.post.created_at</code>.
+     */
+    public final TableField<PostRecord, LocalDateTime> CREATED_AT = createField(DSL.name("created_at"), SQLDataType.LOCALDATETIME(6).nullable(false), this, "");
+
+    /**
      * The column <code>jungsuri.post.image_path</code>.
      */
     public final TableField<PostRecord, String> IMAGE_PATH = createField(DSL.name("image_path"), SQLDataType.VARCHAR(255), this, "");
+
+    /**
+     * The column <code>jungsuri.post.like_count</code>.
+     */
+    public final TableField<PostRecord, Integer> LIKE_COUNT = createField(DSL.name("like_count"), SQLDataType.INTEGER.nullable(false), this, "");
 
     /**
      * The column <code>jungsuri.post.login_id</code>.
@@ -112,6 +97,21 @@ public class Post extends TableImpl<PostRecord> {
      * The column <code>jungsuri.post.title</code>.
      */
     public final TableField<PostRecord, String> TITLE = createField(DSL.name("title"), SQLDataType.VARCHAR(255).nullable(false), this, "");
+
+    /**
+     * The column <code>jungsuri.post.updated_at</code>.
+     */
+    public final TableField<PostRecord, LocalDateTime> UPDATED_AT = createField(DSL.name("updated_at"), SQLDataType.LOCALDATETIME(6), this, "");
+
+    /**
+     * The column <code>jungsuri.post.view_count</code>.
+     */
+    public final TableField<PostRecord, Integer> VIEW_COUNT = createField(DSL.name("view_count"), SQLDataType.INTEGER.nullable(false), this, "");
+
+    /**
+     * The column <code>jungsuri.post.account_entity_id</code>.
+     */
+    public final TableField<PostRecord, Long> ACCOUNT_ENTITY_ID = createField(DSL.name("account_entity_id"), SQLDataType.BIGINT.nullable(false), this, "");
 
     private Post(Name alias, Table<PostRecord> aliased) {
         this(alias, aliased, null);
@@ -222,14 +222,14 @@ public class Post extends TableImpl<PostRecord> {
     // -------------------------------------------------------------------------
 
     @Override
-    public Row12<Integer, Integer, Integer, Long, LocalDateTime, Long, LocalDateTime, String, String, String, String, String> fieldsRow() {
+    public Row12<Long, String, Integer, String, LocalDateTime, String, Integer, String, String, LocalDateTime, Integer, Long> fieldsRow() {
         return (Row12) super.fieldsRow();
     }
 
     /**
      * Convenience mapping calling {@link SelectField#convertFrom(Function)}.
      */
-    public <U> SelectField<U> mapping(Function12<? super Integer, ? super Integer, ? super Integer, ? super Long, ? super LocalDateTime, ? super Long, ? super LocalDateTime, ? super String, ? super String, ? super String, ? super String, ? super String, ? extends U> from) {
+    public <U> SelectField<U> mapping(Function12<? super Long, ? super String, ? super Integer, ? super String, ? super LocalDateTime, ? super String, ? super Integer, ? super String, ? super String, ? super LocalDateTime, ? super Integer, ? super Long, ? extends U> from) {
         return convertFrom(Records.mapping(from));
     }
 
@@ -237,7 +237,7 @@ public class Post extends TableImpl<PostRecord> {
      * Convenience mapping calling {@link SelectField#convertFrom(Class,
      * Function)}.
      */
-    public <U> SelectField<U> mapping(Class<U> toType, Function12<? super Integer, ? super Integer, ? super Integer, ? super Long, ? super LocalDateTime, ? super Long, ? super LocalDateTime, ? super String, ? super String, ? super String, ? super String, ? super String, ? extends U> from) {
+    public <U> SelectField<U> mapping(Class<U> toType, Function12<? super Long, ? super String, ? super Integer, ? super String, ? super LocalDateTime, ? super String, ? super Integer, ? super String, ? super String, ? super LocalDateTime, ? super Integer, ? super Long, ? extends U> from) {
         return convertFrom(toType, Records.mapping(from));
     }
 }

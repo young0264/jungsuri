@@ -16,115 +16,80 @@ public class Account implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    private final Boolean emailVerified;
-    private final Integer mountainExp;
-    private final Boolean postCreatedChecked;
-    private final Byte userRole;
-    private final LocalDateTime emailCheckTokenGeneratedAt;
     private final Long id;
-    private final LocalDateTime joinedAt;
     private final String bio;
     private final String email;
+    private final LocalDateTime emailCheckTokenGeneratedAt;
     private final String emailToken;
+    private final Boolean emailVerified;
+    private final LocalDateTime joinedAt;
     private final String location;
     private final String loginId;
+    private final Integer mountainExp;
     private final String name;
     private final String occupation;
     private final String password;
+    private final Boolean postCreatedChecked;
     private final String profileImage;
     private final String role;
+    private final Byte userRole;
 
     public Account(Account value) {
-        this.emailVerified = value.emailVerified;
-        this.mountainExp = value.mountainExp;
-        this.postCreatedChecked = value.postCreatedChecked;
-        this.userRole = value.userRole;
-        this.emailCheckTokenGeneratedAt = value.emailCheckTokenGeneratedAt;
         this.id = value.id;
-        this.joinedAt = value.joinedAt;
         this.bio = value.bio;
         this.email = value.email;
+        this.emailCheckTokenGeneratedAt = value.emailCheckTokenGeneratedAt;
         this.emailToken = value.emailToken;
+        this.emailVerified = value.emailVerified;
+        this.joinedAt = value.joinedAt;
         this.location = value.location;
         this.loginId = value.loginId;
+        this.mountainExp = value.mountainExp;
         this.name = value.name;
         this.occupation = value.occupation;
         this.password = value.password;
+        this.postCreatedChecked = value.postCreatedChecked;
         this.profileImage = value.profileImage;
         this.role = value.role;
+        this.userRole = value.userRole;
     }
 
     public Account(
-        Boolean emailVerified,
-        Integer mountainExp,
-        Boolean postCreatedChecked,
-        Byte userRole,
-        LocalDateTime emailCheckTokenGeneratedAt,
         Long id,
-        LocalDateTime joinedAt,
         String bio,
         String email,
+        LocalDateTime emailCheckTokenGeneratedAt,
         String emailToken,
+        Boolean emailVerified,
+        LocalDateTime joinedAt,
         String location,
         String loginId,
+        Integer mountainExp,
         String name,
         String occupation,
         String password,
+        Boolean postCreatedChecked,
         String profileImage,
-        String role
+        String role,
+        Byte userRole
     ) {
-        this.emailVerified = emailVerified;
-        this.mountainExp = mountainExp;
-        this.postCreatedChecked = postCreatedChecked;
-        this.userRole = userRole;
-        this.emailCheckTokenGeneratedAt = emailCheckTokenGeneratedAt;
         this.id = id;
-        this.joinedAt = joinedAt;
         this.bio = bio;
         this.email = email;
+        this.emailCheckTokenGeneratedAt = emailCheckTokenGeneratedAt;
         this.emailToken = emailToken;
+        this.emailVerified = emailVerified;
+        this.joinedAt = joinedAt;
         this.location = location;
         this.loginId = loginId;
+        this.mountainExp = mountainExp;
         this.name = name;
         this.occupation = occupation;
         this.password = password;
+        this.postCreatedChecked = postCreatedChecked;
         this.profileImage = profileImage;
         this.role = role;
-    }
-
-    /**
-     * Getter for <code>jungsuri.account.email_verified</code>.
-     */
-    public Boolean getEmailVerified() {
-        return this.emailVerified;
-    }
-
-    /**
-     * Getter for <code>jungsuri.account.mountain_exp</code>.
-     */
-    public Integer getMountainExp() {
-        return this.mountainExp;
-    }
-
-    /**
-     * Getter for <code>jungsuri.account.post_created_checked</code>.
-     */
-    public Boolean getPostCreatedChecked() {
-        return this.postCreatedChecked;
-    }
-
-    /**
-     * Getter for <code>jungsuri.account.user_role</code>.
-     */
-    public Byte getUserRole() {
-        return this.userRole;
-    }
-
-    /**
-     * Getter for <code>jungsuri.account.email_check_token_generated_at</code>.
-     */
-    public LocalDateTime getEmailCheckTokenGeneratedAt() {
-        return this.emailCheckTokenGeneratedAt;
+        this.userRole = userRole;
     }
 
     /**
@@ -132,13 +97,6 @@ public class Account implements Serializable {
      */
     public Long getId() {
         return this.id;
-    }
-
-    /**
-     * Getter for <code>jungsuri.account.joined_at</code>.
-     */
-    public LocalDateTime getJoinedAt() {
-        return this.joinedAt;
     }
 
     /**
@@ -156,10 +114,31 @@ public class Account implements Serializable {
     }
 
     /**
+     * Getter for <code>jungsuri.account.email_check_token_generated_at</code>.
+     */
+    public LocalDateTime getEmailCheckTokenGeneratedAt() {
+        return this.emailCheckTokenGeneratedAt;
+    }
+
+    /**
      * Getter for <code>jungsuri.account.email_token</code>.
      */
     public String getEmailToken() {
         return this.emailToken;
+    }
+
+    /**
+     * Getter for <code>jungsuri.account.email_verified</code>.
+     */
+    public Boolean getEmailVerified() {
+        return this.emailVerified;
+    }
+
+    /**
+     * Getter for <code>jungsuri.account.joined_at</code>.
+     */
+    public LocalDateTime getJoinedAt() {
+        return this.joinedAt;
     }
 
     /**
@@ -174,6 +153,13 @@ public class Account implements Serializable {
      */
     public String getLoginId() {
         return this.loginId;
+    }
+
+    /**
+     * Getter for <code>jungsuri.account.mountain_exp</code>.
+     */
+    public Integer getMountainExp() {
+        return this.mountainExp;
     }
 
     /**
@@ -198,6 +184,13 @@ public class Account implements Serializable {
     }
 
     /**
+     * Getter for <code>jungsuri.account.post_created_checked</code>.
+     */
+    public Boolean getPostCreatedChecked() {
+        return this.postCreatedChecked;
+    }
+
+    /**
      * Getter for <code>jungsuri.account.profile_image</code>.
      */
     public String getProfileImage() {
@@ -211,27 +204,34 @@ public class Account implements Serializable {
         return this.role;
     }
 
+    /**
+     * Getter for <code>jungsuri.account.user_role</code>.
+     */
+    public Byte getUserRole() {
+        return this.userRole;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder("Account (");
 
-        sb.append(emailVerified);
-        sb.append(", ").append(mountainExp);
-        sb.append(", ").append(postCreatedChecked);
-        sb.append(", ").append(userRole);
-        sb.append(", ").append(emailCheckTokenGeneratedAt);
-        sb.append(", ").append(id);
-        sb.append(", ").append(joinedAt);
+        sb.append(id);
         sb.append(", ").append(bio);
         sb.append(", ").append(email);
+        sb.append(", ").append(emailCheckTokenGeneratedAt);
         sb.append(", ").append(emailToken);
+        sb.append(", ").append(emailVerified);
+        sb.append(", ").append(joinedAt);
         sb.append(", ").append(location);
         sb.append(", ").append(loginId);
+        sb.append(", ").append(mountainExp);
         sb.append(", ").append(name);
         sb.append(", ").append(occupation);
         sb.append(", ").append(password);
+        sb.append(", ").append(postCreatedChecked);
         sb.append(", ").append(profileImage);
         sb.append(", ").append(role);
+        sb.append(", ").append(userRole);
 
         sb.append(")");
         return sb.toString();

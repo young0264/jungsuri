@@ -15,39 +15,32 @@ public class Mountain implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    private final Integer height;
     private final Long id;
+    private final Integer height;
     private final String imageUrl;
     private final String name;
     private final String shortLocations;
 
     public Mountain(Mountain value) {
-        this.height = value.height;
         this.id = value.id;
+        this.height = value.height;
         this.imageUrl = value.imageUrl;
         this.name = value.name;
         this.shortLocations = value.shortLocations;
     }
 
     public Mountain(
-        Integer height,
         Long id,
+        Integer height,
         String imageUrl,
         String name,
         String shortLocations
     ) {
-        this.height = height;
         this.id = id;
+        this.height = height;
         this.imageUrl = imageUrl;
         this.name = name;
         this.shortLocations = shortLocations;
-    }
-
-    /**
-     * Getter for <code>jungsuri.mountain.height</code>.
-     */
-    public Integer getHeight() {
-        return this.height;
     }
 
     /**
@@ -55,6 +48,13 @@ public class Mountain implements Serializable {
      */
     public Long getId() {
         return this.id;
+    }
+
+    /**
+     * Getter for <code>jungsuri.mountain.height</code>.
+     */
+    public Integer getHeight() {
+        return this.height;
     }
 
     /**
@@ -82,8 +82,8 @@ public class Mountain implements Serializable {
     public String toString() {
         StringBuilder sb = new StringBuilder("Mountain (");
 
-        sb.append(height);
-        sb.append(", ").append(id);
+        sb.append(id);
+        sb.append(", ").append(height);
         sb.append(", ").append(imageUrl);
         sb.append(", ").append(name);
         sb.append(", ").append(shortLocations);

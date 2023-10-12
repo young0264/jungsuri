@@ -55,6 +55,21 @@ public class Likes extends TableImpl<LikesRecord> {
     }
 
     /**
+     * The column <code>jungsuri.likes.id</code>.
+     */
+    public final TableField<LikesRecord, Long> ID = createField(DSL.name("id"), SQLDataType.BIGINT.nullable(false).identity(true), this, "");
+
+    /**
+     * The column <code>jungsuri.likes.created_at</code>.
+     */
+    public final TableField<LikesRecord, LocalDateTime> CREATED_AT = createField(DSL.name("created_at"), SQLDataType.LOCALDATETIME(6).nullable(false), this, "");
+
+    /**
+     * The column <code>jungsuri.likes.type</code>.
+     */
+    public final TableField<LikesRecord, LikesType> TYPE = createField(DSL.name("type"), SQLDataType.VARCHAR(7).nullable(false).asEnumDataType(jooq.dsl.enums.LikesType.class), this, "");
+
+    /**
      * The column <code>jungsuri.likes.account_entity_id</code>.
      */
     public final TableField<LikesRecord, Long> ACCOUNT_ENTITY_ID = createField(DSL.name("account_entity_id"), SQLDataType.BIGINT.nullable(false), this, "");
@@ -65,24 +80,9 @@ public class Likes extends TableImpl<LikesRecord> {
     public final TableField<LikesRecord, Long> COMMENT_ENTITY_ID = createField(DSL.name("comment_entity_id"), SQLDataType.BIGINT, this, "");
 
     /**
-     * The column <code>jungsuri.likes.created_at</code>.
-     */
-    public final TableField<LikesRecord, LocalDateTime> CREATED_AT = createField(DSL.name("created_at"), SQLDataType.LOCALDATETIME(6).nullable(false), this, "");
-
-    /**
-     * The column <code>jungsuri.likes.id</code>.
-     */
-    public final TableField<LikesRecord, Long> ID = createField(DSL.name("id"), SQLDataType.BIGINT.nullable(false).identity(true), this, "");
-
-    /**
      * The column <code>jungsuri.likes.post_entity_id</code>.
      */
     public final TableField<LikesRecord, Long> POST_ENTITY_ID = createField(DSL.name("post_entity_id"), SQLDataType.BIGINT, this, "");
-
-    /**
-     * The column <code>jungsuri.likes.type</code>.
-     */
-    public final TableField<LikesRecord, LikesType> TYPE = createField(DSL.name("type"), SQLDataType.VARCHAR(7).nullable(false).asEnumDataType(jooq.dsl.enums.LikesType.class), this, "");
 
     private Likes(Name alias, Table<LikesRecord> aliased) {
         this(alias, aliased, null);
@@ -215,14 +215,14 @@ public class Likes extends TableImpl<LikesRecord> {
     // -------------------------------------------------------------------------
 
     @Override
-    public Row6<Long, Long, LocalDateTime, Long, Long, LikesType> fieldsRow() {
+    public Row6<Long, LocalDateTime, LikesType, Long, Long, Long> fieldsRow() {
         return (Row6) super.fieldsRow();
     }
 
     /**
      * Convenience mapping calling {@link SelectField#convertFrom(Function)}.
      */
-    public <U> SelectField<U> mapping(Function6<? super Long, ? super Long, ? super LocalDateTime, ? super Long, ? super Long, ? super LikesType, ? extends U> from) {
+    public <U> SelectField<U> mapping(Function6<? super Long, ? super LocalDateTime, ? super LikesType, ? super Long, ? super Long, ? super Long, ? extends U> from) {
         return convertFrom(Records.mapping(from));
     }
 
@@ -230,7 +230,7 @@ public class Likes extends TableImpl<LikesRecord> {
      * Convenience mapping calling {@link SelectField#convertFrom(Class,
      * Function)}.
      */
-    public <U> SelectField<U> mapping(Class<U> toType, Function6<? super Long, ? super Long, ? super LocalDateTime, ? super Long, ? super Long, ? super LikesType, ? extends U> from) {
+    public <U> SelectField<U> mapping(Class<U> toType, Function6<? super Long, ? super LocalDateTime, ? super LikesType, ? super Long, ? super Long, ? super Long, ? extends U> from) {
         return convertFrom(toType, Records.mapping(from));
     }
 }
