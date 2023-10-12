@@ -18,44 +18,51 @@ public class Notification implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    private final Boolean checked;
-    private final Long accountEntityId;
-    private final LocalDateTime createdAt;
     private final Long id;
+    private final Boolean checked;
+    private final LocalDateTime createdAt;
     private final String link;
     private final String message;
     private final String title;
     private final NotificationType type;
+    private final Long accountEntityId;
 
     public Notification(Notification value) {
-        this.checked = value.checked;
-        this.accountEntityId = value.accountEntityId;
-        this.createdAt = value.createdAt;
         this.id = value.id;
+        this.checked = value.checked;
+        this.createdAt = value.createdAt;
         this.link = value.link;
         this.message = value.message;
         this.title = value.title;
         this.type = value.type;
+        this.accountEntityId = value.accountEntityId;
     }
 
     public Notification(
-        Boolean checked,
-        Long accountEntityId,
-        LocalDateTime createdAt,
         Long id,
+        Boolean checked,
+        LocalDateTime createdAt,
         String link,
         String message,
         String title,
-        NotificationType type
+        NotificationType type,
+        Long accountEntityId
     ) {
-        this.checked = checked;
-        this.accountEntityId = accountEntityId;
-        this.createdAt = createdAt;
         this.id = id;
+        this.checked = checked;
+        this.createdAt = createdAt;
         this.link = link;
         this.message = message;
         this.title = title;
         this.type = type;
+        this.accountEntityId = accountEntityId;
+    }
+
+    /**
+     * Getter for <code>jungsuri.notification.id</code>.
+     */
+    public Long getId() {
+        return this.id;
     }
 
     /**
@@ -66,24 +73,10 @@ public class Notification implements Serializable {
     }
 
     /**
-     * Getter for <code>jungsuri.notification.account_entity_id</code>.
-     */
-    public Long getAccountEntityId() {
-        return this.accountEntityId;
-    }
-
-    /**
      * Getter for <code>jungsuri.notification.created_at</code>.
      */
     public LocalDateTime getCreatedAt() {
         return this.createdAt;
-    }
-
-    /**
-     * Getter for <code>jungsuri.notification.id</code>.
-     */
-    public Long getId() {
-        return this.id;
     }
 
     /**
@@ -114,18 +107,25 @@ public class Notification implements Serializable {
         return this.type;
     }
 
+    /**
+     * Getter for <code>jungsuri.notification.account_entity_id</code>.
+     */
+    public Long getAccountEntityId() {
+        return this.accountEntityId;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder("Notification (");
 
-        sb.append(checked);
-        sb.append(", ").append(accountEntityId);
+        sb.append(id);
+        sb.append(", ").append(checked);
         sb.append(", ").append(createdAt);
-        sb.append(", ").append(id);
         sb.append(", ").append(link);
         sb.append(", ").append(message);
         sb.append(", ").append(title);
         sb.append(", ").append(type);
+        sb.append(", ").append(accountEntityId);
 
         sb.append(")");
         return sb.toString();

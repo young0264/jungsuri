@@ -53,14 +53,14 @@ public class Mountain extends TableImpl<MountainRecord> {
     }
 
     /**
-     * The column <code>jungsuri.mountain.height</code>.
-     */
-    public final TableField<MountainRecord, Integer> HEIGHT = createField(DSL.name("height"), SQLDataType.INTEGER.nullable(false), this, "");
-
-    /**
      * The column <code>jungsuri.mountain.id</code>.
      */
     public final TableField<MountainRecord, Long> ID = createField(DSL.name("id"), SQLDataType.BIGINT.nullable(false).identity(true), this, "");
+
+    /**
+     * The column <code>jungsuri.mountain.height</code>.
+     */
+    public final TableField<MountainRecord, Integer> HEIGHT = createField(DSL.name("height"), SQLDataType.INTEGER.nullable(false), this, "");
 
     /**
      * The column <code>jungsuri.mountain.image_url</code>.
@@ -174,14 +174,14 @@ public class Mountain extends TableImpl<MountainRecord> {
     // -------------------------------------------------------------------------
 
     @Override
-    public Row5<Integer, Long, String, String, String> fieldsRow() {
+    public Row5<Long, Integer, String, String, String> fieldsRow() {
         return (Row5) super.fieldsRow();
     }
 
     /**
      * Convenience mapping calling {@link SelectField#convertFrom(Function)}.
      */
-    public <U> SelectField<U> mapping(Function5<? super Integer, ? super Long, ? super String, ? super String, ? super String, ? extends U> from) {
+    public <U> SelectField<U> mapping(Function5<? super Long, ? super Integer, ? super String, ? super String, ? super String, ? extends U> from) {
         return convertFrom(Records.mapping(from));
     }
 
@@ -189,7 +189,7 @@ public class Mountain extends TableImpl<MountainRecord> {
      * Convenience mapping calling {@link SelectField#convertFrom(Class,
      * Function)}.
      */
-    public <U> SelectField<U> mapping(Class<U> toType, Function5<? super Integer, ? super Long, ? super String, ? super String, ? super String, ? extends U> from) {
+    public <U> SelectField<U> mapping(Class<U> toType, Function5<? super Long, ? super Integer, ? super String, ? super String, ? super String, ? extends U> from) {
         return convertFrom(toType, Records.mapping(from));
     }
 }

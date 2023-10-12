@@ -22,25 +22,10 @@ public class AccountTagRecord extends UpdatableRecordImpl<AccountTagRecord> impl
     private static final long serialVersionUID = 1L;
 
     /**
-     * Setter for <code>jungsuri.account_tag.account_entity_id</code>.
-     */
-    public AccountTagRecord setAccountEntityId(Long value) {
-        set(0, value);
-        return this;
-    }
-
-    /**
-     * Getter for <code>jungsuri.account_tag.account_entity_id</code>.
-     */
-    public Long getAccountEntityId() {
-        return (Long) get(0);
-    }
-
-    /**
      * Setter for <code>jungsuri.account_tag.id</code>.
      */
     public AccountTagRecord setId(Long value) {
-        set(1, value);
+        set(0, value);
         return this;
     }
 
@@ -48,6 +33,21 @@ public class AccountTagRecord extends UpdatableRecordImpl<AccountTagRecord> impl
      * Getter for <code>jungsuri.account_tag.id</code>.
      */
     public Long getId() {
+        return (Long) get(0);
+    }
+
+    /**
+     * Setter for <code>jungsuri.account_tag.account_entity_id</code>.
+     */
+    public AccountTagRecord setAccountEntityId(Long value) {
+        set(1, value);
+        return this;
+    }
+
+    /**
+     * Getter for <code>jungsuri.account_tag.account_entity_id</code>.
+     */
+    public Long getAccountEntityId() {
         return (Long) get(1);
     }
 
@@ -76,43 +76,43 @@ public class AccountTagRecord extends UpdatableRecordImpl<AccountTagRecord> impl
 
     @Override
     public Field<Long> field1() {
-        return AccountTag.ACCOUNT_TAG.ACCOUNT_ENTITY_ID;
-    }
-
-    @Override
-    public Field<Long> field2() {
         return AccountTag.ACCOUNT_TAG.ID;
     }
 
     @Override
+    public Field<Long> field2() {
+        return AccountTag.ACCOUNT_TAG.ACCOUNT_ENTITY_ID;
+    }
+
+    @Override
     public Long component1() {
-        return getAccountEntityId();
+        return getId();
     }
 
     @Override
     public Long component2() {
-        return getId();
-    }
-
-    @Override
-    public Long value1() {
         return getAccountEntityId();
     }
 
     @Override
-    public Long value2() {
+    public Long value1() {
         return getId();
     }
 
     @Override
+    public Long value2() {
+        return getAccountEntityId();
+    }
+
+    @Override
     public AccountTagRecord value1(Long value) {
-        setAccountEntityId(value);
+        setId(value);
         return this;
     }
 
     @Override
     public AccountTagRecord value2(Long value) {
-        setId(value);
+        setAccountEntityId(value);
         return this;
     }
 
@@ -137,11 +137,11 @@ public class AccountTagRecord extends UpdatableRecordImpl<AccountTagRecord> impl
     /**
      * Create a detached, initialised AccountTagRecord
      */
-    public AccountTagRecord(Long accountEntityId, Long id) {
+    public AccountTagRecord(Long id, Long accountEntityId) {
         super(AccountTag.ACCOUNT_TAG);
 
-        setAccountEntityId(accountEntityId);
         setId(id);
+        setAccountEntityId(accountEntityId);
     }
 
     /**
@@ -151,8 +151,8 @@ public class AccountTagRecord extends UpdatableRecordImpl<AccountTagRecord> impl
         super(AccountTag.ACCOUNT_TAG);
 
         if (value != null) {
-            setAccountEntityId(value.getAccountEntityId());
             setId(value.getId());
+            setAccountEntityId(value.getAccountEntityId());
         }
     }
 }

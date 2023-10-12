@@ -16,95 +16,60 @@ public class Post implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    private final Integer commentCount;
-    private final Integer likeCount;
-    private final Integer viewCount;
-    private final Long accountEntityId;
-    private final LocalDateTime createdAt;
     private final Long id;
-    private final LocalDateTime updatedAt;
     private final String author;
+    private final Integer commentCount;
     private final String content;
+    private final LocalDateTime createdAt;
     private final String imagePath;
+    private final Integer likeCount;
     private final String loginId;
     private final String title;
+    private final LocalDateTime updatedAt;
+    private final Integer viewCount;
+    private final Long accountEntityId;
 
     public Post(Post value) {
-        this.commentCount = value.commentCount;
-        this.likeCount = value.likeCount;
-        this.viewCount = value.viewCount;
-        this.accountEntityId = value.accountEntityId;
-        this.createdAt = value.createdAt;
         this.id = value.id;
-        this.updatedAt = value.updatedAt;
         this.author = value.author;
+        this.commentCount = value.commentCount;
         this.content = value.content;
+        this.createdAt = value.createdAt;
         this.imagePath = value.imagePath;
+        this.likeCount = value.likeCount;
         this.loginId = value.loginId;
         this.title = value.title;
+        this.updatedAt = value.updatedAt;
+        this.viewCount = value.viewCount;
+        this.accountEntityId = value.accountEntityId;
     }
 
     public Post(
-        Integer commentCount,
-        Integer likeCount,
-        Integer viewCount,
-        Long accountEntityId,
-        LocalDateTime createdAt,
         Long id,
-        LocalDateTime updatedAt,
         String author,
+        Integer commentCount,
         String content,
+        LocalDateTime createdAt,
         String imagePath,
+        Integer likeCount,
         String loginId,
-        String title
+        String title,
+        LocalDateTime updatedAt,
+        Integer viewCount,
+        Long accountEntityId
     ) {
-        this.commentCount = commentCount;
-        this.likeCount = likeCount;
-        this.viewCount = viewCount;
-        this.accountEntityId = accountEntityId;
-        this.createdAt = createdAt;
         this.id = id;
-        this.updatedAt = updatedAt;
         this.author = author;
+        this.commentCount = commentCount;
         this.content = content;
+        this.createdAt = createdAt;
         this.imagePath = imagePath;
+        this.likeCount = likeCount;
         this.loginId = loginId;
         this.title = title;
-    }
-
-    /**
-     * Getter for <code>jungsuri.post.comment_count</code>.
-     */
-    public Integer getCommentCount() {
-        return this.commentCount;
-    }
-
-    /**
-     * Getter for <code>jungsuri.post.like_count</code>.
-     */
-    public Integer getLikeCount() {
-        return this.likeCount;
-    }
-
-    /**
-     * Getter for <code>jungsuri.post.view_count</code>.
-     */
-    public Integer getViewCount() {
-        return this.viewCount;
-    }
-
-    /**
-     * Getter for <code>jungsuri.post.account_entity_id</code>.
-     */
-    public Long getAccountEntityId() {
-        return this.accountEntityId;
-    }
-
-    /**
-     * Getter for <code>jungsuri.post.created_at</code>.
-     */
-    public LocalDateTime getCreatedAt() {
-        return this.createdAt;
+        this.updatedAt = updatedAt;
+        this.viewCount = viewCount;
+        this.accountEntityId = accountEntityId;
     }
 
     /**
@@ -115,17 +80,17 @@ public class Post implements Serializable {
     }
 
     /**
-     * Getter for <code>jungsuri.post.updated_at</code>.
-     */
-    public LocalDateTime getUpdatedAt() {
-        return this.updatedAt;
-    }
-
-    /**
      * Getter for <code>jungsuri.post.author</code>.
      */
     public String getAuthor() {
         return this.author;
+    }
+
+    /**
+     * Getter for <code>jungsuri.post.comment_count</code>.
+     */
+    public Integer getCommentCount() {
+        return this.commentCount;
     }
 
     /**
@@ -136,10 +101,24 @@ public class Post implements Serializable {
     }
 
     /**
+     * Getter for <code>jungsuri.post.created_at</code>.
+     */
+    public LocalDateTime getCreatedAt() {
+        return this.createdAt;
+    }
+
+    /**
      * Getter for <code>jungsuri.post.image_path</code>.
      */
     public String getImagePath() {
         return this.imagePath;
+    }
+
+    /**
+     * Getter for <code>jungsuri.post.like_count</code>.
+     */
+    public Integer getLikeCount() {
+        return this.likeCount;
     }
 
     /**
@@ -156,22 +135,43 @@ public class Post implements Serializable {
         return this.title;
     }
 
+    /**
+     * Getter for <code>jungsuri.post.updated_at</code>.
+     */
+    public LocalDateTime getUpdatedAt() {
+        return this.updatedAt;
+    }
+
+    /**
+     * Getter for <code>jungsuri.post.view_count</code>.
+     */
+    public Integer getViewCount() {
+        return this.viewCount;
+    }
+
+    /**
+     * Getter for <code>jungsuri.post.account_entity_id</code>.
+     */
+    public Long getAccountEntityId() {
+        return this.accountEntityId;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder("Post (");
 
-        sb.append(commentCount);
-        sb.append(", ").append(likeCount);
-        sb.append(", ").append(viewCount);
-        sb.append(", ").append(accountEntityId);
-        sb.append(", ").append(createdAt);
-        sb.append(", ").append(id);
-        sb.append(", ").append(updatedAt);
+        sb.append(id);
         sb.append(", ").append(author);
+        sb.append(", ").append(commentCount);
         sb.append(", ").append(content);
+        sb.append(", ").append(createdAt);
         sb.append(", ").append(imagePath);
+        sb.append(", ").append(likeCount);
         sb.append(", ").append(loginId);
         sb.append(", ").append(title);
+        sb.append(", ").append(updatedAt);
+        sb.append(", ").append(viewCount);
+        sb.append(", ").append(accountEntityId);
 
         sb.append(")");
         return sb.toString();
