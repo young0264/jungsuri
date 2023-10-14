@@ -16,23 +16,23 @@ public class MountainLocation implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private final Long id;
-    private final String location;
     private final Long mountainEntityId;
+    private final String location;
 
     public MountainLocation(MountainLocation value) {
         this.id = value.id;
-        this.location = value.location;
         this.mountainEntityId = value.mountainEntityId;
+        this.location = value.location;
     }
 
     public MountainLocation(
         Long id,
-        String location,
-        Long mountainEntityId
+        Long mountainEntityId,
+        String location
     ) {
         this.id = id;
-        this.location = location;
         this.mountainEntityId = mountainEntityId;
+        this.location = location;
     }
 
     /**
@@ -43,17 +43,17 @@ public class MountainLocation implements Serializable {
     }
 
     /**
-     * Getter for <code>jungsuri.mountain_location.location</code>.
-     */
-    public String getLocation() {
-        return this.location;
-    }
-
-    /**
      * Getter for <code>jungsuri.mountain_location.mountain_entity_id</code>.
      */
     public Long getMountainEntityId() {
         return this.mountainEntityId;
+    }
+
+    /**
+     * Getter for <code>jungsuri.mountain_location.location</code>.
+     */
+    public String getLocation() {
+        return this.location;
     }
 
     @Override
@@ -61,8 +61,8 @@ public class MountainLocation implements Serializable {
         StringBuilder sb = new StringBuilder("MountainLocation (");
 
         sb.append(id);
-        sb.append(", ").append(location);
         sb.append(", ").append(mountainEntityId);
+        sb.append(", ").append(location);
 
         sb.append(")");
         return sb.toString();

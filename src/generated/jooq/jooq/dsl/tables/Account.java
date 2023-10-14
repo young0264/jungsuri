@@ -56,9 +56,39 @@ public class Account extends TableImpl<AccountRecord> {
     }
 
     /**
+     * The column <code>jungsuri.account.email_verified</code>.
+     */
+    public final TableField<AccountRecord, Boolean> EMAIL_VERIFIED = createField(DSL.name("email_verified"), SQLDataType.BIT.nullable(false), this, "");
+
+    /**
+     * The column <code>jungsuri.account.mountain_exp</code>.
+     */
+    public final TableField<AccountRecord, Integer> MOUNTAIN_EXP = createField(DSL.name("mountain_exp"), SQLDataType.INTEGER.nullable(false), this, "");
+
+    /**
+     * The column <code>jungsuri.account.post_created_checked</code>.
+     */
+    public final TableField<AccountRecord, Boolean> POST_CREATED_CHECKED = createField(DSL.name("post_created_checked"), SQLDataType.BIT.nullable(false), this, "");
+
+    /**
+     * The column <code>jungsuri.account.user_role</code>.
+     */
+    public final TableField<AccountRecord, Byte> USER_ROLE = createField(DSL.name("user_role"), SQLDataType.TINYINT, this, "");
+
+    /**
+     * The column <code>jungsuri.account.email_check_token_generated_at</code>.
+     */
+    public final TableField<AccountRecord, LocalDateTime> EMAIL_CHECK_TOKEN_GENERATED_AT = createField(DSL.name("email_check_token_generated_at"), SQLDataType.LOCALDATETIME(6), this, "");
+
+    /**
      * The column <code>jungsuri.account.id</code>.
      */
     public final TableField<AccountRecord, Long> ID = createField(DSL.name("id"), SQLDataType.BIGINT.nullable(false).identity(true), this, "");
+
+    /**
+     * The column <code>jungsuri.account.joined_at</code>.
+     */
+    public final TableField<AccountRecord, LocalDateTime> JOINED_AT = createField(DSL.name("joined_at"), SQLDataType.LOCALDATETIME(6), this, "");
 
     /**
      * The column <code>jungsuri.account.bio</code>.
@@ -71,24 +101,9 @@ public class Account extends TableImpl<AccountRecord> {
     public final TableField<AccountRecord, String> EMAIL = createField(DSL.name("email"), SQLDataType.VARCHAR(255), this, "");
 
     /**
-     * The column <code>jungsuri.account.email_check_token_generated_at</code>.
-     */
-    public final TableField<AccountRecord, LocalDateTime> EMAIL_CHECK_TOKEN_GENERATED_AT = createField(DSL.name("email_check_token_generated_at"), SQLDataType.LOCALDATETIME(6), this, "");
-
-    /**
      * The column <code>jungsuri.account.email_token</code>.
      */
     public final TableField<AccountRecord, String> EMAIL_TOKEN = createField(DSL.name("email_token"), SQLDataType.VARCHAR(255), this, "");
-
-    /**
-     * The column <code>jungsuri.account.email_verified</code>.
-     */
-    public final TableField<AccountRecord, Boolean> EMAIL_VERIFIED = createField(DSL.name("email_verified"), SQLDataType.BIT.nullable(false), this, "");
-
-    /**
-     * The column <code>jungsuri.account.joined_at</code>.
-     */
-    public final TableField<AccountRecord, LocalDateTime> JOINED_AT = createField(DSL.name("joined_at"), SQLDataType.LOCALDATETIME(6), this, "");
 
     /**
      * The column <code>jungsuri.account.location</code>.
@@ -99,11 +114,6 @@ public class Account extends TableImpl<AccountRecord> {
      * The column <code>jungsuri.account.login_id</code>.
      */
     public final TableField<AccountRecord, String> LOGIN_ID = createField(DSL.name("login_id"), SQLDataType.VARCHAR(255), this, "");
-
-    /**
-     * The column <code>jungsuri.account.mountain_exp</code>.
-     */
-    public final TableField<AccountRecord, Integer> MOUNTAIN_EXP = createField(DSL.name("mountain_exp"), SQLDataType.INTEGER.nullable(false), this, "");
 
     /**
      * The column <code>jungsuri.account.name</code>.
@@ -121,11 +131,6 @@ public class Account extends TableImpl<AccountRecord> {
     public final TableField<AccountRecord, String> PASSWORD = createField(DSL.name("password"), SQLDataType.VARCHAR(255), this, "");
 
     /**
-     * The column <code>jungsuri.account.post_created_checked</code>.
-     */
-    public final TableField<AccountRecord, Boolean> POST_CREATED_CHECKED = createField(DSL.name("post_created_checked"), SQLDataType.BIT.nullable(false), this, "");
-
-    /**
      * The column <code>jungsuri.account.profile_image</code>.
      */
     public final TableField<AccountRecord, String> PROFILE_IMAGE = createField(DSL.name("profile_image"), SQLDataType.VARCHAR(255), this, "");
@@ -134,11 +139,6 @@ public class Account extends TableImpl<AccountRecord> {
      * The column <code>jungsuri.account.role</code>.
      */
     public final TableField<AccountRecord, String> ROLE = createField(DSL.name("role"), SQLDataType.VARCHAR(255), this, "");
-
-    /**
-     * The column <code>jungsuri.account.user_role</code>.
-     */
-    public final TableField<AccountRecord, Byte> USER_ROLE = createField(DSL.name("user_role"), SQLDataType.TINYINT, this, "");
 
     private Account(Name alias, Table<AccountRecord> aliased) {
         this(alias, aliased, null);
@@ -244,14 +244,14 @@ public class Account extends TableImpl<AccountRecord> {
     // -------------------------------------------------------------------------
 
     @Override
-    public Row17<Long, String, String, LocalDateTime, String, Boolean, LocalDateTime, String, String, Integer, String, String, String, Boolean, String, String, Byte> fieldsRow() {
+    public Row17<Boolean, Integer, Boolean, Byte, LocalDateTime, Long, LocalDateTime, String, String, String, String, String, String, String, String, String, String> fieldsRow() {
         return (Row17) super.fieldsRow();
     }
 
     /**
      * Convenience mapping calling {@link SelectField#convertFrom(Function)}.
      */
-    public <U> SelectField<U> mapping(Function17<? super Long, ? super String, ? super String, ? super LocalDateTime, ? super String, ? super Boolean, ? super LocalDateTime, ? super String, ? super String, ? super Integer, ? super String, ? super String, ? super String, ? super Boolean, ? super String, ? super String, ? super Byte, ? extends U> from) {
+    public <U> SelectField<U> mapping(Function17<? super Boolean, ? super Integer, ? super Boolean, ? super Byte, ? super LocalDateTime, ? super Long, ? super LocalDateTime, ? super String, ? super String, ? super String, ? super String, ? super String, ? super String, ? super String, ? super String, ? super String, ? super String, ? extends U> from) {
         return convertFrom(Records.mapping(from));
     }
 
@@ -259,7 +259,7 @@ public class Account extends TableImpl<AccountRecord> {
      * Convenience mapping calling {@link SelectField#convertFrom(Class,
      * Function)}.
      */
-    public <U> SelectField<U> mapping(Class<U> toType, Function17<? super Long, ? super String, ? super String, ? super LocalDateTime, ? super String, ? super Boolean, ? super LocalDateTime, ? super String, ? super String, ? super Integer, ? super String, ? super String, ? super String, ? super Boolean, ? super String, ? super String, ? super Byte, ? extends U> from) {
+    public <U> SelectField<U> mapping(Class<U> toType, Function17<? super Boolean, ? super Integer, ? super Boolean, ? super Byte, ? super LocalDateTime, ? super Long, ? super LocalDateTime, ? super String, ? super String, ? super String, ? super String, ? super String, ? super String, ? super String, ? super String, ? super String, ? super String, ? extends U> from) {
         return convertFrom(toType, Records.mapping(from));
     }
 }

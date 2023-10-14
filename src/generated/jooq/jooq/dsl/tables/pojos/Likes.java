@@ -18,57 +18,36 @@ public class Likes implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    private final Long id;
-    private final LocalDateTime createdAt;
-    private final LikesType type;
     private final Long accountEntityId;
     private final Long commentEntityId;
+    private final LocalDateTime createdAt;
+    private final Long id;
     private final Long postEntityId;
+    private final LikesType type;
 
     public Likes(Likes value) {
-        this.id = value.id;
-        this.createdAt = value.createdAt;
-        this.type = value.type;
         this.accountEntityId = value.accountEntityId;
         this.commentEntityId = value.commentEntityId;
+        this.createdAt = value.createdAt;
+        this.id = value.id;
         this.postEntityId = value.postEntityId;
+        this.type = value.type;
     }
 
     public Likes(
-        Long id,
-        LocalDateTime createdAt,
-        LikesType type,
         Long accountEntityId,
         Long commentEntityId,
-        Long postEntityId
+        LocalDateTime createdAt,
+        Long id,
+        Long postEntityId,
+        LikesType type
     ) {
-        this.id = id;
-        this.createdAt = createdAt;
-        this.type = type;
         this.accountEntityId = accountEntityId;
         this.commentEntityId = commentEntityId;
+        this.createdAt = createdAt;
+        this.id = id;
         this.postEntityId = postEntityId;
-    }
-
-    /**
-     * Getter for <code>jungsuri.likes.id</code>.
-     */
-    public Long getId() {
-        return this.id;
-    }
-
-    /**
-     * Getter for <code>jungsuri.likes.created_at</code>.
-     */
-    public LocalDateTime getCreatedAt() {
-        return this.createdAt;
-    }
-
-    /**
-     * Getter for <code>jungsuri.likes.type</code>.
-     */
-    public LikesType getType() {
-        return this.type;
+        this.type = type;
     }
 
     /**
@@ -86,22 +65,43 @@ public class Likes implements Serializable {
     }
 
     /**
+     * Getter for <code>jungsuri.likes.created_at</code>.
+     */
+    public LocalDateTime getCreatedAt() {
+        return this.createdAt;
+    }
+
+    /**
+     * Getter for <code>jungsuri.likes.id</code>.
+     */
+    public Long getId() {
+        return this.id;
+    }
+
+    /**
      * Getter for <code>jungsuri.likes.post_entity_id</code>.
      */
     public Long getPostEntityId() {
         return this.postEntityId;
     }
 
+    /**
+     * Getter for <code>jungsuri.likes.type</code>.
+     */
+    public LikesType getType() {
+        return this.type;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder("Likes (");
 
-        sb.append(id);
-        sb.append(", ").append(createdAt);
-        sb.append(", ").append(type);
-        sb.append(", ").append(accountEntityId);
+        sb.append(accountEntityId);
         sb.append(", ").append(commentEntityId);
+        sb.append(", ").append(createdAt);
+        sb.append(", ").append(id);
         sb.append(", ").append(postEntityId);
+        sb.append(", ").append(type);
 
         sb.append(")");
         return sb.toString();

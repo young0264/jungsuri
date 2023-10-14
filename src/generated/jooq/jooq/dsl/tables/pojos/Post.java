@@ -16,74 +16,60 @@ public class Post implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    private final Long id;
-    private final String author;
     private final Integer commentCount;
-    private final String content;
-    private final LocalDateTime createdAt;
-    private final String imagePath;
     private final Integer likeCount;
-    private final String loginId;
-    private final String title;
-    private final LocalDateTime updatedAt;
     private final Integer viewCount;
     private final Long accountEntityId;
+    private final LocalDateTime createdAt;
+    private final Long id;
+    private final LocalDateTime updatedAt;
+    private final String author;
+    private final String content;
+    private final String imagePath;
+    private final String loginId;
+    private final String title;
 
     public Post(Post value) {
-        this.id = value.id;
-        this.author = value.author;
         this.commentCount = value.commentCount;
-        this.content = value.content;
-        this.createdAt = value.createdAt;
-        this.imagePath = value.imagePath;
         this.likeCount = value.likeCount;
-        this.loginId = value.loginId;
-        this.title = value.title;
-        this.updatedAt = value.updatedAt;
         this.viewCount = value.viewCount;
         this.accountEntityId = value.accountEntityId;
+        this.createdAt = value.createdAt;
+        this.id = value.id;
+        this.updatedAt = value.updatedAt;
+        this.author = value.author;
+        this.content = value.content;
+        this.imagePath = value.imagePath;
+        this.loginId = value.loginId;
+        this.title = value.title;
     }
 
     public Post(
-        Long id,
-        String author,
         Integer commentCount,
-        String content,
-        LocalDateTime createdAt,
-        String imagePath,
         Integer likeCount,
-        String loginId,
-        String title,
-        LocalDateTime updatedAt,
         Integer viewCount,
-        Long accountEntityId
+        Long accountEntityId,
+        LocalDateTime createdAt,
+        Long id,
+        LocalDateTime updatedAt,
+        String author,
+        String content,
+        String imagePath,
+        String loginId,
+        String title
     ) {
-        this.id = id;
-        this.author = author;
         this.commentCount = commentCount;
-        this.content = content;
-        this.createdAt = createdAt;
-        this.imagePath = imagePath;
         this.likeCount = likeCount;
-        this.loginId = loginId;
-        this.title = title;
-        this.updatedAt = updatedAt;
         this.viewCount = viewCount;
         this.accountEntityId = accountEntityId;
-    }
-
-    /**
-     * Getter for <code>jungsuri.post.id</code>.
-     */
-    public Long getId() {
-        return this.id;
-    }
-
-    /**
-     * Getter for <code>jungsuri.post.author</code>.
-     */
-    public String getAuthor() {
-        return this.author;
+        this.createdAt = createdAt;
+        this.id = id;
+        this.updatedAt = updatedAt;
+        this.author = author;
+        this.content = content;
+        this.imagePath = imagePath;
+        this.loginId = loginId;
+        this.title = title;
     }
 
     /**
@@ -94,52 +80,10 @@ public class Post implements Serializable {
     }
 
     /**
-     * Getter for <code>jungsuri.post.content</code>.
-     */
-    public String getContent() {
-        return this.content;
-    }
-
-    /**
-     * Getter for <code>jungsuri.post.created_at</code>.
-     */
-    public LocalDateTime getCreatedAt() {
-        return this.createdAt;
-    }
-
-    /**
-     * Getter for <code>jungsuri.post.image_path</code>.
-     */
-    public String getImagePath() {
-        return this.imagePath;
-    }
-
-    /**
      * Getter for <code>jungsuri.post.like_count</code>.
      */
     public Integer getLikeCount() {
         return this.likeCount;
-    }
-
-    /**
-     * Getter for <code>jungsuri.post.login_id</code>.
-     */
-    public String getLoginId() {
-        return this.loginId;
-    }
-
-    /**
-     * Getter for <code>jungsuri.post.title</code>.
-     */
-    public String getTitle() {
-        return this.title;
-    }
-
-    /**
-     * Getter for <code>jungsuri.post.updated_at</code>.
-     */
-    public LocalDateTime getUpdatedAt() {
-        return this.updatedAt;
     }
 
     /**
@@ -156,22 +100,78 @@ public class Post implements Serializable {
         return this.accountEntityId;
     }
 
+    /**
+     * Getter for <code>jungsuri.post.created_at</code>.
+     */
+    public LocalDateTime getCreatedAt() {
+        return this.createdAt;
+    }
+
+    /**
+     * Getter for <code>jungsuri.post.id</code>.
+     */
+    public Long getId() {
+        return this.id;
+    }
+
+    /**
+     * Getter for <code>jungsuri.post.updated_at</code>.
+     */
+    public LocalDateTime getUpdatedAt() {
+        return this.updatedAt;
+    }
+
+    /**
+     * Getter for <code>jungsuri.post.author</code>.
+     */
+    public String getAuthor() {
+        return this.author;
+    }
+
+    /**
+     * Getter for <code>jungsuri.post.content</code>.
+     */
+    public String getContent() {
+        return this.content;
+    }
+
+    /**
+     * Getter for <code>jungsuri.post.image_path</code>.
+     */
+    public String getImagePath() {
+        return this.imagePath;
+    }
+
+    /**
+     * Getter for <code>jungsuri.post.login_id</code>.
+     */
+    public String getLoginId() {
+        return this.loginId;
+    }
+
+    /**
+     * Getter for <code>jungsuri.post.title</code>.
+     */
+    public String getTitle() {
+        return this.title;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder("Post (");
 
-        sb.append(id);
-        sb.append(", ").append(author);
-        sb.append(", ").append(commentCount);
-        sb.append(", ").append(content);
-        sb.append(", ").append(createdAt);
-        sb.append(", ").append(imagePath);
+        sb.append(commentCount);
         sb.append(", ").append(likeCount);
-        sb.append(", ").append(loginId);
-        sb.append(", ").append(title);
-        sb.append(", ").append(updatedAt);
         sb.append(", ").append(viewCount);
         sb.append(", ").append(accountEntityId);
+        sb.append(", ").append(createdAt);
+        sb.append(", ").append(id);
+        sb.append(", ").append(updatedAt);
+        sb.append(", ").append(author);
+        sb.append(", ").append(content);
+        sb.append(", ").append(imagePath);
+        sb.append(", ").append(loginId);
+        sb.append(", ").append(title);
 
         sb.append(")");
         return sb.toString();

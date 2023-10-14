@@ -54,9 +54,34 @@ public class Comment extends TableImpl<CommentRecord> {
     }
 
     /**
+     * The column <code>jungsuri.comment.like_count</code>.
+     */
+    public final TableField<CommentRecord, Integer> LIKE_COUNT = createField(DSL.name("like_count"), SQLDataType.INTEGER.nullable(false), this, "");
+
+    /**
+     * The column <code>jungsuri.comment.account_entity_id</code>.
+     */
+    public final TableField<CommentRecord, Long> ACCOUNT_ENTITY_ID = createField(DSL.name("account_entity_id"), SQLDataType.BIGINT.nullable(false), this, "");
+
+    /**
+     * The column <code>jungsuri.comment.created_at</code>.
+     */
+    public final TableField<CommentRecord, LocalDateTime> CREATED_AT = createField(DSL.name("created_at"), SQLDataType.LOCALDATETIME(6).nullable(false), this, "");
+
+    /**
      * The column <code>jungsuri.comment.id</code>.
      */
     public final TableField<CommentRecord, Long> ID = createField(DSL.name("id"), SQLDataType.BIGINT.nullable(false).identity(true), this, "");
+
+    /**
+     * The column <code>jungsuri.comment.post_entity_id</code>.
+     */
+    public final TableField<CommentRecord, Long> POST_ENTITY_ID = createField(DSL.name("post_entity_id"), SQLDataType.BIGINT.nullable(false), this, "");
+
+    /**
+     * The column <code>jungsuri.comment.updated_at</code>.
+     */
+    public final TableField<CommentRecord, LocalDateTime> UPDATED_AT = createField(DSL.name("updated_at"), SQLDataType.LOCALDATETIME(6), this, "");
 
     /**
      * The column <code>jungsuri.comment.author</code>.
@@ -67,31 +92,6 @@ public class Comment extends TableImpl<CommentRecord> {
      * The column <code>jungsuri.comment.content</code>.
      */
     public final TableField<CommentRecord, String> CONTENT = createField(DSL.name("content"), SQLDataType.VARCHAR(255).nullable(false), this, "");
-
-    /**
-     * The column <code>jungsuri.comment.created_at</code>.
-     */
-    public final TableField<CommentRecord, LocalDateTime> CREATED_AT = createField(DSL.name("created_at"), SQLDataType.LOCALDATETIME(6).nullable(false), this, "");
-
-    /**
-     * The column <code>jungsuri.comment.like_count</code>.
-     */
-    public final TableField<CommentRecord, Integer> LIKE_COUNT = createField(DSL.name("like_count"), SQLDataType.INTEGER.nullable(false), this, "");
-
-    /**
-     * The column <code>jungsuri.comment.updated_at</code>.
-     */
-    public final TableField<CommentRecord, LocalDateTime> UPDATED_AT = createField(DSL.name("updated_at"), SQLDataType.LOCALDATETIME(6), this, "");
-
-    /**
-     * The column <code>jungsuri.comment.account_entity_id</code>.
-     */
-    public final TableField<CommentRecord, Long> ACCOUNT_ENTITY_ID = createField(DSL.name("account_entity_id"), SQLDataType.BIGINT.nullable(false), this, "");
-
-    /**
-     * The column <code>jungsuri.comment.post_entity_id</code>.
-     */
-    public final TableField<CommentRecord, Long> POST_ENTITY_ID = createField(DSL.name("post_entity_id"), SQLDataType.BIGINT.nullable(false), this, "");
 
     private Comment(Name alias, Table<CommentRecord> aliased) {
         this(alias, aliased, null);
@@ -213,14 +213,14 @@ public class Comment extends TableImpl<CommentRecord> {
     // -------------------------------------------------------------------------
 
     @Override
-    public Row8<Long, String, String, LocalDateTime, Integer, LocalDateTime, Long, Long> fieldsRow() {
+    public Row8<Integer, Long, LocalDateTime, Long, Long, LocalDateTime, String, String> fieldsRow() {
         return (Row8) super.fieldsRow();
     }
 
     /**
      * Convenience mapping calling {@link SelectField#convertFrom(Function)}.
      */
-    public <U> SelectField<U> mapping(Function8<? super Long, ? super String, ? super String, ? super LocalDateTime, ? super Integer, ? super LocalDateTime, ? super Long, ? super Long, ? extends U> from) {
+    public <U> SelectField<U> mapping(Function8<? super Integer, ? super Long, ? super LocalDateTime, ? super Long, ? super Long, ? super LocalDateTime, ? super String, ? super String, ? extends U> from) {
         return convertFrom(Records.mapping(from));
     }
 
@@ -228,7 +228,7 @@ public class Comment extends TableImpl<CommentRecord> {
      * Convenience mapping calling {@link SelectField#convertFrom(Class,
      * Function)}.
      */
-    public <U> SelectField<U> mapping(Class<U> toType, Function8<? super Long, ? super String, ? super String, ? super LocalDateTime, ? super Integer, ? super LocalDateTime, ? super Long, ? super Long, ? extends U> from) {
+    public <U> SelectField<U> mapping(Class<U> toType, Function8<? super Integer, ? super Long, ? super LocalDateTime, ? super Long, ? super Long, ? super LocalDateTime, ? super String, ? super String, ? extends U> from) {
         return convertFrom(toType, Records.mapping(from));
     }
 }
