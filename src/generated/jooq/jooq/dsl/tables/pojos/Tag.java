@@ -16,35 +16,35 @@ public class Tag implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    private final Long id;
-    private final LocalDateTime createdAt;
-    private final String name;
     private final Integer usedCount;
+    private final LocalDateTime createdAt;
+    private final Long id;
+    private final String name;
 
     public Tag(Tag value) {
-        this.id = value.id;
-        this.createdAt = value.createdAt;
-        this.name = value.name;
         this.usedCount = value.usedCount;
+        this.createdAt = value.createdAt;
+        this.id = value.id;
+        this.name = value.name;
     }
 
     public Tag(
-        Long id,
+        Integer usedCount,
         LocalDateTime createdAt,
-        String name,
-        Integer usedCount
+        Long id,
+        String name
     ) {
-        this.id = id;
-        this.createdAt = createdAt;
-        this.name = name;
         this.usedCount = usedCount;
+        this.createdAt = createdAt;
+        this.id = id;
+        this.name = name;
     }
 
     /**
-     * Getter for <code>jungsuri.tag.id</code>.
+     * Getter for <code>jungsuri.tag.used_count</code>.
      */
-    public Long getId() {
-        return this.id;
+    public Integer getUsedCount() {
+        return this.usedCount;
     }
 
     /**
@@ -55,27 +55,27 @@ public class Tag implements Serializable {
     }
 
     /**
+     * Getter for <code>jungsuri.tag.id</code>.
+     */
+    public Long getId() {
+        return this.id;
+    }
+
+    /**
      * Getter for <code>jungsuri.tag.name</code>.
      */
     public String getName() {
         return this.name;
     }
 
-    /**
-     * Getter for <code>jungsuri.tag.used_count</code>.
-     */
-    public Integer getUsedCount() {
-        return this.usedCount;
-    }
-
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder("Tag (");
 
-        sb.append(id);
+        sb.append(usedCount);
         sb.append(", ").append(createdAt);
+        sb.append(", ").append(id);
         sb.append(", ").append(name);
-        sb.append(", ").append(usedCount);
 
         sb.append(")");
         return sb.toString();

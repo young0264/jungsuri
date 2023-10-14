@@ -54,14 +54,14 @@ public class PostTag extends TableImpl<PostTagRecord> {
     }
 
     /**
-     * The column <code>jungsuri.post_tag.id</code>.
-     */
-    public final TableField<PostTagRecord, Long> ID = createField(DSL.name("id"), SQLDataType.BIGINT.nullable(false).identity(true), this, "");
-
-    /**
      * The column <code>jungsuri.post_tag.created_at</code>.
      */
     public final TableField<PostTagRecord, LocalDateTime> CREATED_AT = createField(DSL.name("created_at"), SQLDataType.LOCALDATETIME(6), this, "");
+
+    /**
+     * The column <code>jungsuri.post_tag.id</code>.
+     */
+    public final TableField<PostTagRecord, Long> ID = createField(DSL.name("id"), SQLDataType.BIGINT.nullable(false).identity(true), this, "");
 
     /**
      * The column <code>jungsuri.post_tag.post_entity_id</code>.
@@ -193,14 +193,14 @@ public class PostTag extends TableImpl<PostTagRecord> {
     // -------------------------------------------------------------------------
 
     @Override
-    public Row4<Long, LocalDateTime, Long, Long> fieldsRow() {
+    public Row4<LocalDateTime, Long, Long, Long> fieldsRow() {
         return (Row4) super.fieldsRow();
     }
 
     /**
      * Convenience mapping calling {@link SelectField#convertFrom(Function)}.
      */
-    public <U> SelectField<U> mapping(Function4<? super Long, ? super LocalDateTime, ? super Long, ? super Long, ? extends U> from) {
+    public <U> SelectField<U> mapping(Function4<? super LocalDateTime, ? super Long, ? super Long, ? super Long, ? extends U> from) {
         return convertFrom(Records.mapping(from));
     }
 
@@ -208,7 +208,7 @@ public class PostTag extends TableImpl<PostTagRecord> {
      * Convenience mapping calling {@link SelectField#convertFrom(Class,
      * Function)}.
      */
-    public <U> SelectField<U> mapping(Class<U> toType, Function4<? super Long, ? super LocalDateTime, ? super Long, ? super Long, ? extends U> from) {
+    public <U> SelectField<U> mapping(Class<U> toType, Function4<? super LocalDateTime, ? super Long, ? super Long, ? super Long, ? extends U> from) {
         return convertFrom(toType, Records.mapping(from));
     }
 }

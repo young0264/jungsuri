@@ -55,19 +55,24 @@ public class Notification extends TableImpl<NotificationRecord> {
     }
 
     /**
-     * The column <code>jungsuri.notification.id</code>.
-     */
-    public final TableField<NotificationRecord, Long> ID = createField(DSL.name("id"), SQLDataType.BIGINT.nullable(false).identity(true), this, "");
-
-    /**
      * The column <code>jungsuri.notification.checked</code>.
      */
     public final TableField<NotificationRecord, Boolean> CHECKED = createField(DSL.name("checked"), SQLDataType.BIT.nullable(false), this, "");
 
     /**
+     * The column <code>jungsuri.notification.account_entity_id</code>.
+     */
+    public final TableField<NotificationRecord, Long> ACCOUNT_ENTITY_ID = createField(DSL.name("account_entity_id"), SQLDataType.BIGINT, this, "");
+
+    /**
      * The column <code>jungsuri.notification.created_at</code>.
      */
     public final TableField<NotificationRecord, LocalDateTime> CREATED_AT = createField(DSL.name("created_at"), SQLDataType.LOCALDATETIME(6), this, "");
+
+    /**
+     * The column <code>jungsuri.notification.id</code>.
+     */
+    public final TableField<NotificationRecord, Long> ID = createField(DSL.name("id"), SQLDataType.BIGINT.nullable(false).identity(true), this, "");
 
     /**
      * The column <code>jungsuri.notification.link</code>.
@@ -88,11 +93,6 @@ public class Notification extends TableImpl<NotificationRecord> {
      * The column <code>jungsuri.notification.type</code>.
      */
     public final TableField<NotificationRecord, NotificationType> TYPE = createField(DSL.name("type"), SQLDataType.VARCHAR(17).asEnumDataType(jooq.dsl.enums.NotificationType.class), this, "");
-
-    /**
-     * The column <code>jungsuri.notification.account_entity_id</code>.
-     */
-    public final TableField<NotificationRecord, Long> ACCOUNT_ENTITY_ID = createField(DSL.name("account_entity_id"), SQLDataType.BIGINT, this, "");
 
     private Notification(Name alias, Table<NotificationRecord> aliased) {
         this(alias, aliased, null);
@@ -203,14 +203,14 @@ public class Notification extends TableImpl<NotificationRecord> {
     // -------------------------------------------------------------------------
 
     @Override
-    public Row8<Long, Boolean, LocalDateTime, String, String, String, NotificationType, Long> fieldsRow() {
+    public Row8<Boolean, Long, LocalDateTime, Long, String, String, String, NotificationType> fieldsRow() {
         return (Row8) super.fieldsRow();
     }
 
     /**
      * Convenience mapping calling {@link SelectField#convertFrom(Function)}.
      */
-    public <U> SelectField<U> mapping(Function8<? super Long, ? super Boolean, ? super LocalDateTime, ? super String, ? super String, ? super String, ? super NotificationType, ? super Long, ? extends U> from) {
+    public <U> SelectField<U> mapping(Function8<? super Boolean, ? super Long, ? super LocalDateTime, ? super Long, ? super String, ? super String, ? super String, ? super NotificationType, ? extends U> from) {
         return convertFrom(Records.mapping(from));
     }
 
@@ -218,7 +218,7 @@ public class Notification extends TableImpl<NotificationRecord> {
      * Convenience mapping calling {@link SelectField#convertFrom(Class,
      * Function)}.
      */
-    public <U> SelectField<U> mapping(Class<U> toType, Function8<? super Long, ? super Boolean, ? super LocalDateTime, ? super String, ? super String, ? super String, ? super NotificationType, ? super Long, ? extends U> from) {
+    public <U> SelectField<U> mapping(Class<U> toType, Function8<? super Boolean, ? super Long, ? super LocalDateTime, ? super Long, ? super String, ? super String, ? super String, ? super NotificationType, ? extends U> from) {
         return convertFrom(toType, Records.mapping(from));
     }
 }

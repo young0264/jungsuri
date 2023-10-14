@@ -52,14 +52,14 @@ public class AccountTag extends TableImpl<AccountTagRecord> {
     }
 
     /**
-     * The column <code>jungsuri.account_tag.id</code>.
-     */
-    public final TableField<AccountTagRecord, Long> ID = createField(DSL.name("id"), SQLDataType.BIGINT.nullable(false), this, "");
-
-    /**
      * The column <code>jungsuri.account_tag.account_entity_id</code>.
      */
     public final TableField<AccountTagRecord, Long> ACCOUNT_ENTITY_ID = createField(DSL.name("account_entity_id"), SQLDataType.BIGINT, this, "");
+
+    /**
+     * The column <code>jungsuri.account_tag.id</code>.
+     */
+    public final TableField<AccountTagRecord, Long> ID = createField(DSL.name("id"), SQLDataType.BIGINT.nullable(false), this, "");
 
     private AccountTag(Name alias, Table<AccountTagRecord> aliased) {
         this(alias, aliased, null);
@@ -106,21 +106,11 @@ public class AccountTag extends TableImpl<AccountTagRecord> {
 
     @Override
     public List<ForeignKey<AccountTagRecord, ?>> getReferences() {
-        return Arrays.asList(Keys.FKT9YC2QDRKD8ISH8T5PH28GKX0, Keys.FKVJ9RA64LQW442NT0TU2X1K0K);
+        return Arrays.asList(Keys.FKVJ9RA64LQW442NT0TU2X1K0K, Keys.FKT9YC2QDRKD8ISH8T5PH28GKX0);
     }
 
-    private transient Tag _tag;
     private transient Account _account;
-
-    /**
-     * Get the implicit join path to the <code>jungsuri.tag</code> table.
-     */
-    public Tag tag() {
-        if (_tag == null)
-            _tag = new Tag(this, Keys.FKT9YC2QDRKD8ISH8T5PH28GKX0);
-
-        return _tag;
-    }
+    private transient Tag _tag;
 
     /**
      * Get the implicit join path to the <code>jungsuri.account</code> table.
@@ -130,6 +120,16 @@ public class AccountTag extends TableImpl<AccountTagRecord> {
             _account = new Account(this, Keys.FKVJ9RA64LQW442NT0TU2X1K0K);
 
         return _account;
+    }
+
+    /**
+     * Get the implicit join path to the <code>jungsuri.tag</code> table.
+     */
+    public Tag tag() {
+        if (_tag == null)
+            _tag = new Tag(this, Keys.FKT9YC2QDRKD8ISH8T5PH28GKX0);
+
+        return _tag;
     }
 
     @Override

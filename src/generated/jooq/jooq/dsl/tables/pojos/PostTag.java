@@ -16,35 +16,28 @@ public class PostTag implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    private final Long id;
     private final LocalDateTime createdAt;
+    private final Long id;
     private final Long postEntityId;
     private final Long tagId;
 
     public PostTag(PostTag value) {
-        this.id = value.id;
         this.createdAt = value.createdAt;
+        this.id = value.id;
         this.postEntityId = value.postEntityId;
         this.tagId = value.tagId;
     }
 
     public PostTag(
-        Long id,
         LocalDateTime createdAt,
+        Long id,
         Long postEntityId,
         Long tagId
     ) {
-        this.id = id;
         this.createdAt = createdAt;
+        this.id = id;
         this.postEntityId = postEntityId;
         this.tagId = tagId;
-    }
-
-    /**
-     * Getter for <code>jungsuri.post_tag.id</code>.
-     */
-    public Long getId() {
-        return this.id;
     }
 
     /**
@@ -52,6 +45,13 @@ public class PostTag implements Serializable {
      */
     public LocalDateTime getCreatedAt() {
         return this.createdAt;
+    }
+
+    /**
+     * Getter for <code>jungsuri.post_tag.id</code>.
+     */
+    public Long getId() {
+        return this.id;
     }
 
     /**
@@ -72,8 +72,8 @@ public class PostTag implements Serializable {
     public String toString() {
         StringBuilder sb = new StringBuilder("PostTag (");
 
-        sb.append(id);
-        sb.append(", ").append(createdAt);
+        sb.append(createdAt);
+        sb.append(", ").append(id);
         sb.append(", ").append(postEntityId);
         sb.append(", ").append(tagId);
 

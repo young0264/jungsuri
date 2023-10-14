@@ -15,27 +15,20 @@ public class AccountTag implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    private final Long id;
     private final Long accountEntityId;
+    private final Long id;
 
     public AccountTag(AccountTag value) {
-        this.id = value.id;
         this.accountEntityId = value.accountEntityId;
+        this.id = value.id;
     }
 
     public AccountTag(
-        Long id,
-        Long accountEntityId
+        Long accountEntityId,
+        Long id
     ) {
-        this.id = id;
         this.accountEntityId = accountEntityId;
-    }
-
-    /**
-     * Getter for <code>jungsuri.account_tag.id</code>.
-     */
-    public Long getId() {
-        return this.id;
+        this.id = id;
     }
 
     /**
@@ -45,12 +38,19 @@ public class AccountTag implements Serializable {
         return this.accountEntityId;
     }
 
+    /**
+     * Getter for <code>jungsuri.account_tag.id</code>.
+     */
+    public Long getId() {
+        return this.id;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder("AccountTag (");
 
-        sb.append(id);
-        sb.append(", ").append(accountEntityId);
+        sb.append(accountEntityId);
+        sb.append(", ").append(id);
 
         sb.append(")");
         return sb.toString();
