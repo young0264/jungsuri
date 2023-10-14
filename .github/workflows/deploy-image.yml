@@ -43,6 +43,7 @@ on:
     branches:
       - main  # 또는 원하는 브랜치로 변경
 env:
+  S3_BUCKET_NAME: jungsuri-s3
   AWS_REGION: ap-northeast-2
   CODE_DEPLOY_APPLICATION_NAME: jungsuri-app
   CODE_DEPLOY_DEPLOYMENT_GROUP_NAME: junsguri-deploy-group
@@ -95,7 +96,15 @@ jobs:
         shell: bash
 
       - name: Upload to S3
-        run: aws s3 cp --region ap-northeast-2 ./$GITHUB_SHA.zip s3://jungsuri-s3/$GITHUB_SHA.zip
+        run: aws s3 cp --region ap-northeast-2 ./$GITHUB_SHA.zip s3://$S3_BUCKET_NAME/$GITHUB_SHA.zip
+
+      - name: Code Deploy
+        run: |
+          aws deploy create-deployment \
+          --deployment-config-name CodeDeployDefault.AllAtOnce \
+          --application-name ${{ env.CODE_DEPLOY_APPLICATION_NAME }} \
+          --deployment-group-name ${{ env.CODE_DEPLOY_DEPLOYMENT_GROUP_NAME }} \
+          --s3-location bucket=$S3_BUCKET_NAME,bundleType=zip,key=$GITHUB_SHA.zip
 #  # (5) 빌드 결과물을 S3 버킷에 업로드
 #      - name: Upload to AWS S3
 #        run: |
