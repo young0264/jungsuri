@@ -4,7 +4,7 @@ os: linux
 
 files:
   - source:  /
-    destination: /home/ubuntu/app
+    destination: /home/ec2-user/jungsuri
     overwrite: yes
 
 permissions:
@@ -14,11 +14,17 @@ permissions:
     group: ubuntu
 
 hooks:
-  AfterInstall:
-    - location: scripts/stop.sh
-      timeout: 60
-      runas: ubuntu
   ApplicationStart:
-    - location: scripts/start.sh
+    - location: scripts/jungsuri-deploy.sh
       timeout: 60
       runas: ubuntu
+
+#hooks:
+#  AfterInstall:
+#    - location: scripts/stop.sh
+#      timeout: 60
+#      runas: ubuntu
+#  ApplicationStart:
+#    - location: scripts/start.sh
+#      timeout: 60
+#      runas: ubuntu
