@@ -10,14 +10,14 @@ files:
 permissions:
   - object: /
     pattern: "**"
-    owner: ubuntu
-    group: ubuntu
+    owner: linux
+    group: linux
 
 hooks:
   ApplicationStart:
     - location: scripts/jungsuri-deploy.sh
       timeout: 60
-      runas: ubuntu
+      runas: linux
 
 #hooks:
 #  AfterInstall:
