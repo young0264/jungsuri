@@ -149,9 +149,9 @@ jooq {
 
                 jdbc {
                     driver = 'com.mysql.cj.jdbc.Driver'
-                    url ="jdbc:mysql://jungsuri-mysql-rds.c6qs8meeed9t.ap-northeast-2.rds.amazonaws.com:3306/jungsuri"
+//                    url ="jdbc:mysql://jungsuri-mysql-rds.c6qs8meeed9t.ap-northeast-2.rds.amazonaws.com:3306/jungsuri"
 //                    url ="jdbc:mysql://localhost:3306/jungsuri"
-//                    url =db_url
+                    url =db_url
                     user = 'young'
                     password = '7dmldud9!!'
                     schema = 'jungsuri'
