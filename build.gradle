@@ -1,14 +1,11 @@
-// jpa setting reference to https://gist.github.com/dsdstudio/bfe66037d39073f489dc8bfc5467fdfe
 import nu.studer.gradle.jooq.JooqEdition
 
 buildscript {
     ext {
-        profile = ""
-        if (project.hasProperty('dev')) {
-            profile = ""
-//            profile = "jungsuri-db"
-//            profile = "172.18.0.2"
-//            profile = "172.18.0.2"
+        db_url = "jdbc:mysql://localhost:3306/jungsuri"
+//        profile = ""
+        if (project.hasProperty('prod')) {
+            db_url= "jdbc:mysql://jungsuri-mysql-rds.c6qs8meeed9t.ap-northeast-2.rds.amazonaws.com:3306/jungsuri"
         }
     }
 
@@ -136,7 +133,6 @@ tasks.named('test') {
 //    locations=["filesystem:src/main/resources/db/migration"]
 //}
 
-
 // jooq settings
 jooq {
 
@@ -153,7 +149,9 @@ jooq {
 
                 jdbc {
                     driver = 'com.mysql.cj.jdbc.Driver'
-                    url= "jdbc:mysql://jungsuri-mysql-rds.c6qs8meeed9t.ap-northeast-2.rds.amazonaws.com:3306/jungsuri"
+                    url="${db_url}"
+//                    url= "jdbc:mysql://jungsuri-mysql-rds.c6qs8meeed9t.ap-northeast-2.rds.amazonaws.com:3306/jungsuri"
+//                    url = "jdbc:mysql://localhost:3306/jungsuri"
                     user = 'young'
                     password = '7dmldud9!!'
                     schema = 'jungsuri'
