@@ -2,7 +2,6 @@
 
 PROJECT_ROOT="/home/ec2-user/jungsuri"
 JAR_FILE="$PROJECT_ROOT/jungsuri-0.0.1-SNAPSHOT.jar"
-#JAR_FILE="$PROJECT_ROOT/build/libs/jungsuri-0.0.1-SNAPSHOT.jar"
 
 APP_LOG="$PROJECT_ROOT/application.log"
 ERROR_LOG="$PROJECT_ROOT/error.log"
@@ -13,13 +12,10 @@ TIME_NOW=$(date +%c)
 # build 파일 복사
 echo "$TIME_NOW > $JAR_FILE 파일 복사" >> $DEPLOY_LOG
 cp $PROJECT_ROOT/jungsuri-0.0.1-SNAPSHOT.jar
-#cp $PROJECT_ROOT/build/libs/*.jar $JAR_FILE
 
 # jar 파일 실행
 echo "$TIME_NOW > $JAR_FILE 파일 실행" >> $DEPLOY_LOG
 nohup java -jar -Dspring.profiles.active=prod $JAR_FILE > $APP_LOG 2> $ERROR_LOG &
-
-#nohup java -jar -Dspring.profiles.active=prod jungsuri-0.0.1-SNAPSHOT.jar > $APP_LOG 2> $ERROR_LOG &
 
 #프로파일 명시
 CURRENT_PID=$(pgrep -f $JAR_FILE)
