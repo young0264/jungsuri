@@ -149,7 +149,7 @@ jooq {
 
                 jdbc {
                     driver = 'com.mysql.cj.jdbc.Driver'
-                    url = this.db_url
+                    url = db_url
                     user = 'young'
                     password = '7dmldud9!!'
                     schema = 'jungsuri'
