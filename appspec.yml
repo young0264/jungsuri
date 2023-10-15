@@ -11,7 +11,7 @@ permissions:
   - object: /
     pattern: "**"
     owner: ec2-user
-    group: ubuntu
+#    group: ubuntu
 
 hooks:
   ApplicationStart:
