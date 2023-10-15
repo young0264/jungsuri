@@ -15,7 +15,7 @@ permissions:
 
 hooks:
   ApplicationStart:
-    - location: scripts/jungsuri-deploy.sh
+    - location: script/jungsuri-deploy.sh
       timeout: 60
       runas: ubuntu
 
