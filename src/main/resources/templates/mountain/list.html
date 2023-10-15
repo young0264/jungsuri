@@ -48,11 +48,10 @@
                                     <p>소재지 : <span th:text="${mountain.shortLocations}"></span></p>
                                 </div>
                             </div>
-                        </div>
                     </div>
                     <!-- list data 뿌리기 끝 -->
                 </div>
-                <div class="pagination font-alt"  th:each="currentPage : ${#numbers.sequence(1, pagingCount)}">
+                <div th:if="${pagingCount > 0}" class="pagination font-alt"  th:each="currentPage : ${#numbers.sequence(1, pagingCount)}">
                     <a th:href="'/mountain/list?currentPageNumber='+${currentPage}" class="active" th:text="${currentPage}"></a>
                 </div>
             </div>
