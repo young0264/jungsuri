@@ -81,8 +81,8 @@ jobs:
       - name: Build with Gradle
         env:
           GRADLE_OPTS: -Dspring.profiles.active=prod
-        run: ./gradlew build -Pprod -x test
-#        run: ./gradlew build -Pprod
+#        run: ./gradlew build -Pprod -x test
+        run: ./gradlew build -Pprod
 #        run: ./gradlew build -x test
 
       - name: Configure AWS credentials
