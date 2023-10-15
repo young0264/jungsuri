@@ -64,8 +64,7 @@ jobs:
           distribution: 'temurin'
       #          server-id: github # Value of the distributionManagement/repository/id field of the pom.xml
       #          settings-path: ${{ github.workspace }} # location for the settings.xml file
-      ### CI
-      #gradlew 권한 추가
+\      #gradlew 권한 추가
       - name: Grant Execute Permission For Gradlew
         run: chmod +x gradlew
 
