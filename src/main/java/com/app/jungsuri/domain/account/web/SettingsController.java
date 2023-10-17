@@ -32,6 +32,27 @@ public class SettingsController {
     private final MountainService mountainService;
     private final NotificationService notificationService;
 
+
+    @GetMapping("/profile")
+    @Operation(summary = "프로필 페이지 조회", description = "프로필 페이지 조회를 조회합니다.")
+    public String showProfile(Model model, Principal principal) {
+        String loginId = principal.getName();
+        AccountEntity accountEntity = accountService.findByLoginId(loginId);
+        model.addAttribute("accountEntity", accountEntity);
+        model.addAttribute("passwordUpdateDto", new PasswordUpdateDto());
+        return "account/profile";
+    }
+
+    @GetMapping("/admin")
+    @Operation(summary = "관리자 페이지 조회", description = "관리자 페이지를 조회합니다.")
+    public String showAdminSettingPage(Model model, Principal principal) {
+        List<String> userLoginIdList = accountService.getAllUsersLoginId();
+        List<String> mountainNameList = mountainService.findAllMountainsName();
+        AccountEntity accountEntity = accountService.findByLoginId(principal.getName());
+        model.addAllAttributes(Map.of("userLoginIdList", userLoginIdList, "mountainNameList", mountainNameList,"userRole", accountEntity.getUserRole().toString()));
+        return "account/admin";
+    }
+
     @GetMapping("/alarm")
     @Operation(summary = "알림 페이지 조회", description = "알림 페이지를 조회합니다.")
     public String showAlarmSettingPage(Model model, Principal principal) {
@@ -44,15 +65,6 @@ public class SettingsController {
         return "account/alarm";
     }
 
-    @GetMapping("/profile")
-    @Operation(summary = "프로필 페이지 조회", description = "프로필 페이지 조회를 조회합니다.")
-    public String showProfile(Model model, Principal principal) {
-        String loginId = principal.getName();
-        AccountEntity accountEntity = accountService.findByLoginId(loginId);
-        model.addAttribute("accountEntity", accountEntity);
-        model.addAttribute("passwordUpdateDto", new PasswordUpdateDto());
-        return "account/profile";
-    }
 
     //TODO PATCH ? PUT ?
     @PutMapping("/password")
@@ -64,16 +76,6 @@ public class SettingsController {
             return ResponseEntity.badRequest().body(error);
         }
         return ResponseEntity.ok().build();
-    }
-
-    @GetMapping("/admin")
-    @Operation(summary = "관리자 페이지 조회", description = "관리자 페이지를 조회합니다.")
-    public String showAdminSettingPage(Model model, Principal principal) {
-        List<String> userLoginIdList = accountService.getAllUsersLoginId();
-        List<String> mountainNameList = mountainService.findAllMountainsName();
-        AccountEntity accountEntity = accountService.findByLoginId(principal.getName());
-        model.addAllAttributes(Map.of("userLoginIdList", userLoginIdList, "mountainNameList", mountainNameList,"userRole", accountEntity.getUserRole().toString()));
-        return "account/admin";
     }
 
     @PatchMapping("/mountain-exp")
