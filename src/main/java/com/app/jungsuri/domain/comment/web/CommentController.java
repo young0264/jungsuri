@@ -10,6 +10,8 @@ import com.app.jungsuri.domain.comment.web.dto.CommentDeleteDto;
 import com.app.jungsuri.domain.comment.web.dto.CommentUpdateDto;
 import com.app.jungsuri.domain.post.persistence.PostEntity;
 import com.app.jungsuri.domain.post.persistence.PostService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -25,6 +27,7 @@ import java.util.List;
 @Slf4j
 @RequiredArgsConstructor
 @RequestMapping("/comment")
+@Tag(name = "댓글 API", description = "swagger 댓글 API")
 public class CommentController {
 
 
@@ -33,6 +36,7 @@ public class CommentController {
     private final PostService postService;
 
     @PostMapping("")
+    @Operation(summary = "댓글 작성", description = "댓글을 작성합니다.")
     public String create(@Valid @ModelAttribute("commentCreateDto") CommentCreateDto commentCreateDto,
                          BindingResult errors, RedirectAttributes redirectAttributes) {
         if (errors.hasErrors()) {
@@ -51,12 +55,14 @@ public class CommentController {
     }
 
     @PutMapping("")
+    @Operation(summary = "댓글 수정", description = "댓글을 수정합니다.")
     public ResponseEntity update(@RequestBody CommentUpdateDto commentUpdateDto) {
         commentService.updateComment(commentUpdateDto.getCommentId(), commentUpdateDto.getNewComment());
         return ResponseEntity.ok().build();
     }
 
     @DeleteMapping("")
+    @Operation(summary = "댓글 삭제", description = "댓글을 삭제합니다.")
     public ResponseEntity delete(@RequestBody CommentDeleteDto commentDeleteDto) {
         PostEntity postEntity = postService.getPostEntity(commentDeleteDto.getPostId());
         commentService.deleteComment(commentDeleteDto.getCommentId(), postEntity);
