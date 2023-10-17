@@ -10,6 +10,8 @@ import com.app.jungsuri.domain.post.web.dto.PostCreateDto;
 import com.app.jungsuri.domain.post.persistence.PostEntity;
 import com.app.jungsuri.domain.post.web.dto.PostSearchDto;
 import com.app.jungsuri.domain.tag.persistence.TagService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -23,6 +25,7 @@ import java.util.List;
 @Controller
 @RequestMapping("/post")
 @RequiredArgsConstructor
+@Tag(name = "게시글 API", description = "swagger 게시글 API")
 public class PostController {
 
     private final TagService tagService;
@@ -32,6 +35,7 @@ public class PostController {
 
     /** 게시글 태그 (or 조건) 검색 */
     @PostMapping("/list")
+    @Operation(summary = "게시글 태그 검색", description = "searchTags 정보에 따라 태그가 달린 게시글을 조회합니다.")
     public String search(@RequestBody PostSearchDto postSearchDto, Model model) {
 
         List<PostEntity> postListByTags = postService.getPostListByTags(postSearchDto.getSearchTags());
@@ -41,6 +45,7 @@ public class PostController {
 
     /** 게시글 목록 조회 */
     @GetMapping("/list")
+    @Operation(summary = "게시글 조회", description = "페이지 네이션이 적용된 게시글을 조회합니다.")
     public String list(@RequestParam(required = false, defaultValue = "1") int currentPageNumber , Model model) {
 
         List<PostEntity> postListByPagination = postService.getPostListByPagination(currentPageNumber);
@@ -62,6 +67,7 @@ public class PostController {
 
     /** 게시글 등록 화면 이동 */
     @GetMapping("")
+    @Operation(summary = "게시글 등록 페이지 조회", description = "게시글 작성 페이지를 조회합니다.")
     public String write(Model model) {
         model.addAttribute("postCreateDto", new PostCreateDto());
         model.addAttribute("mode", "create");
@@ -70,6 +76,7 @@ public class PostController {
 
     /** 게시글 등록 처리 */
     @PostMapping("")
+    @Operation(summary = "게시글 등록", description = "게시글 작성")
     public String write(@ModelAttribute("postCreateDto") PostCreateDto postCreateDto, Principal principal, RedirectAttributes redirectAttributes){
         AccountEntity accountEntity = accountService.findByLoginId(principal.getName());
         PostEntity postEntity = postService.createPost(postCreateDto, accountEntity);
@@ -81,6 +88,7 @@ public class PostController {
 
     /** 게시글 상세 페이지 */
     @GetMapping("/{postId}/details")
+    @Operation(summary = "게시글 상세 페이지 조회", description = "하나의 게시글을 조회할 수 있는 페이지로 이동합니다.")
     public String view(@PathVariable Long postId, Model model, Principal principal) {
         PostEntity postEntity = postService.getPostEntity(postId);
         List<PostEntity> postListByTop5 = postService.getTop5ListByLikeCount();
@@ -100,6 +108,7 @@ public class PostController {
 
     /** 게시글 수정 화면 이동 */
     @GetMapping("/{postId}/updateView")
+    @Operation(summary = "게시글 수정 페이지 조회", description = "게시글 수정 페이지를 조회합니다.")
     public String update(@PathVariable Long postId, Model model) {
         PostEntity postEntity = postService.getPostEntity(postId);
         model.addAttribute("mode", "update");
@@ -109,6 +118,7 @@ public class PostController {
 
     /** 게시글 수정 처리 */
     @PatchMapping("/{postId}")
+    @Operation(summary="게시글 수정 처리", description="게시글 수정 처리")
     public String edit(@PathVariable Long postId, @ModelAttribute("postEntity") PostEntity existingPost, RedirectAttributes redirectAttributes) {
         postService.updatePost(existingPost, postId);
         redirectAttributes.addFlashAttribute("message", "/titan/live/assets/");
@@ -117,6 +127,7 @@ public class PostController {
 
     /** 게시글 삭제 처리 */
     @DeleteMapping("/{postId}")
+    @Operation(summary="게시글 삭제 처리", description="게시글 삭제 처리")
     public String delete(@PathVariable Long postId, RedirectAttributes redirectAttributes){
         postService.deletePost(postId);
         System.out.println("post delete complete");
