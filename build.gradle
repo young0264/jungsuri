@@ -16,9 +16,12 @@ buildscript {
     }
 
     repositories {
+        mavenCentral()
+        maven { url 'https://repo.spring.io/libs-milestone'}
         maven {
             url 'https://plugins.gradle.org/m2/'
         }
+
     }
     dependencies {
         classpath("nu.studer:gradle-jooq-plugin:3.0.3")
@@ -123,10 +126,8 @@ dependencies {
 //    implementation group: 'io.springfox', name: 'springfox-swagger2', version: '2.9.2'
     implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.1.0'
 
-
-
-
-
+    //s3 upload
+    implementation 'org.springframework.cloud:spring-cloud-starter-aws'
 
 //    //flyway
 //    implementation 'org.flywaydb:flyway-core:9.0.0'
@@ -135,7 +136,12 @@ dependencies {
 ////    runtimeOnly 'mysql:mysql-connector-java'
 ////    implementation 'org.flywaydb:flyway-core:7.15.0'
 
+}
 
+dependencyManagement {
+    imports {
+        mavenBom 'org.springframework.cloud:spring-cloud-aws:2.2.1.RELEASE'
+    }
 }
 
 tasks.named('test') {
@@ -168,8 +174,8 @@ jooq {
 
                 jdbc {
                     driver = 'com.mysql.cj.jdbc.Driver'
-//                    url ="jdbc:mysql://jungsuri-mysql-rds.c6qs8meeed9t.ap-northeast-2.rds.amazonaws.com:3306/jungsuri"
-                    url ="jdbc:mysql://localhost:3306/jungsuri"
+                    url ="jdbc:mysql://jungsuri-mysql-rds.c6qs8meeed9t.ap-northeast-2.rds.amazonaws.com:3306/jungsuri"
+//                    url ="jdbc:mysql://localhost:3306/jungsuri"
 //                    url =db_url
                     user = 'young'
                     password = '7dmldud9!!'
