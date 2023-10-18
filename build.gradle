@@ -214,18 +214,18 @@ jooq {
     }
 }
 
-// jooq error logs
-tasks.generateJooq.with {
-    def out = new ByteArrayOutputStream()
-    javaExecSpec = { JavaExecSpec s ->
-        s.standardOutput = out
-        s.errorOutput = out
-        s.ignoreExitValue = true
-        s.jvmArgs= ["-Dorg.slf4j.simpleLogger.defaultLogLevel=debug"]
-    }
-    execResultHandler = { ExecResult r ->
-        if (r.exitValue != 0) {
-            throw new GradleException("JOOQ Generation failed : \n\n" + out.toString())
-        }
-    }
-}
+//// jooq error logs
+//tasks.generateJooq.with {
+//    def out = new ByteArrayOutputStream()
+//    javaExecSpec = { JavaExecSpec s ->
+//        s.standardOutput = out
+//        s.errorOutput = out
+//        s.ignoreExitValue = true
+//        s.jvmArgs= ["-Dorg.slf4j.simpleLogger.defaultLogLevel=debug"]
+//    }
+//    execResultHandler = { ExecResult r ->
+//        if (r.exitValue != 0) {
+//            throw new GradleException("JOOQ Generation failed : \n\n" + out.toString())
+//        }
+//    }
+//}
