@@ -138,11 +138,11 @@ dependencies {
 
 }
 
-dependencyManagement {
-    imports {
-        mavenBom 'org.springframework.cloud:spring-cloud-aws:2.2.1.RELEASE'
-    }
-}
+//dependencyManagement {
+//    imports {
+//        mavenBom 'org.springframework.cloud:spring-cloud-aws:2.0.0.RC2'
+//    }
+//}
 
 tasks.named('test') {
     useJUnitPlatform()
@@ -174,8 +174,8 @@ jooq {
 
                 jdbc {
                     driver = 'com.mysql.cj.jdbc.Driver'
-                    url ="jdbc:mysql://jungsuri-mysql-rds.c6qs8meeed9t.ap-northeast-2.rds.amazonaws.com:3306/jungsuri"
-//                    url ="jdbc:mysql://localhost:3306/jungsuri"
+//                    url ="jdbc:mysql://jungsuri-mysql-rds.c6qs8meeed9t.ap-northeast-2.rds.amazonaws.com:3306/jungsuri"
+                    url ="jdbc:mysql://localhost:3306/jungsuri"
 //                    url =db_url
                     user = 'young'
                     password = '7dmldud9!!'
@@ -214,18 +214,18 @@ jooq {
     }
 }
 
-//// jooq error logs
-//tasks.generateJooq.with {
-//    def out = new ByteArrayOutputStream()
-//    javaExecSpec = { JavaExecSpec s ->
-//        s.standardOutput = out
-//        s.errorOutput = out
-//        s.ignoreExitValue = true
-//        s.jvmArgs= ["-Dorg.slf4j.simpleLogger.defaultLogLevel=debug"]
-//    }
-//    execResultHandler = { ExecResult r ->
-//        if (r.exitValue != 0) {
-//            throw new GradleException("JOOQ Generation failed : \n\n" + out.toString())
-//        }
-//    }
-//}
+// jooq error logs
+tasks.generateJooq.with {
+    def out = new ByteArrayOutputStream()
+    javaExecSpec = { JavaExecSpec s ->
+        s.standardOutput = out
+        s.errorOutput = out
+        s.ignoreExitValue = true
+        s.jvmArgs= ["-Dorg.slf4j.simpleLogger.defaultLogLevel=debug"]
+    }
+    execResultHandler = { ExecResult r ->
+        if (r.exitValue != 0) {
+            throw new GradleException("JOOQ Generation failed : \n\n" + out.toString())
+        }
+    }
+}
