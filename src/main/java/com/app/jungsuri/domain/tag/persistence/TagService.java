@@ -20,6 +20,10 @@ public class TagService {
     private final TagRepository tagRepository;
     private final PostTagRepository postTagRepository;
 
+    public void deleteTag(Long postId) {
+        postTagRepository.deleteByPostEntity(postId);
+    }
+
     public Optional<Tag> findByName(String name) {
         return tagRepository.findByName(name);
     }
