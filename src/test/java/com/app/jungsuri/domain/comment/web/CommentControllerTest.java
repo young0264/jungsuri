@@ -86,8 +86,8 @@ class CommentControllerTest {
                         .param("postId", postEntity.getId().toString())
                         .with(csrf()))
                 .andExpect(status().is3xxRedirection())
-                .andExpect(view().name("redirect:/post/" + postEntity.getId().toString() + "/details"))
-                .andExpect(redirectedUrl("/post/" + postEntity.getId().toString() + "/details"))
+                .andExpect(view().name("redirect:/post/" + postEntity.getId().toString()))
+                .andExpect(redirectedUrl("/post/" + postEntity.getId().toString()))
                 .andExpect(authenticated());
 
         CommentCreateDto commentCreateDto = new CommentCreateDto("댓글 등록 테스트 댓글입니다.", "12", postEntity.getId());
@@ -113,9 +113,9 @@ class CommentControllerTest {
                         .param("postId", createdPostId.toString())
                         .with(csrf()))
                 .andExpect(status().is3xxRedirection())
-                .andExpect(redirectedUrl("/post/" + createdPostId + "/details"))
+                .andExpect(redirectedUrl("/post/" + createdPostId ))
                 .andExpect(flash().attributeExists("comment_create_error"))
-                .andExpect(view().name("redirect:/post/" + createdPostId + "/details"))
+                .andExpect(view().name("redirect:/post/" + createdPostId ))
                 .andExpect(authenticated());
 
         CommentEntity commentEntity = commentService.createComment(commentCreateDto.toComment(accountEntity, postEntity));

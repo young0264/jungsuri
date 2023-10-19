@@ -45,7 +45,7 @@
                             </a>
                         </div>
                         <div class="post-header font-alt">
-                            <h2 class="post-title"><a th:href="'/post/' + ${post.id} + '/details'" th:text="${post.title}"></a></h2>
+                            <h2 class="post-title"><a th:href="'/post/' + ${post.id} " th:text="${post.title}"></a></h2>
                             <div class="post-meta">
                                 By&nbsp;:<a th:text="${post.author} + ' | '  "></a>
                                 Date : <a th:text="${post.getCreatedAt().toLocalDate()} + ' | '"></a>
@@ -81,8 +81,8 @@
                         <a th:href="'/post/list?currentPageNumber='+${beforePageNum}">
                             <i class="fa fa-angle-left">이전</i>
                         </a>
-                        <div class="pagination font-alt"  th:each="currentPage : ${#numbers.sequence(1, pagingCount)}">
-                            <a th:href="'/post/list?currentPageNumber='+${currentPage}" class="active" th:text="${currentPage}"></a>
+                        <div  class="pagination font-alt"  th:each="currentPage : ${#numbers.sequence(1, pagingCount)}" >
+                            <a th:if="${pagingCount >= 1}" th:href="'/post/list?currentPageNumber='+${currentPage}" class="active" th:text="${currentPage}"></a>
                         </div>
                         <a th:href="'/post/list?currentPageNumber='+${nextPageNum}">
                             <i class="fa fa-angle-right">다음</i>
