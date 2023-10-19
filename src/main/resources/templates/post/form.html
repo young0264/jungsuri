@@ -126,9 +126,6 @@
                     }
 
                     function submitForm() {
-                        alert("submit form");
-                        alert(Array.from(tag_array));
-                        alert(JSON.stringify(Array.from(tag_array)));
                         console.log("JSON.stringify(tag_array)",JSON.stringify(Array.from(tag_array)))
                         document.getElementById("tagList").value = Array.from(tag_array);
                         document.querySelector(".form").submit();
@@ -150,7 +147,7 @@
 
                     <input type="hidden" name="author" th:value="${#authentication.name}">
                     <input id="tagList" name="tagList" value="">
-                    <textarea id="summernote" th:field="*{content}" class="form-control"  placeholder="content"></textarea>
+                    <textarea id="summernote" name="content" th:field="*{content}" class="form-control"  placeholder="content"></textarea>
 <!--                    <button class="btn btn-round btn-b" type="submit">게시글 등록</button>-->
                     <button class="btn btn-round btn-b" onclick="submitForm()">게시글 등록</button>
                 </form>
