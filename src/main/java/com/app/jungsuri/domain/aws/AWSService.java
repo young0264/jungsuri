@@ -1,27 +1,29 @@
-package com.app.jungsuri.config;
+package com.app.jungsuri.domain.aws;
 
+import com.app.jungsuri.config.CommonUtils;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import software.amazon.awssdk.core.sync.RequestBody;
 import software.amazon.awssdk.services.s3.S3Client;
 import software.amazon.awssdk.services.s3.model.GetUrlRequest;
 import software.amazon.awssdk.services.s3.model.PutObjectRequest;
-
 import java.io.IOException;
 
 @Slf4j
 @RequiredArgsConstructor
-@Component
-public class AwsS3Service {
+@Service
+public class AWSService {
     private final S3Client s3Client;
 
     @Value("${spring.cloud.aws.s3.bucket}")
     private String bucketName;
 
     public String uploadFile(MultipartFile multipartFile) {
+
+        log.info("uploadFile 시작");
 
         if(multipartFile.isEmpty()) {
             log.info("image is null");
@@ -55,4 +57,5 @@ public class AwsS3Service {
         if(multipartFile.isEmpty()) return "";
         return CommonUtils.buildFileName(multipartFile.getOriginalFilename());
     }
+
 }
