@@ -71,13 +71,14 @@ class SettingsControllerTest {
     }
 
     @Test
-    @WithMockUser(username = "12" , password = "12")
+    @WithMockUser(username = "12" , password = "12" , roles = "ADMIN")
     void admin페이지에_model이_들어가는지() throws Exception {
         mockMvc.perform(get("/settings/admin")
                         .with(csrf()))
                 .andExpect(status().isOk())
                 .andExpect(model().attributeExists("userLoginIdList"))
                 .andExpect(model().attributeExists("mountainNameList"))
+                .andExpect(model().attributeExists("userRole"))
                 .andExpect(view().name("account/admin"))
                 .andExpect(status().isOk());
     }
