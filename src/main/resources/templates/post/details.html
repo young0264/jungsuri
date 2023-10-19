@@ -238,9 +238,6 @@
             <div class="col-sm-8 col-sm-offset-1">
                 <!-- 게시글  start-->
                 <div class="post" th:object="${postEntity}">
-<!--                    <div class="post-thumbnail">-->
-<!--                        <img src="/static/images/jungsuri_logo.png" alt="Blog Featured Image"/>-->
-<!--                    </div>-->
                     <div class="post-header font-alt">
                         <h1 class="post-title" th:text="${postEntity.title}"></h1>
                         <div class="post-meta">
@@ -252,6 +249,9 @@
                     </div>
                     <div class="post-entry " style="height: 300px">
                         <h4 th:utext="${postEntity.content}"></h4>
+                        <a th:href="${postEntity.imagePath}">
+                            <img th:src="${postEntity.imagePath}" style=" height: 100%;">
+                        </a>
                     </div>
                 </div>
                 <!-- 게시글  end-->

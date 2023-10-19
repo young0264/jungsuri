@@ -1,5 +1,6 @@
 package com.app.jungsuri.domain.post.web;
 
+import com.app.jungsuri.domain.aws.AWSService;
 import com.app.jungsuri.domain.account.persistence.AccountEntity;
 import com.app.jungsuri.domain.account.persistence.AccountService;
 import com.app.jungsuri.domain.comment.persistence.CommentEntity;
@@ -28,6 +29,7 @@ import java.util.List;
 @Tag(name = "게시글 API", description = "swagger 게시글 API")
 public class PostController {
 
+    private final AWSService awsService;
     private final TagService tagService;
     private final PostService postService;
     private final AccountService accountService;
@@ -38,6 +40,7 @@ public class PostController {
     @PostMapping("")
     @Operation(summary = "게시글 등록", description = "게시글 작성")
     public String write(@ModelAttribute("postCreateDto") PostCreateDto postCreateDto, Principal principal, RedirectAttributes redirectAttributes){
+        postCreateDto.initImagePath(awsService.uploadFile(postCreateDto.getImgFile()));
         AccountEntity accountEntity = accountService.findByLoginId(principal.getName());
         PostEntity postEntity = postService.createPost(postCreateDto, accountEntity);
         tagService.createTags(postCreateDto.getTagList(), postEntity);
