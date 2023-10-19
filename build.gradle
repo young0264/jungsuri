@@ -1,12 +1,7 @@
 import nu.studer.gradle.jooq.JooqEdition
 
 buildscript {
-//    ext {
-//        db_url = "jdbc:mysql://localhost:3306/jungsuri"
-////        profile = ""
-//        if (project.hasProperty("prod")) {
-//            db_url= "jdbc:mysql://jungsuri-mysql-rds.c6qs8meeed9t.ap-northeast-2.rds.amazonaws.com:3306/jungsuri"
-//        }
+
     ext {
         if (project.hasProperty("prod")) {
             db_url = "jdbc:mysql://jungsuri-mysql-rds.c6qs8meeed9t.ap-northeast-2.rds.amazonaws.com:3306/jungsuri"
@@ -127,6 +122,7 @@ dependencies {
 ////    runtimeOnly 'mysql:mysql-connector-java'
 ////    implementation 'org.flywaydb:flyway-core:7.15.0'
 
+    implementation 'io.awspring.cloud:spring-cloud-aws-s3:3.0.2'
 
 }
 
@@ -149,8 +145,6 @@ jooq {
 
     version = '3.18.0'  // default (can be omitted)
     edition = JooqEdition.OSS  // default (can be omitted)
-
-// name of the jOOQ configuration
     configurations {
         main {
 //            generateSchemaSourceOnCompilation = true  // default (can be omitted)
@@ -160,8 +154,8 @@ jooq {
 
                 jdbc {
                     driver = 'com.mysql.cj.jdbc.Driver'
-                    url ="jdbc:mysql://jungsuri-mysql-rds.c6qs8meeed9t.ap-northeast-2.rds.amazonaws.com:3306/jungsuri"
-//                    url ="jdbc:mysql://localhost:3306/jungsuri"
+//                    url ="jdbc:mysql://jungsuri-mysql-rds.c6qs8meeed9t.ap-northeast-2.rds.amazonaws.com:3306/jungsuri"
+                    url ="jdbc:mysql://localhost:3306/jungsuri"
 //                    url =db_url
                     user = 'young'
                     password = '7dmldud9!!'
