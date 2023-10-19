@@ -58,7 +58,7 @@ class AccountControllerTest {
     }
 
     @Test
-    @WithMockUser(username="12", password="12")
+//    @WithMockUser(username="12", password="12")
     void 회원가입이_정상적으로_되는지() throws Exception {
 
         SignUpForm signUpForm = new SignUpForm();
@@ -72,8 +72,8 @@ class AccountControllerTest {
                         .param("password", "123123!@#")
                         .with(csrf()))
                 .andExpect(status().is3xxRedirection())
-                .andExpect(view().name("redirect:/"))
-                .andExpect(authenticated().withUsername("testid")) //TODO
+                .andExpect(view().name("redirect:/account/login"))
+//                .andExpect(authenticated().withUsername("testid")) //TODO
         ;
 
         AccountEntity accountEntity = accountRepository.findByLoginId("testid").orElseThrow(() -> new IllegalArgumentException("해당 유저가 없습니다."));

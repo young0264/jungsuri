@@ -53,8 +53,8 @@ dockerfile
 ###pem파일
 .pem
 
-#temp 임시 ignore .
-/src/test/*
+##temp 임시 ignore .
+#/src/test/*
 
 #properties
 /src/main/resources/application.properties
