@@ -26,6 +26,8 @@ fi
 echo "$TIME_NOW > $JAR_FILE 파일 복사" >> $DEPLOY_LOG
 cp "$JAR_FILE $PROJECT_ROOT/"
 
+# "/home/ec2-user/jungsuri/build/libs/jungsuri-0.0.1-SNAPSHOT.jar" "/home/ec2-user/jungsuri"
+
 # jar 파일 실행
 echo "$TIME_NOW > $JAR_FILE 파일 실행" >> $DEPLOY_LOG
 nohup java -jar -Dspring.profiles.active=prod $JAR_FILE > $APP_LOG 2> $ERROR_LOG &

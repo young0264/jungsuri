@@ -126,11 +126,9 @@
                         }
 
                         function submitForm() {
-                            alert("submitForm start");
                             console.log("JSON.stringify(tag_array)",JSON.stringify(Array.from(tag_array)))
                             document.getElementById("tagList").value = Array.from(tag_array);
                             document.querySelector(".form").submit();
-                            alert("submitForm end");
                         }
 
                     </script>
