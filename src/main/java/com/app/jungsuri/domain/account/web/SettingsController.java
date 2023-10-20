@@ -16,6 +16,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import java.security.Principal;
 import java.util.List;
 import java.util.Map;
@@ -96,6 +97,13 @@ public class SettingsController {
         log.info("email : {}", email);
         accountService.updateEmail(principal.getName(), email);
 
+        return "redirect:/settings/profile";
+    }
+
+    @PostMapping("/change-img")
+    @Operation(summary = "프로필 이미지 변경", description = "프로필 이미지를 변경합니다.")
+    public String changeProfileImg(@RequestParam MultipartFile profileImage, Principal principal) {
+        accountService.updateProfileImg(principal.getName(), profileImage);
         return "redirect:/settings/profile";
     }
 }

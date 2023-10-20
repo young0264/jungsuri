@@ -55,7 +55,8 @@ public class AccountEntity implements UserDetails {
     @NotBlank
     private String password;
 
-    private String profileImage;
+    @Builder.Default
+    private String profileImage="https://static.nid.naver.com/images/web/user/default.png?type=s160";
 
     private int mountainExp; //등산한 산 경험치 (높이)
 
@@ -153,5 +154,9 @@ public class AccountEntity implements UserDetails {
                 ", postCreatedChecked=" + postCreatedChecked +
                 ", authorities=" + authorities +
                 '}';
+    }
+
+    public void updateProfileImg(String s3Url) {
+        this.profileImage = s3Url;
     }
 }

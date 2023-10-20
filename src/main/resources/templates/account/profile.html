@@ -106,18 +106,21 @@
     <!--                                    이메일을 변경하면 -> verified false로 수정,generateEmailCheckToken  -->
                                 </div>
                                 <div class="row">
-                                    <form>
+                                    <form action="/settings/change-img" enctype="multipart/form-data"  method="post">
                                         <label><span style="color: red">*</span>프로필 사진</label>
                                         <div>
                                             <div class="col-sm-5">
                                                 <img id="imgThumb"
-                                                     src="https://static.nid.naver.com/images/web/user/default.png?type=s160"
+                                                     th:src="${accountEntity.profileImage}"
                                                      width="100" height="100">
                                                 <div class="form-group">
-                                                    <label for="imgFile">사진 변경</label>
-                                                    <input class="form-control" type="file" id="imgFile" name="imgFile" accept="image/*" value="사진 선택 ">
+                                                    <label for="profileImage">사진 변경</label>
+                                                    <input class="form-control" type="file" id="profileImage" name="profileImage" accept="image/*" >
                                                 </div>
                                             </div>
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <button class="btn btn-g btn-primary">tkwls 변경</button>
                                         </div>
                                     </form>
                                 </div>
