@@ -88,4 +88,14 @@ public class SettingsController {
         }
         return ResponseEntity.ok().build();
     }
+
+
+    @PostMapping("/change-email")
+    @Operation(summary = "이메일 변경", description = "이메일를 변경합니다.")
+    public String changePassword(@RequestParam String email, Principal principal) {
+        log.info("email : {}", email);
+        accountService.updateEmail(principal.getName(), email);
+
+        return "redirect:/settings/profile";
+    }
 }

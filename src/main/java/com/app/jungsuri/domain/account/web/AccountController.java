@@ -3,8 +3,6 @@ package com.app.jungsuri.domain.account.web;
 import com.app.jungsuri.domain.account.persistence.AccountEntity;
 import com.app.jungsuri.domain.account.persistence.AccountService;
 import com.app.jungsuri.domain.account.web.form.SignUpForm;
-import com.app.jungsuri.domain.weather.persistence.WeatherEntity;
-import com.app.jungsuri.domain.weather.persistence.WeatherService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
@@ -15,8 +13,6 @@ import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import java.security.Principal;
 
 @Controller
 @RequiredArgsConstructor

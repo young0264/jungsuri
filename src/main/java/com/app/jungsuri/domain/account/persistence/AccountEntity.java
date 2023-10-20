@@ -79,12 +79,18 @@ public class AccountEntity implements UserDetails {
     }
 
     public void generateEmailCheckToken() {
+        this.emailVerified = false;
         this.emailToken = UUID.randomUUID().toString();
         this.emailCheckTokenGeneratedAt = LocalDateTime.now();
     }
 
     public boolean canSendConfirmEmail() {
         return this.emailCheckTokenGeneratedAt.isBefore(LocalDateTime.now().minusHours(1)); //1시간 이전에 만들었는지
+    }
+
+    public void updateEmail(String email) {
+        this.email = email;
+        generateEmailCheckToken();
     }
 
     public void updatePassword(String newPassword) {
