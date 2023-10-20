@@ -1,6 +1,7 @@
 package com.app.jungsuri.domain.account.persistence;
 
 import com.app.jungsuri.domain.account.web.form.SignUpForm;
+import com.app.jungsuri.domain.aws.AWSService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
@@ -14,6 +15,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
+
 import java.security.Principal;
 import java.util.List;
 
@@ -26,6 +29,8 @@ public class AccountService {
     private final JavaMailSender javaMailSender;
     private final PasswordEncoder passwordEncoder;
     private final ModelMapper modelMapper;
+
+    private final AWSService awsService;
 
 
     public void login(AccountEntity accountEntity) {
@@ -88,5 +93,13 @@ public class AccountService {
     public void updateEmail(String loginId, String email) {
         AccountEntity accountEntity = findByLoginId(loginId);
         accountEntity.updateEmail(email);
+    }
+
+    public void updateProfileImg(String name, MultipartFile multipartFile) {
+        AccountEntity accountEntity = findByLoginId(name);
+
+        String s3Url = awsService.uploadFile(multipartFile);
+        accountEntity.updateProfileImg(s3Url);
+
     }
 }

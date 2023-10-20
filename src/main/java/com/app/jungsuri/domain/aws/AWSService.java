@@ -42,7 +42,7 @@ public class AWSService {
             RequestBody requestBody = RequestBody.fromBytes(multipartFile.getBytes());
             s3Client.putObject(putObjectRequest, requestBody);
         } catch (IOException e) {
-            log.error("cannot upload image",e);
+            log.error("s3 image upload : {}", e.getMessage());
             throw new RuntimeException(e);
         }
         GetUrlRequest getUrlRequest = GetUrlRequest.builder()
