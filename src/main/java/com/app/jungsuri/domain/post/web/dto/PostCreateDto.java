@@ -33,6 +33,10 @@ public class PostCreateDto {
     }
 
     public void initImagePath(String imagePath) {
-        this.imagePath = imagePath;
+        if (imagePath == null || imagePath.equals("") ) {
+            this.imagePath = "/images/jungsuri_logo.png";
+        } else {
+            this.imagePath = imagePath;
+        }
     }
 }

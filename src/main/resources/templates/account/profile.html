@@ -99,31 +99,36 @@
                                                 <input class="form-control" name="email" th:placeholder="${accountEntity.email}">
                                             </div>
                                             <div class="col-sm-2">
-                                                <button class="btn btn-g btn-primary">변경</button>
+                                                <button class="btn btn-g btn-primary">이메일 수정</button>
                                             </div>
                                         </div>
                                     </form>
     <!--                                    이메일을 변경하면 -> verified false로 수정,generateEmailCheckToken  -->
                                 </div>
-                                <div class="row">
-                                    <form action="/settings/change-img" enctype="multipart/form-data"  method="post">
+                                <form action="/settings/change-img" enctype="multipart/form-data"  method="post">
+
+                                    <div class="row">
                                         <label><span style="color: red">*</span>프로필 사진</label>
                                         <div>
                                             <div class="col-sm-5">
                                                 <img id="imgThumb"
                                                      th:src="${accountEntity.profileImage}"
-                                                     width="100" height="100">
-                                                <div class="form-group">
+                                                     width="200" height="100">
+                                                <div  class="form-group">
                                                     <label for="profileImage">사진 변경</label>
-                                                    <input class="form-control" type="file" id="profileImage" name="profileImage" accept="image/*" >
+                                                    <input class="form-control" type="file" id="profileImage" name="profileImage" accept="image/*" style="width: 350px;">
                                                 </div>
                                             </div>
                                         </div>
+
+                                    </div>
+                                    <div class="row">
                                         <div class="col-sm-2">
-                                            <button class="btn btn-g btn-primary">tkwls 변경</button>
+                                            <button class="btn btn-primary">사진 변경</button>
                                         </div>
-                                    </form>
-                                </div>
+                                    </div>
+                                </form>
+
                             </div>
                             <div class="tab-pane" id="password">
                                 <form th:object="${passwordUpdateDto}">

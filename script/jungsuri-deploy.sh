@@ -24,13 +24,13 @@ fi
 # build 파일 복사
 echo "$TIME_NOW > $JAR_FILE 파일 복사" >> $DEPLOY_LOG
 cp "$JAR_FILE" "$PROJECT_ROOT/"
-
-# "/home/ec2-user/jungsuri/build/libs/jungsuri-0.0.1-SNAPSHOT.jar" "/home/ec2-user/jungsuri"
+# cp :: "/home/ec2-user/jungsuri/build/libs/jungsuri-0.0.1-SNAPSHOT.jar" "/home/ec2-user/jungsuri"
 # nohup java -jar -Dspring.profiles.active=prod $JAR_FILE > $APP_LOG 2> $ERROR_LOG &
 # nohup java -jar -Dspring.profiles.active=prod /home/ec2-user/jungsuri/build/libs/jungsuri-0.0.1-SNAPSHOT.jar
+
 # jar 파일 실행
-echo "$TIME_NOW > $JAR_FILE 파일 실행" >> $DEPLOY_LOG
-nohup java -jar -Dspring.profiles.active=prod $JAR_FILE > $APP_LOG 2> $ERROR_LOG &
+echo "$TIME_NOW > $PROJECT_ROOT jar 파일 실행" >> $DEPLOY_LOG
+nohup java -jar -Dspring.profiles.active=prod "$PROJECT_ROOT/jungsuri-0.0.1-SNAPSHOT.jar" > $APP_LOG 2> $ERROR_LOG &
 
 #프로파일 명시
 CURRENT_PID=$(pgrep -f $JAR_FILE)
