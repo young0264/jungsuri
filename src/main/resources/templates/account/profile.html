@@ -80,6 +80,7 @@
                         </ul>
                         <div class="tab-content">
                             <div class="tab-pane active" id="info">
+
                                 <h4>본인 확인 및 계정 복구용 휴대폰 번호</h4>
                                 <div class="row">
                                     <label><span style="color: red">*</span>로그인 아이디</label>
@@ -91,32 +92,35 @@
                                     </div>
                                 </div>
                                 <div class="row">
-
-                                    <label><span style="color: red">*</span>이메일</label>
-                                    <div>
-                                        <div class="col-sm-6">
-                                            <input class="form-control" th:placeholder="${accountEntity.email}">
+                                    <form action="/settings/change-email" method="post">
+                                        <label><span style="color: red">*</span>이메일</label>
+                                        <div>
+                                            <div class="col-sm-6">
+                                                <input class="form-control" name="email" th:placeholder="${accountEntity.email}">
+                                            </div>
+                                            <div class="col-sm-2">
+                                                <button class="btn btn-g btn-primary">변경</button>
+                                            </div>
                                         </div>
-                                        <div class="col-sm-2">
-                                            <button class="btn btn-g btn-primary">변경</button>
-                                        </div>
-                                    </div>
+                                    </form>
+    <!--                                    이메일을 변경하면 -> verified false로 수정,generateEmailCheckToken  -->
                                 </div>
                                 <div class="row">
-                                    <label><span style="color: red">*</span>프로필 사진</label>
-                                    <div>
-                                        <div class="col-sm-3">
-                                            <img id="imgThumb"
-                                                 src="https://static.nid.naver.com/images/web/user/default.png?type=s160"
-                                                 width="100" height="100">
-                                            <!--                                        </div>-->
-                                            <!--                                        <div class="col-sm-2">-->
-                                            <button class="btn btn-g btn-primary">사진 변경</button>
-                                            <!--                                            <button class="btn btn-g btn-primary">삭제</button>-->
+                                    <form>
+                                        <label><span style="color: red">*</span>프로필 사진</label>
+                                        <div>
+                                            <div class="col-sm-5">
+                                                <img id="imgThumb"
+                                                     src="https://static.nid.naver.com/images/web/user/default.png?type=s160"
+                                                     width="100" height="100">
+                                                <div class="form-group">
+                                                    <label for="imgFile">사진 변경</label>
+                                                    <input class="form-control" type="file" id="imgFile" name="imgFile" accept="image/*" value="사진 선택 ">
+                                                </div>
+                                            </div>
                                         </div>
-                                    </div>
+                                    </form>
                                 </div>
-
                             </div>
                             <div class="tab-pane" id="password">
                                 <form th:object="${passwordUpdateDto}">

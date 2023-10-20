@@ -84,4 +84,9 @@ public class AccountService {
     public List<String> getAllUsersLoginId() {
         return accountRepository.findAllUsersLoginId();
     }
+
+    public void updateEmail(String loginId, String email) {
+        AccountEntity accountEntity = findByLoginId(loginId);
+        accountEntity.updateEmail(email);
+    }
 }
