@@ -42,7 +42,7 @@ public class mainController {
 
     /** 메인 화면 */
     @GetMapping("/")
-    public String main(@RequestParam(value="city", defaultValue="seoul") String city, Principal principal, Model model) {
+    public String main(@RequestParam(value="city", defaultValue="seoul") String city, Principal principal, Model model) throws IOException {
         boolean emailValid = accountService.isEmailValid(principal);
         List<PostEntity> postListByRecentTop3 = postService.getPostListByRecentTop3();
         WeatherEntity weatherEntity = weatherService.getWeatherData(city);
