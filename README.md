@@ -9,8 +9,8 @@
 회원별 경험치 부여, 태그, 알림 기능과 기본적인 게시글과 댓글관련 기능들이 구현되어 있습니다.
 
 
-## [1] Project 서버 구조
-<img width="729" alt="스크린샷 2023-10-15 21 59 19" src="https://github.com/young0264/jungsuri/assets/96028167/d5f9ef76-f203-452d-83c5-813dd8adfe2c">
+## [1] Jungsuri Project 서버 구조
+<img width="600" alt="스크린샷 2023-10-23 00 42 42" src="https://github.com/young0264/jungsuri/assets/96028167/0ba87bbc-05aa-482f-a507-6ad38cd96667">
 
 
 
