@@ -105,7 +105,9 @@
             })
                 .then(response => {
                     if (!response.ok) {
-                        throw new Error('Network response was not ok');
+                        alert('댓글 수정에 실패하였습니다. 5자 이상 입력해주세요.')
+                        return;
+                        // throw new Error('Network response was not ok');
                     }
                     alert('성공적으로 수정되었습니다.');
                     $('#CommentUpdateModal').modal('hide'); // 모달 닫기
@@ -241,10 +243,19 @@
                     <div class="post-header font-alt">
                         <h1 class="post-title" th:text="${postEntity.title}"></h1>
                         <div class="post-meta">
-                            By&nbsp;<a href="#" th:text="${postEntity.author}"></a>
-                            | <a href="#" th:text="${postEntity.createdAt.toLocalDate()}"></a>
-                            | <a href="#" th:text="${postEntity.commentCount}"></a>
-                             Comments |
+                            By&nbsp;:<a th:text="${postEntity.author} + ' | '  "></a>
+                            Date : <a th:text="${postEntity.getCreatedAt().toLocalDate()} + ' | '"></a>
+                            Comments : <a th:text=" ${postEntity.commentCount}"></a>
+                            <a th:if="${postEntity.loginId == #authentication.principal.username}" style="float:right">
+                                <div style="float:right">
+                                    <form th:action=" '/post/' + ${postEntity.id}" th:method="delete">
+                                        <button class="btn btn-danger bottom-right">삭제</button>
+                                    </form>
+                                </div>
+                                <div style="float:right">
+                                    <a th:href="'/post/' + ${postEntity.getId()} +'/updateView'" class="btn btn-b btn-round bottom-right">수정</a>
+                                </div>
+                            </a>
                         </div>
                     </div>
                     <div class="post-entry " style="height: 300px">
@@ -276,9 +287,11 @@
                                 좋아요
                                 <span th:id="'comment_like_count_' + ${comment.id}" th:text="${comment.likeCount}"></span>개 </a>
                         </div>
-                        <div class="comment-body">
-                            <p th:text="${comment.content}"></p>
+                        <div class="comment-body" >
+<!--                            <p th:text="${comment.content}"></p>-->
+                            <textarea class="form-control" style="resize: none;" rows="4" th:text="${comment.content}" readonly></textarea>
                         </div>
+                        <br>
                         <div class="comment-meta font-alt">
 
                             <!--                            <a href="#" th:text="${comment.createdAt.toLocalDate()}">시간</a>-->
@@ -311,7 +324,7 @@
                                         <label for="modal-comment-content" class="col-form-label">댓글 </label>
                                         <textarea class="form-control" id="modal-comment-content"
                                                   name="newComment"></textarea>
-                                        <input type="hidden" name="commentId" value="${comment">
+                                        <input type="hidden" name="commentId" value="${comment}">
                                     </div>
                                 </form>
                             </div>
@@ -322,18 +335,17 @@
                         </div>
                     </div>
                 </div>
-                <!--                댓글 수정 모달 end -->
-                <!-- 댓글 list end-->
+                <!-- 댓글 수정 모달 end -->
+                <!-- 댓글  list  end -->
 
                 <!-- 댓글 작성 start -->
-                <h4 class="comment-form-title font-alt">Add your comment</h4>
                 <form method="post" th:action="@{/comment}" th:object="${commentCreateDto}">
                     <div class="form-group">
-                        <textarea class="form-control" th:field="*{content}" rows="4" placeholder="Comment" required th:min="5" th:max="50"></textarea>
+                        <textarea class="form-control" th:field="*{content}" rows="4" placeholder="Comment" required th:min="5" th:max="50" style="resize: none" ></textarea>
                         <input type="hidden" th:name="loginId" th:value="${accountEntity.loginId}">
                         <input type="hidden" th:name="postId" th:value="${postId}">
                     </div>
-                    <div class="text-center " th:if="${comment_create_error}">
+                    <div class="text-center " th:if="${comment_error}">
                         <div class="alert alert-danger" role="alert">
                             <strong>댓글 등록 실패</strong> <br>
                             <span th:text="${comment_create_error}"></span>
