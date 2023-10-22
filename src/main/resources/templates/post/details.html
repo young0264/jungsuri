@@ -250,7 +250,7 @@
                     <div class="post-entry " style="height: 300px">
                         <h4 th:utext="${postEntity.content}"></h4>
                         <a th:href="${postEntity.imagePath}">
-                            <img th:src="${postEntity.imagePath}" style=" height: 100%;">
+                            <img th:src="${postEntity.imagePath}" style=" height: 90%;">
                         </a>
                     </div>
                 </div>
@@ -265,7 +265,7 @@
 
                 <div class="comment clearfix" th:each="comment : ${commentList}">
                     <div class="comment-avatar"><img
-                            src="https://s3.amazonaws.com/uifaces/faces/twitter/ryanbattles/128.jpg"
+                            th:src="${comment.accountEntity.profileImage}"
                             alt="avatar"/></div>
                     <div class="comment-content clearfix">
                         <div class="comment-author font-alt">
