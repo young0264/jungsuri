@@ -22,10 +22,28 @@ public class WeatherApiTest {
 
     @Test
     @WithMockUser(username = "12", password = "12")
-    public void weatherServiceTest()  {
+    public void weatherServiceTest() throws IOException {
         weatherService.getWeatherData("seoul");
         Assertions.assertThat(weatherService.getWeatherData("seoul")).isNotNull();
         Assertions.assertThat(weatherService.getWeatherData("seoul").getCity().getName()).isEqualTo("Seoul");
+    }
+
+
+    @Test
+    @WithMockUser(username = "12", password = "12")
+    public void 기상청API_잘받아와지는지() throws IOException {
+        weatherService.getWeatherDataByKMA();
+    }
+
+    @Test
+    public void openweatherAPI_일출일몰시간() throws IOException {
+        weatherService.getWeatherData("seoul");
+    }
+
+    @Test
+    public void 년월일_8자리() {
+        String weatherDataToStr = weatherService.getWeatherDataToStr();
+        Assertions.assertThat(weatherDataToStr.length()).isEqualTo(8);
     }
 
     @Test
@@ -44,7 +62,7 @@ public class WeatherApiTest {
             RestTemplate restTemplate = new RestTemplate();
             WeatherTotalDto weatherTotalDto = restTemplate.getForObject(urlBuilder.toString(), WeatherTotalDto.class);
 
-            WeatherEntity weatherEntity = weatherService.mapToWeatherData(weatherTotalDto);
+            WeatherEntity weatherEntity = weatherService.OpenWeathermapToData(weatherTotalDto);
             System.out.println(weatherEntity.toString());
 
         } catch (Exception e) {
