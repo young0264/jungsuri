@@ -28,14 +28,14 @@
             <div class="row">
                 <div class="col-sm-6 col-sm-offset-3">
                     <h2 class="module-subtitle font-alt">
-                        <img th:src="'https://openweathermap.org/img/wn/' + ${weatherData.weather.getIconId()} + '@2x.png'">
+                        <img th:if="${weatherData.weather.getIconId()}" th:src="'https://openweathermap.org/img/wn/' + ${weatherData.weather.getIconId()} + '@2x.png'">
                         현재 <span th:text="${weatherData.city.name}"></span> 지역의 날씨
                     </h2>
                 </div>
             </div>
             <div class="row">
                 <div class="col-sm-6 col-md-3 col-lg-3">
-                    <div class="alt-features-item">
+                    <div th:if="${weatherData.weather.getIconId()}" class="alt-features-item">
                         <form id="weatherForm" action="/" method="get" style="color: black;">
                             <select class="form-control" id="city" name="city"
                                     style="text-align: center; font-weight: bold">
@@ -57,11 +57,13 @@
                         </form>
                     </div>
                     <div class="alt-features-item">
-                        <img th:src="'https://openweathermap.org/img/wn/' + ${weatherData.weather.iconId} + '@2x.png'">
+                        <img th:if="${weatherData.weather.getIconId()}" th:src="'https://openweathermap.org/img/wn/' + ${weatherData.weather.iconId} + '@2x.png'">
                         <h3 class="alt-features-title font-alt" th:text="${weatherData.weather.getStatusKo()}"></h3>
                     </div>
-                    <div class="alt-features-item">
-                        <div class="alt-features-icon"><span class="icon-alarmclock"></span></div>
+                    <div th:if="${weatherData.sunTimeInfo.getSunriseTime()}" class="alt-features-item">
+                        <div class="alt-features-icon">
+                            <span class="icon-alarmclock"></span>
+                        </div>
                         <h3 class="alt-features-title font-alt">일출/일몰 시간</h3>
                         일출 시간 : <span th:text="${weatherData.sunTimeInfo.getSunriseTime()}"></span>
                         <br>
@@ -74,8 +76,10 @@
                     </div>
                 </div>
                 <div class="col-md-6 col-lg-6 hidden-xs hidden-sm">
-                    <div class="alt-services-image align-center "><img th:src="${weatherData.getWeather().getImgSrc()}"
-                                                                       alt="Feature Image"></div>
+                    <div class="alt-services-image align-center ">
+                        <img th:if="${weatherData.getWeather().getImgSrc()}" th:src="${weatherData.getWeather().getImgSrc()}"
+                                                                       alt="Feature Image">
+                    </div>
                 </div>
                 <div class="col-sm-6 col-md-3 col-lg-3">
                     <div class="alt-features-item">
@@ -88,14 +92,16 @@
                         <h3 class="alt-features-title font-alt">기온(TEMPERATURE)</h3>
                         <span th:text="'현재 온도 : ' + ${weatherData.temperature.temp} + '℃' "></span>
                         <br>
-                        <span th:text="'체감 온도 : ' + ${weatherData.temperature.feelsLike} + '℃'"></span>
-                        <hr>
-                        <span th:text="'최소 온도 : ' + ${weatherData.temperature.getTempMin()} + '℃'"></span>
-                        <br>
-                        <span th:text="'최대 온도 : ' + ${weatherData.temperature.getTempMax()} + '℃'"></span>
-                        <hr>
+                        <span th:if="${weatherData.temperature.feelsLike}">
+                            <span th:text="'체감 온도 : ' + ${weatherData.temperature.feelsLike} + '℃'"></span>
+                            <hr>
+                            <span th:text="'최소 온도 : ' + ${weatherData.temperature.getTempMin()} + '℃'"></span>
+                            <br>
+                            <span th:text="'최대 온도 : ' + ${weatherData.temperature.getTempMax()} + '℃'"></span>
+                            <hr>
+                        </span>
                     </div>
-                    <div class="alt-features-item">
+                    <div th:if="${weatherData.clouds.cloudiness}" class="alt-features-item">
                         <div class="alt-features-icon"><span class="icon-cloud"></span></div>
                         <h3 class="alt-features-title font-alt">구름(CLOUD)</h3>
                         <span th:text="'구름 : ' + ${weatherData.clouds.cloudiness} + '%'"></span>
