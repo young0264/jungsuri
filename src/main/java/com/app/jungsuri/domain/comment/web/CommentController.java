@@ -39,10 +39,11 @@ public class CommentController {
     @Operation(summary = "댓글 작성", description = "댓글을 작성합니다.")
     public String create(@Valid @ModelAttribute("commentCreateDto") CommentCreateDto commentCreateDto,
                          BindingResult errors, RedirectAttributes redirectAttributes) {
+        //TODO
         if (errors.hasErrors()) {
             List<ObjectError> allErrors = errors.getAllErrors();
             allErrors.stream().forEach(objectError -> {
-                redirectAttributes.addFlashAttribute("comment_create_error", objectError.getDefaultMessage());
+                redirectAttributes.addFlashAttribute("comment_error", objectError.getDefaultMessage());
             });
             return String.format("redirect:/post/%s", commentCreateDto.getPostId());
         }
@@ -56,7 +57,15 @@ public class CommentController {
 
     @PutMapping("")
     @Operation(summary = "댓글 수정", description = "댓글을 수정합니다.")
-    public ResponseEntity update(@RequestBody CommentUpdateDto commentUpdateDto) {
+    public ResponseEntity update(@Valid @RequestBody CommentUpdateDto commentUpdateDto,
+                                 BindingResult errors, RedirectAttributes redirectAttributes) {
+        if (errors.hasErrors()) {
+            List<ObjectError> allErrors = errors.getAllErrors();
+            allErrors.stream().forEach(objectError -> {
+                redirectAttributes.addFlashAttribute("comment_error", objectError.getDefaultMessage());
+            });
+            return ResponseEntity.badRequest().build();
+        }
         commentService.updateComment(commentUpdateDto.getCommentId(), commentUpdateDto.getNewComment());
         return ResponseEntity.ok().build();
     }
