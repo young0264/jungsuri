@@ -29,9 +29,9 @@ cp "$JAR_FILE" "$PROJECT_ROOT/"
 # nohup java -jar -Dspring.profiles.active=prod /home/ec2-user/jungsuri/build/libs/jungsuri-0.0.1-SNAPSHOT.jar
 
 # jar 파일 실행
-echo "$TIME_NOW > $PROJECT_ROOT jar 파일 실행" >> $DEPLOY_LOG
-nohup java -jar -Dspring.profiles.active=prod "$PROJECT_ROOT/jungsuri-0.0.1-SNAPSHOT.jar" > $APP_LOG 2> $ERROR_LOG &
-
+echo "$TIME_NOW > $PROJECT_ROOT /jar 파일 실행" >> $DEPLOY_LOG
+nohup java -jar -Dspring.profiles.active=prod $PROJECT_ROOT/jungsuri-0.0.1-SNAPSHOT.jar > $APP_LOG 2> $ERROR_LOG &
+# nohup java -jar -Dspring.profiles.active=prod /home/ec2-user/jungsuri/jungsuri-0.0.1-SNAPSHOT.jar > /home/ec2-user/jungsuri/application.log 2> /home/ec2-user/jungsuri/error.log &
 #프로파일 명시
 CURRENT_PID=$(pgrep -f $JAR_FILE)
 echo "$TIME_NOW > 실행된 프로세스 아이디 $CURRENT_PID 입니다." >> $DEPLOY_LOG
