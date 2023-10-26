@@ -13,10 +13,12 @@ import com.app.jungsuri.domain.post.web.dto.PostSearchDto;
 import com.app.jungsuri.domain.tag.persistence.TagService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import java.security.Principal;
@@ -39,7 +41,7 @@ public class PostController {
     /** 게시글 등록 처리 */
     @PostMapping("")
     @Operation(summary = "게시글 등록", description = "게시글 작성")
-    public String write(@ModelAttribute("postCreateDto") PostCreateDto postCreateDto, Principal principal, RedirectAttributes redirectAttributes){
+    public String write(@Valid @ModelAttribute("postCreateDto") PostCreateDto postCreateDto, Principal principal, RedirectAttributes redirectAttributes){
         postCreateDto.initImagePath(awsService.uploadFile(postCreateDto.getImgFile()));
         AccountEntity accountEntity = accountService.findByLoginId(principal.getName());
         PostEntity postEntity = postService.createPost(postCreateDto, accountEntity);

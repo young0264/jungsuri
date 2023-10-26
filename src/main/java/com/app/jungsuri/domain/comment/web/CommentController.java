@@ -39,7 +39,6 @@ public class CommentController {
     @Operation(summary = "댓글 작성", description = "댓글을 작성합니다.")
     public String create(@Valid @ModelAttribute("commentCreateDto") CommentCreateDto commentCreateDto,
                          BindingResult errors, RedirectAttributes redirectAttributes) {
-        //TODO
         if (errors.hasErrors()) {
             List<ObjectError> allErrors = errors.getAllErrors();
             allErrors.stream().forEach(objectError -> {
