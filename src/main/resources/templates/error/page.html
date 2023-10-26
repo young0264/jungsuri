@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html
+        lang="ko"
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:sec="http://thymeleaf.org/extras/spring-security"
+        xmlns="http://www.w3.org/1999/xhtml"
+>
+
+
+<head th:replace="~{fragments/fragments.html :: head}"></head>
+<style>
+    .caption-content {
+        display: table-cell;
+        vertical-align: middle;
+        text-align: center;
+    }
+</style>
+<body data-spy="scroll" data-target=".onpage-navigation" data-offset="60">
+
+    <section class="home-section home-parallax home-fade home-full-height bg-dark bg-dark-30"
+             id="home" data-background="/images/jungsuri_logo.png"
+             style="background-image: url(/images/jungsuri_logo.png);">
+        <div class="titan-caption">
+            <div class="caption-content"
+                 style="display: table-cell;
+                        vertical-align: middle;
+                        text-align: center;
+                        height: 1000px;
+">
+                <div class="font-alt mb-30 titan-title-size-3" th:text="'Error : '  + ${status_code}"></div>
+                <div class="font-alt" th:text="${error_message}">
+<!--                    The requested URL was not found on this server.<br/>That is all we know.-->
+                </div>
+                <div class="font-alt mt-30"><a class="btn btn-border-w btn-round" href="/">Back to home page</a></div>
+            </div>
+        </div>
+    </section>
+<!--
+JavaScripts
+=============================================
+-->
+    <div th:replace="~{fragments/fragments.html :: nav_footer}"></div>
+
+</body>
+
+</html>
