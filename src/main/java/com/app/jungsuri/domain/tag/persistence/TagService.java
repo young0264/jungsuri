@@ -40,11 +40,9 @@ public class TagService {
         optionalTag.ifPresentOrElse(existTag -> {
             existTag.increaseUsedCount();
             tagRepository.save(existTag);
-            postTagRepository.save(new PostTag(postEntity, existTag));
+            postTagRepository.save(new PostTag(postEntity, tagName));
         }, () -> {
-            Tag tag = new Tag(tagName, LocalDateTime.now());
-            tagRepository.save(tag);
-            postTagRepository.save(new PostTag(postEntity, tag));
+            postTagRepository.save(new PostTag(postEntity,tagName));
         });
     }
 

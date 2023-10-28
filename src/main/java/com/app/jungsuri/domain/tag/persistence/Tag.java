@@ -6,31 +6,32 @@ import java.time.LocalDateTime;
 
 @Entity
 @Getter
-@Builder
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Inheritance(strategy = InheritanceType.JOINED) //because
-public class Tag {
+@Inheritance(strategy = InheritanceType.JOINED)
+@DiscriminatorColumn // 하위 테이블의 구분 컬럼 생성(default = DTYPE)
+public abstract class Tag {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name="name", unique = true)
+    @Column(name="name", unique=true)
     private String name;
 
-    @Builder.Default
     @Column(name="used_count")
     private int usedCount = 0;
 
     @Column(name="created_at")
     private LocalDateTime createdAt;
 
-    public Tag(String name, LocalDateTime createdAt) {
+    public Tag(String name) {
         this.name = name;
-        this.createdAt = createdAt;
+        this.createdAt = LocalDateTime.now();
         this.usedCount = 1;
     }
+
 
     public void increaseUsedCount() {
         this.usedCount += 1;

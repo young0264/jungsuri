@@ -8,25 +8,20 @@ import java.time.LocalDateTime;
 
 @Entity
 @Getter
+@Setter
+@Builder
 @NoArgsConstructor
-public class PostTag {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+@AllArgsConstructor
+@DiscriminatorValue("PostTag")
+@PrimaryKeyJoinColumn(name = "post_tag_id")
+public class PostTag extends Tag{
 
     @ManyToOne
     private PostEntity postEntity;
 
-    @ManyToOne
-    private Tag tag;
-
-    private LocalDateTime createdAt;
-
-    public PostTag(PostEntity postEntity, Tag tag) {
+    public PostTag(PostEntity postEntity, String tagName) {
+        super(tagName);
         this.postEntity = postEntity;
-        this.tag = tag;
-        this.createdAt = LocalDateTime.now();
     }
 
 }
