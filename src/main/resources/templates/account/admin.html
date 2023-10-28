@@ -11,7 +11,8 @@
 <script src="https://cdn.jsdelivr.net/npm/@yaireo/tagify/dist/tagify.polyfills.min.js"></script>
 <script type="application/javascript" th:inline="javascript">
     let mountainName = "";
-    let LoginIdArr = new Set([]);
+    let LoginIdArr = new Set();
+
     let settings = {
         mountain_exp: function () {
             if(mountainName === "" || LoginIdArr.size === 0){
@@ -23,15 +24,14 @@
                 "mountainName": mountainName,
                 "LoginIdArr": newLoginIdArr,
             };
-            console.log(JSON.stringify(data));
-            //TODO
             fetch('/settings/mountain-exp', {
                 method: 'PATCH',
                 headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify(data),
             })
                 .then(response => {
-                    if (!response.ok) {
+                    if (! response.ok) {
+                        alert('등산 경험치 반영에 실패하였습니다.');
                         throw new Error('등산 경험치 반영에 실패하였습니다.');
                     }
                     alert('참여회원의 경험치가 성공적으로 반영 되었습니다.');
@@ -76,7 +76,10 @@
                     <!-- tab 시작 -->
                     <div role="tabpanel">
                         <ul class="nav nav-tabs font-alt" role="tablist">
-                            <li class="active"><a href="#mountain_exp" data-toggle="tab" ><span class="icon-circle-compass"></span>등산 경험치 부여</a>
+                            <li class="active">
+                                <a href="#mountain_exp" data-toggle="tab" >
+                                    <span class="icon-circle-compass"></span>등산 경험치 부여
+                                </a>
                             </li>
                         </ul>
                         <div class="tab-content">
@@ -199,7 +202,7 @@
 
                                     function onDropdownSelect(e){
                                         console.log("onDropdownSelect: ", e.detail)
-                                        LoginIdArr.add(e.detail.data);
+                                        LoginIdArr.add(e.detail.data.value);
                                     }
                                 </script>
                                 <input class="form-control" type="button" value="등산 참여 등록" onclick="settings.mountain_exp()">
