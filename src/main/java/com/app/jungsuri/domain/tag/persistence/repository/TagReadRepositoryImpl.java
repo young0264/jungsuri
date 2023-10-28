@@ -18,7 +18,6 @@ public class TagReadRepositoryImpl implements TagReadRepository {
                 .from(TAG)
                 .where(TAG.NAME.eq(name))
                 .fetchOptionalInto(Tag.class);
-
     }
 
     public List<String> findAllTagsName() {
