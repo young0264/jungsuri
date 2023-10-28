@@ -66,6 +66,7 @@ public class ExceptionController  {
     public String RuntimeHandleError(RuntimeException e, Model model) {
 
         log.info("status code RuntimeException ::: " + HttpStatus.INTERNAL_SERVER_ERROR);
+        log.info("error message ::: " + e.getLocalizedMessage());
         model.addAttribute("status_code",HttpStatus.INTERNAL_SERVER_ERROR );
         model.addAttribute("exception_type", "RuntimeException" );
         model.addAttribute("error_message", e.getLocalizedMessage());
