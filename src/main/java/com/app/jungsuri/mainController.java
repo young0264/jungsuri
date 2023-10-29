@@ -61,37 +61,37 @@ public class mainController {
     }
 
     /** default 관리자 계정 생성 */
-    @Profile("local")
-    @PostConstruct
-    public void initAccount() {
-        log.info("initAccount");
-        SignUpForm signUpForm = new SignUpForm("12", "12@naver.com", "12","남의영","","", UserRole.ADMIN);
-        AccountEntity newAccount = accountService.createNewAccount(signUpForm);
-        log.info("newAccount: {}", newAccount);
-        AccountTag accountTag = new AccountTag(newAccount);
-        log.info("accountTag: {}", accountTag);
-
-
-        tagService.createAccountTags(accountTag, newAccount.getId());
-
-    }
+//    @Profile("local")
+//    @PostConstruct
+//    public void initAccount() {
+//        log.info("initAccount");
+//        SignUpForm signUpForm = new SignUpForm("12", "12@naver.com", "12","남의영","","", UserRole.ADMIN);
+//        AccountEntity newAccount = accountService.createNewAccount(signUpForm);
+//        log.info("newAccount: {}", newAccount);
+//        AccountTag accountTag = new AccountTag(newAccount);
+//        log.info("accountTag: {}", accountTag);
 //
-    /** 등산 정보 크롤링 */
-    @Profile("local")
-    @PostConstruct
-    public void initMountainInfo() {
-        log.info("initMountainInfo");
-        final String mountainInfoUrl = "https://www.forest.go.kr/kfsweb/kfi/kfs/foreston/main/contents/FmmntSrch/selectFmmntSrchList.do?mn=NKFS_03_01_12&orgId=&mntUnit=100&mntIndex=1&searchMnt=&searchCnd3=&mntnInfoGbn=&mntnInfoSsnCd=&mntnInfoThmCd=&mntnInfoTmCd=&mntnHaslvCd=&mntnInfoLvlCd=";
-        Connection connect = Jsoup.connect(mountainInfoUrl);
-
-        try {
-            Document document = connect.get();
-            mountainService.saveMountainInfo(document);
-        } catch (IOException e) {
-            e.printStackTrace();
-            throw new RuntimeException(e);
-        }
-    }
+//
+//        tagService.createAccountTags(accountTag, newAccount.getId());
+//
+//    }
+////
+//    /** 등산 정보 크롤링 */
+//    @Profile("local")
+//    @PostConstruct
+//    public void initMountainInfo() {
+//        log.info("initMountainInfo");
+//        final String mountainInfoUrl = "https://www.forest.go.kr/kfsweb/kfi/kfs/foreston/main/contents/FmmntSrch/selectFmmntSrchList.do?mn=NKFS_03_01_12&orgId=&mntUnit=100&mntIndex=1&searchMnt=&searchCnd3=&mntnInfoGbn=&mntnInfoSsnCd=&mntnInfoThmCd=&mntnInfoTmCd=&mntnHaslvCd=&mntnInfoLvlCd=";
+//        Connection connect = Jsoup.connect(mountainInfoUrl);
+//
+//        try {
+//            Document document = connect.get();
+//            mountainService.saveMountainInfo(document);
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//            throw new RuntimeException(e);
+//        }
+//    }
 
 //    @PostConstruct
 //    public void postTestInit() {
