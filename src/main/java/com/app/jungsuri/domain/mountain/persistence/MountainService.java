@@ -1,5 +1,7 @@
 package com.app.jungsuri.domain.mountain.persistence;
 
+import com.app.jungsuri.domain.tag.persistence.MountainTag;
+import com.app.jungsuri.domain.tag.persistence.repository.MountainTagRepository;
 import com.app.jungsuri.infra.pagination.MountainPage;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -20,6 +22,7 @@ import java.util.Map;
 public class MountainService {
 
     private final MountainLocationService mountainLocationService;
+    private final MountainTagRepository mountainTagRepository;
     private final MountainRepository mountainRepository;
 
     /** 100대 명산 크롤링 - 저장 */
@@ -39,8 +42,9 @@ public class MountainService {
             String mountainName = split1[0];
             String shortLocations = mountainAllLocation.substring(0, Math.min(mountainAllLocation.length(), 20))+"...";
             int mountainHeight = getMountainHeight(split1);
-
+            /** mountain 크롤링시 tag 생성 */
             MountainEntity mountainEntity= saveMountainEntity(new MountainEntity(mountainName, mountainHeight, image_url, shortLocations));
+            mountainTagRepository.save(new MountainTag(mountainEntity, mountainName));
             mountainLocationService.saveMountainLocation(mountainAllLocation, mountainEntity);
         }
     }

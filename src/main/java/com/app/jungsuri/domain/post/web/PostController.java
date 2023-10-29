@@ -18,7 +18,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import java.security.Principal;
@@ -45,7 +44,7 @@ public class PostController {
         postCreateDto.initImagePath(awsService.uploadFile(postCreateDto.getImgFile()));
         AccountEntity accountEntity = accountService.findByLoginId(principal.getName());
         PostEntity postEntity = postService.createPost(postCreateDto, accountEntity);
-        tagService.createTags(postCreateDto.getTagList(), postEntity);
+        tagService.createPostTags(postCreateDto.getTagList(), postEntity);
 
         redirectAttributes.addFlashAttribute("message", "게시물이 성공적으로 등록되었습니다.");
         return "redirect:/post/list";

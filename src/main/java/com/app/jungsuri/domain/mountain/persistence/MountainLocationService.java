@@ -8,7 +8,7 @@ import java.util.Arrays;
 @Service
 @Transactional
 @RequiredArgsConstructor
-public class MountainLocationService {
+public class MountainLocationService { //TODO 무슨 생각으로 나눈거지
 
     private final MountainLocationRepository mountainLocationRepository;
 

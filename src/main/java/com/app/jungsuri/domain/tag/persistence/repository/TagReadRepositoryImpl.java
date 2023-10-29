@@ -25,4 +25,5 @@ public class TagReadRepositoryImpl implements TagReadRepository {
                 .from(TAG)
                 .fetchInto(String.class);
     }
+
 }
