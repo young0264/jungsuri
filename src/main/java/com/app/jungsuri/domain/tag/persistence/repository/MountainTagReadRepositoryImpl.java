@@ -10,7 +10,7 @@ import static jooq.dsl.tables.MountainTag.MOUNTAIN_TAG;
 
 @Repository
 @RequiredArgsConstructor
-public class MountainTagRepositoryImpl implements MountainTagRepository {
+public class MountainTagReadRepositoryImpl implements MountainTagReadRepository {
 
     private final DSLContext dslContext;
 

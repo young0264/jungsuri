@@ -9,6 +9,8 @@ import com.app.jungsuri.domain.post.persistence.PostEntity;
 import com.app.jungsuri.domain.post.persistence.PostRepository;
 import com.app.jungsuri.domain.post.persistence.PostService;
 import com.app.jungsuri.domain.post.web.dto.PostCreateDto;
+import com.app.jungsuri.domain.tag.persistence.AccountTag;
+import com.app.jungsuri.domain.tag.persistence.TagService;
 import com.app.jungsuri.domain.weather.persistence.WeatherEntity;
 import com.app.jungsuri.domain.weather.persistence.WeatherService;
 import jakarta.annotation.PostConstruct;
@@ -35,6 +37,7 @@ public class mainController {
 
     private final AccountService accountService;
     private final MountainService mountainService;
+    private final TagService tagService;
     private final PostService postService;
     private final PostRepository postRepository;
     private final WeatherService weatherService;
@@ -57,29 +60,38 @@ public class mainController {
         return "main";
     }
 
-//    @Profile("local")
-//    @PostConstruct
-//    public void initAccount() {
-//        log.info("initAccount");
-//        SignUpForm signUpForm = new SignUpForm("12", "12@naver.com", "12","남의영","","", UserRole.ADMIN);
-//        accountService.createNewAccount(signUpForm);
-//    }
+    /** default 관리자 계정 생성 */
+    @Profile("local")
+    @PostConstruct
+    public void initAccount() {
+        log.info("initAccount");
+        SignUpForm signUpForm = new SignUpForm("12", "12@naver.com", "12","남의영","","", UserRole.ADMIN);
+        AccountEntity newAccount = accountService.createNewAccount(signUpForm);
+        log.info("newAccount: {}", newAccount);
+        AccountTag accountTag = new AccountTag(newAccount);
+        log.info("accountTag: {}", accountTag);
 
-//    @Profile("local")
-//    @PostConstruct
-//    public void initMountainInfo() {
-//        log.info("initMountainInfo");
-//        final String mountainInfoUrl = "https://www.forest.go.kr/kfsweb/kfi/kfs/foreston/main/contents/FmmntSrch/selectFmmntSrchList.do?mn=NKFS_03_01_12&orgId=&mntUnit=100&mntIndex=1&searchMnt=&searchCnd3=&mntnInfoGbn=&mntnInfoSsnCd=&mntnInfoThmCd=&mntnInfoTmCd=&mntnHaslvCd=&mntnInfoLvlCd=";
-//        Connection connect = Jsoup.connect(mountainInfoUrl);
+
+        tagService.createAccountTags(accountTag, newAccount.getId());
+
+    }
 //
-//        try {
-//            Document document = connect.get();
-//            mountainService.saveMountainInfo(document);
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//            throw new RuntimeException(e);
-//        }
-//    }
+    /** 등산 정보 크롤링 */
+    @Profile("local")
+    @PostConstruct
+    public void initMountainInfo() {
+        log.info("initMountainInfo");
+        final String mountainInfoUrl = "https://www.forest.go.kr/kfsweb/kfi/kfs/foreston/main/contents/FmmntSrch/selectFmmntSrchList.do?mn=NKFS_03_01_12&orgId=&mntUnit=100&mntIndex=1&searchMnt=&searchCnd3=&mntnInfoGbn=&mntnInfoSsnCd=&mntnInfoThmCd=&mntnInfoTmCd=&mntnHaslvCd=&mntnInfoLvlCd=";
+        Connection connect = Jsoup.connect(mountainInfoUrl);
+
+        try {
+            Document document = connect.get();
+            mountainService.saveMountainInfo(document);
+        } catch (IOException e) {
+            e.printStackTrace();
+            throw new RuntimeException(e);
+        }
+    }
 
 //    @PostConstruct
 //    public void postTestInit() {

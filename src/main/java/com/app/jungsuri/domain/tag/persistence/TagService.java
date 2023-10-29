@@ -1,10 +1,7 @@
 package com.app.jungsuri.domain.tag.persistence;
 
 import com.app.jungsuri.domain.post.persistence.PostEntity;
-import com.app.jungsuri.domain.tag.persistence.repository.AccountTagReadRepository;
-import com.app.jungsuri.domain.tag.persistence.repository.AccountTagRepository;
-import com.app.jungsuri.domain.tag.persistence.repository.PostTagRepository;
-import com.app.jungsuri.domain.tag.persistence.repository.TagRepository;
+import com.app.jungsuri.domain.tag.persistence.repository.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -21,6 +18,7 @@ public class TagService {
 
     private final TagRepository tagRepository;
     private final AccountTagRepository accountTagRepository;
+    private final MountainTagRepository mountainTagRepository;
     private final PostTagRepository postTagRepository;
 
     public void deleteTag(Long postId) {
@@ -37,6 +35,7 @@ public class TagService {
             createPostTag(postEntity, tagName);
         }
     }
+
 
     /** account 생성시 태그 생성*/
     public void createAccountTags(AccountTag accountTag, Long accountId) {

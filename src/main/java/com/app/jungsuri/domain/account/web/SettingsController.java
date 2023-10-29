@@ -8,6 +8,7 @@ import com.app.jungsuri.domain.account.web.dto.PasswordUpdateDto;
 import com.app.jungsuri.domain.mountain.persistence.MountainService;
 import com.app.jungsuri.domain.notification.persistence.NotificationEntity;
 import com.app.jungsuri.domain.notification.persistence.NotificationService;
+import com.app.jungsuri.domain.tag.persistence.TagService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
@@ -79,6 +80,10 @@ public class SettingsController {
         return ResponseEntity.ok().build();
     }
 
+    /**
+     * 등산 경험치 등록 및
+     * account, mountain 해당 태그 등록
+     * */
     @PatchMapping("/mountain-exp")
     @Operation(summary = "산에 따른 경험치 수정", description = "산(mountain)에 따른 경험치를 수정합니다.")
     public ResponseEntity updateMountainExp(@RequestBody MountainExpUpdateDto mountainExpUpdateDto) {
