@@ -5,7 +5,6 @@ import com.app.jungsuri.domain.account.persistence.AccountService;
 import com.app.jungsuri.domain.post.persistence.PostEntity;
 import com.app.jungsuri.domain.post.persistence.PostService;
 import com.app.jungsuri.domain.post.web.dto.PostCreateDto;
-import com.app.jungsuri.domain.tag.persistence.Tag;
 import com.app.jungsuri.domain.tag.persistence.TagService;
 import com.app.jungsuri.domain.tag.persistence.repository.PostTagRepository;
 import com.app.jungsuri.domain.tag.persistence.repository.TagRepository;
@@ -14,11 +13,9 @@ import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
 
 @MockMvcTest
 
@@ -71,7 +68,7 @@ public class TagTest {
         PostCreateDto postCreateDto = new PostCreateDto("게시글 등록 제목", "게시글 등록 내용", "게시글 등록 이름", null, 0,  new ArrayList<>());
         PostEntity postEntity = postService.createPost(postCreateDto, accountEntity);
 
-        tagService.createTags(Arrays.asList("태그1", "태그2", "태그3"), postEntity);
+        tagService.createPostTags(Arrays.asList("태그1", "태그2", "태그3"), postEntity);
 
         Assertions.assertThat(tagService.getTagList().size()).isEqualTo(3);
     }
@@ -82,7 +79,7 @@ public class TagTest {
         PostCreateDto postCreateDto = new PostCreateDto("게시글 등록 제목", "게시글 등록 내용", "게시글 등록 이름", null, 0,  new ArrayList<>());
         PostEntity postEntity = postService.createPost(postCreateDto, accountEntity);
 
-        tagService.createTags(Arrays.asList("태그1", "태그2", "태그3"), postEntity);
+        tagService.createPostTags(Arrays.asList("태그1", "태그2", "태그3"), postEntity);
         List<String> tagNameList = tagService.getTagNameList();
 
         Assertions.assertThat(tagNameList.size()).isEqualTo(3);

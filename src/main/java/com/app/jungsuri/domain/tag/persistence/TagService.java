@@ -61,6 +61,6 @@ public class TagService {
     }
 
     public List<String> getTagNameList() {
-        return tagRepository.findAllTagsName();
+        return tagRepository.findAllPostTags();
     }
 }

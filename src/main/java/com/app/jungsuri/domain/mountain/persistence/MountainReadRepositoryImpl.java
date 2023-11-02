@@ -32,6 +32,15 @@ public class MountainReadRepositoryImpl implements MountainReadRepository {
                 .orderBy(MOUNTAIN.HEIGHT.desc())
                 .limit(startRowNum-1, MountainPage.PAGE_ROW_SIZE.getValue())
                 .fetchInto(MountainEntity.class);
+
+//        log.info("MountainEntity startRowNum: {}", startRowNum);
+//        /** cursor-페이지네이션 보류 */
+//        return dslContext.select()
+//                .from(MOUNTAIN)
+//                .where(MOUNTAIN.ID.greaterThan((long) (startRowNum - 1)))
+//                .orderBy(MOUNTAIN.HEIGHT.desc())
+//                .limit(MountainPage.PAGE_ROW_SIZE.getValue())
+//                .fetchInto(MountainEntity.class);
     }
 
     /** 모든 산 이름 가져오기*/

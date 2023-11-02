@@ -8,5 +8,5 @@ public interface TagReadRepository {
 
     Optional<Tag> findByName(String name);
 
-    List<String> findAllTagsName();
+    List<String> findAllPostTags();
 }

@@ -62,12 +62,39 @@ public class PostReadRepositoryImpl implements PostReadRepository {
     /** pagination 적용된 post list 가져오기 */
     @Override
     public List<PostEntity> findPostListByPagination(int startRowNum) {
+        log.info("startRowNum: {}", startRowNum);
         return dslContext.select()
                 .from(POST)
-                .orderBy(POST.CREATED_AT.desc())
-                .limit(startRowNum-1, PostPage.PAGE_ROW_SIZE.getValue())
+                .where(POST.ID.greaterThan((long) (startRowNum - 1)))
+                .orderBy(POST.ID.desc())
+                .limit(PostPage.PAGE_ROW_SIZE.getValue())
                 .fetchInto(PostEntity.class);
+//        return dslContext.select()
+//                .from(POST)
+//                .orderBy(POST.CREATED_AT.desc())
+//                .limit(startRowNum-1, PostPage.PAGE_ROW_SIZE.getValue())
+//                .fetchInto(PostEntity.class);
     }
+
+    /** cursor pagination 적용. */
+    public List<PostEntity> findPostListByPagination2(int startRowNum) {
+//        return dslContext.select()
+//                .from(POST)
+//                .orderBy(POST.CREATED_AT.desc())
+//                .limit(startRowNum-1, PostPage.PAGE_ROW_SIZE.getValue())
+//                .fetchInto(PostEntity.class);
+
+        return dslContext.select()
+                .from(POST)
+                .where(POST.ID.greaterThan((long) (startRowNum - 1)))
+                .orderBy(POST.ID.desc())
+                .limit(PostPage.PAGE_ROW_SIZE.getValue())
+                .fetchInto(PostEntity.class);
+
+
+    }
+
+
 
     /** 최근 게시글 3개 가져오기 */
     @Override
