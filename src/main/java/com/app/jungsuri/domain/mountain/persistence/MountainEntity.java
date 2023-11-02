@@ -9,9 +9,9 @@ import lombok.ToString;
 @Entity
 @Getter
 @ToString
-@Table(name="mountain")
 @NoArgsConstructor
 @AllArgsConstructor
+@Table(name = "mountain", indexes = @Index(name = "idx_height", columnList = "height"))
 public class MountainEntity {
 
     @Id
