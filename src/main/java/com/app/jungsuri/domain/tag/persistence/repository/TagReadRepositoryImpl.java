@@ -20,9 +20,10 @@ public class TagReadRepositoryImpl implements TagReadRepository {
                 .fetchOptionalInto(Tag.class);
     }
 
-    public List<String> findAllTagsName() {
+    public List<String> findAllPostTags() {
         return dslContext.select(TAG.NAME)
                 .from(TAG)
+                .where(TAG.ID.greaterThan(101L))
                 .fetchInto(String.class);
     }
 
