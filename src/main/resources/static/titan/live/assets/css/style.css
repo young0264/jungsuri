@@ -2248,7 +2248,7 @@ Google map
 /* Progress bars */
 .progress {
   overflow: visible;
-  height: 4px;
+  height: 18px;
 }
 
 .progress-bar {
@@ -2258,6 +2258,9 @@ Google map
 .progress-bar.pb-dark {
   background: #111;
 }
+.progress-bar.pb-orange {
+  background: red;
+}
 
 .progress-bar span {
   position: absolute;
@@ -2266,13 +2269,13 @@ Google map
   top: -24px;
   opacity: 0;
   line-height: 12px;
-  font-size: 12px;
+  font-size: 17px;
   color: #111;
   padding: 4px 0px;
 }
 
 .progress-bar span:after {
-  display: inline-block;
+  /*display: inline-block;*/
   content: "%";
 }
 

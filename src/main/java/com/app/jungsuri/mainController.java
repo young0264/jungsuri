@@ -59,7 +59,7 @@ public class mainController {
     }
 
     /** default 관리자 계정 생성 */
-    @Profile("local")
+    @Profile({"local","test"})
     @PostConstruct
     public void initAccount() {
         SignUpForm signUpForm = new SignUpForm("12", "12@naver.com", "12","남의영","","", UserRole.ADMIN);
@@ -75,7 +75,7 @@ public class mainController {
     }
 //
     /** 등산 정보 크롤링 */
-    @Profile("local")
+    @Profile({"local","test"})
     @PostConstruct
     public void initMountainInfo() {
         log.info("initMountainInfo");
