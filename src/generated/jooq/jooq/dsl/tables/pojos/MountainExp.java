@@ -5,7 +5,6 @@ package jooq.dsl.tables.pojos;
 
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
 
 
 /**
@@ -17,31 +16,31 @@ public class MountainExp implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private final Long accountEntityId;
-    private final LocalDateTime hikingDate;
     private final Long id;
     private final Long mountainEntityId;
     private final Long registerId;
+    private final String hikingDate;
 
     public MountainExp(MountainExp value) {
         this.accountEntityId = value.accountEntityId;
-        this.hikingDate = value.hikingDate;
         this.id = value.id;
         this.mountainEntityId = value.mountainEntityId;
         this.registerId = value.registerId;
+        this.hikingDate = value.hikingDate;
     }
 
     public MountainExp(
         Long accountEntityId,
-        LocalDateTime hikingDate,
         Long id,
         Long mountainEntityId,
-        Long registerId
+        Long registerId,
+        String hikingDate
     ) {
         this.accountEntityId = accountEntityId;
-        this.hikingDate = hikingDate;
         this.id = id;
         this.mountainEntityId = mountainEntityId;
         this.registerId = registerId;
+        this.hikingDate = hikingDate;
     }
 
     /**
@@ -49,13 +48,6 @@ public class MountainExp implements Serializable {
      */
     public Long getAccountEntityId() {
         return this.accountEntityId;
-    }
-
-    /**
-     * Getter for <code>jungsuri.mountain_exp.hiking_date</code>.
-     */
-    public LocalDateTime getHikingDate() {
-        return this.hikingDate;
     }
 
     /**
@@ -79,15 +71,22 @@ public class MountainExp implements Serializable {
         return this.registerId;
     }
 
+    /**
+     * Getter for <code>jungsuri.mountain_exp.hiking_date</code>.
+     */
+    public String getHikingDate() {
+        return this.hikingDate;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder("MountainExp (");
 
         sb.append(accountEntityId);
-        sb.append(", ").append(hikingDate);
         sb.append(", ").append(id);
         sb.append(", ").append(mountainEntityId);
         sb.append(", ").append(registerId);
+        sb.append(", ").append(hikingDate);
 
         sb.append(")");
         return sb.toString();
