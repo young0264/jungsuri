@@ -29,7 +29,6 @@ public class AccountDetailService implements UserDetailsService {
         accountEntity.setAuthorities(List.of(new SimpleGrantedAuthority(accountEntity.getUserRole().toString())));
 
         return new UserAccount(accountEntity);
-
     }
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration configuration) throws Exception {
