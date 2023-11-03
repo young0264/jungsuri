@@ -83,12 +83,14 @@ public class SettingsController {
     /**
      * 등산 경험치 등록 및
      * account, mountain 해당 태그 등록
+     * mountain_exp table에 데이터 등록
      * */
     @PatchMapping("/mountain-exp")
     @Operation(summary = "산에 따른 경험치 수정", description = "산(mountain)에 따른 경험치를 수정합니다.")
-    public ResponseEntity updateMountainExp(@RequestBody MountainExpUpdateDto mountainExpUpdateDto) {
+    public ResponseEntity updateMountainExp(@RequestBody MountainExpUpdateDto mountainExpUpdateDto, Principal principal) {
         try {
             settingsService.updateMountainExp(mountainExpUpdateDto);
+            mountainService.createLog(mountainExpUpdateDto, accountService.findByLoginId(principal.getName()));
         } catch (Exception error) {
             return ResponseEntity.badRequest().body(error);
         }

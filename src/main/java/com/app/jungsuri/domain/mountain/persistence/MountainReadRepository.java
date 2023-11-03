@@ -14,5 +14,7 @@ public interface MountainReadRepository {
 
     int getMountainCount();
 
+    MountainEntity findByName(String name);
+
 }
 

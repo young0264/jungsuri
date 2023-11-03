@@ -7,14 +7,18 @@ package jooq.dsl;
 import jooq.dsl.tables.Account;
 import jooq.dsl.tables.AccountTag;
 import jooq.dsl.tables.Comment;
+import jooq.dsl.tables.FlywaySchemaHistory;
 import jooq.dsl.tables.Likes;
 import jooq.dsl.tables.Mountain;
+import jooq.dsl.tables.MountainExp;
 import jooq.dsl.tables.MountainLocation;
+import jooq.dsl.tables.MountainSeq;
 import jooq.dsl.tables.MountainTag;
 import jooq.dsl.tables.Notification;
 import jooq.dsl.tables.Post;
 import jooq.dsl.tables.PostTag;
 import jooq.dsl.tables.Tag;
+import jooq.dsl.tables.TagSeq;
 
 
 /**
@@ -39,6 +43,11 @@ public class Tables {
     public static final Comment COMMENT = Comment.COMMENT;
 
     /**
+     * The table <code>jungsuri.flyway_schema_history</code>.
+     */
+    public static final FlywaySchemaHistory FLYWAY_SCHEMA_HISTORY = FlywaySchemaHistory.FLYWAY_SCHEMA_HISTORY;
+
+    /**
      * The table <code>jungsuri.likes</code>.
      */
     public static final Likes LIKES = Likes.LIKES;
@@ -49,9 +58,19 @@ public class Tables {
     public static final Mountain MOUNTAIN = Mountain.MOUNTAIN;
 
     /**
+     * The table <code>jungsuri.mountain_exp</code>.
+     */
+    public static final MountainExp MOUNTAIN_EXP = MountainExp.MOUNTAIN_EXP;
+
+    /**
      * The table <code>jungsuri.mountain_location</code>.
      */
     public static final MountainLocation MOUNTAIN_LOCATION = MountainLocation.MOUNTAIN_LOCATION;
+
+    /**
+     * The table <code>jungsuri.mountain_seq</code>.
+     */
+    public static final MountainSeq MOUNTAIN_SEQ = MountainSeq.MOUNTAIN_SEQ;
 
     /**
      * The table <code>jungsuri.mountain_tag</code>.
@@ -77,4 +96,9 @@ public class Tables {
      * The table <code>jungsuri.tag</code>.
      */
     public static final Tag TAG = Tag.TAG;
+
+    /**
+     * The table <code>jungsuri.tag_seq</code>.
+     */
+    public static final TagSeq TAG_SEQ = TagSeq.TAG_SEQ;
 }

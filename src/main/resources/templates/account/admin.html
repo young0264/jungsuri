@@ -20,9 +20,11 @@
                 return;
             }
             let newLoginIdArr = Array.from(LoginIdArr);
+            let hikeDate = document.getElementById("hikeDate").value;
             let data = {
                 "mountainName": mountainName,
                 "LoginIdArr": newLoginIdArr,
+                "hikingDate" : hikeDate
             };
             fetch('/settings/mountain-exp', {
                 method: 'PATCH',
@@ -108,12 +110,15 @@
                                         console.log(e)
                                     }
                                 </script>
-
                                 <!-- input tagify : 유저 목록-->
-                                <input name='attendees' class='some_class_name'
+                                <input name='attendees' class='form-group'
                                        placeholder='등산 참석 인원'
                                        value=''
                                        data-blacklist='.NET,PHP'>
+                                <span>
+                                    <input class="form-control" id="hikeDate" name="hikeDate" type="date" style="width: 30%; display: inline">
+                                </span>
+
                                 <script type="application/javascript" th:inline="javascript">
                                     var inputElm = document.querySelector('input[name=attendees]'),
                                         tagify = new Tagify(inputElm, {

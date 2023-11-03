@@ -8,6 +8,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.function.Function;
 
+import jooq.dsl.Indexes;
 import jooq.dsl.Jungsuri;
 import jooq.dsl.Keys;
 import jooq.dsl.tables.records.MountainRecord;
@@ -15,7 +16,7 @@ import jooq.dsl.tables.records.MountainRecord;
 import org.jooq.Field;
 import org.jooq.ForeignKey;
 import org.jooq.Function5;
-import org.jooq.Identity;
+import org.jooq.Index;
 import org.jooq.Name;
 import org.jooq.Record;
 import org.jooq.Records;
@@ -60,7 +61,7 @@ public class Mountain extends TableImpl<MountainRecord> {
     /**
      * The column <code>jungsuri.mountain.id</code>.
      */
-    public final TableField<MountainRecord, Long> ID = createField(DSL.name("id"), SQLDataType.BIGINT.nullable(false).identity(true), this, "");
+    public final TableField<MountainRecord, Long> ID = createField(DSL.name("id"), SQLDataType.BIGINT.nullable(false), this, "");
 
     /**
      * The column <code>jungsuri.mountain.image_url</code>.
@@ -116,8 +117,8 @@ public class Mountain extends TableImpl<MountainRecord> {
     }
 
     @Override
-    public Identity<MountainRecord, Long> getIdentity() {
-        return (Identity<MountainRecord, Long>) super.getIdentity();
+    public List<Index> getIndexes() {
+        return Arrays.asList(Indexes.MOUNTAIN_IDX_HEIGHT);
     }
 
     @Override

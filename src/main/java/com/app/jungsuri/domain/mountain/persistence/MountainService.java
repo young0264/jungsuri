@@ -1,5 +1,8 @@
 package com.app.jungsuri.domain.mountain.persistence;
 
+import com.app.jungsuri.domain.account.persistence.AccountEntity;
+import com.app.jungsuri.domain.account.persistence.AccountRepository;
+import com.app.jungsuri.domain.account.web.dto.MountainExpUpdateDto;
 import com.app.jungsuri.domain.tag.persistence.MountainTag;
 import com.app.jungsuri.domain.tag.persistence.repository.MountainTagRepository;
 import com.app.jungsuri.infra.pagination.MountainPage;
@@ -21,8 +24,10 @@ import java.util.Map;
 @RequiredArgsConstructor
 public class MountainService {
 
+    private final AccountRepository accountRepository;
     private final MountainLocationService mountainLocationService;
     private final MountainTagRepository mountainTagRepository;
+    private final MountainExpRepository mountainExpRepository;
     private final MountainRepository mountainRepository;
 
     /** 100대 명산 크롤링 - 저장 */
@@ -171,5 +176,18 @@ public class MountainService {
                 }
             }
         }
+    }
+
+    /** 등산 경험치 반영에 대한 로그 기록 */
+    public void createLog(MountainExpUpdateDto mountainExpUpdateDto, AccountEntity accountEntity) {
+        String mountainName = mountainExpUpdateDto.getMountainName();
+        MountainEntity mountainEntity = mountainRepository.findByName(mountainName);
+
+        for (int i = 0; i < mountainExpUpdateDto.getLoginIdArr().size(); i++) {
+            String userId = mountainExpUpdateDto.getLoginIdArr().get(i);
+            AccountEntity userEntity = accountRepository.findByLoginId(userId).orElseThrow(() -> new IllegalArgumentException("해당하는 아이디가 없습니다."));
+            mountainExpRepository.save(new MountainExpEntity(userEntity, mountainEntity, mountainExpUpdateDto.getHikingDate(), accountEntity.getId()));
+        }
+
     }
 }

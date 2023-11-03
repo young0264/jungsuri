@@ -42,7 +42,7 @@ public class PostReadRepositoryImpl implements PostReadRepository {
                 .where(TAG.NAME.in(searchTags));
         var postSubQuery =  dslContext.select(POST_TAG.POST_ENTITY_ID)
                 .from(POST_TAG)
-                .where(POST_TAG.TAG_ID.in(tagSubQuery));
+                .where(POST_TAG.POST_TAG_ID.in(tagSubQuery));
         return dslContext.select()
                 .from(POST)
                 .where(POST.ID.in(postSubQuery))

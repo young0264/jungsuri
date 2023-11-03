@@ -52,14 +52,14 @@ public class MountainTag extends TableImpl<MountainTagRecord> {
     }
 
     /**
-     * The column <code>jungsuri.mountain_tag.id</code>.
-     */
-    public final TableField<MountainTagRecord, Long> ID = createField(DSL.name("id"), SQLDataType.BIGINT.nullable(false), this, "");
-
-    /**
      * The column <code>jungsuri.mountain_tag.mountain_entity_id</code>.
      */
     public final TableField<MountainTagRecord, Long> MOUNTAIN_ENTITY_ID = createField(DSL.name("mountain_entity_id"), SQLDataType.BIGINT, this, "");
+
+    /**
+     * The column <code>jungsuri.mountain_tag.mountain_tag_id</code>.
+     */
+    public final TableField<MountainTagRecord, Long> MOUNTAIN_TAG_ID = createField(DSL.name("mountain_tag_id"), SQLDataType.BIGINT.nullable(false), this, "");
 
     private MountainTag(Name alias, Table<MountainTagRecord> aliased) {
         this(alias, aliased, null);
@@ -106,21 +106,11 @@ public class MountainTag extends TableImpl<MountainTagRecord> {
 
     @Override
     public List<ForeignKey<MountainTagRecord, ?>> getReferences() {
-        return Arrays.asList(Keys.FKNBSYOMU9DSLUBEHRKCOY5GO7A, Keys.FKSKNBYMDINHQ0DM6F748CCYAX0);
+        return Arrays.asList(Keys.FKSKNBYMDINHQ0DM6F748CCYAX0, Keys.FKRUDYQE1F6KXJXAXLJH820HMJ7);
     }
 
-    private transient Tag _tag;
     private transient Mountain _mountain;
-
-    /**
-     * Get the implicit join path to the <code>jungsuri.tag</code> table.
-     */
-    public Tag tag() {
-        if (_tag == null)
-            _tag = new Tag(this, Keys.FKNBSYOMU9DSLUBEHRKCOY5GO7A);
-
-        return _tag;
-    }
+    private transient Tag _tag;
 
     /**
      * Get the implicit join path to the <code>jungsuri.mountain</code> table.
@@ -130,6 +120,16 @@ public class MountainTag extends TableImpl<MountainTagRecord> {
             _mountain = new Mountain(this, Keys.FKSKNBYMDINHQ0DM6F748CCYAX0);
 
         return _mountain;
+    }
+
+    /**
+     * Get the implicit join path to the <code>jungsuri.tag</code> table.
+     */
+    public Tag tag() {
+        if (_tag == null)
+            _tag = new Tag(this, Keys.FKRUDYQE1F6KXJXAXLJH820HMJ7);
+
+        return _tag;
     }
 
     @Override
