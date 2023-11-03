@@ -40,8 +40,12 @@ public class SettingsController {
     public String showProfile(Model model, Principal principal) {
         String loginId = principal.getName();
         AccountEntity accountEntity = accountService.findByLoginId(loginId);
+        Integer mountain100Exp = accountService.getUserMountain100Exp(accountEntity);
+        Integer mountain100ExpByPer = mountainService.convertMountain100ExpToMountain100ExpByPer(mountain100Exp);
+
         model.addAttribute("accountEntity", accountEntity);
         model.addAttribute("passwordUpdateDto", new PasswordUpdateDto());
+        model.addAttribute("mountain100Exp", mountain100ExpByPer);
         return "account/profile";
     }
 

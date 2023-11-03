@@ -2,6 +2,7 @@ package com.app.jungsuri.domain.account.persistence;
 
 import com.app.jungsuri.domain.account.web.form.SignUpForm;
 import com.app.jungsuri.domain.aws.AWSService;
+import com.app.jungsuri.domain.mountain.persistence.MountainExp.MountainExpRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
@@ -26,6 +27,7 @@ import java.util.List;
 @Slf4j
 public class AccountService {
     private final AccountRepository accountRepository;
+    private final MountainExpRepository mountainExpRepository;
     private final JavaMailSender javaMailSender;
     private final PasswordEncoder passwordEncoder;
     private final ModelMapper modelMapper;
@@ -101,5 +103,9 @@ public class AccountService {
         String s3Url = awsService.uploadFile(multipartFile);
         accountEntity.updateProfileImg(s3Url);
 
+    }
+
+    public Integer getUserMountain100Exp(AccountEntity accountEntity) {
+        return mountainExpRepository.get100MountainExp(accountEntity.getId()).orElse(0);
     }
 }
