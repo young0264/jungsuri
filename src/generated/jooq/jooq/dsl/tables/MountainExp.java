@@ -4,7 +4,6 @@
 package jooq.dsl.tables;
 
 
-import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
 import java.util.function.Function;
@@ -59,11 +58,6 @@ public class MountainExp extends TableImpl<MountainExpRecord> {
     public final TableField<MountainExpRecord, Long> ACCOUNT_ENTITY_ID = createField(DSL.name("account_entity_id"), SQLDataType.BIGINT, this, "");
 
     /**
-     * The column <code>jungsuri.mountain_exp.hiking_date</code>.
-     */
-    public final TableField<MountainExpRecord, LocalDateTime> HIKING_DATE = createField(DSL.name("hiking_date"), SQLDataType.LOCALDATETIME(6), this, "");
-
-    /**
      * The column <code>jungsuri.mountain_exp.id</code>.
      */
     public final TableField<MountainExpRecord, Long> ID = createField(DSL.name("id"), SQLDataType.BIGINT.nullable(false).identity(true), this, "");
@@ -77,6 +71,11 @@ public class MountainExp extends TableImpl<MountainExpRecord> {
      * The column <code>jungsuri.mountain_exp.register_id</code>.
      */
     public final TableField<MountainExpRecord, Long> REGISTER_ID = createField(DSL.name("register_id"), SQLDataType.BIGINT, this, "");
+
+    /**
+     * The column <code>jungsuri.mountain_exp.hiking_date</code>.
+     */
+    public final TableField<MountainExpRecord, String> HIKING_DATE = createField(DSL.name("hiking_date"), SQLDataType.VARCHAR(255), this, "");
 
     private MountainExp(Name alias, Table<MountainExpRecord> aliased) {
         this(alias, aliased, null);
@@ -198,14 +197,14 @@ public class MountainExp extends TableImpl<MountainExpRecord> {
     // -------------------------------------------------------------------------
 
     @Override
-    public Row5<Long, LocalDateTime, Long, Long, Long> fieldsRow() {
+    public Row5<Long, Long, Long, Long, String> fieldsRow() {
         return (Row5) super.fieldsRow();
     }
 
     /**
      * Convenience mapping calling {@link SelectField#convertFrom(Function)}.
      */
-    public <U> SelectField<U> mapping(Function5<? super Long, ? super LocalDateTime, ? super Long, ? super Long, ? super Long, ? extends U> from) {
+    public <U> SelectField<U> mapping(Function5<? super Long, ? super Long, ? super Long, ? super Long, ? super String, ? extends U> from) {
         return convertFrom(Records.mapping(from));
     }
 
@@ -213,7 +212,7 @@ public class MountainExp extends TableImpl<MountainExpRecord> {
      * Convenience mapping calling {@link SelectField#convertFrom(Class,
      * Function)}.
      */
-    public <U> SelectField<U> mapping(Class<U> toType, Function5<? super Long, ? super LocalDateTime, ? super Long, ? super Long, ? super Long, ? extends U> from) {
+    public <U> SelectField<U> mapping(Class<U> toType, Function5<? super Long, ? super Long, ? super Long, ? super Long, ? super String, ? extends U> from) {
         return convertFrom(toType, Records.mapping(from));
     }
 }
