@@ -31,6 +31,11 @@ public class MountainExpEntity {
     @Column(name = "register_id", nullable = true)
     private Long registerId;
 
+    /**
+     * 추후 type 구분
+     * 100대명산, 서울시명산, 경기도명산 등등..
+     * */
+
     public MountainExpEntity(AccountEntity accountEntity, MountainEntity mountainEntity, String hikingDate, Long id) {
         this.accountEntity = accountEntity;
         this.mountainEntity = mountainEntity;
