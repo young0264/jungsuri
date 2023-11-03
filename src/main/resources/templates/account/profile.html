@@ -76,16 +76,13 @@
                             <li>
                                 <a class="icon-lock" href="#password" data-toggle="tab">비밀번호 변경</a>
                             </li>
-
+                            <li>
+                                <a class="icon-circle-compass" href="#mountain" data-toggle="tab">등산 정보</a>
+                            </li>
 <!--                            <li>-->
 <!--                                <a class="icon-envelope" href="#email" data-toggle="tab">이메일 변경</a>-->
 <!--                            </li>-->
 
-                            <li>
-                                <a href="#mountain" data-toggle="tab">
-                                    <span class="icon-circle-compass"></span>등산 정보
-                                </a>
-                            </li>
                         </ul>
                         <div class="tab-content">
                             <div class="tab-pane active" id="info">
@@ -173,7 +170,29 @@
                                     <button class="btn btn-success btn-circle" onclick="settings.passwordUpdate()">변경하기</button>
                                 </form>
                             </div>
-                            <div class="tab-pane" id="mountain"></div>
+                            <div class="tab-pane" id="mountain">
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-sm-4">
+                                            <h5 class="font-alt">등산 경험치(exp)</h5>
+                                            <br>
+                                            <h6 class="font-alt">
+                                                <span class="icon-tools-2"></span> 100대 명산 경험치
+                                            </h6>
+                                            <br>
+                                            <div class="progress">
+                                                <div class="progress-bar pb-orange" aria-valuenow="1" role="progressbar" aria-valuemin="0"
+                                                     aria-valuemax="100" th:style="'width: ' + ${mountain100Exp} + '%'">
+                                                    <span class="font-alt" style="opacity: 1; " th:text="${mountain100Exp}"></span>
+<!--                                                        <span class="font-alt">-->
+<!--                                                            60%-->
+<!--                                                        </span>-->
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
 
                     </div>
