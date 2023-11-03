@@ -57,9 +57,9 @@ public class AccountTag extends TableImpl<AccountTagRecord> {
     public final TableField<AccountTagRecord, Long> ACCOUNT_ENTITY_ID = createField(DSL.name("account_entity_id"), SQLDataType.BIGINT, this, "");
 
     /**
-     * The column <code>jungsuri.account_tag.id</code>.
+     * The column <code>jungsuri.account_tag.account_tag_id</code>.
      */
-    public final TableField<AccountTagRecord, Long> ID = createField(DSL.name("id"), SQLDataType.BIGINT.nullable(false), this, "");
+    public final TableField<AccountTagRecord, Long> ACCOUNT_TAG_ID = createField(DSL.name("account_tag_id"), SQLDataType.BIGINT.nullable(false), this, "");
 
     private AccountTag(Name alias, Table<AccountTagRecord> aliased) {
         this(alias, aliased, null);
@@ -106,7 +106,7 @@ public class AccountTag extends TableImpl<AccountTagRecord> {
 
     @Override
     public List<ForeignKey<AccountTagRecord, ?>> getReferences() {
-        return Arrays.asList(Keys.FKVJ9RA64LQW442NT0TU2X1K0K, Keys.FKT9YC2QDRKD8ISH8T5PH28GKX0);
+        return Arrays.asList(Keys.FKVJ9RA64LQW442NT0TU2X1K0K, Keys.FKJYN3BHQGEB2H5G85D7QHEGHCP);
     }
 
     private transient Account _account;
@@ -127,7 +127,7 @@ public class AccountTag extends TableImpl<AccountTagRecord> {
      */
     public Tag tag() {
         if (_tag == null)
-            _tag = new Tag(this, Keys.FKT9YC2QDRKD8ISH8T5PH28GKX0);
+            _tag = new Tag(this, Keys.FKJYN3BHQGEB2H5G85D7QHEGHCP);
 
         return _tag;
     }

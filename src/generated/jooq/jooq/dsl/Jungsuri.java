@@ -10,14 +10,18 @@ import java.util.List;
 import jooq.dsl.tables.Account;
 import jooq.dsl.tables.AccountTag;
 import jooq.dsl.tables.Comment;
+import jooq.dsl.tables.FlywaySchemaHistory;
 import jooq.dsl.tables.Likes;
 import jooq.dsl.tables.Mountain;
+import jooq.dsl.tables.MountainExp;
 import jooq.dsl.tables.MountainLocation;
+import jooq.dsl.tables.MountainSeq;
 import jooq.dsl.tables.MountainTag;
 import jooq.dsl.tables.Notification;
 import jooq.dsl.tables.Post;
 import jooq.dsl.tables.PostTag;
 import jooq.dsl.tables.Tag;
+import jooq.dsl.tables.TagSeq;
 
 import org.jooq.Catalog;
 import org.jooq.Table;
@@ -53,6 +57,11 @@ public class Jungsuri extends SchemaImpl {
     public final Comment COMMENT = Comment.COMMENT;
 
     /**
+     * The table <code>jungsuri.flyway_schema_history</code>.
+     */
+    public final FlywaySchemaHistory FLYWAY_SCHEMA_HISTORY = FlywaySchemaHistory.FLYWAY_SCHEMA_HISTORY;
+
+    /**
      * The table <code>jungsuri.likes</code>.
      */
     public final Likes LIKES = Likes.LIKES;
@@ -63,9 +72,19 @@ public class Jungsuri extends SchemaImpl {
     public final Mountain MOUNTAIN = Mountain.MOUNTAIN;
 
     /**
+     * The table <code>jungsuri.mountain_exp</code>.
+     */
+    public final MountainExp MOUNTAIN_EXP = MountainExp.MOUNTAIN_EXP;
+
+    /**
      * The table <code>jungsuri.mountain_location</code>.
      */
     public final MountainLocation MOUNTAIN_LOCATION = MountainLocation.MOUNTAIN_LOCATION;
+
+    /**
+     * The table <code>jungsuri.mountain_seq</code>.
+     */
+    public final MountainSeq MOUNTAIN_SEQ = MountainSeq.MOUNTAIN_SEQ;
 
     /**
      * The table <code>jungsuri.mountain_tag</code>.
@@ -93,6 +112,11 @@ public class Jungsuri extends SchemaImpl {
     public final Tag TAG = Tag.TAG;
 
     /**
+     * The table <code>jungsuri.tag_seq</code>.
+     */
+    public final TagSeq TAG_SEQ = TagSeq.TAG_SEQ;
+
+    /**
      * No further instances allowed
      */
     private Jungsuri() {
@@ -111,14 +135,18 @@ public class Jungsuri extends SchemaImpl {
             Account.ACCOUNT,
             AccountTag.ACCOUNT_TAG,
             Comment.COMMENT,
+            FlywaySchemaHistory.FLYWAY_SCHEMA_HISTORY,
             Likes.LIKES,
             Mountain.MOUNTAIN,
+            MountainExp.MOUNTAIN_EXP,
             MountainLocation.MOUNTAIN_LOCATION,
+            MountainSeq.MOUNTAIN_SEQ,
             MountainTag.MOUNTAIN_TAG,
             Notification.NOTIFICATION,
             Post.POST,
             PostTag.POST_TAG,
-            Tag.TAG
+            Tag.TAG,
+            TagSeq.TAG_SEQ
         );
     }
 }

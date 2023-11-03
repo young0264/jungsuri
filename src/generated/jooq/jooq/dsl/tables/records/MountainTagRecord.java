@@ -22,25 +22,10 @@ public class MountainTagRecord extends UpdatableRecordImpl<MountainTagRecord> im
     private static final long serialVersionUID = 1L;
 
     /**
-     * Setter for <code>jungsuri.mountain_tag.id</code>.
-     */
-    public MountainTagRecord setId(Long value) {
-        set(0, value);
-        return this;
-    }
-
-    /**
-     * Getter for <code>jungsuri.mountain_tag.id</code>.
-     */
-    public Long getId() {
-        return (Long) get(0);
-    }
-
-    /**
      * Setter for <code>jungsuri.mountain_tag.mountain_entity_id</code>.
      */
     public MountainTagRecord setMountainEntityId(Long value) {
-        set(1, value);
+        set(0, value);
         return this;
     }
 
@@ -48,6 +33,21 @@ public class MountainTagRecord extends UpdatableRecordImpl<MountainTagRecord> im
      * Getter for <code>jungsuri.mountain_tag.mountain_entity_id</code>.
      */
     public Long getMountainEntityId() {
+        return (Long) get(0);
+    }
+
+    /**
+     * Setter for <code>jungsuri.mountain_tag.mountain_tag_id</code>.
+     */
+    public MountainTagRecord setMountainTagId(Long value) {
+        set(1, value);
+        return this;
+    }
+
+    /**
+     * Getter for <code>jungsuri.mountain_tag.mountain_tag_id</code>.
+     */
+    public Long getMountainTagId() {
         return (Long) get(1);
     }
 
@@ -76,43 +76,43 @@ public class MountainTagRecord extends UpdatableRecordImpl<MountainTagRecord> im
 
     @Override
     public Field<Long> field1() {
-        return MountainTag.MOUNTAIN_TAG.ID;
-    }
-
-    @Override
-    public Field<Long> field2() {
         return MountainTag.MOUNTAIN_TAG.MOUNTAIN_ENTITY_ID;
     }
 
     @Override
+    public Field<Long> field2() {
+        return MountainTag.MOUNTAIN_TAG.MOUNTAIN_TAG_ID;
+    }
+
+    @Override
     public Long component1() {
-        return getId();
+        return getMountainEntityId();
     }
 
     @Override
     public Long component2() {
-        return getMountainEntityId();
+        return getMountainTagId();
     }
 
     @Override
     public Long value1() {
-        return getId();
-    }
-
-    @Override
-    public Long value2() {
         return getMountainEntityId();
     }
 
     @Override
+    public Long value2() {
+        return getMountainTagId();
+    }
+
+    @Override
     public MountainTagRecord value1(Long value) {
-        setId(value);
+        setMountainEntityId(value);
         return this;
     }
 
     @Override
     public MountainTagRecord value2(Long value) {
-        setMountainEntityId(value);
+        setMountainTagId(value);
         return this;
     }
 
@@ -137,11 +137,11 @@ public class MountainTagRecord extends UpdatableRecordImpl<MountainTagRecord> im
     /**
      * Create a detached, initialised MountainTagRecord
      */
-    public MountainTagRecord(Long id, Long mountainEntityId) {
+    public MountainTagRecord(Long mountainEntityId, Long mountainTagId) {
         super(MountainTag.MOUNTAIN_TAG);
 
-        setId(id);
         setMountainEntityId(mountainEntityId);
+        setMountainTagId(mountainTagId);
     }
 
     /**
@@ -151,8 +151,8 @@ public class MountainTagRecord extends UpdatableRecordImpl<MountainTagRecord> im
         super(MountainTag.MOUNTAIN_TAG);
 
         if (value != null) {
-            setId(value.getId());
             setMountainEntityId(value.getMountainEntityId());
+            setMountainTagId(value.getMountainTagId());
         }
     }
 }

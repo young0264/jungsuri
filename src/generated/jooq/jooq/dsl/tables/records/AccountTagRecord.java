@@ -37,17 +37,17 @@ public class AccountTagRecord extends UpdatableRecordImpl<AccountTagRecord> impl
     }
 
     /**
-     * Setter for <code>jungsuri.account_tag.id</code>.
+     * Setter for <code>jungsuri.account_tag.account_tag_id</code>.
      */
-    public AccountTagRecord setId(Long value) {
+    public AccountTagRecord setAccountTagId(Long value) {
         set(1, value);
         return this;
     }
 
     /**
-     * Getter for <code>jungsuri.account_tag.id</code>.
+     * Getter for <code>jungsuri.account_tag.account_tag_id</code>.
      */
-    public Long getId() {
+    public Long getAccountTagId() {
         return (Long) get(1);
     }
 
@@ -81,7 +81,7 @@ public class AccountTagRecord extends UpdatableRecordImpl<AccountTagRecord> impl
 
     @Override
     public Field<Long> field2() {
-        return AccountTag.ACCOUNT_TAG.ID;
+        return AccountTag.ACCOUNT_TAG.ACCOUNT_TAG_ID;
     }
 
     @Override
@@ -91,7 +91,7 @@ public class AccountTagRecord extends UpdatableRecordImpl<AccountTagRecord> impl
 
     @Override
     public Long component2() {
-        return getId();
+        return getAccountTagId();
     }
 
     @Override
@@ -101,7 +101,7 @@ public class AccountTagRecord extends UpdatableRecordImpl<AccountTagRecord> impl
 
     @Override
     public Long value2() {
-        return getId();
+        return getAccountTagId();
     }
 
     @Override
@@ -112,7 +112,7 @@ public class AccountTagRecord extends UpdatableRecordImpl<AccountTagRecord> impl
 
     @Override
     public AccountTagRecord value2(Long value) {
-        setId(value);
+        setAccountTagId(value);
         return this;
     }
 
@@ -137,11 +137,11 @@ public class AccountTagRecord extends UpdatableRecordImpl<AccountTagRecord> impl
     /**
      * Create a detached, initialised AccountTagRecord
      */
-    public AccountTagRecord(Long accountEntityId, Long id) {
+    public AccountTagRecord(Long accountEntityId, Long accountTagId) {
         super(AccountTag.ACCOUNT_TAG);
 
         setAccountEntityId(accountEntityId);
-        setId(id);
+        setAccountTagId(accountTagId);
     }
 
     /**
@@ -152,7 +152,7 @@ public class AccountTagRecord extends UpdatableRecordImpl<AccountTagRecord> impl
 
         if (value != null) {
             setAccountEntityId(value.getAccountEntityId());
-            setId(value.getId());
+            setAccountTagId(value.getAccountTagId());
         }
     }
 }

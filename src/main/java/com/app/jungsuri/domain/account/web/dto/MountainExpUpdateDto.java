@@ -8,6 +8,7 @@ import java.util.List;
 
 @Getter
 @Setter
+@ToString
 @NoArgsConstructor
 @AllArgsConstructor
 public class MountainExpUpdateDto {
@@ -19,12 +20,7 @@ public class MountainExpUpdateDto {
     @NotBlank
     private List<String> LoginIdArr;
 
-    @Override
-    public String toString() {
-        return "MountainExpUpdateDto{" +
-                "mountainName='" + mountainName + '\'' +
-                ", LoginIds=" + LoginIdArr +
-                '}';
-    }
+    @NotBlank
+    private String hikingDate;
 
 }

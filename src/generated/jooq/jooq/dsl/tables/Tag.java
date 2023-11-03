@@ -15,12 +15,11 @@ import jooq.dsl.tables.records.TagRecord;
 
 import org.jooq.Field;
 import org.jooq.ForeignKey;
-import org.jooq.Function4;
-import org.jooq.Identity;
+import org.jooq.Function5;
 import org.jooq.Name;
 import org.jooq.Record;
 import org.jooq.Records;
-import org.jooq.Row4;
+import org.jooq.Row5;
 import org.jooq.Schema;
 import org.jooq.SelectField;
 import org.jooq.Table;
@@ -66,7 +65,12 @@ public class Tag extends TableImpl<TagRecord> {
     /**
      * The column <code>jungsuri.tag.id</code>.
      */
-    public final TableField<TagRecord, Long> ID = createField(DSL.name("id"), SQLDataType.BIGINT.nullable(false).identity(true), this, "");
+    public final TableField<TagRecord, Long> ID = createField(DSL.name("id"), SQLDataType.BIGINT.nullable(false), this, "");
+
+    /**
+     * The column <code>jungsuri.tag.dtype</code>.
+     */
+    public final TableField<TagRecord, String> DTYPE = createField(DSL.name("dtype"), SQLDataType.VARCHAR(31).nullable(false), this, "");
 
     /**
      * The column <code>jungsuri.tag.name</code>.
@@ -109,11 +113,6 @@ public class Tag extends TableImpl<TagRecord> {
     @Override
     public Schema getSchema() {
         return aliased() ? null : Jungsuri.JUNGSURI;
-    }
-
-    @Override
-    public Identity<TagRecord, Long> getIdentity() {
-        return (Identity<TagRecord, Long>) super.getIdentity();
     }
 
     @Override
@@ -166,18 +165,18 @@ public class Tag extends TableImpl<TagRecord> {
     }
 
     // -------------------------------------------------------------------------
-    // Row4 type methods
+    // Row5 type methods
     // -------------------------------------------------------------------------
 
     @Override
-    public Row4<Integer, LocalDateTime, Long, String> fieldsRow() {
-        return (Row4) super.fieldsRow();
+    public Row5<Integer, LocalDateTime, Long, String, String> fieldsRow() {
+        return (Row5) super.fieldsRow();
     }
 
     /**
      * Convenience mapping calling {@link SelectField#convertFrom(Function)}.
      */
-    public <U> SelectField<U> mapping(Function4<? super Integer, ? super LocalDateTime, ? super Long, ? super String, ? extends U> from) {
+    public <U> SelectField<U> mapping(Function5<? super Integer, ? super LocalDateTime, ? super Long, ? super String, ? super String, ? extends U> from) {
         return convertFrom(Records.mapping(from));
     }
 
@@ -185,7 +184,7 @@ public class Tag extends TableImpl<TagRecord> {
      * Convenience mapping calling {@link SelectField#convertFrom(Class,
      * Function)}.
      */
-    public <U> SelectField<U> mapping(Class<U> toType, Function4<? super Integer, ? super LocalDateTime, ? super Long, ? super String, ? extends U> from) {
+    public <U> SelectField<U> mapping(Class<U> toType, Function5<? super Integer, ? super LocalDateTime, ? super Long, ? super String, ? super String, ? extends U> from) {
         return convertFrom(toType, Records.mapping(from));
     }
 }

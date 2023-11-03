@@ -5,7 +5,6 @@ package jooq.dsl.tables.pojos;
 
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
 
 
 /**
@@ -16,42 +15,20 @@ public class PostTag implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    private final LocalDateTime createdAt;
-    private final Long id;
     private final Long postEntityId;
-    private final Long tagId;
+    private final Long postTagId;
 
     public PostTag(PostTag value) {
-        this.createdAt = value.createdAt;
-        this.id = value.id;
         this.postEntityId = value.postEntityId;
-        this.tagId = value.tagId;
+        this.postTagId = value.postTagId;
     }
 
     public PostTag(
-        LocalDateTime createdAt,
-        Long id,
         Long postEntityId,
-        Long tagId
+        Long postTagId
     ) {
-        this.createdAt = createdAt;
-        this.id = id;
         this.postEntityId = postEntityId;
-        this.tagId = tagId;
-    }
-
-    /**
-     * Getter for <code>jungsuri.post_tag.created_at</code>.
-     */
-    public LocalDateTime getCreatedAt() {
-        return this.createdAt;
-    }
-
-    /**
-     * Getter for <code>jungsuri.post_tag.id</code>.
-     */
-    public Long getId() {
-        return this.id;
+        this.postTagId = postTagId;
     }
 
     /**
@@ -62,20 +39,18 @@ public class PostTag implements Serializable {
     }
 
     /**
-     * Getter for <code>jungsuri.post_tag.tag_id</code>.
+     * Getter for <code>jungsuri.post_tag.post_tag_id</code>.
      */
-    public Long getTagId() {
-        return this.tagId;
+    public Long getPostTagId() {
+        return this.postTagId;
     }
 
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder("PostTag (");
 
-        sb.append(createdAt);
-        sb.append(", ").append(id);
-        sb.append(", ").append(postEntityId);
-        sb.append(", ").append(tagId);
+        sb.append(postEntityId);
+        sb.append(", ").append(postTagId);
 
         sb.append(")");
         return sb.toString();

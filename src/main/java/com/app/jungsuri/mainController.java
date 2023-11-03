@@ -8,7 +8,6 @@ import com.app.jungsuri.domain.mountain.persistence.MountainService;
 import com.app.jungsuri.domain.post.persistence.PostEntity;
 import com.app.jungsuri.domain.post.persistence.PostRepository;
 import com.app.jungsuri.domain.post.persistence.PostService;
-import com.app.jungsuri.domain.post.web.dto.PostCreateDto;
 import com.app.jungsuri.domain.tag.persistence.AccountTag;
 import com.app.jungsuri.domain.tag.persistence.TagService;
 import com.app.jungsuri.domain.weather.persistence.WeatherEntity;
@@ -27,7 +26,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.io.IOException;
 import java.security.Principal;
-import java.util.ArrayList;
 import java.util.List;
 
 @Slf4j
@@ -61,37 +59,37 @@ public class mainController {
     }
 
     /** default 관리자 계정 생성 */
-//    @Profile("local")
-//    @PostConstruct
-//    public void initAccount() {
-//        log.info("initAccount");
-//        SignUpForm signUpForm = new SignUpForm("12", "12@naver.com", "12","남의영","","", UserRole.ADMIN);
-//        AccountEntity newAccount = accountService.createNewAccount(signUpForm);
-//        log.info("newAccount: {}", newAccount);
-//        AccountTag accountTag = new AccountTag(newAccount);
-//        log.info("accountTag: {}", accountTag);
+    @Profile("local")
+    @PostConstruct
+    public void initAccount() {
+        SignUpForm signUpForm = new SignUpForm("12", "12@naver.com", "12","남의영","","", UserRole.ADMIN);
+        SignUpForm signUpForm2 = new SignUpForm("23", "23@naver.com", "23","남의영2","","", UserRole.ADMIN);
+        AccountEntity newAccount = accountService.createNewAccount(signUpForm);
+        AccountEntity newAccount2 = accountService.createNewAccount(signUpForm2);
+        AccountTag accountTag = new AccountTag(newAccount);
+        AccountTag accountTag2 = new AccountTag(newAccount2);
+
+        tagService.createAccountTags(accountTag, newAccount.getId());
+        tagService.createAccountTags(accountTag2, newAccount2.getId());
+
+    }
 //
-//
-//        tagService.createAccountTags(accountTag, newAccount.getId());
-//
-//    }
-////
-//    /** 등산 정보 크롤링 */
-//    @Profile("local")
-//    @PostConstruct
-//    public void initMountainInfo() {
-//        log.info("initMountainInfo");
-//        final String mountainInfoUrl = "https://www.forest.go.kr/kfsweb/kfi/kfs/foreston/main/contents/FmmntSrch/selectFmmntSrchList.do?mn=NKFS_03_01_12&orgId=&mntUnit=100&mntIndex=1&searchMnt=&searchCnd3=&mntnInfoGbn=&mntnInfoSsnCd=&mntnInfoThmCd=&mntnInfoTmCd=&mntnHaslvCd=&mntnInfoLvlCd=";
-//        Connection connect = Jsoup.connect(mountainInfoUrl);
-//
-//        try {
-//            Document document = connect.get();
-//            mountainService.saveMountainInfo(document);
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//            throw new RuntimeException(e);
-//        }
-//    }
+    /** 등산 정보 크롤링 */
+    @Profile("local")
+    @PostConstruct
+    public void initMountainInfo() {
+        log.info("initMountainInfo");
+        final String mountainInfoUrl = "https://www.forest.go.kr/kfsweb/kfi/kfs/foreston/main/contents/FmmntSrch/selectFmmntSrchList.do?mn=NKFS_03_01_12&orgId=&mntUnit=100&mntIndex=1&searchMnt=&searchCnd3=&mntnInfoGbn=&mntnInfoSsnCd=&mntnInfoThmCd=&mntnInfoTmCd=&mntnHaslvCd=&mntnInfoLvlCd=";
+        Connection connect = Jsoup.connect(mountainInfoUrl);
+
+        try {
+            Document document = connect.get();
+            mountainService.saveMountainInfo(document);
+        } catch (IOException e) {
+            e.printStackTrace();
+            throw new RuntimeException(e);
+        }
+    }
 
 //    @PostConstruct
 //    public void postTestInit() {
