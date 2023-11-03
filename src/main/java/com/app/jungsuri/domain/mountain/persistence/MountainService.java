@@ -3,6 +3,8 @@ package com.app.jungsuri.domain.mountain.persistence;
 import com.app.jungsuri.domain.account.persistence.AccountEntity;
 import com.app.jungsuri.domain.account.persistence.AccountRepository;
 import com.app.jungsuri.domain.account.web.dto.MountainExpUpdateDto;
+import com.app.jungsuri.domain.mountain.persistence.MountainExp.MountainExpEntity;
+import com.app.jungsuri.domain.mountain.persistence.MountainExp.MountainExpRepository;
 import com.app.jungsuri.domain.tag.persistence.MountainTag;
 import com.app.jungsuri.domain.tag.persistence.repository.MountainTagRepository;
 import com.app.jungsuri.infra.pagination.MountainPage;
@@ -189,5 +191,10 @@ public class MountainService {
             mountainExpRepository.save(new MountainExpEntity(userEntity, mountainEntity, mountainExpUpdateDto.getHikingDate(), accountEntity.getId()));
         }
 
+    }
+
+    /** 등산 경험치를 백분위 percent로 바꾸는 메서드 */
+    public Integer convertMountain100ExpToMountain100ExpByPer(Integer mountain100Exp) {
+        return (Integer) (mountain100Exp*100 / 97159) ;
     }
 }
