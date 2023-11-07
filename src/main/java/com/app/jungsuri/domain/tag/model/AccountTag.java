@@ -1,4 +1,4 @@
-package com.app.jungsuri.domain.tag.persistence;
+package com.app.jungsuri.domain.tag.model;
 
 import com.app.jungsuri.domain.account.model.AccountEntity;
 import jakarta.persistence.*;

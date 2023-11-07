@@ -10,7 +10,7 @@ import com.app.jungsuri.domain.post.service.PostService;
 import com.app.jungsuri.domain.post.dto.PostCreateDto;
 import com.app.jungsuri.domain.post.model.PostEntity;
 import com.app.jungsuri.domain.post.dto.PostSearchDto;
-import com.app.jungsuri.domain.tag.persistence.TagService;
+import com.app.jungsuri.domain.tag.service.TagService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;

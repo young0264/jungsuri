@@ -1,6 +1,6 @@
-package com.app.jungsuri.domain.tag.persistence.repository;
+package com.app.jungsuri.domain.tag.repository;
 
-import com.app.jungsuri.domain.tag.persistence.Tag;
+import com.app.jungsuri.domain.tag.model.Tag;
 import lombok.RequiredArgsConstructor;
 import org.jooq.DSLContext;
 

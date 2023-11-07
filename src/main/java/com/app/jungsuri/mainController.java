@@ -5,7 +5,7 @@ import com.app.jungsuri.domain.mountain.service.MountainService;
 import com.app.jungsuri.domain.post.model.PostEntity;
 import com.app.jungsuri.domain.post.repository.PostRepository;
 import com.app.jungsuri.domain.post.service.PostService;
-import com.app.jungsuri.domain.tag.persistence.TagService;
+import com.app.jungsuri.domain.tag.service.TagService;
 import com.app.jungsuri.domain.weather.persistence.WeatherEntity;
 import com.app.jungsuri.domain.weather.persistence.WeatherService;
 import lombok.RequiredArgsConstructor;

@@ -1,4 +1,4 @@
-package com.app.jungsuri.domain.tag.persistence.repository;
+package com.app.jungsuri.domain.tag.repository;
 
 import com.app.jungsuri.domain.mountain.model.MountainEntity;
 import lombok.RequiredArgsConstructor;

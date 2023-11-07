@@ -1,4 +1,4 @@
-package com.app.jungsuri.domain.tag.persistence.repository;
+package com.app.jungsuri.domain.tag.repository;
 
 import lombok.RequiredArgsConstructor;
 import org.jooq.DSLContext;
