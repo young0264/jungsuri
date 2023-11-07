@@ -1,12 +1,14 @@
-package com.app.jungsuri.domain.like.persistence;
+package com.app.jungsuri.domain.like.service;
 
 import com.app.jungsuri.domain.account.model.AccountEntity;
 import com.app.jungsuri.domain.account.repository.AccountRepository;
 import com.app.jungsuri.domain.comment.model.CommentEntity;
 import com.app.jungsuri.domain.comment.repository.CommentRepository;
-import com.app.jungsuri.domain.like.domain.LikeType;
-import com.app.jungsuri.domain.like.web.dto.CommentLikeUpdateDto;
-import com.app.jungsuri.domain.like.web.dto.LikeUpdateResultDto;
+import com.app.jungsuri.domain.like.model.LikeType;
+import com.app.jungsuri.domain.like.model.LikeEntity;
+import com.app.jungsuri.domain.like.repository.LikeRepository;
+import com.app.jungsuri.domain.like.dto.CommentLikeUpdateDto;
+import com.app.jungsuri.domain.like.dto.LikeUpdateResultDto;
 import com.app.jungsuri.domain.post.persistence.PostEntity;
 import com.app.jungsuri.domain.post.persistence.PostRepository;
 import lombok.RequiredArgsConstructor;
