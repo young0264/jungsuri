@@ -1,6 +1,6 @@
-package com.app.jungsuri.domain.comment.persistence;
+package com.app.jungsuri.domain.comment.repository;
 
-import jooq.dsl.tables.Comment;
+import com.app.jungsuri.domain.comment.model.CommentEntity;
 import lombok.RequiredArgsConstructor;
 import org.jooq.DSLContext;
 import org.springframework.stereotype.Repository;

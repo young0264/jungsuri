@@ -1,4 +1,4 @@
-package com.app.jungsuri.domain.comment.web.dto;
+package com.app.jungsuri.domain.comment.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

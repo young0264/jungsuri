@@ -2,12 +2,12 @@ package com.app.jungsuri.domain.comment.web;
 
 import com.app.jungsuri.domain.account.model.AccountEntity;
 import com.app.jungsuri.domain.account.service.AccountService;
-import com.app.jungsuri.domain.comment.persistence.CommentEntity;
-import com.app.jungsuri.domain.comment.persistence.CommentRepository;
-import com.app.jungsuri.domain.comment.persistence.CommentService;
-import com.app.jungsuri.domain.comment.web.dto.CommentCreateDto;
-import com.app.jungsuri.domain.comment.web.dto.CommentDeleteDto;
-import com.app.jungsuri.domain.comment.web.dto.CommentUpdateDto;
+import com.app.jungsuri.domain.comment.model.CommentEntity;
+import com.app.jungsuri.domain.comment.repository.CommentRepository;
+import com.app.jungsuri.domain.comment.service.CommentService;
+import com.app.jungsuri.domain.comment.dto.CommentCreateDto;
+import com.app.jungsuri.domain.comment.dto.CommentDeleteDto;
+import com.app.jungsuri.domain.comment.dto.CommentUpdateDto;
 import com.app.jungsuri.domain.post.persistence.PostEntity;
 import com.app.jungsuri.domain.post.persistence.PostRepository;
 import com.app.jungsuri.domain.post.persistence.PostService;

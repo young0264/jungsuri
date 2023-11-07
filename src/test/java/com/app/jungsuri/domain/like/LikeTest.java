@@ -2,9 +2,9 @@ package com.app.jungsuri.domain.like;
 
 import com.app.jungsuri.domain.account.model.AccountEntity;
 import com.app.jungsuri.domain.account.service.AccountService;
-import com.app.jungsuri.domain.comment.persistence.CommentEntity;
-import com.app.jungsuri.domain.comment.persistence.CommentService;
-import com.app.jungsuri.domain.comment.web.dto.CommentCreateDto;
+import com.app.jungsuri.domain.comment.model.CommentEntity;
+import com.app.jungsuri.domain.comment.service.CommentService;
+import com.app.jungsuri.domain.comment.dto.CommentCreateDto;
 import com.app.jungsuri.domain.like.persistence.LikeService;
 import com.app.jungsuri.domain.like.web.dto.CommentLikeUpdateDto;
 import com.app.jungsuri.domain.post.persistence.PostEntity;

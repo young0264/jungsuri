@@ -1,7 +1,7 @@
 package com.app.jungsuri.domain.post.persistence;
 
 import com.app.jungsuri.domain.account.model.AccountEntity;
-import com.app.jungsuri.domain.comment.persistence.CommentEntity;
+import com.app.jungsuri.domain.comment.model.CommentEntity;
 import com.app.jungsuri.domain.post.web.dto.PostCreateDto;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;

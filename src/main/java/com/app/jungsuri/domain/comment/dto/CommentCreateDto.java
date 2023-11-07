@@ -1,4 +1,4 @@
-package com.app.jungsuri.domain.comment.web.dto;
+package com.app.jungsuri.domain.comment.dto;
 
 import com.app.jungsuri.domain.account.model.AccountEntity;
 import com.app.jungsuri.domain.comment.model.Comment;
