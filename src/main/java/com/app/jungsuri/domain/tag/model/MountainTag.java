@@ -1,4 +1,4 @@
-package com.app.jungsuri.domain.tag.persistence;
+package com.app.jungsuri.domain.tag.model;
 
 import com.app.jungsuri.domain.mountain.model.MountainEntity;
 import jakarta.persistence.*;

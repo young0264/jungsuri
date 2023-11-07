@@ -1,4 +1,4 @@
-package com.app.jungsuri.domain.tag.persistence.repository;
+package com.app.jungsuri.domain.tag.repository;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

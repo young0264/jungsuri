@@ -1,4 +1,4 @@
-package com.app.jungsuri.domain.tag.persistence;
+package com.app.jungsuri.domain.tag.model;
 
 import jakarta.persistence.*;
 import lombok.*;

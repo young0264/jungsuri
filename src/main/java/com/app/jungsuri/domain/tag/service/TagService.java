@@ -1,7 +1,13 @@
-package com.app.jungsuri.domain.tag.persistence;
+package com.app.jungsuri.domain.tag.service;
 
 import com.app.jungsuri.domain.post.model.PostEntity;
-import com.app.jungsuri.domain.tag.persistence.repository.*;
+import com.app.jungsuri.domain.tag.model.AccountTag;
+import com.app.jungsuri.domain.tag.model.PostTag;
+import com.app.jungsuri.domain.tag.model.Tag;
+import com.app.jungsuri.domain.tag.repository.AccountTagRepository;
+import com.app.jungsuri.domain.tag.repository.MountainTagRepository;
+import com.app.jungsuri.domain.tag.repository.PostTagRepository;
+import com.app.jungsuri.domain.tag.repository.TagRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;

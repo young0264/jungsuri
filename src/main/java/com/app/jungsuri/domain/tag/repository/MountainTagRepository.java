@@ -1,6 +1,6 @@
-package com.app.jungsuri.domain.tag.persistence.repository;
+package com.app.jungsuri.domain.tag.repository;
 
-import com.app.jungsuri.domain.tag.persistence.MountainTag;
+import com.app.jungsuri.domain.tag.model.MountainTag;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface MountainTagRepository extends JpaRepository<MountainTag, Long>, MountainTagReadRepository{
