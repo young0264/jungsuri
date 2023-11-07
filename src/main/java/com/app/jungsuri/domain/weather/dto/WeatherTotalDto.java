@@ -1,4 +1,4 @@
-package com.app.jungsuri.domain.weather.web.dto;
+package com.app.jungsuri.domain.weather.dto;
 
 
 import lombok.Getter;

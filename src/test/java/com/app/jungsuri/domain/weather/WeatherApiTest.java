@@ -1,8 +1,8 @@
 package com.app.jungsuri.domain.weather;
 
-import com.app.jungsuri.domain.weather.persistence.WeatherEntity;
-import com.app.jungsuri.domain.weather.persistence.WeatherService;
-import com.app.jungsuri.domain.weather.web.dto.WeatherTotalDto;
+import com.app.jungsuri.domain.weather.model.WeatherEntity;
+import com.app.jungsuri.domain.weather.service.WeatherService;
+import com.app.jungsuri.domain.weather.dto.WeatherTotalDto;
 import com.app.jungsuri.infra.MockMvcTest;
 import org.assertj.core.api.Assertions;
 import org.json.simple.parser.ParseException;

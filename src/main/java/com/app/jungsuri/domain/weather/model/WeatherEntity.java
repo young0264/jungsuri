@@ -1,6 +1,6 @@
-package com.app.jungsuri.domain.weather.persistence;
+package com.app.jungsuri.domain.weather.model;
 
-import com.app.jungsuri.domain.weather.domain.*;
+import com.app.jungsuri.domain.weather.model.*;
 import lombok.*;
 
 /**

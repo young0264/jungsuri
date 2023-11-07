@@ -1,6 +1,5 @@
-package com.app.jungsuri.domain.weather.domain;
+package com.app.jungsuri.domain.weather.model;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
 
 @Getter

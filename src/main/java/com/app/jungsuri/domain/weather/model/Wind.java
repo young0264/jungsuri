@@ -1,4 +1,4 @@
-package com.app.jungsuri.domain.weather.domain;
+package com.app.jungsuri.domain.weather.model;
 
 import lombok.*;
 
