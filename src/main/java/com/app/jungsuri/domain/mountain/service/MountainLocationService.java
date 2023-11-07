@@ -1,5 +1,8 @@
-package com.app.jungsuri.domain.mountain.persistence;
+package com.app.jungsuri.domain.mountain.service;
 
+import com.app.jungsuri.domain.mountain.model.MountainEntity;
+import com.app.jungsuri.domain.mountain.model.MountainLocationEntity;
+import com.app.jungsuri.domain.mountain.repository.MountainLocationRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

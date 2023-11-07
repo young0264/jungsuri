@@ -1,5 +1,6 @@
 package com.app.jungsuri.domain.mountain.persistence;
 
+import com.app.jungsuri.domain.mountain.service.MountainService;
 import com.app.jungsuri.infra.MockMvcTest;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;

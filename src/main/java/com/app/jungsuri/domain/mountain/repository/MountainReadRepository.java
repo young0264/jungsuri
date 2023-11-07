@@ -1,4 +1,6 @@
-package com.app.jungsuri.domain.mountain.persistence;
+package com.app.jungsuri.domain.mountain.repository;
+
+import com.app.jungsuri.domain.mountain.model.MountainEntity;
 
 import java.util.List;
 

@@ -5,7 +5,7 @@ import com.app.jungsuri.domain.account.service.AccountService;
 import com.app.jungsuri.domain.account.service.SettingsService;
 import com.app.jungsuri.domain.account.dto.MountainExpUpdateDto;
 import com.app.jungsuri.domain.account.dto.PasswordUpdateDto;
-import com.app.jungsuri.domain.mountain.persistence.MountainService;
+import com.app.jungsuri.domain.mountain.service.MountainService;
 import com.app.jungsuri.domain.notification.persistence.NotificationEntity;
 import com.app.jungsuri.domain.notification.persistence.NotificationService;
 import io.swagger.v3.oas.annotations.Operation;

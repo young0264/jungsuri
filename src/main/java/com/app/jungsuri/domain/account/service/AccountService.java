@@ -4,7 +4,7 @@ import com.app.jungsuri.domain.account.model.AccountEntity;
 import com.app.jungsuri.domain.account.repository.AccountRepository;
 import com.app.jungsuri.domain.account.dto.SignUpForm;
 import com.app.jungsuri.domain.aws.AWSService;
-import com.app.jungsuri.domain.mountain.persistence.MountainExp.MountainExpRepository;
+import com.app.jungsuri.domain.mountain.repository.MountainExpRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;

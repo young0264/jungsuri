@@ -1,6 +1,6 @@
 package com.app.jungsuri.domain.tag.persistence.repository;
 
-import com.app.jungsuri.domain.mountain.persistence.MountainEntity;
+import com.app.jungsuri.domain.mountain.model.MountainEntity;
 import lombok.RequiredArgsConstructor;
 import org.jooq.DSLContext;
 import org.springframework.stereotype.Repository;
