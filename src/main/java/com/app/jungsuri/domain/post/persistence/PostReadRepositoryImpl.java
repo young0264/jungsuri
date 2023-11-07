@@ -1,6 +1,6 @@
 package com.app.jungsuri.domain.post.persistence;
 
-import com.app.jungsuri.infra.pagination.PostPage;
+import com.app.jungsuri.common.pagination.PostPage;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.jooq.DSLContext;

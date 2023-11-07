@@ -7,7 +7,7 @@ import com.app.jungsuri.domain.mountain.persistence.MountainExp.MountainExpEntit
 import com.app.jungsuri.domain.mountain.persistence.MountainExp.MountainExpRepository;
 import com.app.jungsuri.domain.tag.persistence.MountainTag;
 import com.app.jungsuri.domain.tag.persistence.repository.MountainTagRepository;
-import com.app.jungsuri.infra.pagination.MountainPage;
+import com.app.jungsuri.common.pagination.MountainPage;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.jsoup.nodes.Document;

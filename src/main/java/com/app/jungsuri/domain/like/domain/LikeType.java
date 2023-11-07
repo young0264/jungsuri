@@ -13,6 +13,4 @@ public enum LikeType {
     public String label() {
         return label;
     }
-
-
 }

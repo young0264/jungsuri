@@ -3,7 +3,7 @@ package com.app.jungsuri.domain.post.persistence;
 import com.app.jungsuri.domain.account.persistence.AccountEntity;
 import com.app.jungsuri.domain.post.event.PostCreatedEvent;
 import com.app.jungsuri.domain.post.web.dto.PostCreateDto;
-import com.app.jungsuri.infra.pagination.PostPage;
+import com.app.jungsuri.common.pagination.PostPage;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.ApplicationEventPublisher;

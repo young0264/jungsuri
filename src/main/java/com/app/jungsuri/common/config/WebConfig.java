@@ -1,7 +1,7 @@
-package com.app.jungsuri.infra.config;
+package com.app.jungsuri.common.config;
 
-import com.app.jungsuri.infra.interceptor.AccountInterceptor;
-import com.app.jungsuri.infra.interceptor.NotificationInterceptor;
+import com.app.jungsuri.common.interceptor.AccountInterceptor;
+import com.app.jungsuri.common.interceptor.NotificationInterceptor;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.security.StaticResourceLocation;

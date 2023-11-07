@@ -1,6 +1,6 @@
-package com.app.jungsuri.config;
+package com.app.jungsuri.infra.aws;
 
-public class CommonUtils {
+public class AwsUtils {
     public static final String FILE_EXTENSION_SEPARATOR = ".";
 
     public static String getFileName(String originalFileName) {
