@@ -1,9 +1,9 @@
-package com.app.jungsuri.domain.weather.web.dto;
+package com.app.jungsuri.domain.weather.model;
 
 import lombok.Getter;
 
 @Getter
-public enum WeatherImageDto {
+public enum WeatherImage {
     DEFAULT("Default", "https://images.unsplash.com/photo-1526943604017-955071a1fb3e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80"),
     CLEAR("Clear", "https://images.unsplash.com/photo-1604949210966-9440c324823f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NjB8fHN1bnxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=800&q=60"),
     CLOUDS("Clouds", "https://images.unsplash.com/photo-1517685352821-92cf88aee5a5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1074&q=80"),
@@ -14,13 +14,13 @@ public enum WeatherImageDto {
     private final String status;
     private final String imgSrc;
 
-    WeatherImageDto(String status, String imgSrc) {
+    WeatherImage(String status, String imgSrc) {
         this.status = status;
         this.imgSrc = imgSrc;
     }
 
     public static String getImgSrc(String status) {
-        for (WeatherImageDto weatherImage : WeatherImageDto.values()) {
+        for (WeatherImage weatherImage : WeatherImage.values()) {
             if (weatherImage.getStatus().equals(status)) {
                 return weatherImage.getImgSrc();
             }

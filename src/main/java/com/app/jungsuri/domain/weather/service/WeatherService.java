@@ -1,7 +1,7 @@
-package com.app.jungsuri.domain.weather.persistence;
+package com.app.jungsuri.domain.weather.service;
 
-import com.app.jungsuri.domain.weather.domain.*;
-import com.app.jungsuri.domain.weather.web.dto.*;
+import com.app.jungsuri.domain.weather.dto.*;
+import com.app.jungsuri.domain.weather.model.*;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;

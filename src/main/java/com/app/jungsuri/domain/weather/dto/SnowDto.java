@@ -1,4 +1,4 @@
-package com.app.jungsuri.domain.weather.web.dto;
+package com.app.jungsuri.domain.weather.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
