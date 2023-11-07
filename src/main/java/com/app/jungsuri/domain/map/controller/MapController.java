@@ -1,4 +1,4 @@
-package com.app.jungsuri.domain.map.web;
+package com.app.jungsuri.domain.map.controller;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
