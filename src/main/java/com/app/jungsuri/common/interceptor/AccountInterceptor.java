@@ -1,7 +1,7 @@
 package com.app.jungsuri.common.interceptor;
 
-import com.app.jungsuri.domain.account.persistence.AccountEntity;
-import com.app.jungsuri.domain.account.persistence.AccountRepository;
+import com.app.jungsuri.domain.account.model.AccountEntity;
+import com.app.jungsuri.domain.account.repository.AccountRepository;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;

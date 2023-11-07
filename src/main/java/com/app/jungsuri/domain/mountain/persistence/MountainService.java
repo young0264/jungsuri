@@ -1,8 +1,8 @@
 package com.app.jungsuri.domain.mountain.persistence;
 
-import com.app.jungsuri.domain.account.persistence.AccountEntity;
-import com.app.jungsuri.domain.account.persistence.AccountRepository;
-import com.app.jungsuri.domain.account.web.dto.MountainExpUpdateDto;
+import com.app.jungsuri.domain.account.model.AccountEntity;
+import com.app.jungsuri.domain.account.repository.AccountRepository;
+import com.app.jungsuri.domain.account.dto.MountainExpUpdateDto;
 import com.app.jungsuri.domain.mountain.persistence.MountainExp.MountainExpEntity;
 import com.app.jungsuri.domain.mountain.persistence.MountainExp.MountainExpRepository;
 import com.app.jungsuri.domain.tag.persistence.MountainTag;

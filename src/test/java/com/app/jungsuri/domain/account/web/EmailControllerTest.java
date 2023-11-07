@@ -1,7 +1,7 @@
 package com.app.jungsuri.domain.account.web;
 
-import com.app.jungsuri.domain.account.persistence.AccountEntity;
-import com.app.jungsuri.domain.account.persistence.AccountRepository;
+import com.app.jungsuri.domain.account.model.AccountEntity;
+import com.app.jungsuri.domain.account.repository.AccountRepository;
 import com.app.jungsuri.infra.MockMvcTest;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

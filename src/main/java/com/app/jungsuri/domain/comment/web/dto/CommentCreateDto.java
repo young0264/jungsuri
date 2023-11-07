@@ -1,6 +1,6 @@
 package com.app.jungsuri.domain.comment.web.dto;
 
-import com.app.jungsuri.domain.account.persistence.AccountEntity;
+import com.app.jungsuri.domain.account.model.AccountEntity;
 import com.app.jungsuri.domain.comment.model.Comment;
 import com.app.jungsuri.domain.post.persistence.PostEntity;
 import jakarta.validation.constraints.*;

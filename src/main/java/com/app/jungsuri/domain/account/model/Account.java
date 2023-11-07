@@ -1,6 +1,5 @@
 package com.app.jungsuri.domain.account.model;
 
-import com.app.jungsuri.domain.account.persistence.AccountEntity;
 import lombok.*;
 import org.modelmapper.ModelMapper;
 

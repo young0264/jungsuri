@@ -1,7 +1,7 @@
 package com.app.jungsuri.domain.comment.persistence;
 
 
-import com.app.jungsuri.domain.account.persistence.AccountEntity;
+import com.app.jungsuri.domain.account.model.AccountEntity;
 import com.app.jungsuri.domain.post.persistence.PostEntity;
 import jakarta.persistence.*;
 import lombok.*;

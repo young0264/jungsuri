@@ -1,7 +1,7 @@
 package com.app.jungsuri.domain;
 
-import com.app.jungsuri.domain.account.persistence.AccountEntity;
-import com.app.jungsuri.domain.account.persistence.AccountRepository;
+import com.app.jungsuri.domain.account.model.AccountEntity;
+import com.app.jungsuri.domain.account.repository.AccountRepository;
 import com.app.jungsuri.domain.post.persistence.PostEntity;
 import com.app.jungsuri.domain.post.persistence.PostRepository;
 import com.app.jungsuri.domain.post.persistence.PostService;

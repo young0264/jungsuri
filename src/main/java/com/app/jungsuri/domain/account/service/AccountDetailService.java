@@ -1,6 +1,8 @@
-package com.app.jungsuri.domain.account.persistence;
+package com.app.jungsuri.domain.account.service;
 
-import com.app.jungsuri.domain.account.web.form.UserAccount;
+import com.app.jungsuri.domain.account.model.AccountEntity;
+import com.app.jungsuri.domain.account.repository.AccountRepository;
+import com.app.jungsuri.domain.account.model.UserAccount;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;

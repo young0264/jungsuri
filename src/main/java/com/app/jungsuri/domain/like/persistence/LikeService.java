@@ -1,7 +1,7 @@
 package com.app.jungsuri.domain.like.persistence;
 
-import com.app.jungsuri.domain.account.persistence.AccountEntity;
-import com.app.jungsuri.domain.account.persistence.AccountRepository;
+import com.app.jungsuri.domain.account.model.AccountEntity;
+import com.app.jungsuri.domain.account.repository.AccountRepository;
 import com.app.jungsuri.domain.comment.persistence.CommentEntity;
 import com.app.jungsuri.domain.comment.persistence.CommentRepository;
 import com.app.jungsuri.domain.like.domain.LikeType;

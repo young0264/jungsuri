@@ -1,4 +1,4 @@
-package com.app.jungsuri.domain.account.web.dto;
+package com.app.jungsuri.domain.account.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.validation.constraints.NotBlank;

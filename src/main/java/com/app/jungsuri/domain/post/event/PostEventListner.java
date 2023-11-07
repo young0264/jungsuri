@@ -1,7 +1,7 @@
 package com.app.jungsuri.domain.post.event;
 
-import com.app.jungsuri.domain.account.persistence.AccountEntity;
-import com.app.jungsuri.domain.account.persistence.AccountRepository;
+import com.app.jungsuri.domain.account.model.AccountEntity;
+import com.app.jungsuri.domain.account.repository.AccountRepository;
 import com.app.jungsuri.domain.notification.model.NotificationType;
 import com.app.jungsuri.domain.notification.persistence.NotificationEntity;
 import com.app.jungsuri.domain.notification.persistence.NotificationRepository;

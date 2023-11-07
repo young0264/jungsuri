@@ -1,4 +1,4 @@
-package com.app.jungsuri.domain.account.web;
+package com.app.jungsuri.domain.account.enums;
 
 public enum UserRole {
     USER, ADMIN;
