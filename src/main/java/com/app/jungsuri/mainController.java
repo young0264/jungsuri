@@ -1,7 +1,7 @@
 package com.app.jungsuri;
 
 import com.app.jungsuri.domain.account.service.AccountService;
-import com.app.jungsuri.domain.mountain.persistence.MountainService;
+import com.app.jungsuri.domain.mountain.service.MountainService;
 import com.app.jungsuri.domain.post.persistence.PostEntity;
 import com.app.jungsuri.domain.post.persistence.PostRepository;
 import com.app.jungsuri.domain.post.persistence.PostService;

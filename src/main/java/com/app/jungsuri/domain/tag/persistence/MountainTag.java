@@ -1,6 +1,6 @@
 package com.app.jungsuri.domain.tag.persistence;
 
-import com.app.jungsuri.domain.mountain.persistence.MountainEntity;
+import com.app.jungsuri.domain.mountain.model.MountainEntity;
 import jakarta.persistence.*;
 import lombok.*;
 

@@ -1,7 +1,7 @@
 package com.app.jungsuri.domain.mountain.web;
 
-import com.app.jungsuri.domain.mountain.persistence.MountainEntity;
-import com.app.jungsuri.domain.mountain.persistence.MountainService;
+import com.app.jungsuri.domain.mountain.model.MountainEntity;
+import com.app.jungsuri.domain.mountain.service.MountainService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;

@@ -1,5 +1,6 @@
-package com.app.jungsuri.domain.mountain.persistence;
+package com.app.jungsuri.domain.mountain.model;
 
+import com.app.jungsuri.domain.mountain.model.MountainEntity;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

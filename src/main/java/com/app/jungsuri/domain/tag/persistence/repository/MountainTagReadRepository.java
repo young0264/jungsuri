@@ -1,6 +1,6 @@
 package com.app.jungsuri.domain.tag.persistence.repository;
 
-import com.app.jungsuri.domain.mountain.persistence.MountainEntity;
+import com.app.jungsuri.domain.mountain.model.MountainEntity;
 
 import java.util.Optional;
 

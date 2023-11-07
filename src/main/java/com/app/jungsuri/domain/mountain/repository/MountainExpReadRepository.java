@@ -1,4 +1,4 @@
-package com.app.jungsuri.domain.mountain.persistence.MountainExp;
+package com.app.jungsuri.domain.mountain.repository;
 
 import java.util.Optional;
 

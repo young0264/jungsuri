@@ -5,7 +5,7 @@ import com.app.jungsuri.domain.account.repository.AccountRepository;
 import com.app.jungsuri.domain.account.service.SettingsService;
 import com.app.jungsuri.domain.account.dto.MountainExpUpdateDto;
 import com.app.jungsuri.domain.account.dto.PasswordUpdateDto;
-import com.app.jungsuri.domain.mountain.persistence.MountainRepository;
+import com.app.jungsuri.domain.mountain.repository.MountainRepository;
 import com.app.jungsuri.infra.MockMvcTest;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.assertj.core.api.Assertions;

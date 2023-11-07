@@ -1,10 +1,12 @@
-package com.app.jungsuri.domain.mountain.persistence;
+package com.app.jungsuri.domain.mountain.service;
 
 import com.app.jungsuri.domain.account.model.AccountEntity;
 import com.app.jungsuri.domain.account.repository.AccountRepository;
 import com.app.jungsuri.domain.account.dto.MountainExpUpdateDto;
-import com.app.jungsuri.domain.mountain.persistence.MountainExp.MountainExpEntity;
-import com.app.jungsuri.domain.mountain.persistence.MountainExp.MountainExpRepository;
+import com.app.jungsuri.domain.mountain.model.MountainEntity;
+import com.app.jungsuri.domain.mountain.model.MountainExpEntity;
+import com.app.jungsuri.domain.mountain.repository.MountainExpRepository;
+import com.app.jungsuri.domain.mountain.repository.MountainRepository;
 import com.app.jungsuri.domain.tag.persistence.MountainTag;
 import com.app.jungsuri.domain.tag.persistence.repository.MountainTagRepository;
 import com.app.jungsuri.common.pagination.MountainPage;

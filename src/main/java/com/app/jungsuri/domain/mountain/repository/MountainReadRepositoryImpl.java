@@ -1,6 +1,7 @@
-package com.app.jungsuri.domain.mountain.persistence;
+package com.app.jungsuri.domain.mountain.repository;
 
 import com.app.jungsuri.common.pagination.MountainPage;
+import com.app.jungsuri.domain.mountain.model.MountainEntity;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.jooq.DSLContext;
