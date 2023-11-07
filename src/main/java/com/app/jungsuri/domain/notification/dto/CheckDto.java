@@ -1,4 +1,4 @@
-package com.app.jungsuri.domain.notification.web;
+package com.app.jungsuri.domain.notification.dto;
 
 import lombok.Getter;
 import lombok.Setter;

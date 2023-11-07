@@ -1,6 +1,7 @@
-package com.app.jungsuri.domain.notification.web;
+package com.app.jungsuri.domain.notification.controller;
 
-import com.app.jungsuri.domain.notification.persistence.NotificationService;
+import com.app.jungsuri.domain.notification.service.NotificationService;
+import com.app.jungsuri.domain.notification.dto.CheckDto;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;

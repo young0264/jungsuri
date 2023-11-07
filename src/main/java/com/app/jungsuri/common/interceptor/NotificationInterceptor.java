@@ -1,7 +1,7 @@
 package com.app.jungsuri.common.interceptor;
 
 import com.app.jungsuri.domain.account.repository.AccountRepository;
-import com.app.jungsuri.domain.notification.persistence.NotificationRepository;
+import com.app.jungsuri.domain.notification.repository.NotificationRepository;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;

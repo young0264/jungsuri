@@ -1,4 +1,4 @@
-package com.app.jungsuri.domain.mountain.web;
+package com.app.jungsuri.domain.mountain.controller;
 
 import com.app.jungsuri.domain.mountain.model.MountainEntity;
 import com.app.jungsuri.domain.mountain.service.MountainService;

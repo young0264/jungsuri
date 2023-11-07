@@ -1,5 +1,7 @@
-package com.app.jungsuri.domain.notification.persistence;
+package com.app.jungsuri.domain.notification.service;
 
+import com.app.jungsuri.domain.notification.model.NotificationEntity;
+import com.app.jungsuri.domain.notification.repository.NotificationRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

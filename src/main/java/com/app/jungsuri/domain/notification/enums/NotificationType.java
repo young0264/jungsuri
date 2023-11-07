@@ -1,6 +1,4 @@
-package com.app.jungsuri.domain.notification.model;
-
-import com.app.jungsuri.domain.notification.persistence.NotificationEntity;
+package com.app.jungsuri.domain.notification.enums;
 
 import java.util.EnumMap;
 import java.util.Map;
