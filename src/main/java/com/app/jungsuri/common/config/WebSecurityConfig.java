@@ -1,4 +1,4 @@
-package com.app.jungsuri.domain.account.web.form;
+package com.app.jungsuri.common.config;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;

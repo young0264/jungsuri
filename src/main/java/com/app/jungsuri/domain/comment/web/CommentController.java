@@ -1,8 +1,8 @@
 package com.app.jungsuri.domain.comment.web;
 
 
-import com.app.jungsuri.domain.account.persistence.AccountEntity;
-import com.app.jungsuri.domain.account.persistence.AccountService;
+import com.app.jungsuri.domain.account.model.AccountEntity;
+import com.app.jungsuri.domain.account.service.AccountService;
 import com.app.jungsuri.domain.comment.model.Comment;
 import com.app.jungsuri.domain.comment.persistence.CommentService;
 import com.app.jungsuri.domain.comment.web.dto.CommentCreateDto;

@@ -1,7 +1,9 @@
-package com.app.jungsuri.domain.account.persistence;
+package com.app.jungsuri.domain.account.service;
 
-import com.app.jungsuri.domain.account.web.dto.MountainExpUpdateDto;
-import com.app.jungsuri.domain.account.web.dto.PasswordUpdateDto;
+import com.app.jungsuri.domain.account.model.AccountEntity;
+import com.app.jungsuri.domain.account.repository.AccountRepository;
+import com.app.jungsuri.domain.account.dto.MountainExpUpdateDto;
+import com.app.jungsuri.domain.account.dto.PasswordUpdateDto;
 import com.app.jungsuri.domain.mountain.persistence.MountainRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

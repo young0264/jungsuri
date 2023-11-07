@@ -1,6 +1,6 @@
 package com.app.jungsuri.domain.mountain.persistence.MountainExp;
 
-import com.app.jungsuri.domain.account.persistence.AccountEntity;
+import com.app.jungsuri.domain.account.model.AccountEntity;
 import com.app.jungsuri.domain.mountain.persistence.MountainEntity;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

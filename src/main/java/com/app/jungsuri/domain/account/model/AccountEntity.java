@@ -1,6 +1,6 @@
-package com.app.jungsuri.domain.account.persistence;
+package com.app.jungsuri.domain.account.model;
 
-import com.app.jungsuri.domain.account.web.UserRole;
+import com.app.jungsuri.domain.account.enums.UserRole;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.*;

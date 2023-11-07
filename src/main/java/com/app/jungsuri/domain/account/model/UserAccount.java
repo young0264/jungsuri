@@ -1,6 +1,6 @@
-package com.app.jungsuri.domain.account.web.form;
+package com.app.jungsuri.domain.account.model;
 
-import com.app.jungsuri.domain.account.persistence.AccountEntity;
+import com.app.jungsuri.domain.account.model.AccountEntity;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;

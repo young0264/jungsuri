@@ -1,24 +1,15 @@
 package com.app.jungsuri;
 
-import com.app.jungsuri.domain.account.persistence.AccountEntity;
-import com.app.jungsuri.domain.account.persistence.AccountService;
-import com.app.jungsuri.domain.account.web.UserRole;
-import com.app.jungsuri.domain.account.web.form.SignUpForm;
+import com.app.jungsuri.domain.account.service.AccountService;
 import com.app.jungsuri.domain.mountain.persistence.MountainService;
 import com.app.jungsuri.domain.post.persistence.PostEntity;
 import com.app.jungsuri.domain.post.persistence.PostRepository;
 import com.app.jungsuri.domain.post.persistence.PostService;
-import com.app.jungsuri.domain.tag.persistence.AccountTag;
 import com.app.jungsuri.domain.tag.persistence.TagService;
 import com.app.jungsuri.domain.weather.persistence.WeatherEntity;
 import com.app.jungsuri.domain.weather.persistence.WeatherService;
-import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.jsoup.Connection;
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;

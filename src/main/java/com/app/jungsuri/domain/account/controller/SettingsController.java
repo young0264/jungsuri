@@ -1,14 +1,13 @@
-package com.app.jungsuri.domain.account.web;
+package com.app.jungsuri.domain.account.controller;
 
-import com.app.jungsuri.domain.account.persistence.AccountEntity;
-import com.app.jungsuri.domain.account.persistence.AccountService;
-import com.app.jungsuri.domain.account.persistence.SettingsService;
-import com.app.jungsuri.domain.account.web.dto.MountainExpUpdateDto;
-import com.app.jungsuri.domain.account.web.dto.PasswordUpdateDto;
+import com.app.jungsuri.domain.account.model.AccountEntity;
+import com.app.jungsuri.domain.account.service.AccountService;
+import com.app.jungsuri.domain.account.service.SettingsService;
+import com.app.jungsuri.domain.account.dto.MountainExpUpdateDto;
+import com.app.jungsuri.domain.account.dto.PasswordUpdateDto;
 import com.app.jungsuri.domain.mountain.persistence.MountainService;
 import com.app.jungsuri.domain.notification.persistence.NotificationEntity;
 import com.app.jungsuri.domain.notification.persistence.NotificationService;
-import com.app.jungsuri.domain.tag.persistence.TagService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;

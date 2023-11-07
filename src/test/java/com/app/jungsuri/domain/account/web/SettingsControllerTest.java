@@ -1,10 +1,10 @@
 package com.app.jungsuri.domain.account.web;
 
-import com.app.jungsuri.domain.account.persistence.AccountEntity;
-import com.app.jungsuri.domain.account.persistence.AccountRepository;
-import com.app.jungsuri.domain.account.persistence.SettingsService;
-import com.app.jungsuri.domain.account.web.dto.MountainExpUpdateDto;
-import com.app.jungsuri.domain.account.web.dto.PasswordUpdateDto;
+import com.app.jungsuri.domain.account.model.AccountEntity;
+import com.app.jungsuri.domain.account.repository.AccountRepository;
+import com.app.jungsuri.domain.account.service.SettingsService;
+import com.app.jungsuri.domain.account.dto.MountainExpUpdateDto;
+import com.app.jungsuri.domain.account.dto.PasswordUpdateDto;
 import com.app.jungsuri.domain.mountain.persistence.MountainRepository;
 import com.app.jungsuri.infra.MockMvcTest;
 import com.fasterxml.jackson.databind.ObjectMapper;

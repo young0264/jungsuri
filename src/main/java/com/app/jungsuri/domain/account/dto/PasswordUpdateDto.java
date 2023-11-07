@@ -1,4 +1,4 @@
-package com.app.jungsuri.domain.account.web.dto;
+package com.app.jungsuri.domain.account.dto;
 
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;

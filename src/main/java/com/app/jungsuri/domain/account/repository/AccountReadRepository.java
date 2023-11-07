@@ -1,4 +1,6 @@
-package com.app.jungsuri.domain.account.persistence;
+package com.app.jungsuri.domain.account.repository;
+
+import com.app.jungsuri.domain.account.model.AccountEntity;
 
 import java.util.List;
 

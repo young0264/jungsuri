@@ -1,6 +1,6 @@
 package com.app.jungsuri.domain.post.web.dto;
 
-import com.app.jungsuri.domain.account.persistence.AccountEntity;
+import com.app.jungsuri.domain.account.model.AccountEntity;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;

@@ -1,6 +1,6 @@
-package com.app.jungsuri.domain.account.web.form;
+package com.app.jungsuri.domain.account.dto;
 
-import com.app.jungsuri.domain.account.web.UserRole;
+import com.app.jungsuri.domain.account.enums.UserRole;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
