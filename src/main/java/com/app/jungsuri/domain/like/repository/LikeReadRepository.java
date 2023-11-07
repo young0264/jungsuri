@@ -1,4 +1,4 @@
-package com.app.jungsuri.domain.like.persistence;
+package com.app.jungsuri.domain.like.repository;
 
 import java.util.List;
 

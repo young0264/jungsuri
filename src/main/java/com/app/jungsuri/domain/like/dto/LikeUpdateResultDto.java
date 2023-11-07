@@ -1,4 +1,4 @@
-package com.app.jungsuri.domain.like.web.dto;
+package com.app.jungsuri.domain.like.dto;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;

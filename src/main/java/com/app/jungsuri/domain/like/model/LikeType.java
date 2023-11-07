@@ -1,4 +1,4 @@
-package com.app.jungsuri.domain.like.domain;
+package com.app.jungsuri.domain.like.model;
 
 
 public enum LikeType {

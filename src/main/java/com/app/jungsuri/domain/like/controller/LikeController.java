@@ -1,10 +1,10 @@
-package com.app.jungsuri.domain.like.web;
+package com.app.jungsuri.domain.like.controller;
 
-import com.app.jungsuri.domain.like.persistence.LikeService;
-import com.app.jungsuri.domain.like.web.dto.CommentLikeDto;
-import com.app.jungsuri.domain.like.web.dto.CommentLikeUpdateDto;
-import com.app.jungsuri.domain.like.web.dto.LikeUpdateResultDto;
-import com.app.jungsuri.domain.like.web.dto.PostLikeUpdateDto;
+import com.app.jungsuri.domain.like.service.LikeService;
+import com.app.jungsuri.domain.like.dto.CommentLikeDto;
+import com.app.jungsuri.domain.like.dto.CommentLikeUpdateDto;
+import com.app.jungsuri.domain.like.dto.LikeUpdateResultDto;
+import com.app.jungsuri.domain.like.dto.PostLikeUpdateDto;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
