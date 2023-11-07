@@ -1,6 +1,9 @@
-package com.app.jungsuri.domain.comment.persistence;
+package com.app.jungsuri.domain.comment.service;
 
 import com.app.jungsuri.domain.comment.model.Comment;
+import com.app.jungsuri.domain.comment.model.CommentEntity;
+import com.app.jungsuri.domain.comment.repository.CommentReadRepository;
+import com.app.jungsuri.domain.comment.repository.CommentRepository;
 import com.app.jungsuri.domain.post.persistence.PostEntity;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
