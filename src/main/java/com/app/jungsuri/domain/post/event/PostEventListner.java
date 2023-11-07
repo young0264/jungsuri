@@ -2,9 +2,9 @@ package com.app.jungsuri.domain.post.event;
 
 import com.app.jungsuri.domain.account.model.AccountEntity;
 import com.app.jungsuri.domain.account.repository.AccountRepository;
-import com.app.jungsuri.domain.notification.model.NotificationType;
-import com.app.jungsuri.domain.notification.persistence.NotificationEntity;
-import com.app.jungsuri.domain.notification.persistence.NotificationRepository;
+import com.app.jungsuri.domain.notification.enums.NotificationType;
+import com.app.jungsuri.domain.notification.model.NotificationEntity;
+import com.app.jungsuri.domain.notification.repository.NotificationRepository;
 import com.app.jungsuri.domain.post.persistence.PostEntity;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

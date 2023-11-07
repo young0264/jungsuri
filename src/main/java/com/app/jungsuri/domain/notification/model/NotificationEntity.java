@@ -1,7 +1,7 @@
-package com.app.jungsuri.domain.notification.persistence;
+package com.app.jungsuri.domain.notification.model;
 
 import com.app.jungsuri.domain.account.model.AccountEntity;
-import com.app.jungsuri.domain.notification.model.NotificationType;
+import com.app.jungsuri.domain.notification.enums.NotificationType;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
