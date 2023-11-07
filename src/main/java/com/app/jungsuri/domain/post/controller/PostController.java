@@ -1,4 +1,4 @@
-package com.app.jungsuri.domain.post.web;
+package com.app.jungsuri.domain.post.controller;
 
 import com.app.jungsuri.domain.aws.AWSService;
 import com.app.jungsuri.domain.account.model.AccountEntity;
@@ -6,10 +6,10 @@ import com.app.jungsuri.domain.account.service.AccountService;
 import com.app.jungsuri.domain.comment.model.CommentEntity;
 import com.app.jungsuri.domain.comment.service.CommentService;
 import com.app.jungsuri.domain.comment.dto.CommentCreateDto;
-import com.app.jungsuri.domain.post.persistence.PostService;
-import com.app.jungsuri.domain.post.web.dto.PostCreateDto;
-import com.app.jungsuri.domain.post.persistence.PostEntity;
-import com.app.jungsuri.domain.post.web.dto.PostSearchDto;
+import com.app.jungsuri.domain.post.service.PostService;
+import com.app.jungsuri.domain.post.dto.PostCreateDto;
+import com.app.jungsuri.domain.post.model.PostEntity;
+import com.app.jungsuri.domain.post.dto.PostSearchDto;
 import com.app.jungsuri.domain.tag.persistence.TagService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;

@@ -5,7 +5,7 @@ import com.app.jungsuri.domain.account.repository.AccountRepository;
 import com.app.jungsuri.domain.notification.enums.NotificationType;
 import com.app.jungsuri.domain.notification.model.NotificationEntity;
 import com.app.jungsuri.domain.notification.repository.NotificationRepository;
-import com.app.jungsuri.domain.post.persistence.PostEntity;
+import com.app.jungsuri.domain.post.model.PostEntity;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.event.EventListener;

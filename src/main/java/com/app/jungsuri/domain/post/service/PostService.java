@@ -1,9 +1,11 @@
-package com.app.jungsuri.domain.post.persistence;
+package com.app.jungsuri.domain.post.service;
 
 import com.app.jungsuri.domain.account.model.AccountEntity;
 import com.app.jungsuri.domain.post.event.PostCreatedEvent;
-import com.app.jungsuri.domain.post.web.dto.PostCreateDto;
+import com.app.jungsuri.domain.post.dto.PostCreateDto;
 import com.app.jungsuri.common.pagination.PostPage;
+import com.app.jungsuri.domain.post.model.PostEntity;
+import com.app.jungsuri.domain.post.repository.PostRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.ApplicationEventPublisher;

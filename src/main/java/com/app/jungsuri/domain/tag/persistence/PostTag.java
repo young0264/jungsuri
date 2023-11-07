@@ -1,10 +1,8 @@
 package com.app.jungsuri.domain.tag.persistence;
 
-import com.app.jungsuri.domain.post.persistence.PostEntity;
+import com.app.jungsuri.domain.post.model.PostEntity;
 import jakarta.persistence.*;
 import lombok.*;
-
-import java.time.LocalDateTime;
 
 @Entity
 @Getter

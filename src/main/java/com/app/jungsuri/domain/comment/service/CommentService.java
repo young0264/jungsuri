@@ -4,7 +4,7 @@ import com.app.jungsuri.domain.comment.model.Comment;
 import com.app.jungsuri.domain.comment.model.CommentEntity;
 import com.app.jungsuri.domain.comment.repository.CommentReadRepository;
 import com.app.jungsuri.domain.comment.repository.CommentRepository;
-import com.app.jungsuri.domain.post.persistence.PostEntity;
+import com.app.jungsuri.domain.post.model.PostEntity;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;

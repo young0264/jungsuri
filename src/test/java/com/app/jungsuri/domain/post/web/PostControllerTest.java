@@ -2,11 +2,11 @@ package com.app.jungsuri.domain.post.web;
 
 import com.app.jungsuri.domain.account.model.AccountEntity;
 import com.app.jungsuri.domain.account.service.AccountService;
-import com.app.jungsuri.domain.post.persistence.PostEntity;
-import com.app.jungsuri.domain.post.persistence.PostReadRepositoryImpl;
-import com.app.jungsuri.domain.post.persistence.PostRepository;
-import com.app.jungsuri.domain.post.persistence.PostService;
-import com.app.jungsuri.domain.post.web.dto.PostCreateDto;
+import com.app.jungsuri.domain.post.model.PostEntity;
+import com.app.jungsuri.domain.post.repository.PostReadRepositoryImpl;
+import com.app.jungsuri.domain.post.repository.PostRepository;
+import com.app.jungsuri.domain.post.service.PostService;
+import com.app.jungsuri.domain.post.dto.PostCreateDto;
 import com.app.jungsuri.infra.MockMvcTest;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;

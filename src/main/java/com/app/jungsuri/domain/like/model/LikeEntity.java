@@ -2,8 +2,7 @@ package com.app.jungsuri.domain.like.model;
 
 import com.app.jungsuri.domain.account.model.AccountEntity;
 import com.app.jungsuri.domain.comment.model.CommentEntity;
-import com.app.jungsuri.domain.like.model.LikeType;
-import com.app.jungsuri.domain.post.persistence.PostEntity;
+import com.app.jungsuri.domain.post.model.PostEntity;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

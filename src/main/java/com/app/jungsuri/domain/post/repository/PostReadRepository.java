@@ -1,4 +1,6 @@
-package com.app.jungsuri.domain.post.persistence;
+package com.app.jungsuri.domain.post.repository;
+
+import com.app.jungsuri.domain.post.model.PostEntity;
 
 import java.util.List;
 
