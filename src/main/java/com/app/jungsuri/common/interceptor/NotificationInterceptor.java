@@ -1,4 +1,4 @@
-package com.app.jungsuri.infra.interceptor;
+package com.app.jungsuri.common.interceptor;
 
 import com.app.jungsuri.domain.account.persistence.AccountRepository;
 import com.app.jungsuri.domain.notification.persistence.NotificationRepository;

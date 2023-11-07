@@ -1,4 +1,4 @@
-package com.app.jungsuri.infra.pagination;
+package com.app.jungsuri.common.pagination;
 
 public enum MountainPage {
     PAGE_ROW_SIZE(20), PAGE_BTN_SIZE(10);

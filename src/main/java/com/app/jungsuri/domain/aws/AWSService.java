@@ -1,6 +1,6 @@
 package com.app.jungsuri.domain.aws;
 
-import com.app.jungsuri.config.CommonUtils;
+import com.app.jungsuri.infra.aws.AwsUtils;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
@@ -55,7 +55,7 @@ public class AWSService {
 
     public String getFileName(MultipartFile multipartFile) {
         if(multipartFile.isEmpty()) return "";
-        return CommonUtils.buildFileName(multipartFile.getOriginalFilename());
+        return AwsUtils.buildFileName(multipartFile.getOriginalFilename());
     }
 
 }

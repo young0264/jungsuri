@@ -1,4 +1,4 @@
-package com.app.jungsuri.infra.pagination;
+package com.app.jungsuri.common.pagination;
 
 public enum PostPage {
     PAGE_ROW_SIZE(5), PAGE_BTN_SIZE(5);
