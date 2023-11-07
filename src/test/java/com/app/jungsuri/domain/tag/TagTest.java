@@ -2,9 +2,9 @@ package com.app.jungsuri.domain.tag;
 
 import com.app.jungsuri.domain.account.model.AccountEntity;
 import com.app.jungsuri.domain.account.service.AccountService;
-import com.app.jungsuri.domain.post.persistence.PostEntity;
-import com.app.jungsuri.domain.post.persistence.PostService;
-import com.app.jungsuri.domain.post.web.dto.PostCreateDto;
+import com.app.jungsuri.domain.post.model.PostEntity;
+import com.app.jungsuri.domain.post.service.PostService;
+import com.app.jungsuri.domain.post.dto.PostCreateDto;
 import com.app.jungsuri.domain.tag.persistence.TagService;
 import com.app.jungsuri.domain.tag.persistence.repository.PostTagRepository;
 import com.app.jungsuri.domain.tag.persistence.repository.TagRepository;

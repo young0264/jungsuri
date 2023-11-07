@@ -1,5 +1,6 @@
-package com.app.jungsuri.domain.post.persistence;
+package com.app.jungsuri.domain.post.repository;
 
+import com.app.jungsuri.domain.post.model.PostEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.transaction.annotation.Transactional;
 import java.util.List;

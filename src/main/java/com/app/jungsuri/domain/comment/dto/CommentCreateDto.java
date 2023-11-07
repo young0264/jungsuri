@@ -2,7 +2,7 @@ package com.app.jungsuri.domain.comment.dto;
 
 import com.app.jungsuri.domain.account.model.AccountEntity;
 import com.app.jungsuri.domain.comment.model.Comment;
-import com.app.jungsuri.domain.post.persistence.PostEntity;
+import com.app.jungsuri.domain.post.model.PostEntity;
 import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

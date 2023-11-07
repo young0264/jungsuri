@@ -1,8 +1,8 @@
-package com.app.jungsuri.domain.post.persistence;
+package com.app.jungsuri.domain.post.model;
 
 import com.app.jungsuri.domain.account.model.AccountEntity;
 import com.app.jungsuri.domain.comment.model.CommentEntity;
-import com.app.jungsuri.domain.post.web.dto.PostCreateDto;
+import com.app.jungsuri.domain.post.dto.PostCreateDto;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;

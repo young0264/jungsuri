@@ -1,6 +1,6 @@
 package com.app.jungsuri.domain.post.event;
 
-import com.app.jungsuri.domain.post.persistence.PostEntity;
+import com.app.jungsuri.domain.post.model.PostEntity;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 

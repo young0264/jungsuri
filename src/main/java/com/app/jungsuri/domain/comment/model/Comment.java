@@ -1,7 +1,7 @@
 package com.app.jungsuri.domain.comment.model;
 
 import com.app.jungsuri.domain.account.model.AccountEntity;
-import com.app.jungsuri.domain.post.persistence.PostEntity;
+import com.app.jungsuri.domain.post.model.PostEntity;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 

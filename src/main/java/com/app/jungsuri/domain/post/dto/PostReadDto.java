@@ -1,4 +1,4 @@
-package com.app.jungsuri.domain.post.web.dto;
+package com.app.jungsuri.domain.post.dto;
 
 import com.app.jungsuri.domain.account.model.AccountEntity;
 import lombok.Builder;
