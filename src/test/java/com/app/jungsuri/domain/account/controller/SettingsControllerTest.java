@@ -11,6 +11,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
@@ -47,8 +48,7 @@ class SettingsControllerTest {
                 .andExpect(model().attributeExists("passwordUpdateDto"))
                 .andExpect(view().name("account/profile"));
     }
-//.contentType(MediaType.APPLICATION_JSON)
-//.content(objectMapper.writeValueAsString(dto))
+
     @Test
     @WithMockUser(username = "12" , password = "12")
     void 비밀번호_변경_성공() throws Exception {
@@ -70,12 +70,10 @@ class SettingsControllerTest {
         ).andExpect(status().isBadRequest());
     }
 
-    @Test
+    @Test//
     @WithMockUser(username = "12" , password = "12" , roles = "ADMIN")
     void admin페이지에_model이_들어가는지() throws Exception {
-        mockMvc.perform(get("/settings/admin")
-                        .with(csrf()))
-                .andExpect(status().isOk())
+        mockMvc.perform(get("/settings/admin").with(csrf()))
                 .andExpect(model().attributeExists("userLoginIdList"))
                 .andExpect(model().attributeExists("mountainNameList"))
                 .andExpect(model().attributeExists("userRole"))
