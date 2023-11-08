@@ -57,7 +57,6 @@ class AccountControllerTest {
     }
 
     @Test
-//    @WithMockUser(username="12", password="12")
     void 회원가입이_정상적으로_되는지() throws Exception {
 
         SignUpForm signUpForm = new SignUpForm();
@@ -81,13 +80,14 @@ class AccountControllerTest {
     }
 
     @Test
-    @WithMockUser(username="12", password="12")
     void WeatherEntity_모델이_정상적으로_넘어가는지() throws Exception {
         mockMvc.perform(get("/")
                         .param("city", "seoul")
-                        .with(csrf()))
+                        .with(csrf())
+                )
                 .andExpect(status().isOk())
                 .andExpect(view().name("main"))
-                .andExpect(model().attributeExists("weatherData"));
+                .andExpect(model().attributeExists("weatherData"))
+        ;
     }
 }
