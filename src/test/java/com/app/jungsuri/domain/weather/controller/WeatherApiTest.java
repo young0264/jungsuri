@@ -1,4 +1,4 @@
-package com.app.jungsuri.domain.weather;
+package com.app.jungsuri.domain.weather.controller;
 
 import com.app.jungsuri.domain.weather.model.WeatherEntity;
 import com.app.jungsuri.domain.weather.service.WeatherService;

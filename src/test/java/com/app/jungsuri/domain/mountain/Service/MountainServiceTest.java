@@ -1,4 +1,4 @@
-package com.app.jungsuri.domain.mountain.persistence;
+package com.app.jungsuri.domain.mountain.Service;
 
 import com.app.jungsuri.domain.mountain.service.MountainService;
 import com.app.jungsuri.infra.MockMvcTest;

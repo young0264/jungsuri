@@ -1,4 +1,4 @@
-package com.app.jungsuri.domain.tag;
+package com.app.jungsuri.domain.tag.controller;
 
 import com.app.jungsuri.domain.account.model.AccountEntity;
 import com.app.jungsuri.domain.account.service.AccountService;
@@ -19,7 +19,7 @@ import java.util.List;
 
 @MockMvcTest
 
-public class TagTest {
+public class TagControllerTest {
 
     @Autowired
     private AccountService accountService;
