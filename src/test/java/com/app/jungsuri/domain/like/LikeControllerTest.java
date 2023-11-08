@@ -19,7 +19,7 @@ import org.springframework.security.test.context.support.WithMockUser;
 import java.util.ArrayList;
 
 @MockMvcTest
-public class LikeTest {
+public class LikeControllerTest {
 
     @Autowired
     AccountService accountService;

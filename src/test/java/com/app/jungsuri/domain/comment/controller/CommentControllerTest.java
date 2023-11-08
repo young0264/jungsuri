@@ -1,4 +1,4 @@
-package com.app.jungsuri.domain.comment.web;
+package com.app.jungsuri.domain.comment.controller;
 
 import com.app.jungsuri.domain.account.model.AccountEntity;
 import com.app.jungsuri.domain.account.service.AccountService;
