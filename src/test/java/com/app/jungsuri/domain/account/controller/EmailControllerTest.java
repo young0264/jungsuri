@@ -17,10 +17,8 @@ class EmailControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
-
     @Autowired
     private AccountRepository accountRepository;
-
 
     @Test
     @WithMockUser(username="12", password="12")

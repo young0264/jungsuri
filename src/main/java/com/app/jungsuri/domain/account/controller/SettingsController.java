@@ -54,7 +54,9 @@ public class SettingsController {
         List<String> userLoginIdList = accountService.getAllUsersLoginId();
         List<String> mountainNameList = mountainService.findAllMountainsName();
         AccountEntity accountEntity = accountService.findByLoginId(principal.getName());
-        model.addAllAttributes(Map.of("userLoginIdList", userLoginIdList, "mountainNameList", mountainNameList,"userRole", accountEntity.getUserRole().toString()));
+        model.addAllAttributes(Map.of("userLoginIdList", userLoginIdList,
+                                        "mountainNameList", mountainNameList,
+                                        "userRole", accountEntity.getUserRole().toString()));
         return "account/admin";
     }
 
