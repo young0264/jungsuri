@@ -43,7 +43,7 @@ public class WebSecurityConfig implements WebMvcConfigurer {
                                         Stream.of("/settings/admin")
                                                 .map(AntPathRequestMatcher::antMatcher)
                                                 .toArray(AntPathRequestMatcher[]::new)
-                                ).hasAuthority("ADMIN")
+                                ).hasRole("ADMIN")
                                 .anyRequest().authenticated()
                 );
 
