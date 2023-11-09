@@ -114,7 +114,7 @@ class CommentControllerTest {
                         .with(csrf()))
                 .andExpect(status().is3xxRedirection())
                 .andExpect(redirectedUrl("/post/" + createdPostId ))
-                .andExpect(flash().attributeExists("comment_create_error"))
+                .andExpect(flash().attributeExists("comment_error"))
                 .andExpect(view().name("redirect:/post/" + createdPostId ))
                 .andExpect(authenticated());
 

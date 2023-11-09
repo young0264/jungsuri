@@ -32,7 +32,7 @@ public class WeatherApiTest {
     @Test
     @WithMockUser(username = "12", password = "12")
     public void 기상청API_잘받아와지는지() throws IOException {
-        weatherService.getWeatherDataByKMA();
+        weatherService.getWeatherData("seoul");
     }
 
     @Test
