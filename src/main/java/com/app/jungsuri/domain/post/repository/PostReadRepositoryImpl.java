@@ -77,7 +77,7 @@ public class PostReadRepositoryImpl implements PostReadRepository {
 //                .fetchInto(PostEntity.class);
     }
 
-    /** cursor pagination 적용. */
+    /** cursor pagination 적용. */ //TODO
     public List<PostEntity> findPostListByPagination2(int startRowNum) {
 //        return dslContext.select()
 //                .from(POST)
@@ -91,8 +91,6 @@ public class PostReadRepositoryImpl implements PostReadRepository {
                 .orderBy(POST.ID.desc())
                 .limit(PostPage.PAGE_ROW_SIZE.getValue())
                 .fetchInto(PostEntity.class);
-
-
     }
 
 
