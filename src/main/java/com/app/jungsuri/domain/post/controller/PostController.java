@@ -74,7 +74,6 @@ public class PostController {
     public String delete(@PathVariable Long postId, RedirectAttributes redirectAttributes){
         tagService.deleteTag(postId);
         postService.deletePost(postId);
-        System.out.println("post delete complete");
         redirectAttributes.addFlashAttribute("delete_message", "게시물이 성공적으로 삭제되었습니다.");
         return "redirect:/post/list";
     }
@@ -104,6 +103,7 @@ public class PostController {
     @Operation(summary = "게시글 수정 페이지 조회", description = "게시글 수정 페이지를 조회합니다.")
     public String update(@PathVariable Long postId, Model model) {
         PostEntity postEntity = postService.getPostEntity(postId);
+
         model.addAttribute("mode", "update");
         model.addAttribute("postEntity", postEntity);
         return "post/form";
