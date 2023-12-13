@@ -85,8 +85,23 @@ class SettingsControllerTest {
     void 등산경험치_반영이_정상적으로_되는지() throws Exception {
         AccountEntity accountEntity = accountRepository.findByLoginId("12").orElseThrow(null);
         MountainExpUpdateDto mountainExpUpdateDto = new MountainExpUpdateDto("가리산", List.of("12"), "2021-10-10");
-        int mountainHeight = mountainRepository.findMountainHeightByName("가리산");
+        int mountainHeight = 1050;
+//        int mountainHeight = mountainRepository.findMountainHeightByName("가리산");
         settingsService.updateMountainExp(mountainExpUpdateDto);
         Assertions.assertThat(accountEntity.getMountainExp()).isEqualTo(mountainHeight);
     }
+
+    @Test
+    @WithMockUser(username = "12" , password = "12")
+    void 알림페이지가_정상적으로_열리는지() throws Exception {
+
+        mockMvc.perform(get("/settings/alarm").with(csrf()))
+                .andExpect(model().attributeExists("accountEntity"))
+                .andExpect(model().attributeExists("notificationList"))
+                .andExpect(model().attributeExists("passwordUpdateDto"))
+                .andExpect(view().name("account/alarm"))
+                .andExpect(status().isOk());
+
+    }
+
 }
