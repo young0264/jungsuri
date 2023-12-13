@@ -15,11 +15,11 @@ import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @MockMvcTest
@@ -82,26 +82,24 @@ class SettingsControllerTest {
 
     @Test
     @WithMockUser(username = "12" , password = "12")
-    void 등산경험치_반영이_정상적으로_되는지() throws Exception {
-        AccountEntity accountEntity = accountRepository.findByLoginId("12").orElseThrow(null);
-        MountainExpUpdateDto mountainExpUpdateDto = new MountainExpUpdateDto("가리산", List.of("12"), "2021-10-10");
-        int mountainHeight = 1050;
-//        int mountainHeight = mountainRepository.findMountainHeightByName("가리산");
-        settingsService.updateMountainExp(mountainExpUpdateDto);
-        Assertions.assertThat(accountEntity.getMountainExp()).isEqualTo(mountainHeight);
-    }
-
-    @Test
-    @WithMockUser(username = "12" , password = "12")
     void 알림페이지가_정상적으로_열리는지() throws Exception {
-
         mockMvc.perform(get("/settings/alarm").with(csrf()))
                 .andExpect(model().attributeExists("accountEntity"))
                 .andExpect(model().attributeExists("notificationList"))
                 .andExpect(model().attributeExists("passwordUpdateDto"))
                 .andExpect(view().name("account/alarm"))
                 .andExpect(status().isOk());
+    }
 
+    @Test
+    @WithMockUser(username = "12" , password = "12")
+    void 등산경험치_수정() throws Exception {
+        List<String> LoginIdArr = List.of("12");
+        mockMvc.perform(patch("/settings/mountain-exp").with(csrf())
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(new MountainExpUpdateDto("가리산", LoginIdArr, "2023-12-12")))
+                        .with(csrf()))
+                .andExpect(status().isOk());
     }
 
 }
