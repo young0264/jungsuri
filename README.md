@@ -10,7 +10,7 @@
 
 
 ## [1] Jungsuri Project 서버 구조
-<img width="600" alt="스크린샷 2023-11-01 01 36 56" src="https://github.com/young0264/jungsuri/assets/96028167/ac6cf09a-e2a2-4f50-8677-00ceaa7ed948">
+<img width="600" alt="스크린샷 2023-11-01 01 36 56" src="https://github.com/young0264/jungsuri/assets/96028167/70cfd4a9-e842-4436-b188-83f40053ffda">
 
 
 
