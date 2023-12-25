@@ -34,7 +34,17 @@ cp "$JAR_FILE" "$PROJECT_ROOT/" #파일 복사 정상적으로 됨
 # jar 파일 실행
 echo "$TIME_NOW > $PROJECT_ROOT /jar 파일 실행" >> $DEPLOY_LOG
 #nohup java -jar -Dspring.profiles.active=prod "$PROJECT_ROOT"/jungsuri-0.0.1-SNAPSHOT.jar > "$APP_LOG" 2 > "$ERROR_LOG &" #& 위치 등 잘못
-nohup java -jar -Dspring.profiles.active=prod "$PROJECT_ROOT"/jungsuri-0.0.1-SNAPSHOT.jar > "$APP_LOG" 2> "$ERROR_LOG" &
+nohup java -jar -Dspring.profiles.active=prod \
+-DrdsUrl=$rdsUrl \
+-DdbPassword=$dbPassword \
+-Dprofile=$profile \
+-DweatherAPIKey=$weatherAPIKey \
+-DmailSendLoginId=$mailSendLoginId \
+-DmailSendPassword=$mailSendPassword \
+-jooqVersion=$jooqVersion \
+-accessKey=$accessKey \
+-DdbLoginId=$dbLoginId \
+ "$PROJECT_ROOT"/jungsuri-0.0.1-SNAPSHOT.jar > "$APP_LOG" 2> "$ERROR_LOG" &
 
 
 # nohup java -jar -Dspring.profiles.active=prod /home/ec2-user/jungsuri/jungsuri-0.0.1-SNAPSHOT.jar > /home/ec2-user/jungsuri/application.log 2> /home/ec2-user/jungsuri/error.log &
