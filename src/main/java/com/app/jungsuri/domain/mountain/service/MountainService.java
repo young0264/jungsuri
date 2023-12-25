@@ -192,7 +192,6 @@ public class MountainService {
             AccountEntity userEntity = accountRepository.findByLoginId(userId).orElseThrow(() -> new IllegalArgumentException("해당하는 아이디가 없습니다."));
             mountainExpRepository.save(new MountainExpEntity(userEntity, mountainEntity, mountainExpUpdateDto.getHikingDate(), accountEntity.getId()));
         }
-
     }
 
     /** 등산 경험치를 백분위 percent로 바꾸는 메서드 */
