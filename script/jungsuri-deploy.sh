@@ -12,8 +12,8 @@ TIME_NOW=$(date +%c)
 
 # 현재 구동 중인 애플리케이션 pid 확인
 CURRENT_PID=$(pgrep -f $JAR_FILE)
-echo "pid가 왜 안나오니1 : " CURRENT_PID
-echo "pid가 왜 안나오니2 : " "$CURRENT_PID"
+echo "pid가 왜 안나오니1 : " CURRENT_PID >> $DEPLOY_LOG
+echo "pid가 왜 안나오니2 : " "$CURRENT_PID" >> $DEPLOY_LOG
 
 # 프로세스가 켜져 있으면 종료
 if [ -z $CURRENT_PID ]; then
@@ -36,6 +36,6 @@ nohup java -jar -Dspring.profiles.active=prod "$PROJECT_ROOT"/jungsuri-0.0.1-SNA
 # nohup java -jar -Dspring.profiles.active=prod /home/ec2-user/jungsuri/jungsuri-0.0.1-SNAPSHOT.jar > /home/ec2-user/jungsuri/application.log 2> /home/ec2-user/jungsuri/error.log &
 #프로파일 명시
 #CURRENT_PID=$(pgrep -f $JAR_FILE)
-echo "current pid 입니다 : " CURRENT_PID
-echo "달러 current pid 입니다 : $CURRENT_PID"
+echo "current pid 입니다 : " CURRENT_PID >> $DEPLOY_LOG
+echo "달러 current pid 입니다 : $CURRENT_PID" >> $DEPLOY_LOG
 echo "$TIME_NOW > 실행된 프로세스 아이디 $CURRENT_PID 입니다." >> "$DEPLOY_LOG"
