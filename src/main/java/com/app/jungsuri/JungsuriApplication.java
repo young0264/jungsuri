@@ -7,7 +7,7 @@ import org.springframework.test.context.ActiveProfiles;
 
 @SpringBootApplication
 @ActiveProfiles("${profile}")
-//@ConditionalOnProperty(prefix = "spring.flyway", name = "enabled", matchIfMissing = true)
+//@ActiveProfiles("${spring.profiles.active}")
 public class JungsuriApplication {
 
 	public static void main(String[] args) {
