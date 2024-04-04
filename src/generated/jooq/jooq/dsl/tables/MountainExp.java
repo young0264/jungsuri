@@ -53,19 +53,14 @@ public class MountainExp extends TableImpl<MountainExpRecord> {
     }
 
     /**
-     * The column <code>jungsuri.mountain_exp.account_entity_id</code>.
-     */
-    public final TableField<MountainExpRecord, Long> ACCOUNT_ENTITY_ID = createField(DSL.name("account_entity_id"), SQLDataType.BIGINT, this, "");
-
-    /**
      * The column <code>jungsuri.mountain_exp.id</code>.
      */
     public final TableField<MountainExpRecord, Long> ID = createField(DSL.name("id"), SQLDataType.BIGINT.nullable(false).identity(true), this, "");
 
     /**
-     * The column <code>jungsuri.mountain_exp.mountain_entity_id</code>.
+     * The column <code>jungsuri.mountain_exp.hiking_date</code>.
      */
-    public final TableField<MountainExpRecord, Long> MOUNTAIN_ENTITY_ID = createField(DSL.name("mountain_entity_id"), SQLDataType.BIGINT, this, "");
+    public final TableField<MountainExpRecord, String> HIKING_DATE = createField(DSL.name("hiking_date"), SQLDataType.VARCHAR(255), this, "");
 
     /**
      * The column <code>jungsuri.mountain_exp.register_id</code>.
@@ -73,9 +68,14 @@ public class MountainExp extends TableImpl<MountainExpRecord> {
     public final TableField<MountainExpRecord, Long> REGISTER_ID = createField(DSL.name("register_id"), SQLDataType.BIGINT, this, "");
 
     /**
-     * The column <code>jungsuri.mountain_exp.hiking_date</code>.
+     * The column <code>jungsuri.mountain_exp.account_entity_id</code>.
      */
-    public final TableField<MountainExpRecord, String> HIKING_DATE = createField(DSL.name("hiking_date"), SQLDataType.VARCHAR(255), this, "");
+    public final TableField<MountainExpRecord, Long> ACCOUNT_ENTITY_ID = createField(DSL.name("account_entity_id"), SQLDataType.BIGINT, this, "");
+
+    /**
+     * The column <code>jungsuri.mountain_exp.mountain_entity_id</code>.
+     */
+    public final TableField<MountainExpRecord, Long> MOUNTAIN_ENTITY_ID = createField(DSL.name("mountain_entity_id"), SQLDataType.BIGINT, this, "");
 
     private MountainExp(Name alias, Table<MountainExpRecord> aliased) {
         this(alias, aliased, null);
@@ -197,14 +197,14 @@ public class MountainExp extends TableImpl<MountainExpRecord> {
     // -------------------------------------------------------------------------
 
     @Override
-    public Row5<Long, Long, Long, Long, String> fieldsRow() {
+    public Row5<Long, String, Long, Long, Long> fieldsRow() {
         return (Row5) super.fieldsRow();
     }
 
     /**
      * Convenience mapping calling {@link SelectField#convertFrom(Function)}.
      */
-    public <U> SelectField<U> mapping(Function5<? super Long, ? super Long, ? super Long, ? super Long, ? super String, ? extends U> from) {
+    public <U> SelectField<U> mapping(Function5<? super Long, ? super String, ? super Long, ? super Long, ? super Long, ? extends U> from) {
         return convertFrom(Records.mapping(from));
     }
 
@@ -212,7 +212,7 @@ public class MountainExp extends TableImpl<MountainExpRecord> {
      * Convenience mapping calling {@link SelectField#convertFrom(Class,
      * Function)}.
      */
-    public <U> SelectField<U> mapping(Class<U> toType, Function5<? super Long, ? super Long, ? super Long, ? super Long, ? super String, ? extends U> from) {
+    public <U> SelectField<U> mapping(Class<U> toType, Function5<? super Long, ? super String, ? super Long, ? super Long, ? super Long, ? extends U> from) {
         return convertFrom(toType, Records.mapping(from));
     }
 }

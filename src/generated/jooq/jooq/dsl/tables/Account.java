@@ -58,17 +58,17 @@ public class Account extends TableImpl<AccountRecord> {
     /**
      * The column <code>jungsuri.account.email_verified</code>.
      */
-    public final TableField<AccountRecord, Boolean> EMAIL_VERIFIED = createField(DSL.name("email_verified"), SQLDataType.BIT, this, "");
+    public final TableField<AccountRecord, Boolean> EMAIL_VERIFIED = createField(DSL.name("email_verified"), SQLDataType.BIT.nullable(false), this, "");
 
     /**
      * The column <code>jungsuri.account.mountain_exp</code>.
      */
-    public final TableField<AccountRecord, Integer> MOUNTAIN_EXP = createField(DSL.name("mountain_exp"), SQLDataType.INTEGER, this, "");
+    public final TableField<AccountRecord, Integer> MOUNTAIN_EXP = createField(DSL.name("mountain_exp"), SQLDataType.INTEGER.nullable(false), this, "");
 
     /**
      * The column <code>jungsuri.account.post_created_checked</code>.
      */
-    public final TableField<AccountRecord, Boolean> POST_CREATED_CHECKED = createField(DSL.name("post_created_checked"), SQLDataType.BIT, this, "");
+    public final TableField<AccountRecord, Boolean> POST_CREATED_CHECKED = createField(DSL.name("post_created_checked"), SQLDataType.BIT.nullable(false), this, "");
 
     /**
      * The column <code>jungsuri.account.user_role</code>.

@@ -14,11 +14,11 @@ import jooq.dsl.tables.records.MountainTagRecord;
 
 import org.jooq.Field;
 import org.jooq.ForeignKey;
-import org.jooq.Function2;
+import org.jooq.Function3;
 import org.jooq.Name;
 import org.jooq.Record;
 import org.jooq.Records;
-import org.jooq.Row2;
+import org.jooq.Row3;
 import org.jooq.Schema;
 import org.jooq.SelectField;
 import org.jooq.Table;
@@ -50,6 +50,11 @@ public class MountainTag extends TableImpl<MountainTagRecord> {
     public Class<MountainTagRecord> getRecordType() {
         return MountainTagRecord.class;
     }
+
+    /**
+     * The column <code>jungsuri.mountain_tag.id</code>.
+     */
+    public final TableField<MountainTagRecord, Long> ID = createField(DSL.name("id"), SQLDataType.BIGINT.nullable(false), this, "");
 
     /**
      * The column <code>jungsuri.mountain_tag.mountain_entity_id</code>.
@@ -106,11 +111,23 @@ public class MountainTag extends TableImpl<MountainTagRecord> {
 
     @Override
     public List<ForeignKey<MountainTagRecord, ?>> getReferences() {
-        return Arrays.asList(Keys.FKSKNBYMDINHQ0DM6F748CCYAX0, Keys.FKRUDYQE1F6KXJXAXLJH820HMJ7);
+        return Arrays.asList(Keys.FKNBSYOMU9DSLUBEHRKCOY5GO7A, Keys.FKSKNBYMDINHQ0DM6F748CCYAX0, Keys.FKRUDYQE1F6KXJXAXLJH820HMJ7);
     }
 
+    private transient Tag _fknbsyomu9dslubehrkcoy5go7a;
     private transient Mountain _mountain;
-    private transient Tag _tag;
+    private transient Tag _fkrudyqe1f6kxjxaxljh820hmj7;
+
+    /**
+     * Get the implicit join path to the <code>jungsuri.tag</code> table, via
+     * the <code>FKnbsyomu9dslubehrkcoy5go7a</code> key.
+     */
+    public Tag fknbsyomu9dslubehrkcoy5go7a() {
+        if (_fknbsyomu9dslubehrkcoy5go7a == null)
+            _fknbsyomu9dslubehrkcoy5go7a = new Tag(this, Keys.FKNBSYOMU9DSLUBEHRKCOY5GO7A);
+
+        return _fknbsyomu9dslubehrkcoy5go7a;
+    }
 
     /**
      * Get the implicit join path to the <code>jungsuri.mountain</code> table.
@@ -123,13 +140,14 @@ public class MountainTag extends TableImpl<MountainTagRecord> {
     }
 
     /**
-     * Get the implicit join path to the <code>jungsuri.tag</code> table.
+     * Get the implicit join path to the <code>jungsuri.tag</code> table, via
+     * the <code>FKrudyqe1f6kxjxaxljh820hmj7</code> key.
      */
-    public Tag tag() {
-        if (_tag == null)
-            _tag = new Tag(this, Keys.FKRUDYQE1F6KXJXAXLJH820HMJ7);
+    public Tag fkrudyqe1f6kxjxaxljh820hmj7() {
+        if (_fkrudyqe1f6kxjxaxljh820hmj7 == null)
+            _fkrudyqe1f6kxjxaxljh820hmj7 = new Tag(this, Keys.FKRUDYQE1F6KXJXAXLJH820HMJ7);
 
-        return _tag;
+        return _fkrudyqe1f6kxjxaxljh820hmj7;
     }
 
     @Override
@@ -172,18 +190,18 @@ public class MountainTag extends TableImpl<MountainTagRecord> {
     }
 
     // -------------------------------------------------------------------------
-    // Row2 type methods
+    // Row3 type methods
     // -------------------------------------------------------------------------
 
     @Override
-    public Row2<Long, Long> fieldsRow() {
-        return (Row2) super.fieldsRow();
+    public Row3<Long, Long, Long> fieldsRow() {
+        return (Row3) super.fieldsRow();
     }
 
     /**
      * Convenience mapping calling {@link SelectField#convertFrom(Function)}.
      */
-    public <U> SelectField<U> mapping(Function2<? super Long, ? super Long, ? extends U> from) {
+    public <U> SelectField<U> mapping(Function3<? super Long, ? super Long, ? super Long, ? extends U> from) {
         return convertFrom(Records.mapping(from));
     }
 
@@ -191,7 +209,7 @@ public class MountainTag extends TableImpl<MountainTagRecord> {
      * Convenience mapping calling {@link SelectField#convertFrom(Class,
      * Function)}.
      */
-    public <U> SelectField<U> mapping(Class<U> toType, Function2<? super Long, ? super Long, ? extends U> from) {
+    public <U> SelectField<U> mapping(Class<U> toType, Function3<? super Long, ? super Long, ? super Long, ? extends U> from) {
         return convertFrom(toType, Records.mapping(from));
     }
 }

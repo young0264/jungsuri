@@ -7,7 +7,6 @@ package jooq.dsl;
 import jooq.dsl.tables.Account;
 import jooq.dsl.tables.AccountTag;
 import jooq.dsl.tables.Comment;
-import jooq.dsl.tables.FlywaySchemaHistory;
 import jooq.dsl.tables.Likes;
 import jooq.dsl.tables.Mountain;
 import jooq.dsl.tables.MountainExp;
@@ -41,11 +40,6 @@ public class Tables {
      * The table <code>jungsuri.comment</code>.
      */
     public static final Comment COMMENT = Comment.COMMENT;
-
-    /**
-     * The table <code>jungsuri.flyway_schema_history</code>.
-     */
-    public static final FlywaySchemaHistory FLYWAY_SCHEMA_HISTORY = FlywaySchemaHistory.FLYWAY_SCHEMA_HISTORY;
 
     /**
      * The table <code>jungsuri.likes</code>.

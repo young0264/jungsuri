@@ -16,6 +16,7 @@ import jooq.dsl.tables.records.TagRecord;
 import org.jooq.Field;
 import org.jooq.ForeignKey;
 import org.jooq.Function5;
+import org.jooq.Identity;
 import org.jooq.Name;
 import org.jooq.Record;
 import org.jooq.Records;
@@ -65,17 +66,17 @@ public class Tag extends TableImpl<TagRecord> {
     /**
      * The column <code>jungsuri.tag.id</code>.
      */
-    public final TableField<TagRecord, Long> ID = createField(DSL.name("id"), SQLDataType.BIGINT.nullable(false), this, "");
-
-    /**
-     * The column <code>jungsuri.tag.dtype</code>.
-     */
-    public final TableField<TagRecord, String> DTYPE = createField(DSL.name("dtype"), SQLDataType.VARCHAR(31).nullable(false), this, "");
+    public final TableField<TagRecord, Long> ID = createField(DSL.name("id"), SQLDataType.BIGINT.nullable(false).identity(true), this, "");
 
     /**
      * The column <code>jungsuri.tag.name</code>.
      */
     public final TableField<TagRecord, String> NAME = createField(DSL.name("name"), SQLDataType.VARCHAR(255), this, "");
+
+    /**
+     * The column <code>jungsuri.tag.dtype</code>.
+     */
+    public final TableField<TagRecord, String> DTYPE = createField(DSL.name("dtype"), SQLDataType.VARCHAR(31).nullable(false), this, "");
 
     private Tag(Name alias, Table<TagRecord> aliased) {
         this(alias, aliased, null);
@@ -113,6 +114,11 @@ public class Tag extends TableImpl<TagRecord> {
     @Override
     public Schema getSchema() {
         return aliased() ? null : Jungsuri.JUNGSURI;
+    }
+
+    @Override
+    public Identity<TagRecord, Long> getIdentity() {
+        return (Identity<TagRecord, Long>) super.getIdentity();
     }
 
     @Override

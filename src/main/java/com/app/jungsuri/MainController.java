@@ -1,28 +1,15 @@
 package com.app.jungsuri;
 
-import com.app.jungsuri.domain.account.dto.SignUpForm;
-import com.app.jungsuri.domain.account.enums.UserRole;
-import com.app.jungsuri.domain.account.model.AccountEntity;
 import com.app.jungsuri.domain.account.service.AccountService;
 import com.app.jungsuri.domain.mountain.service.MountainService;
 import com.app.jungsuri.domain.post.model.PostEntity;
-import com.app.jungsuri.domain.post.repository.PostRepository;
 import com.app.jungsuri.domain.post.service.PostService;
-import com.app.jungsuri.domain.tag.model.AccountTag;
 import com.app.jungsuri.domain.tag.service.TagService;
 import com.app.jungsuri.domain.weather.model.WeatherEntity;
 import com.app.jungsuri.domain.weather.service.WeatherService;
-import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.jsoup.Connection;
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Controller;
-import org.springframework.test.annotation.IfProfileValue;
-import org.springframework.test.context.ActiveProfiles;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -34,13 +21,12 @@ import java.util.List;
 @Slf4j
 @Controller
 @RequiredArgsConstructor
-public class mainController {
+public class MainController {
 
     private final AccountService accountService;
     private final MountainService mountainService;
     private final TagService tagService;
     private final PostService postService;
-    private final PostRepository postRepository;
     private final WeatherService weatherService;
 
 

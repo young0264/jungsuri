@@ -19,29 +19,29 @@ public class Tag implements Serializable {
     private final Integer usedCount;
     private final LocalDateTime createdAt;
     private final Long id;
-    private final String dtype;
     private final String name;
+    private final String dtype;
 
     public Tag(Tag value) {
         this.usedCount = value.usedCount;
         this.createdAt = value.createdAt;
         this.id = value.id;
-        this.dtype = value.dtype;
         this.name = value.name;
+        this.dtype = value.dtype;
     }
 
     public Tag(
         Integer usedCount,
         LocalDateTime createdAt,
         Long id,
-        String dtype,
-        String name
+        String name,
+        String dtype
     ) {
         this.usedCount = usedCount;
         this.createdAt = createdAt;
         this.id = id;
-        this.dtype = dtype;
         this.name = name;
+        this.dtype = dtype;
     }
 
     /**
@@ -66,17 +66,17 @@ public class Tag implements Serializable {
     }
 
     /**
-     * Getter for <code>jungsuri.tag.dtype</code>.
-     */
-    public String getDtype() {
-        return this.dtype;
-    }
-
-    /**
      * Getter for <code>jungsuri.tag.name</code>.
      */
     public String getName() {
         return this.name;
+    }
+
+    /**
+     * Getter for <code>jungsuri.tag.dtype</code>.
+     */
+    public String getDtype() {
+        return this.dtype;
     }
 
     @Override
@@ -86,8 +86,8 @@ public class Tag implements Serializable {
         sb.append(usedCount);
         sb.append(", ").append(createdAt);
         sb.append(", ").append(id);
-        sb.append(", ").append(dtype);
         sb.append(", ").append(name);
+        sb.append(", ").append(dtype);
 
         sb.append(")");
         return sb.toString();
