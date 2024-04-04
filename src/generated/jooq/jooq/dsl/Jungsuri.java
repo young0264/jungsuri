@@ -10,7 +10,6 @@ import java.util.List;
 import jooq.dsl.tables.Account;
 import jooq.dsl.tables.AccountTag;
 import jooq.dsl.tables.Comment;
-import jooq.dsl.tables.FlywaySchemaHistory;
 import jooq.dsl.tables.Likes;
 import jooq.dsl.tables.Mountain;
 import jooq.dsl.tables.MountainExp;
@@ -55,11 +54,6 @@ public class Jungsuri extends SchemaImpl {
      * The table <code>jungsuri.comment</code>.
      */
     public final Comment COMMENT = Comment.COMMENT;
-
-    /**
-     * The table <code>jungsuri.flyway_schema_history</code>.
-     */
-    public final FlywaySchemaHistory FLYWAY_SCHEMA_HISTORY = FlywaySchemaHistory.FLYWAY_SCHEMA_HISTORY;
 
     /**
      * The table <code>jungsuri.likes</code>.
@@ -135,7 +129,6 @@ public class Jungsuri extends SchemaImpl {
             Account.ACCOUNT,
             AccountTag.ACCOUNT_TAG,
             Comment.COMMENT,
-            FlywaySchemaHistory.FLYWAY_SCHEMA_HISTORY,
             Likes.LIKES,
             Mountain.MOUNTAIN,
             MountainExp.MOUNTAIN_EXP,

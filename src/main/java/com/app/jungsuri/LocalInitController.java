@@ -22,20 +22,20 @@ public class LocalInitController {
     private final MountainService mountainService;
 
     /** 등산 정보 크롤링 */
-    @PostConstruct
-    public void initMountainInfo() {
-        log.info("initMountainInfo");
-        final String mountainInfoUrl = "https://www.forest.go.kr/kfsweb/kfi/kfs/foreston/main/contents/FmmntSrch/selectFmmntSrchList.do?mn=NKFS_03_01_12&orgId=&mntUnit=100&mntIndex=1&searchMnt=&searchCnd3=&mntnInfoGbn=&mntnInfoSsnCd=&mntnInfoThmCd=&mntnInfoTmCd=&mntnHaslvCd=&mntnInfoLvlCd=";
-        Connection connect = Jsoup.connect(mountainInfoUrl);
-
-        try {
-            Document document = connect.get();
-            mountainService.saveMountainInfo(document);
-        } catch (IOException e) {
-            e.printStackTrace();
-            throw new RuntimeException(e);
-        }
-    }
+//    @PostConstruct
+//    public void initMountainInfo() {
+//        log.info("initMountainInfo");
+//        final String mountainInfoUrl = "https://www.forest.go.kr/kfsweb/kfi/kfs/foreston/main/contents/FmmntSrch/selectFmmntSrchList.do?mn=NKFS_03_01_12&orgId=&mntUnit=100&mntIndex=1&searchMnt=&searchCnd3=&mntnInfoGbn=&mntnInfoSsnCd=&mntnInfoThmCd=&mntnInfoTmCd=&mntnHaslvCd=&mntnInfoLvlCd=";
+//        Connection connect = Jsoup.connect(mountainInfoUrl);
+//
+//        try {
+//            Document document = connect.get();
+//            mountainService.saveMountainInfo(document);
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//            throw new RuntimeException(e);
+//        }
+//    }
 
 //    @PostConstruct
 //    public void postTestInit() {

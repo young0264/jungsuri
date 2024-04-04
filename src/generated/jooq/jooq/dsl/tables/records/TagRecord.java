@@ -69,25 +69,10 @@ public class TagRecord extends UpdatableRecordImpl<TagRecord> implements Record5
     }
 
     /**
-     * Setter for <code>jungsuri.tag.dtype</code>.
-     */
-    public TagRecord setDtype(String value) {
-        set(3, value);
-        return this;
-    }
-
-    /**
-     * Getter for <code>jungsuri.tag.dtype</code>.
-     */
-    public String getDtype() {
-        return (String) get(3);
-    }
-
-    /**
      * Setter for <code>jungsuri.tag.name</code>.
      */
     public TagRecord setName(String value) {
-        set(4, value);
+        set(3, value);
         return this;
     }
 
@@ -95,6 +80,21 @@ public class TagRecord extends UpdatableRecordImpl<TagRecord> implements Record5
      * Getter for <code>jungsuri.tag.name</code>.
      */
     public String getName() {
+        return (String) get(3);
+    }
+
+    /**
+     * Setter for <code>jungsuri.tag.dtype</code>.
+     */
+    public TagRecord setDtype(String value) {
+        set(4, value);
+        return this;
+    }
+
+    /**
+     * Getter for <code>jungsuri.tag.dtype</code>.
+     */
+    public String getDtype() {
         return (String) get(4);
     }
 
@@ -138,12 +138,12 @@ public class TagRecord extends UpdatableRecordImpl<TagRecord> implements Record5
 
     @Override
     public Field<String> field4() {
-        return Tag.TAG.DTYPE;
+        return Tag.TAG.NAME;
     }
 
     @Override
     public Field<String> field5() {
-        return Tag.TAG.NAME;
+        return Tag.TAG.DTYPE;
     }
 
     @Override
@@ -163,12 +163,12 @@ public class TagRecord extends UpdatableRecordImpl<TagRecord> implements Record5
 
     @Override
     public String component4() {
-        return getDtype();
+        return getName();
     }
 
     @Override
     public String component5() {
-        return getName();
+        return getDtype();
     }
 
     @Override
@@ -188,12 +188,12 @@ public class TagRecord extends UpdatableRecordImpl<TagRecord> implements Record5
 
     @Override
     public String value4() {
-        return getDtype();
+        return getName();
     }
 
     @Override
     public String value5() {
-        return getName();
+        return getDtype();
     }
 
     @Override
@@ -216,13 +216,13 @@ public class TagRecord extends UpdatableRecordImpl<TagRecord> implements Record5
 
     @Override
     public TagRecord value4(String value) {
-        setDtype(value);
+        setName(value);
         return this;
     }
 
     @Override
     public TagRecord value5(String value) {
-        setName(value);
+        setDtype(value);
         return this;
     }
 
@@ -250,14 +250,14 @@ public class TagRecord extends UpdatableRecordImpl<TagRecord> implements Record5
     /**
      * Create a detached, initialised TagRecord
      */
-    public TagRecord(Integer usedCount, LocalDateTime createdAt, Long id, String dtype, String name) {
+    public TagRecord(Integer usedCount, LocalDateTime createdAt, Long id, String name, String dtype) {
         super(Tag.TAG);
 
         setUsedCount(usedCount);
         setCreatedAt(createdAt);
         setId(id);
-        setDtype(dtype);
         setName(name);
+        setDtype(dtype);
     }
 
     /**
@@ -270,8 +270,8 @@ public class TagRecord extends UpdatableRecordImpl<TagRecord> implements Record5
             setUsedCount(value.getUsedCount());
             setCreatedAt(value.getCreatedAt());
             setId(value.getId());
-            setDtype(value.getDtype());
             setName(value.getName());
+            setDtype(value.getDtype());
         }
     }
 }

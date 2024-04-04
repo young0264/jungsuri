@@ -15,39 +15,32 @@ public class MountainExp implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    private final Long accountEntityId;
     private final Long id;
-    private final Long mountainEntityId;
-    private final Long registerId;
     private final String hikingDate;
+    private final Long registerId;
+    private final Long accountEntityId;
+    private final Long mountainEntityId;
 
     public MountainExp(MountainExp value) {
-        this.accountEntityId = value.accountEntityId;
         this.id = value.id;
-        this.mountainEntityId = value.mountainEntityId;
-        this.registerId = value.registerId;
         this.hikingDate = value.hikingDate;
+        this.registerId = value.registerId;
+        this.accountEntityId = value.accountEntityId;
+        this.mountainEntityId = value.mountainEntityId;
     }
 
     public MountainExp(
-        Long accountEntityId,
         Long id,
-        Long mountainEntityId,
+        String hikingDate,
         Long registerId,
-        String hikingDate
+        Long accountEntityId,
+        Long mountainEntityId
     ) {
-        this.accountEntityId = accountEntityId;
         this.id = id;
-        this.mountainEntityId = mountainEntityId;
-        this.registerId = registerId;
         this.hikingDate = hikingDate;
-    }
-
-    /**
-     * Getter for <code>jungsuri.mountain_exp.account_entity_id</code>.
-     */
-    public Long getAccountEntityId() {
-        return this.accountEntityId;
+        this.registerId = registerId;
+        this.accountEntityId = accountEntityId;
+        this.mountainEntityId = mountainEntityId;
     }
 
     /**
@@ -58,10 +51,10 @@ public class MountainExp implements Serializable {
     }
 
     /**
-     * Getter for <code>jungsuri.mountain_exp.mountain_entity_id</code>.
+     * Getter for <code>jungsuri.mountain_exp.hiking_date</code>.
      */
-    public Long getMountainEntityId() {
-        return this.mountainEntityId;
+    public String getHikingDate() {
+        return this.hikingDate;
     }
 
     /**
@@ -72,21 +65,28 @@ public class MountainExp implements Serializable {
     }
 
     /**
-     * Getter for <code>jungsuri.mountain_exp.hiking_date</code>.
+     * Getter for <code>jungsuri.mountain_exp.account_entity_id</code>.
      */
-    public String getHikingDate() {
-        return this.hikingDate;
+    public Long getAccountEntityId() {
+        return this.accountEntityId;
+    }
+
+    /**
+     * Getter for <code>jungsuri.mountain_exp.mountain_entity_id</code>.
+     */
+    public Long getMountainEntityId() {
+        return this.mountainEntityId;
     }
 
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder("MountainExp (");
 
-        sb.append(accountEntityId);
-        sb.append(", ").append(id);
-        sb.append(", ").append(mountainEntityId);
-        sb.append(", ").append(registerId);
+        sb.append(id);
         sb.append(", ").append(hikingDate);
+        sb.append(", ").append(registerId);
+        sb.append(", ").append(accountEntityId);
+        sb.append(", ").append(mountainEntityId);
 
         sb.append(")");
         return sb.toString();

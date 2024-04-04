@@ -15,20 +15,31 @@ public class MountainTag implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
+    private final Long id;
     private final Long mountainEntityId;
     private final Long mountainTagId;
 
     public MountainTag(MountainTag value) {
+        this.id = value.id;
         this.mountainEntityId = value.mountainEntityId;
         this.mountainTagId = value.mountainTagId;
     }
 
     public MountainTag(
+        Long id,
         Long mountainEntityId,
         Long mountainTagId
     ) {
+        this.id = id;
         this.mountainEntityId = mountainEntityId;
         this.mountainTagId = mountainTagId;
+    }
+
+    /**
+     * Getter for <code>jungsuri.mountain_tag.id</code>.
+     */
+    public Long getId() {
+        return this.id;
     }
 
     /**
@@ -49,7 +60,8 @@ public class MountainTag implements Serializable {
     public String toString() {
         StringBuilder sb = new StringBuilder("MountainTag (");
 
-        sb.append(mountainEntityId);
+        sb.append(id);
+        sb.append(", ").append(mountainEntityId);
         sb.append(", ").append(mountainTagId);
 
         sb.append(")");

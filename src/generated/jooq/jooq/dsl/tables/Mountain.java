@@ -16,6 +16,7 @@ import jooq.dsl.tables.records.MountainRecord;
 import org.jooq.Field;
 import org.jooq.ForeignKey;
 import org.jooq.Function5;
+import org.jooq.Identity;
 import org.jooq.Index;
 import org.jooq.Name;
 import org.jooq.Record;
@@ -61,7 +62,7 @@ public class Mountain extends TableImpl<MountainRecord> {
     /**
      * The column <code>jungsuri.mountain.id</code>.
      */
-    public final TableField<MountainRecord, Long> ID = createField(DSL.name("id"), SQLDataType.BIGINT.nullable(false), this, "");
+    public final TableField<MountainRecord, Long> ID = createField(DSL.name("id"), SQLDataType.BIGINT.nullable(false).identity(true), this, "");
 
     /**
      * The column <code>jungsuri.mountain.image_url</code>.
@@ -119,6 +120,11 @@ public class Mountain extends TableImpl<MountainRecord> {
     @Override
     public List<Index> getIndexes() {
         return Arrays.asList(Indexes.MOUNTAIN_IDX_HEIGHT);
+    }
+
+    @Override
+    public Identity<MountainRecord, Long> getIdentity() {
+        return (Identity<MountainRecord, Long>) super.getIdentity();
     }
 
     @Override

@@ -14,11 +14,11 @@ import jooq.dsl.tables.records.AccountTagRecord;
 
 import org.jooq.Field;
 import org.jooq.ForeignKey;
-import org.jooq.Function2;
+import org.jooq.Function3;
 import org.jooq.Name;
 import org.jooq.Record;
 import org.jooq.Records;
-import org.jooq.Row2;
+import org.jooq.Row3;
 import org.jooq.Schema;
 import org.jooq.SelectField;
 import org.jooq.Table;
@@ -55,6 +55,11 @@ public class AccountTag extends TableImpl<AccountTagRecord> {
      * The column <code>jungsuri.account_tag.account_entity_id</code>.
      */
     public final TableField<AccountTagRecord, Long> ACCOUNT_ENTITY_ID = createField(DSL.name("account_entity_id"), SQLDataType.BIGINT, this, "");
+
+    /**
+     * The column <code>jungsuri.account_tag.id</code>.
+     */
+    public final TableField<AccountTagRecord, Long> ID = createField(DSL.name("id"), SQLDataType.BIGINT.nullable(false), this, "");
 
     /**
      * The column <code>jungsuri.account_tag.account_tag_id</code>.
@@ -106,11 +111,12 @@ public class AccountTag extends TableImpl<AccountTagRecord> {
 
     @Override
     public List<ForeignKey<AccountTagRecord, ?>> getReferences() {
-        return Arrays.asList(Keys.FKVJ9RA64LQW442NT0TU2X1K0K, Keys.FKJYN3BHQGEB2H5G85D7QHEGHCP);
+        return Arrays.asList(Keys.FKVJ9RA64LQW442NT0TU2X1K0K, Keys.FKT9YC2QDRKD8ISH8T5PH28GKX0, Keys.FKJYN3BHQGEB2H5G85D7QHEGHCP);
     }
 
     private transient Account _account;
-    private transient Tag _tag;
+    private transient Tag _fkt9yc2qdrkd8ish8t5ph28gkx0;
+    private transient Tag _fkjyn3bhqgeb2h5g85d7qheghcp;
 
     /**
      * Get the implicit join path to the <code>jungsuri.account</code> table.
@@ -123,13 +129,25 @@ public class AccountTag extends TableImpl<AccountTagRecord> {
     }
 
     /**
-     * Get the implicit join path to the <code>jungsuri.tag</code> table.
+     * Get the implicit join path to the <code>jungsuri.tag</code> table, via
+     * the <code>FKt9yc2qdrkd8ish8t5ph28gkx0</code> key.
      */
-    public Tag tag() {
-        if (_tag == null)
-            _tag = new Tag(this, Keys.FKJYN3BHQGEB2H5G85D7QHEGHCP);
+    public Tag fkt9yc2qdrkd8ish8t5ph28gkx0() {
+        if (_fkt9yc2qdrkd8ish8t5ph28gkx0 == null)
+            _fkt9yc2qdrkd8ish8t5ph28gkx0 = new Tag(this, Keys.FKT9YC2QDRKD8ISH8T5PH28GKX0);
 
-        return _tag;
+        return _fkt9yc2qdrkd8ish8t5ph28gkx0;
+    }
+
+    /**
+     * Get the implicit join path to the <code>jungsuri.tag</code> table, via
+     * the <code>FKjyn3bhqgeb2h5g85d7qheghcp</code> key.
+     */
+    public Tag fkjyn3bhqgeb2h5g85d7qheghcp() {
+        if (_fkjyn3bhqgeb2h5g85d7qheghcp == null)
+            _fkjyn3bhqgeb2h5g85d7qheghcp = new Tag(this, Keys.FKJYN3BHQGEB2H5G85D7QHEGHCP);
+
+        return _fkjyn3bhqgeb2h5g85d7qheghcp;
     }
 
     @Override
@@ -172,18 +190,18 @@ public class AccountTag extends TableImpl<AccountTagRecord> {
     }
 
     // -------------------------------------------------------------------------
-    // Row2 type methods
+    // Row3 type methods
     // -------------------------------------------------------------------------
 
     @Override
-    public Row2<Long, Long> fieldsRow() {
-        return (Row2) super.fieldsRow();
+    public Row3<Long, Long, Long> fieldsRow() {
+        return (Row3) super.fieldsRow();
     }
 
     /**
      * Convenience mapping calling {@link SelectField#convertFrom(Function)}.
      */
-    public <U> SelectField<U> mapping(Function2<? super Long, ? super Long, ? extends U> from) {
+    public <U> SelectField<U> mapping(Function3<? super Long, ? super Long, ? super Long, ? extends U> from) {
         return convertFrom(Records.mapping(from));
     }
 
@@ -191,7 +209,7 @@ public class AccountTag extends TableImpl<AccountTagRecord> {
      * Convenience mapping calling {@link SelectField#convertFrom(Class,
      * Function)}.
      */
-    public <U> SelectField<U> mapping(Class<U> toType, Function2<? super Long, ? super Long, ? extends U> from) {
+    public <U> SelectField<U> mapping(Class<U> toType, Function3<? super Long, ? super Long, ? super Long, ? extends U> from) {
         return convertFrom(toType, Records.mapping(from));
     }
 }

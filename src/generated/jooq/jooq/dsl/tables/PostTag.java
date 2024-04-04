@@ -4,6 +4,7 @@
 package jooq.dsl.tables;
 
 
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
 import java.util.function.Function;
@@ -14,11 +15,12 @@ import jooq.dsl.tables.records.PostTagRecord;
 
 import org.jooq.Field;
 import org.jooq.ForeignKey;
-import org.jooq.Function2;
+import org.jooq.Function5;
+import org.jooq.Identity;
 import org.jooq.Name;
 import org.jooq.Record;
 import org.jooq.Records;
-import org.jooq.Row2;
+import org.jooq.Row5;
 import org.jooq.Schema;
 import org.jooq.SelectField;
 import org.jooq.Table;
@@ -52,9 +54,24 @@ public class PostTag extends TableImpl<PostTagRecord> {
     }
 
     /**
+     * The column <code>jungsuri.post_tag.created_at</code>.
+     */
+    public final TableField<PostTagRecord, LocalDateTime> CREATED_AT = createField(DSL.name("created_at"), SQLDataType.LOCALDATETIME(6), this, "");
+
+    /**
+     * The column <code>jungsuri.post_tag.id</code>.
+     */
+    public final TableField<PostTagRecord, Long> ID = createField(DSL.name("id"), SQLDataType.BIGINT.nullable(false).identity(true), this, "");
+
+    /**
      * The column <code>jungsuri.post_tag.post_entity_id</code>.
      */
     public final TableField<PostTagRecord, Long> POST_ENTITY_ID = createField(DSL.name("post_entity_id"), SQLDataType.BIGINT, this, "");
+
+    /**
+     * The column <code>jungsuri.post_tag.tag_id</code>.
+     */
+    public final TableField<PostTagRecord, Long> TAG_ID = createField(DSL.name("tag_id"), SQLDataType.BIGINT, this, "");
 
     /**
      * The column <code>jungsuri.post_tag.post_tag_id</code>.
@@ -100,13 +117,18 @@ public class PostTag extends TableImpl<PostTagRecord> {
     }
 
     @Override
+    public Identity<PostTagRecord, Long> getIdentity() {
+        return (Identity<PostTagRecord, Long>) super.getIdentity();
+    }
+
+    @Override
     public UniqueKey<PostTagRecord> getPrimaryKey() {
         return Keys.KEY_POST_TAG_PRIMARY;
     }
 
     @Override
     public List<ForeignKey<PostTagRecord, ?>> getReferences() {
-        return Arrays.asList(Keys.FKEDU8N21PDYWBAFR0KQMB76K6M, Keys.FK71DNM74267JIV0XXU0MWR3GHM);
+        return Arrays.asList(Keys.FKEDU8N21PDYWBAFR0KQMB76K6M, Keys.FKAC1WDCHD2PNUR3FL225OBMLG0);
     }
 
     private transient Post _post;
@@ -127,7 +149,7 @@ public class PostTag extends TableImpl<PostTagRecord> {
      */
     public Tag tag() {
         if (_tag == null)
-            _tag = new Tag(this, Keys.FK71DNM74267JIV0XXU0MWR3GHM);
+            _tag = new Tag(this, Keys.FKAC1WDCHD2PNUR3FL225OBMLG0);
 
         return _tag;
     }
@@ -172,18 +194,18 @@ public class PostTag extends TableImpl<PostTagRecord> {
     }
 
     // -------------------------------------------------------------------------
-    // Row2 type methods
+    // Row5 type methods
     // -------------------------------------------------------------------------
 
     @Override
-    public Row2<Long, Long> fieldsRow() {
-        return (Row2) super.fieldsRow();
+    public Row5<LocalDateTime, Long, Long, Long, Long> fieldsRow() {
+        return (Row5) super.fieldsRow();
     }
 
     /**
      * Convenience mapping calling {@link SelectField#convertFrom(Function)}.
      */
-    public <U> SelectField<U> mapping(Function2<? super Long, ? super Long, ? extends U> from) {
+    public <U> SelectField<U> mapping(Function5<? super LocalDateTime, ? super Long, ? super Long, ? super Long, ? super Long, ? extends U> from) {
         return convertFrom(Records.mapping(from));
     }
 
@@ -191,7 +213,7 @@ public class PostTag extends TableImpl<PostTagRecord> {
      * Convenience mapping calling {@link SelectField#convertFrom(Class,
      * Function)}.
      */
-    public <U> SelectField<U> mapping(Class<U> toType, Function2<? super Long, ? super Long, ? extends U> from) {
+    public <U> SelectField<U> mapping(Class<U> toType, Function5<? super LocalDateTime, ? super Long, ? super Long, ? super Long, ? super Long, ? extends U> from) {
         return convertFrom(toType, Records.mapping(from));
     }
 }
