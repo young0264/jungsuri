@@ -1,5 +1,5 @@
 # [jungsuri]
-[https://www.jungsuri.site](https://www.jungsuri.site)
+`https://www.jungsuri.site` (현재는 사이트 운영을 종료하였습니다.)
 
 ## Project 기획 배경
 지인들과 몇년동안 운영중인 등산 모임이 있습니다. 지인끼리 소소하게 운영하던 모임이 몇년에 걸쳐 회원이 40명가까이 
